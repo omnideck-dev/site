@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create and configure agent profiles — each with its own model, prompt, tools, and memory.">
+  <title>Agents | Docs | Omnideck</title>
+  <link rel="stylesheet" href="/css/ivy.full.css">
+  <link rel="stylesheet" href="/css/lattice.full.css">
+  <link rel="stylesheet" href="/css/site.css">
+  <script type="module" src="/js/dark-mode-toggle.js"></script>
+  
+</head>
+<body class="lattice">
+  <header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+    <nav class="d-flex gap-4 items-center">
+      
+        <a href="/docs/" class="nav-link">Docs</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="https://github.com/omnideck/omnideck" class="nav-link">GitHub</a>
+      
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+  </div>
+</header>
+
+  <main class="full-width">
+    
+<div class="container py-5">
+  <div class="grid gap-5">
+    <div class="span-12 md-span-3">
+      <aside class="docs-sidebar">
+  <span class="docs-nav-label">Documentation</span>
+  <nav>
+    
+    <a href="/docs/getting-started.html">Getting Started</a>
+    
+    <a href="/docs/configuration.html">Configuration</a>
+    
+    <a href="/docs/agents.html">Agents</a>
+    
+    <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+  </nav>
+</aside>
+
+    </div>
+    <article class="span-12 md-span-9">
+      <h1>Agents</h1>
+      
+      <p class="muted">Create and configure agent profiles — each with its own model, prompt, tools, and memory.</p>
+      <hr>
+      
+      <p>An agent profile is a named configuration that defines how a particular agent thinks and what it can do. You can have as many profiles as you like and switch between them at any point in a conversation.</p>
+<h2>Creating a profile</h2>
+<p>From the UI sidebar, click <strong>New Agent</strong> and fill in:</p>
+<ul>
+<li><strong>Name</strong> — a descriptive label (e.g. &quot;Research Agent&quot;, &quot;Code Agent&quot;)</li>
+<li><strong>Model</strong> — which LLM provider and model to use</li>
+<li><strong>System prompt</strong> — the agent's core instructions and persona</li>
+<li><strong>Tools</strong> — which capabilities the agent has access to</li>
+</ul>
+<p>Or create a profile in <code>~/.omnideck/agents/</code>:</p>
+<pre><code class="language-toml"># ~/.omnideck/agents/research.toml
+name   = &quot;Research Agent&quot;
+model  = &quot;claude-sonnet-4-6&quot;
+provider = &quot;anthropic&quot;
+
+system_prompt = &quot;&quot;&quot;
+You are a thorough research assistant. Your job is to gather, verify, and summarize information from the web. Always cite sources. Prefer primary sources over summaries.
+&quot;&quot;&quot;
+
+[tools]
+web_browse  = true
+web_search  = true
+memory      = true
+filesystem  = false
+bash        = false
+</code></pre>
+<h2>Per-agent tool access</h2>
+<p>Tool access is scoped per agent. A research agent might have full web and memory access but no bash. A DevOps agent might have bash and filesystem but no browser.</p>
+<p>| Tool | Description |
+|---|---|
+| <code>web_browse</code> | Full Playwright browser automation |
+| <code>web_search</code> | Web search (via configured provider) |
+| <code>memory</code> | Read and write persistent keyed facts |
+| <code>filesystem</code> | Access the shared file space |
+| <code>bash</code> | Run shell commands (subject to execution policy) |
+| <code>mcp</code> | Connect to configured MCP servers |</p>
+<h2>Context management</h2>
+<p>When a conversation approaches the model's context limit, Omnideck can run an automatic compaction pass. Configure this per agent:</p>
+<pre><code class="language-toml">[context]
+compaction = true
+compaction_model   = &quot;gpt-4o-mini&quot;
+compaction_provider = &quot;openai&quot;
+</code></pre>
+<h2>Sub-agents</h2>
+<p>Agents can spawn sub-agents for delegated, parallel work. Use the <code>spawn_agent</code> tool in a conversation — the parent agent defines the goal, the sub-agent runs it, and results are passed back.</p>
+<p>Sub-agent spawning is opt-in per profile:</p>
+<pre><code class="language-toml">[tools]
+spawn_agents = true
+max_subagents = 3
+</code></pre>
+<h2>Switching agents mid-conversation</h2>
+<p>Click the agent selector at the top of any conversation to switch to a different profile. The conversation history is preserved; the new agent's system prompt takes effect from the next turn.</p>
+
+    </article>
+  </div>
+</div>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      Omnideck is open source —
+      <a href="https://github.com/omnideck/omnideck">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="/docs/">Documentation</a>
+      &nbsp;·&nbsp;
+      MIT License
+      &nbsp;·&nbsp;
+      No telemetry, ever.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

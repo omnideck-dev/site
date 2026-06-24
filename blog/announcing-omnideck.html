@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A local-first AI agent workbench that runs on your machine, supports any LLM, and never phones home.">
+  <title>Announcing Omnideck | Blog | Omnideck</title>
+  <link rel="stylesheet" href="/css/ivy.full.css">
+  <link rel="stylesheet" href="/css/lattice.full.css">
+  <link rel="stylesheet" href="/css/site.css">
+  <script type="module" src="/js/dark-mode-toggle.js"></script>
+  
+</head>
+<body class="lattice">
+  <header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+    <nav class="d-flex gap-4 items-center">
+      
+        <a href="/docs/" class="nav-link">Docs</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="https://github.com/omnideck/omnideck" class="nav-link">GitHub</a>
+      
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+  </div>
+</header>
+
+  <main class="full-width">
+    
+<div class="container py-5">
+  <article style="max-width:720px;margin:0 auto">
+    <header style="margin-bottom:2rem">
+      <p class="muted"><a href="/blog/">← Blog</a></p>
+      <h1>Announcing Omnideck</h1>
+      <p class="muted"><time>June 1, 2025</time> · Ron Northcutt</p>
+      <p>A local-first AI agent workbench that runs on your machine, supports any LLM, and never phones home.</p>
+    </header>
+    <hr>
+    <p>Today we're open-sourcing Omnideck — a self-hosted AI agent workbench that runs on your desktop or home server.</p>
+<h2>Why we built it</h2>
+<p>The current generation of cloud AI agents is powerful but comes with a fundamental compromise: your conversations, files, and credentials flow through servers you don't control, you're locked to one model per tool, and running a local model like Llama or Mistral means piecing together brittle tooling.</p>
+<p>Omnideck fixes this by giving you a full agent workbench that runs locally, supports any LLM, and keeps all your data on your machine.</p>
+<h2>What's in the first release</h2>
+<ul>
+<li><strong>Multi-agent profiles</strong> — build a team of specialized agents, each with its own model, system prompt, and tool access</li>
+<li><strong>Real browser automation</strong> — Playwright-powered, with both structural and visual navigation</li>
+<li><strong>Code execution</strong> — write and run code with full output streaming</li>
+<li><strong>Persistent memory</strong> — keyed facts that survive session resets</li>
+<li><strong>Autonomous tasks</strong> — cron-scheduled goals with notification on completion</li>
+<li><strong>Google Workspace integration</strong> — Gmail, Calendar, and Drive</li>
+<li><strong>MCP server support</strong> — connect any Model Context Protocol server</li>
+</ul>
+<h2>What's next</h2>
+<p>We're working on:</p>
+<ul>
+<li>Windows and ARM support</li>
+<li>Visual workflow builder for task chains</li>
+<li>Plugin API for custom tools</li>
+<li>Expanded model provider support</li>
+</ul>
+<h2>Get started</h2>
+<pre><code class="language-bash">curl -fsSL https://omnideck.dev/install.sh | sh
+omnideck start
+</code></pre>
+<p>Then open <code>http://localhost:3000</code> and follow the setup wizard.</p>
+<p>Feedback and contributions are welcome on <a href="https://github.com/omnideck/omnideck">GitHub</a>.</p>
+
+  </article>
+</div>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      Omnideck is open source —
+      <a href="https://github.com/omnideck/omnideck">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="/docs/">Documentation</a>
+      &nbsp;·&nbsp;
+      MIT License
+      &nbsp;·&nbsp;
+      No telemetry, ever.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
