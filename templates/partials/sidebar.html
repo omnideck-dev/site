@@ -1,0 +1,8 @@
+<aside class="docs-sidebar">
+  <span class="docs-nav-label">Documentation</span>
+  <nav>
+    {% for item in Data.docs_nav.items %}
+    <a href="{{ item.url }}">{{ item.title }}</a>
+    {% endfor %}
+  </nav>
+</aside>

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omnideck — Local AI Agent Workbench</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0B0F1A;
+    --navy-2:  #111827;
+    --navy-3:  #1C2333;
+    --slate:   #2D3748;
+    --indigo:  #6366F1;
+    --indigo-l:#818CF8;
+    --magenta: #EC4899;
+    --green:   #4ADE80;
+    --amber:   #FCD34D;
+    --bone:    #F0EEE9;
+    --muted:   #94A3B8;
+    --border:  rgba(99,102,241,0.18);
+    --ff-display: 'Space Grotesk', sans-serif;
+    --ff-body:    'Inter', sans-serif;
+    --ff-mono:    'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--bone);
+    font-family: var(--ff-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 60px;
+    background: rgba(11,15,26,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: var(--ff-display); font-weight: 700; font-size: 1.15rem;
+    letter-spacing: -0.02em; color: var(--bone); text-decoration: none;
+  }
+  .logo span { color: var(--indigo); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a { font-size: 0.875rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  nav ul a:hover { color: var(--bone); }
+  .nav-cta {
+    font-family: var(--ff-display); font-size: 0.8rem; font-weight: 600;
+    background: var(--indigo); color: #fff; border: none;
+    padding: 0.45rem 1.1rem; border-radius: 6px; cursor: pointer;
+    text-decoration: none; letter-spacing: 0.01em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center; max-width: 1200px; margin: 0 auto;
+    padding: 7rem 2rem 6rem;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--ff-mono); font-size: 0.75rem; color: var(--green);
+    background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 100px; padding: 0.3rem 0.75rem; margin-bottom: 1.5rem; letter-spacing: 0.05em;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 7px; height: 7px; background: var(--green);
+    border-radius: 50%; animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.85)} }
+
+  h1 {
+    font-family: var(--ff-display); font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+    font-weight: 700; line-height: 1.08; letter-spacing: -0.035em;
+    color: var(--bone); margin-bottom: 1.5rem;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--indigo) 0%, var(--magenta) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub {
+    font-size: 1.125rem; color: var(--muted); line-height: 1.7;
+    margin-bottom: 2.5rem; max-width: 480px;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    font-family: var(--ff-display); font-weight: 600; font-size: 0.9rem;
+    background: var(--indigo); color: #fff; border: none;
+    padding: 0.8rem 1.8rem; border-radius: 8px; cursor: pointer;
+    text-decoration: none; letter-spacing: 0.01em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--indigo-l); transform: translateY(-1px); }
+  .btn-ghost {
+    font-family: var(--ff-display); font-size: 0.875rem; color: var(--muted);
+    text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.15s;
+  }
+  .btn-ghost:hover { color: var(--bone); }
+  .trust-badges {
+    display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap;
+  }
+  .badge {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-family: var(--ff-mono); font-size: 0.7rem;
+    color: var(--muted); letter-spacing: 0.04em;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+  /* ── TERMINAL ── */
+  .terminal {
+    background: var(--navy-2); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; font-family: var(--ff-mono); font-size: 0.78rem;
+    box-shadow: 0 24px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(99,102,241,.12);
+  }
+  .terminal-bar {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1rem; background: var(--navy-3); border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot.red{background:#FF5F57} .dot.amber{background:#FEBC2E} .dot.green{background:#28C840}
+  .terminal-title { font-size: 0.72rem; color: var(--muted); margin: 0 auto; }
+  .terminal-body { padding: 1.25rem; min-height: 300px; }
+  .t-line { margin-bottom: 0.35rem; color: var(--muted); }
+  .t-line .prompt  { color: var(--indigo-l); }
+  .t-line .tool    { color: var(--green); }
+  .t-line .val     { color: var(--amber); }
+  .t-line .dim     { color: #475569; }
+  .t-line .ok      { color: var(--green); }
+  .t-line .agent   { color: var(--magenta); font-weight: 500; }
+  .t-line .thinking{ color: var(--magenta); font-style: italic; }
+  .t-cursor {
+    display: inline-block; width: 7px; height: 1em;
+    background: var(--indigo-l); vertical-align: text-bottom;
+    animation: blink 1.1s step-end infinite;
+  }
+  @keyframes blink { 50%{opacity:0} }
+
+  /* ── PAIN ── */
+  .pain {
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    background: var(--navy-2); padding: 5rem 2rem;
+  }
+  .pain-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .pain-label {
+    font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.12em;
+    color: var(--magenta); text-transform: uppercase; margin-bottom: 1rem;
+  }
+  h2 {
+    font-family: var(--ff-display); font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.15;
+    color: var(--bone); margin-bottom: 1rem;
+  }
+  .pain-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .pain-list li {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    font-size: 0.95rem; color: var(--muted); line-height: 1.5;
+  }
+  .pain-list li::before { content: '×'; color: var(--magenta); font-weight: 700; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .section-label {
+    font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--indigo-l); margin-bottom: 0.75rem;
+  }
+  .section-header p {
+    max-width: 560px; margin: 1rem auto 0;
+    color: var(--muted); font-size: 1.05rem; line-height: 1.7;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .step {
+    background: var(--navy-2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+  }
+  .step-num { font-family: var(--ff-mono); font-size: 0.7rem; color: var(--indigo-l); margin-bottom: 1rem; letter-spacing: 0.1em; }
+  .step h3 { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 600; color: var(--bone); margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+  .step p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+  .step-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(99,102,241,.12); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.1rem; }
+
+  /* ── MULTI-AGENT FEATURE ── */
+  .multiagent {
+    background: var(--navy-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 6rem 2rem;
+  }
+  .multiagent-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .multiagent-visual {
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .agent-row {
+    background: var(--navy); border: 1px solid var(--border); border-radius: 10px;
+    padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .agent-row.active { border-color: var(--indigo); background: rgba(99,102,241,0.06); }
+  .agent-row.spawned { margin-left: 2rem; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.04); }
+  .agent-row.spawned-2 { margin-left: 2rem; }
+  .agent-avatar {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem; flex-shrink: 0;
+  }
+  .agent-avatar.primary { background: rgba(99,102,241,0.2); }
+  .agent-avatar.sub     { background: rgba(236,72,153,0.15); }
+  .agent-avatar.sub2    { background: rgba(74,222,128,0.12); }
+  .agent-meta { flex: 1; }
+  .agent-name { font-family: var(--ff-display); font-size: 0.875rem; font-weight: 600; color: var(--bone); }
+  .agent-model { font-family: var(--ff-mono); font-size: 0.68rem; color: var(--muted); margin-top: 1px; }
+  .agent-status {
+    font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.06em;
+    padding: 0.2rem 0.55rem; border-radius: 100px;
+  }
+  .agent-status.running { background: rgba(99,102,241,0.15); color: var(--indigo-l); }
+  .agent-status.spawning { background: rgba(236,72,153,0.12); color: var(--magenta); }
+  .agent-status.done { background: rgba(74,222,128,0.1); color: var(--green); }
+  .spawn-connector {
+    margin-left: 2.5rem; height: 0.75rem;
+    border-left: 1px dashed rgba(236,72,153,0.35);
+  }
+  .multiagent-content .section-label { margin-bottom: 0.75rem; }
+  .multiagent-content h2 { margin-bottom: 1.25rem; }
+  .multiagent-content p { color: var(--muted); line-height: 1.75; font-size: 1.025rem; margin-bottom: 1.25rem; }
+  .feature-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .feature-bullets li {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    font-size: 0.9rem; color: var(--muted); line-height: 1.55;
+  }
+  .feature-bullets li::before { content: '→'; color: var(--indigo-l); flex-shrink: 0; margin-top: 1px; }
+
+  /* ── BENTO ── */
+  .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.25rem; }
+  .bcard {
+    background: var(--navy-2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2rem; position: relative; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .bcard:hover { border-color: rgba(99,102,241,.4); }
+  .bcard::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 0%, rgba(99,102,241,.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .bcard.wide   { grid-column: span 7; }
+  .bcard.narrow { grid-column: span 5; }
+  .bcard.third  { grid-column: span 4; }
+  .bcard.half   { grid-column: span 6; }
+  .bcard-tag {
+    font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--indigo-l); margin-bottom: 1rem; display: block;
+  }
+  .bcard h3 {
+    font-family: var(--ff-display); font-size: 1.1rem; font-weight: 600;
+    color: var(--bone); letter-spacing: -0.02em; margin-bottom: 0.6rem; line-height: 1.25;
+  }
+  .bcard p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+  .bcard-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+  .mini-terminal {
+    margin-top: 1.25rem; background: var(--navy);
+    border: 1px solid rgba(99,102,241,.15); border-radius: 8px;
+    padding: 1rem; font-family: var(--ff-mono); font-size: 0.72rem; line-height: 1.7; color: var(--muted);
+  }
+  .mini-terminal .g { color: var(--green); }
+  .mini-terminal .i { color: var(--indigo-l); }
+  .mini-terminal .y { color: var(--amber); }
+  .mini-terminal .m { color: var(--magenta); }
+  .provider-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+  .chip {
+    font-family: var(--ff-mono); font-size: 0.72rem;
+    padding: 0.3rem 0.65rem; border-radius: 100px;
+    border: 1px solid var(--border); color: var(--muted); background: var(--navy);
+  }
+  .chip.active { border-color: var(--indigo); color: var(--indigo-l); }
+
+  /* ── SECURITY ── */
+  .security {
+    background: var(--navy-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 6rem 2rem;
+  }
+  .security-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .security-diagram {
+    font-family: var(--ff-mono); font-size: 0.78rem; line-height: 1.9;
+  }
+  .sec-box {
+    border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem;
+    margin-bottom: 0.5rem; position: relative;
+  }
+  .sec-box.outer { border-color: rgba(74,222,128,0.25); background: rgba(74,222,128,0.03); }
+  .sec-box.inner { margin: 0.5rem 0.75rem; border-color: rgba(99,102,241,0.25); background: rgba(99,102,241,0.04); }
+  .sec-box.vault { margin: 0.25rem 1.5rem; border-color: rgba(236,72,153,0.25); background: rgba(236,72,153,0.04); }
+  .sec-label { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .sec-label.g { color: var(--green); }
+  .sec-label.i { color: var(--indigo-l); }
+  .sec-label.m { color: var(--magenta); }
+  .sec-item { color: var(--muted); font-size: 0.72rem; }
+  .sec-item::before { content: '· '; color: #475569; }
+  .sec-divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
+  .security-content .section-label { margin-bottom: 0.75rem; }
+  .security-content h2 { margin-bottom: 1.25rem; }
+  .security-content p { color: var(--muted); font-size: 1.025rem; line-height: 1.75; margin-bottom: 1.25rem; }
+  .no-telemetry {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 8px; padding: 0.75rem 1rem;
+    font-family: var(--ff-mono); font-size: 0.75rem; color: var(--green);
+    margin-top: 0.5rem;
+  }
+
+  /* ── TASKS BAND ── */
+  .tasks-band { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding: 6rem 2rem; }
+  .tasks-mini-log {
+    background: var(--navy-2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+    font-family: var(--ff-mono); font-size: 0.75rem; line-height: 1.9; color: var(--muted);
+  }
+  .tasks-mini-log .head {
+    color: var(--bone); font-weight: 500;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.75rem; margin-bottom: 0.75rem; font-size: 0.8rem;
+  }
+  .log-row { display: flex; justify-content: space-between; }
+  .log-row .ok { color: var(--green); }
+  .log-row .run { color: var(--indigo-l); }
+  .log-row .sched { color: var(--amber); }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center; padding: 7rem 2rem;
+    background: var(--navy-2); border-top: 1px solid var(--border);
+  }
+  .cta-section h2 { margin-bottom: 1rem; }
+  .cta-section p { color: var(--muted); font-size: 1.05rem; margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-outline {
+    font-family: var(--ff-display); font-weight: 600; font-size: 0.9rem;
+    color: var(--bone); border: 1px solid var(--border);
+    padding: 0.8rem 1.8rem; border-radius: 8px; cursor: pointer;
+    text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--indigo-l); color: var(--indigo-l); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border); padding: 2.5rem 2rem; text-align: center;
+    font-family: var(--ff-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--bone); }
+
+  /* ── QUOTE BAND ── */
+  .quote-band {
+    background: linear-gradient(135deg, rgba(99,102,241,.12) 0%, rgba(236,72,153,.06) 100%);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 5rem 2rem; text-align: center;
+  }
+  .quote-band blockquote {
+    max-width: 720px; margin: 0 auto;
+    font-family: var(--ff-display); font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+    font-weight: 500; line-height: 1.45; letter-spacing: -0.025em; color: var(--bone);
+  }
+  .quote-band blockquote span { color: var(--indigo-l); }
+  .quote-attr { margin-top: 1.5rem; font-family: var(--ff-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; }
+
+  /* ── GIF PLACEHOLDER ── */
+  .ui-preview {
+    background: var(--navy-2); border: 1px solid var(--border); border-radius: 16px;
+    aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.45);
+  }
+  .ui-preview-inner {
+    text-align: center; font-family: var(--ff-mono); font-size: 0.78rem; color: var(--muted);
+  }
+  .ui-preview-inner svg { opacity: 0.2; margin-bottom: 0.75rem; }
+  .ui-preview::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.08) 0%, transparent 65%);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 3rem; }
+    .pain-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .steps { grid-template-columns: 1fr; }
+    .bento .bcard.wide,.bcard.narrow,.bcard.third,.bcard.half { grid-column: span 12 !important; }
+    .multiagent-inner { grid-template-columns: 1fr; }
+    .security-inner { grid-template-columns: 1fr; }
+    .tasks-band { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,*::before,*::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">omni<span>deck</span></a>
+  <ul>
+    <li><a href="#agents">Multi-agent</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#security">Security</a></li>
+    <li><a href="#tasks">Autonomous tasks</a></li>
+    <li><a href="https://github.com" target="_blank">GitHub</a></li>
+  </ul>
+  <a href="https://github.com" class="nav-cta">Install →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">runs locally · open source · no telemetry</div>
+    <h1>A full AI agent workbench.<br><em>On your machine.<br>Under your control.</em></h1>
+    <p class="hero-sub">
+      Omnideck runs on your desktop or home server — not in a cloud you don't own. Create multiple specialized agents, switch between them mid-conversation, and watch sub-agents work in real time. Bring any LLM, cloud or local.
+    </p>
+    <div class="hero-actions">
+      <a href="https://github.com" class="btn-primary">Get started free</a>
+      <a href="#how-it-works" class="btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+        How it works
+      </a>
+    </div>
+    <div class="trust-badges">
+      <span class="badge"><span class="badge-dot"></span>No data leaves your machine</span>
+      <span class="badge"><span class="badge-dot"></span>Zero telemetry</span>
+      <span class="badge"><span class="badge-dot"></span>Container-isolated agents</span>
+    </div>
+  </div>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot red"></div><div class="dot amber"></div><div class="dot green"></div>
+      <div class="terminal-title">omnideck · research-agent · turn 4</div>
+    </div>
+    <div class="terminal-body">
+      <div id="terminal-output"></div>
+      <span class="t-cursor"></span>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN -->
+<div class="pain">
+  <div class="pain-inner">
+    <div>
+      <div class="pain-label">the problem</div>
+      <h2>Cloud AI agents were designed for vendor convenience, not yours.</h2>
+    </div>
+    <ul class="pain-list">
+      <li>Your conversations, files, and credentials flow through servers you don't control or audit.</li>
+      <li>You're locked to one model per tool. Switching providers means starting over.</li>
+      <li>One agent fits all — no way to have a coding agent, a research agent, and a writing agent with their own configs.</li>
+      <li>Autonomous background tasks are either expensive add-ons or simply missing.</li>
+      <li>Running a local model like Llama or Mistral? Agent tooling that connects to it barely exists.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">how it works</div>
+      <h2>Install once. Configure once. Just use it.</h2>
+      <p>The <code style="font-family:var(--ff-mono);font-size:0.9em;color:var(--indigo-l)">omnideck</code> CLI wraps Docker or Podman and handles everything — install, update, health checks. No YAML archaeology required.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01 —</div>
+        <div class="step-icon">📦</div>
+        <h3>Pull and run</h3>
+        <p>One CLI command pulls the container and starts Omnideck. The setup wizard walks you through connecting your LLM providers. Everything runs locally — no accounts, no signup, no cloud dependency.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02 —</div>
+        <div class="step-icon">🤖</div>
+        <h3>Create your agents</h3>
+        <p>Build agent profiles — each with its own system prompt, model, skills, and tool access. A coding agent running on a local Llama model. A research agent on GPT-4o. A writing agent on Claude. All in one UI.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03 —</div>
+        <div class="step-icon">⚡</div>
+        <h3>Put them to work</h3>
+        <p>Chat with any agent. Switch agents mid-conversation. Watch sub-agents spin up and complete tasks in real time. Set recurring background tasks and get notified when they finish.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UI PREVIEW PLACEHOLDER -->
+<section style="padding-top:0;padding-bottom:4rem">
+  <div class="section-inner">
+    <div class="ui-preview">
+      <div class="ui-preview-inner">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <p style="font-size:0.8rem">UI screenshot / GIF coming soon</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MULTI-AGENT — FEATURE HERO -->
+<div class="multiagent" id="agents">
+  <div class="multiagent-inner">
+
+    <!-- Visual left -->
+    <div class="multiagent-visual">
+
+      <div class="agent-row active">
+        <div class="agent-avatar primary">🧠</div>
+        <div class="agent-meta">
+          <div class="agent-name">Research Agent</div>
+          <div class="agent-model">claude-sonnet-4-6 · custom prompt · web + memory tools</div>
+        </div>
+        <span class="agent-status running">active</span>
+      </div>
+
+      <div class="spawn-connector"></div>
+
+      <div class="agent-row spawned">
+        <div class="agent-avatar sub">💻</div>
+        <div class="agent-meta">
+          <div class="agent-name">Code Agent <span style="color:var(--muted);font-weight:400;font-size:0.8em">↳ spawned</span></div>
+          <div class="agent-model">llama-3.3-70b (local) · strict execution tools only</div>
+        </div>
+        <span class="agent-status spawning">working</span>
+      </div>
+
+      <div class="agent-row spawned spawned-2">
+        <div class="agent-avatar sub2">✍️</div>
+        <div class="agent-meta">
+          <div class="agent-name">Summary Agent <span style="color:var(--muted);font-weight:400;font-size:0.8em">↳ spawned</span></div>
+          <div class="agent-model">gpt-4o-mini · write + read tools</div>
+        </div>
+        <span class="agent-status done">done</span>
+      </div>
+
+      <div style="height:0.75rem;border-left:1px solid var(--border);margin-left:1rem"></div>
+
+      <div class="agent-row" style="opacity:0.55">
+        <div class="agent-avatar primary">✍️</div>
+        <div class="agent-meta">
+          <div class="agent-name">Writing Agent</div>
+          <div class="agent-model">gpt-4o · focused system prompt · no browser</div>
+        </div>
+        <span class="agent-status" style="color:var(--muted);background:rgba(148,163,184,0.08);border-radius:100px;padding:0.2rem 0.55rem;font-family:var(--ff-mono);font-size:0.65rem">idle</span>
+      </div>
+
+      <div class="agent-row" style="opacity:0.55">
+        <div class="agent-avatar sub2">🔧</div>
+        <div class="agent-meta">
+          <div class="agent-name">DevOps Agent</div>
+          <div class="agent-model">qwen3-32b (local) · bash + files · no web</div>
+        </div>
+        <span class="agent-status" style="color:var(--muted);background:rgba(148,163,184,0.08);border-radius:100px;padding:0.2rem 0.55rem;font-family:var(--ff-mono);font-size:0.65rem">idle</span>
+      </div>
+
+      <div style="margin-top:1rem;font-family:var(--ff-mono);font-size:0.7rem;color:var(--muted);text-align:center;letter-spacing:0.04em">
+        switch agents at any point in the conversation →
+      </div>
+
+    </div>
+
+    <!-- Content right -->
+    <div class="multiagent-content">
+      <div class="section-label">multi-agent</div>
+      <h2>One workbench.<br>As many agents as you need.</h2>
+      <p>Most AI tools give you one generic assistant. Omnideck lets you build a team. Each agent is a fully independent configuration — its own model, system prompt, tool access, memory, and inference parameters. Swap between them in any conversation.</p>
+      <p>And when a task calls for parallel work, the active agent can spin up sub-agents on the fly — dedicated helpers that run autonomously and report back — while you watch the whole thing unfold in real time.</p>
+      <ul class="feature-bullets">
+        <li>Per-agent model selection — mix cloud and local models in the same session</li>
+        <li>Per-agent tool access — lock an agent to only the tools it needs</li>
+        <li>Per-agent system prompts, temperature, context window, and compaction settings</li>
+        <li>Switch the active agent mid-conversation without losing context</li>
+        <li>Agents can spawn sub-agents for delegated, parallel workstreams</li>
+        <li>Watch sub-agent turns stream live — every tool call, every result</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODEL SWITCHING HIGHLIGHT -->
+<section style="padding-top:4rem;padding-bottom:2rem">
+  <div class="section-inner">
+    <div class="section-header" style="margin-bottom:2rem">
+      <div class="section-label">model flexibility</div>
+      <h2>The right model for every job.</h2>
+      <p>Switch models per agent profile in seconds. Run a powerful cloud model for reasoning-heavy work. Route to a local model for anything sensitive. No vendor lock-in, ever.</p>
+    </div>
+    <div class="bento">
+      <div class="bcard half">
+        <span class="bcard-tag">per-agent model selection</span>
+        <h3>Cloud and local models, side by side</h3>
+        <p>Point each agent at OpenAI, Anthropic, OpenRouter, Ollama, or any OpenAI-compatible endpoint. Change the model on any agent profile in the settings panel — no restart required.</p>
+        <div class="provider-chips" style="margin-top:1.25rem">
+          <span class="chip active">claude-sonnet-4-6</span>
+          <span class="chip active">gpt-4o</span>
+          <span class="chip active">llama-3.3-70b</span>
+          <span class="chip active">qwen3-32b</span>
+          <span class="chip">mistral-large</span>
+          <span class="chip">+ any endpoint</span>
+        </div>
+      </div>
+      <div class="bcard half">
+        <span class="bcard-tag">smart context management</span>
+        <h3>Long conversations that don't break</h3>
+        <p>When a conversation approaches the model's context limit, Omnideck runs an automatic compaction pass — summarizing history while preserving critical facts. You can even assign a different, cheaper model just for compaction.</p>
+        <div class="mini-terminal">
+          <span class="i">context</span>: <span class="y">87,400</span> / <span class="y">96,000</span> tokens<br>
+          <span class="m">→ compacting with gpt-4o-mini…</span><br>
+          <span class="g">✓</span> compacted to <span class="y">12,200</span> tokens<br>
+          <span class="g">✓</span> ready to continue
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES BENTO -->
+<section id="features" style="padding-top:2rem">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">built-in capabilities</div>
+      <h2>Every tool an agent needs, already included.</h2>
+    </div>
+
+    <div class="bento">
+      <div class="bcard wide">
+        <span class="bcard-tag">web</span>
+        <span class="bcard-icon">🌐</span>
+        <h3>Real browser automation — structural and visual</h3>
+        <p>A persistent Playwright browser handles full web automation. Agents navigate via accessibility trees for structured UIs and fall back to screenshot + vision model analysis for anything custom or canvas-based. Sessions, cookies, and auth state persist across tool calls.</p>
+        <div class="mini-terminal">
+          <span class="i">→ tool:</span> browse_page <span class="y">"https://news.ycombinator.com"</span><br>
+          <span class="g">✓</span> 30 interactive elements found<br>
+          <span class="i">→ tool:</span> read_page<br>
+          <span class="g">✓</span> 3,800 tokens of clean markdown<br>
+          <span class="i">→ tool:</span> remember <span class="y">"top_story" "..."</span><br>
+          <span class="g">✓</span> memory updated
+        </div>
+      </div>
+
+      <div class="bcard narrow">
+        <span class="bcard-tag">execution</span>
+        <span class="bcard-icon">💻</span>
+        <h3>Write and run code — for real</h3>
+        <p>The agent writes files, runs bash commands with full stdout/stderr streaming, installs packages, and sends output files back to the UI. Execution policy controls what it can and can't touch.</p>
+        <div class="mini-terminal">
+          <span class="i">→ tool:</span> run_bash_cmd<br>
+          <span class="y">"python analyze.py"</span><br>
+          <span class="g">streaming…</span><br>
+          <span>rows: 14,832 | anomalies: 3</span><br>
+          <span class="g">✓</span> output: <span class="m">report.csv</span>
+        </div>
+      </div>
+
+      <div class="bcard third">
+        <span class="bcard-tag">memory</span>
+        <span class="bcard-icon">🧠</span>
+        <h3>Facts that survive session resets</h3>
+        <p>Agents store and retrieve keyed facts across conversations. Atomic writes ensure nothing is lost mid-turn. Private keys are hidden from the UI.</p>
+      </div>
+
+      <div class="bcard third">
+        <span class="bcard-tag">integrations</span>
+        <span class="bcard-icon">🔗</span>
+        <h3>Gmail, Calendar, Drive — and custom MCP servers</h3>
+        <p>Connect your Google Workspace and any MCP server to extend what agents can access and control.</p>
+      </div>
+
+      <div class="bcard third">
+        <span class="bcard-tag">files</span>
+        <span class="bcard-icon">📁</span>
+        <h3>Full filesystem access in the shared space</h3>
+        <p>Read, write, edit, patch, grep, move. Agents work inside the shared file space you define — and only there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<div class="security" id="security">
+  <div class="security-inner">
+
+    <div class="security-diagram">
+      <div class="sec-box outer">
+        <div class="sec-label g">🛡 Omnideck Container (isolated)</div>
+        <div class="sec-item">Agent UI &amp; API server</div>
+        <div class="sec-item">Agent loop + tools</div>
+        <div class="sec-item">Browser (Playwright, headless)</div>
+        <div class="sec-item">Code execution (policy-controlled)</div>
+
+        <div class="sec-box inner">
+          <div class="sec-label i">🔌 Integration Supervisor (isolated process)</div>
+          <div class="sec-item">Credential broker — agent never sees raw keys</div>
+          <div class="sec-item">LLM proxy for brokered providers</div>
+          <div class="sec-box vault">
+            <div class="sec-label m">🔒 Encrypted Vault</div>
+            <div class="sec-item">API keys &amp; OAuth tokens at rest</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-divider"></div>
+
+      <div style="color:var(--muted);font-size:0.72rem;line-height:1.8">
+        <div>📂 Shared file space — you define the boundary</div>
+        <div>🚫 No access to rest of your filesystem</div>
+        <div>🚫 SSRF protection blocks cloud metadata endpoints</div>
+        <div>🚫 CSRF guard on all mutating API requests</div>
+      </div>
+    </div>
+
+    <div class="security-content">
+      <div class="section-label">security &amp; privacy</div>
+      <h2>The agent is sandboxed. Your system is not its playground.</h2>
+      <p>Omnideck runs entirely inside a container. The agent has no access to your filesystem, processes, or network outside of what you explicitly share. If an agent makes a mistake or goes off-script, the blast radius is the container — not your machine.</p>
+      <p>Credentials for external services live in an encrypted local vault managed by an isolated supervisor process. The agent itself never handles raw API keys — it routes requests through a broker that holds credentials on its behalf.</p>
+      <ul class="feature-bullets" style="margin-bottom:1.5rem">
+        <li>Container boundary prevents filesystem and process access beyond the shared space</li>
+        <li>Credentials encrypted at rest, never visible to the agent or the LLM</li>
+        <li>Execution policy controls which bash commands the agent is allowed to run</li>
+        <li>SSRF protection blocks requests to cloud metadata services</li>
+        <li>CSRF guard on all mutating API calls</li>
+        <li>Atomic writes prevent data corruption from crashes or power loss</li>
+      </ul>
+      <div class="no-telemetry">
+        ✓ &nbsp;Zero telemetry — Omnideck never phones home. Ever.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- AUTONOMOUS TASKS -->
+<div id="tasks">
+  <div class="tasks-band">
+    <div>
+      <div class="section-label" style="margin-bottom:0.75rem">autonomous tasks</div>
+      <h2>Set it. Forget it.<br>Get notified.</h2>
+      <p style="color:var(--muted);margin:1rem 0 1.5rem;line-height:1.75;font-size:1.025rem">
+        Define goals with ordered task lists and recurring schedules. The task engine runs them in the background, using the same agent loop and tool access as interactive conversations. When a run completes — or fails — you get a Telegram notification with output files attached.
+      </p>
+      <ul class="feature-bullets">
+        <li>Cron-style or one-off scheduling with full timezone support</li>
+        <li>Concurrent goal execution with configurable limits</li>
+        <li>Crash-safe: tasks stuck in "running" reset automatically on restart</li>
+        <li>Full goal, run, and result history persisted to disk</li>
+      </ul>
+    </div>
+    <div class="tasks-mini-log">
+      <div class="head">⚡ task runner — 2 active</div>
+      <div class="log-row"><span>daily-digest</span>         <span class="sched">08:00 UTC</span></div>
+      <div class="log-row"><span>competitor-scan</span>      <span class="run">running…</span></div>
+      <div class="log-row"><span>backup-export</span>        <span class="ok">✓ completed</span></div>
+      <div class="log-row"><span>weekly-summary</span>       <span class="sched">fri 09:00</span></div>
+      <div class="log-row"><span>monitor-uptime</span>       <span class="ok">✓ completed</span></div>
+      <br>
+      <div style="color:var(--indigo-l)">📬 "competitor-scan done — 3 new findings. report.pdf attached."</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE BAND -->
+<div class="quote-band">
+  <blockquote>
+    "You shouldn't have to choose between <span>a capable AI agent</span> and <span>owning your own data</span>. Omnideck is the workbench that doesn't make you pick."
+  </blockquote>
+</div>
+
+<!-- FINAL CTA -->
+<div class="cta-section">
+  <div class="section-label" style="margin-bottom:0.75rem">get started</div>
+  <h2>Your agents. Your models.<br>Your machine.</h2>
+  <p>Omnideck is open source and free to run. Pull the container, connect your LLMs, and have your first agent working in under five minutes.</p>
+  <div class="cta-actions">
+    <a href="https://github.com" class="btn-primary">Install Omnideck →</a>
+    <a href="#docs" class="btn-outline">Read the docs</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    Omnideck is open source —
+    <a href="https://github.com">GitHub</a> &nbsp;·&nbsp;
+    <a href="#docs">Documentation</a> &nbsp;·&nbsp;
+    MIT License &nbsp;·&nbsp;
+    No telemetry, ever.
+  </p>
+</footer>
+
+<script>
+const lines = [
+  { d: 0,    h: '<span class="dim"># user: "research top 3 competitors and write a comparison doc"</span>' },
+  { d: 700,  h: '<span class="thinking">→ planning: spawning research sub-agent…</span>' },
+  { d: 1500, h: '<span class="prompt">→ spawn_agent</span> <span class="agent">"research-sub"</span> <span class="val">model=claude-sonnet-4-6</span>' },
+  { d: 2400, h: '<span class="dim">  [research-sub]</span> <span class="tool">browse_page</span> <span class="val">"https://competitor-a.com"</span>' },
+  { d: 3100, h: '<span class="dim">  [research-sub]</span> <span class="ok">✓</span> page read — 2,100 tokens' },
+  { d: 3700, h: '<span class="dim">  [research-sub]</span> <span class="tool">browse_page</span> <span class="val">"https://competitor-b.com"</span>' },
+  { d: 4400, h: '<span class="dim">  [research-sub]</span> <span class="ok">✓</span> page read — 1,800 tokens' },
+  { d: 5000, h: '<span class="dim">  [research-sub]</span> <span class="tool">remember</span> <span class="val">"comp_notes" "{…}"</span>' },
+  { d: 5600, h: '<span class="ok">✓</span> <span class="agent">research-sub</span> complete — passing results back' },
+  { d: 6300, h: '<span class="prompt">→ spawn_agent</span> <span class="agent">"writing-sub"</span> <span class="val">model=gpt-4o</span>' },
+  { d: 7000, h: '<span class="dim">  [writing-sub]</span> <span class="tool">write_file</span> <span class="val">"comparison.md"</span>' },
+  { d: 7700, h: '<span class="ok">✓</span> <span class="agent">writing-sub</span> complete — comparison.md ready' },
+  { d: 8400, h: '<span class="thinking">Here\'s your competitor comparison. I used Claude for research and GPT-4o for the write-up…</span>' },
+];
+
+const out = document.getElementById('terminal-output');
+function typeLines(idx) {
+  if (idx >= lines.length) { setTimeout(() => { out.innerHTML=''; typeLines(0); }, 3500); return; }
+  const l = lines[idx];
+  const wait = idx === 0 ? 400 : (l.d - lines[idx-1].d);
+  setTimeout(() => {
+    const el = document.createElement('div');
+    el.className = 't-line'; el.innerHTML = l.h; out.appendChild(el);
+    typeLines(idx + 1);
+  }, wait);
+}
+typeLines(0);
+</script>
+
+</body>
+</html>

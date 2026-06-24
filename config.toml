@@ -1,0 +1,13 @@
+[site]
+title       = "Omnideck"
+base_url    = "https://omnideck.dev"
+language    = "en"
+page_size   = 10
+
+[build]
+draft_mode  = false
+output_dir  = "public"
+
+[author]
+name        = "Ron Northcutt"
+email       = "ron@omnideck.dev"

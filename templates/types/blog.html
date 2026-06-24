@@ -1,0 +1,16 @@
+{% extends "templates/layouts/base.html" %}
+{% block title %}{{ Page.Title }} | Blog | {{ Site.Config.Site.Title }}{% endblock %}
+{% block body %}
+<div class="container py-5">
+  <article style="max-width:720px;margin:0 auto">
+    <header style="margin-bottom:2rem">
+      <p class="muted"><a href="/blog/">← Blog</a></p>
+      <h1>{{ Page.Title }}</h1>
+      <p class="muted"><time>{{ Page.Date|godate:"January 2, 2006" }}</time>{% if Page.Meta.Fields.author %} · {{ Page.Meta.Fields.author }}{% endif %}</p>
+      {% if Page.Meta.Fields.description %}<p>{{ Page.Meta.Fields.description }}</p>{% endif %}
+    </header>
+    <hr>
+    {{ Page.HTMLContent|safe }}
+  </article>
+</div>
+{% endblock %}
