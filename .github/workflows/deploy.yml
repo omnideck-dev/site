@@ -18,6 +18,14 @@ jobs:
       - name: Make arbor executable
         run: chmod +x ./arbor
 
+      - name: Set base URL for GitHub Pages subpath
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY##*/}"
+          OWNER="${GITHUB_REPOSITORY_OWNER}"
+          BASE_URL="https://${OWNER}.github.io/${REPO_NAME}"
+          sed -i "s|base_url.*=.*|base_url    = \"${BASE_URL}\"|" config.toml
+          echo "Base URL set to: ${BASE_URL}"
+
       - name: Build site
         run: ./arbor build
 
