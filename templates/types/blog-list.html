@@ -6,7 +6,7 @@
   <p class="muted">Updates, announcements, and deep dives from the Omnideck team.</p>
   <hr>
   {% if Items %}
-  <div class="grid gap-3 mt-4">
+  <div class="grid col-1 gap-3 mt-4">
     {% for item in Items %}
     <article class="card">
       <h2 class="blog-card-title"><a href="{{ item.Permalink }}" class="blog-card-link">{{ item.Title }}</a></h2>
