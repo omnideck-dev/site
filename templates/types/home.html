@@ -1,0 +1,400 @@
+{% extends "templates/layouts/base.html" %}
+{% block title %}{{ Site.Config.Site.Title }} — Local AI Agent Workbench{% endblock %}
+{% block head %}<meta name="description" content="Omnideck runs on your desktop or home server. Create multiple specialized agents, switch between them mid-conversation, and watch sub-agents work in real time.">{% endblock %}
+{% block body %}
+
+<!-- ── HERO ──────────────────────────────────────────────── -->
+<section class="hero-section">
+  <div class="container">
+    <div class="grid md-col-2 gap-5 items-center">
+
+      <div>
+        <p class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          runs locally · open source · no telemetry
+        </p>
+        <h1>A full AI agent workbench.<br><em>On your machine.<br>Under your control.</em></h1>
+        <p class="hero-sub">
+          Omnideck runs on your desktop or home server — not in a cloud you don't own. Create multiple specialized agents, switch between them mid-conversation, and watch sub-agents work in real time. Bring any LLM, cloud or local.
+        </p>
+        <div class="d-flex gap-3 flex-wrap items-center">
+          <a href="https://github.com/omnideck/omnideck" role="button" data-variant="primary" data-size="lg">Get started free</a>
+          <a href="#how-it-works" role="button" data-variant="ghost">How it works →</a>
+        </div>
+        <div class="trust-badges">
+          <span class="trust-badge"><span class="badge-dot"></span>No data leaves your machine</span>
+          <span class="trust-badge"><span class="badge-dot"></span>Zero telemetry</span>
+          <span class="trust-badge"><span class="badge-dot"></span>Container-isolated agents</span>
+        </div>
+      </div>
+
+      <aside class="terminal" aria-label="Omnideck agent session example">
+        <div class="terminal-bar">
+          <span class="terminal-dots">
+            <span class="t-dot t-dot-red"></span>
+            <span class="t-dot t-dot-amber"></span>
+            <span class="t-dot t-dot-green"></span>
+          </span>
+          <span class="terminal-title">omnideck · research-agent · turn 4</span>
+        </div>
+        <div class="terminal-body">
+          <span class="t-line"><span class="t-dim"># user: "research top 3 competitors and write a comparison doc"</span></span>
+          <span class="t-line"><span class="t-think">→ planning: spawning research sub-agent…</span></span>
+          <span class="t-line"><span class="t-prompt">→ spawn_agent</span> <span class="t-agent">"research-sub"</span> <span class="t-val">model=claude-sonnet-4-6</span></span>
+          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-tool">browse_page</span> <span class="t-val">"https://competitor-a.com"</span></span>
+          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-ok">✓</span> page read — 2,100 tokens</span>
+          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-tool">browse_page</span> <span class="t-val">"https://competitor-b.com"</span></span>
+          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-ok">✓</span> page read — 1,800 tokens</span>
+          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-tool">remember</span> <span class="t-val">"comp_notes" "{…}"</span></span>
+          <span class="t-line"><span class="t-ok">✓</span> <span class="t-agent">research-sub</span> complete — passing results back</span>
+          <span class="t-line"><span class="t-prompt">→ spawn_agent</span> <span class="t-agent">"writing-sub"</span> <span class="t-val">model=gpt-4o</span></span>
+          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[writing-sub]</span> <span class="t-tool">write_file</span> <span class="t-val">"comparison.md"</span></span>
+          <span class="t-line"><span class="t-ok">✓</span> <span class="t-agent">writing-sub</span> complete — comparison.md ready</span>
+          <span class="t-line"><span class="t-think">Here's your competitor comparison. I used Claude for research and GPT-4o for the write-up…</span></span>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PAIN ──────────────────────────────────────────────── -->
+<section class="band band-surface" id="pain">
+  <div class="container">
+    <div class="grid md-col-2 gap-5 items-center">
+      <div>
+        <span class="section-label section-label-muted">the problem</span>
+        <h2>Cloud AI agents were designed for vendor convenience, not yours.</h2>
+      </div>
+      <ul class="pain-list">
+        <li>Your conversations, files, and credentials flow through servers you don't control or audit.</li>
+        <li>You're locked to one model per tool. Switching providers means starting over.</li>
+        <li>One agent fits all — no way to have a coding agent, a research agent, and a writing agent with their own configs.</li>
+        <li>Autonomous background tasks are either expensive add-ons or simply missing.</li>
+        <li>Running a local model like Llama or Mistral? Agent tooling that connects to it barely exists.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────────── -->
+<section id="how-it-works" style="padding:5rem 0">
+  <div class="container">
+    <header class="text-center mb-5">
+      <span class="section-label">how it works</span>
+      <h2>Install once. Configure once. Just use it.</h2>
+      <p class="muted">The <code>omnideck</code> CLI wraps Docker or Podman and handles everything — install, update, health checks. No YAML archaeology required.</p>
+    </header>
+
+    <div class="grid md-col-3 gap-4">
+      <div class="card">
+        <span class="step-num">01 —</span>
+        <span class="step-icon">📦</span>
+        <h3>Pull and run</h3>
+        <p>One CLI command pulls the container and starts Omnideck. The setup wizard walks you through connecting your LLM providers. Everything runs locally — no accounts, no signup, no cloud dependency.</p>
+      </div>
+      <div class="card">
+        <span class="step-num">02 —</span>
+        <span class="step-icon">🤖</span>
+        <h3>Create your agents</h3>
+        <p>Build agent profiles — each with its own system prompt, model, skills, and tool access. A coding agent running on a local Llama model. A research agent on GPT-4o. A writing agent on Claude. All in one UI.</p>
+      </div>
+      <div class="card">
+        <span class="step-num">03 —</span>
+        <span class="step-icon">⚡</span>
+        <h3>Put them to work</h3>
+        <p>Chat with any agent. Switch agents mid-conversation. Watch sub-agents spin up and complete tasks in real time. Set recurring background tasks and get notified when they finish.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── UI PREVIEW ─────────────────────────────────────────── -->
+<section style="padding:0 0 4rem">
+  <div class="container">
+    <div class="ui-preview">
+      <p class="ui-preview-label">UI screenshot coming soon</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MULTI-AGENT ────────────────────────────────────────── -->
+<section class="band band-surface" id="agents">
+  <div class="container">
+    <div class="grid md-col-2 gap-5 items-center">
+
+      <div class="agent-stack">
+        <div class="agent-row active">
+          <span class="agent-avatar primary">🧠</span>
+          <div class="agent-meta">
+            <div class="agent-name">Research Agent</div>
+            <div class="agent-model">claude-sonnet-4-6 · custom prompt · web + memory tools</div>
+          </div>
+          <span class="agent-status running">active</span>
+        </div>
+
+        <div class="spawn-connector"></div>
+
+        <div class="agent-row spawned">
+          <span class="agent-avatar sub">💻</span>
+          <div class="agent-meta">
+            <div class="agent-name">Code Agent <span class="spawned-label">↳ spawned</span></div>
+            <div class="agent-model">llama-3.3-70b (local) · strict execution tools only</div>
+          </div>
+          <span class="agent-status working">working</span>
+        </div>
+
+        <div class="agent-row spawned">
+          <span class="agent-avatar sub2">✍️</span>
+          <div class="agent-meta">
+            <div class="agent-name">Summary Agent <span class="spawned-label">↳ spawned</span></div>
+            <div class="agent-model">gpt-4o-mini · write + read tools</div>
+          </div>
+          <span class="agent-status done">done</span>
+        </div>
+
+        <div class="agent-row idle">
+          <span class="agent-avatar primary">✍️</span>
+          <div class="agent-meta">
+            <div class="agent-name">Writing Agent</div>
+            <div class="agent-model">gpt-4o · focused system prompt · no browser</div>
+          </div>
+          <span class="agent-status idle">idle</span>
+        </div>
+
+        <div class="agent-row idle">
+          <span class="agent-avatar sub2">🔧</span>
+          <div class="agent-meta">
+            <div class="agent-name">DevOps Agent</div>
+            <div class="agent-model">qwen3-32b (local) · bash + files · no web</div>
+          </div>
+          <span class="agent-status idle">idle</span>
+        </div>
+
+        <p class="agent-note">switch agents at any point in the conversation →</p>
+      </div>
+
+      <div>
+        <span class="section-label">multi-agent</span>
+        <h2>One workbench.<br>As many agents as you need.</h2>
+        <p class="muted" style="line-height:1.75;margin-bottom:1rem">Most AI tools give you one generic assistant. Omnideck lets you build a team. Each agent is a fully independent configuration — its own model, system prompt, tool access, memory, and inference parameters. Swap between them in any conversation.</p>
+        <p class="muted" style="line-height:1.75;margin-bottom:1.25rem">And when a task calls for parallel work, the active agent can spin up sub-agents on the fly — dedicated helpers that run autonomously and report back.</p>
+        <ul class="feature-bullets">
+          <li>Per-agent model selection — mix cloud and local models in the same session</li>
+          <li>Per-agent tool access — lock an agent to only the tools it needs</li>
+          <li>Per-agent system prompts, temperature, and context window settings</li>
+          <li>Switch the active agent mid-conversation without losing context</li>
+          <li>Agents can spawn sub-agents for delegated, parallel workstreams</li>
+          <li>Watch sub-agent turns stream live — every tool call, every result</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MODEL FLEXIBILITY ──────────────────────────────────── -->
+<section style="padding:5rem 0" id="models">
+  <div class="container">
+    <header class="text-center mb-4">
+      <span class="section-label">model flexibility</span>
+      <h2>The right model for every job.</h2>
+      <p class="muted">Switch models per agent profile in seconds. Route to a local model for anything sensitive. No vendor lock-in, ever.</p>
+    </header>
+
+    <div class="grid md-col-2 gap-4">
+      <div class="card">
+        <span class="bcard-tag">per-agent model selection</span>
+        <h3>Cloud and local models, side by side</h3>
+        <p>Point each agent at OpenAI, Anthropic, OpenRouter, Ollama, or any OpenAI-compatible endpoint. Change the model on any agent profile in the settings panel — no restart required.</p>
+        <div class="provider-chips">
+          <span class="chip active">claude-sonnet-4-6</span>
+          <span class="chip active">gpt-4o</span>
+          <span class="chip active">llama-3.3-70b</span>
+          <span class="chip active">qwen3-32b</span>
+          <span class="chip">mistral-large</span>
+          <span class="chip">+ any endpoint</span>
+        </div>
+      </div>
+      <div class="card">
+        <span class="bcard-tag">smart context management</span>
+        <h3>Long conversations that don't break</h3>
+        <p>When a conversation approaches the model's context limit, Omnideck runs an automatic compaction pass — summarizing history while preserving critical facts. You can even assign a different, cheaper model just for compaction.</p>
+        <div class="mini-terminal">
+          <span class="mt-i">context</span>: <span class="mt-y">87,400</span> / <span class="mt-y">96,000</span> tokens<br>
+          <span class="mt-m">→ compacting with gpt-4o-mini…</span><br>
+          <span class="mt-g">✓</span> compacted to <span class="mt-y">12,200</span> tokens<br>
+          <span class="mt-g">✓</span> ready to continue
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES BENTO ─────────────────────────────────────── -->
+<section style="padding:0 0 5rem" id="features">
+  <div class="container">
+    <header class="text-center mb-4">
+      <span class="section-label">built-in capabilities</span>
+      <h2>Every tool an agent needs, already included.</h2>
+    </header>
+
+    <div class="grid gap-4 mb-4">
+      <div class="card span-12 md-span-7">
+        <span class="bcard-tag">web</span>
+        <span class="bcard-icon">🌐</span>
+        <h3>Real browser automation — structural and visual</h3>
+        <p>A persistent Playwright browser handles full web automation. Agents navigate via accessibility trees for structured UIs and fall back to screenshot + vision model analysis for anything custom. Sessions, cookies, and auth state persist across tool calls.</p>
+        <div class="mini-terminal">
+          <span class="mt-i">→ tool:</span> browse_page <span class="mt-y">"https://news.ycombinator.com"</span><br>
+          <span class="mt-g">✓</span> 30 interactive elements found<br>
+          <span class="mt-i">→ tool:</span> read_page<br>
+          <span class="mt-g">✓</span> 3,800 tokens of clean markdown<br>
+          <span class="mt-i">→ tool:</span> remember <span class="mt-y">"top_story" "..."</span><br>
+          <span class="mt-g">✓</span> memory updated
+        </div>
+      </div>
+
+      <div class="card span-12 md-span-5">
+        <span class="bcard-tag">execution</span>
+        <span class="bcard-icon">💻</span>
+        <h3>Write and run code — for real</h3>
+        <p>The agent writes files, runs bash commands with full stdout/stderr streaming, installs packages, and sends output files back to the UI. Execution policy controls what it can and can't touch.</p>
+        <div class="mini-terminal">
+          <span class="mt-i">→ tool:</span> run_bash_cmd<br>
+          <span class="mt-y">"python analyze.py"</span><br>
+          <span class="mt-g">streaming…</span><br>
+          rows: 14,832 | anomalies: 3<br>
+          <span class="mt-g">✓</span> output: <span class="mt-m">report.csv</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md-col-3 gap-4">
+      <div class="card">
+        <span class="bcard-tag">memory</span>
+        <span class="bcard-icon">🧠</span>
+        <h3>Facts that survive session resets</h3>
+        <p>Agents store and retrieve keyed facts across conversations. Atomic writes ensure nothing is lost mid-turn. Private keys are hidden from the UI.</p>
+      </div>
+      <div class="card">
+        <span class="bcard-tag">integrations</span>
+        <span class="bcard-icon">🔗</span>
+        <h3>Gmail, Calendar, Drive — and custom MCP servers</h3>
+        <p>Connect your Google Workspace and any MCP server to extend what agents can access and control.</p>
+      </div>
+      <div class="card">
+        <span class="bcard-tag">files</span>
+        <span class="bcard-icon">📁</span>
+        <h3>Full filesystem access in the shared space</h3>
+        <p>Read, write, edit, patch, grep, move. Agents work inside the shared file space you define — and only there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECURITY ───────────────────────────────────────────── -->
+<section class="band band-surface" id="security">
+  <div class="container">
+    <div class="grid md-col-2 gap-5 items-center">
+
+      <div class="sec-diagram">
+        <div class="sec-box outer">
+          <span class="sec-label sl-green">🛡 Omnideck Container (isolated)</span>
+          <span class="sec-item">Agent UI &amp; API server</span>
+          <span class="sec-item">Agent loop + tools</span>
+          <span class="sec-item">Browser (Playwright, headless)</span>
+          <span class="sec-item">Code execution (policy-controlled)</span>
+          <div class="sec-box inner">
+            <span class="sec-label sl-indigo">🔌 Integration Supervisor (isolated process)</span>
+            <span class="sec-item">Credential broker — agent never sees raw keys</span>
+            <span class="sec-item">LLM proxy for brokered providers</span>
+            <div class="sec-box vault">
+              <span class="sec-label sl-magenta">🔒 Encrypted Vault</span>
+              <span class="sec-item">API keys &amp; OAuth tokens at rest</span>
+            </div>
+          </div>
+        </div>
+        <div class="sec-divider"></div>
+        <div class="sec-notes">
+          <span>📂 Shared file space — you define the boundary</span><br>
+          <span>🚫 No access to rest of your filesystem</span><br>
+          <span>🚫 SSRF protection blocks cloud metadata endpoints</span><br>
+          <span>🚫 CSRF guard on all mutating API requests</span>
+        </div>
+      </div>
+
+      <div>
+        <span class="section-label">security &amp; privacy</span>
+        <h2>The agent is sandboxed. Your system is not its playground.</h2>
+        <p class="muted" style="line-height:1.75;margin-bottom:1rem">Omnideck runs entirely inside a container. The agent has no access to your filesystem, processes, or network outside of what you explicitly share. If an agent makes a mistake or goes off-script, the blast radius is the container — not your machine.</p>
+        <p class="muted" style="line-height:1.75;margin-bottom:1.25rem">Credentials for external services live in an encrypted local vault managed by an isolated supervisor process. The agent itself never handles raw API keys.</p>
+        <ul class="feature-bullets" style="margin-bottom:1.5rem">
+          <li>Container boundary prevents filesystem and process access beyond the shared space</li>
+          <li>Credentials encrypted at rest, never visible to the agent or the LLM</li>
+          <li>Execution policy controls which bash commands the agent is allowed to run</li>
+          <li>SSRF protection blocks requests to cloud metadata services</li>
+          <li>CSRF guard on all mutating API calls</li>
+          <li>Atomic writes prevent data corruption from crashes or power loss</li>
+        </ul>
+        <span class="no-telemetry">✓ &nbsp;Zero telemetry — Omnideck never phones home. Ever.</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── AUTONOMOUS TASKS ───────────────────────────────────── -->
+<section style="padding:5rem 0" id="tasks">
+  <div class="container">
+    <div class="grid md-col-2 gap-5 items-center">
+
+      <div>
+        <span class="section-label">autonomous tasks</span>
+        <h2>Set it. Forget it.<br>Get notified.</h2>
+        <p class="muted" style="line-height:1.75;margin:1rem 0 1.5rem">Define goals with ordered task lists and recurring schedules. The task engine runs them in the background, using the same agent loop and tool access as interactive conversations. When a run completes — or fails — you get a notification with output files attached.</p>
+        <ul class="feature-bullets">
+          <li>Cron-style or one-off scheduling with full timezone support</li>
+          <li>Concurrent goal execution with configurable limits</li>
+          <li>Crash-safe: tasks stuck in "running" reset automatically on restart</li>
+          <li>Full goal, run, and result history persisted to disk</li>
+        </ul>
+      </div>
+
+      <div class="tasks-log">
+        <div class="tasks-log-head">⚡ task runner — 2 active</div>
+        <div class="log-row"><span>daily-digest</span>     <span class="log-sched">08:00 UTC</span></div>
+        <div class="log-row"><span>competitor-scan</span>  <span class="log-run">running…</span></div>
+        <div class="log-row"><span>backup-export</span>    <span class="log-ok">✓ completed</span></div>
+        <div class="log-row"><span>weekly-summary</span>   <span class="log-sched">fri 09:00</span></div>
+        <div class="log-row"><span>monitor-uptime</span>   <span class="log-ok">✓ completed</span></div>
+        <span class="log-notify">📬 "competitor-scan done — 3 new findings. report.pdf attached."</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── QUOTE BAND ─────────────────────────────────────────── -->
+<section class="quote-band">
+  <div class="container">
+    <blockquote>
+      "You shouldn't have to choose between <em>a capable AI agent</em> and <em>owning your own data</em>. Omnideck is the workbench that doesn't make you pick."
+    </blockquote>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ──────────────────────────────────────────── -->
+<section class="band band-surface cta-section">
+  <div class="container">
+    <span class="section-label">get started</span>
+    <h2>Your agents. Your models.<br>Your machine.</h2>
+    <p class="muted" style="margin:1rem auto 2rem;max-width:480px">Omnideck is open source and free to run. Pull the container, connect your LLMs, and have your first agent working in under five minutes.</p>
+    <div class="d-flex gap-3 flex-wrap justify-center">
+      <a href="https://github.com/omnideck/omnideck" role="button" data-variant="primary" data-size="lg">Install Omnideck →</a>
+      <a href="/docs/" role="button" data-variant="outline" data-size="lg">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

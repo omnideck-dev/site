@@ -1,0 +1,15 @@
+[[items]]
+title = "Getting Started"
+url   = "/docs/getting-started.html"
+
+[[items]]
+title = "Configuration"
+url   = "/docs/configuration.html"
+
+[[items]]
+title = "Agents"
+url   = "/docs/agents.html"
+
+[[items]]
+title = "Autonomous Tasks"
+url   = "/docs/tasks.html"

@@ -1,0 +1,19 @@
+{% extends "templates/layouts/base.html" %}
+{% block title %}{{ Page.Title }} | Docs | {{ Site.Config.Site.Title }}{% endblock %}
+{% block body %}
+<div class="container py-5">
+  <div class="grid gap-5">
+    <div class="span-12 md-span-3">
+      {% include "templates/partials/sidebar.html" %}
+    </div>
+    <article class="span-12 md-span-9">
+      <h1>{{ Page.Title }}</h1>
+      {% if Page.Meta.Fields.description %}
+      <p class="muted">{{ Page.Meta.Fields.description }}</p>
+      <hr>
+      {% endif %}
+      {{ Page.HTMLContent|safe }}
+    </article>
+  </div>
+</div>
+{% endblock %}

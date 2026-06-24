@@ -1,0 +1,11 @@
+<header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+    <nav class="d-flex gap-4 items-center">
+      {% for item in Data.nav.items %}
+        <a href="{{ item.url }}" class="nav-link">{{ item.label }}</a>
+      {% endfor %}
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+  </div>
+</header>

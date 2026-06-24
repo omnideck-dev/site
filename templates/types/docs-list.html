@@ -1,0 +1,35 @@
+{% extends "templates/layouts/base.html" %}
+{% block title %}Documentation | {{ Site.Config.Site.Title }}{% endblock %}
+{% block body %}
+<div class="container py-5">
+  <div class="grid gap-5">
+    <div class="span-12 md-span-3">
+      {% include "templates/partials/sidebar.html" %}
+    </div>
+    <div class="span-12 md-span-9">
+      <h1>Documentation</h1>
+      <p class="muted">Everything you need to install, configure, and get the most out of Omnideck.</p>
+      <hr>
+      {% if Items %}
+      <div class="grid md-col-2 gap-3 mt-4">
+        {% for item in Items %}
+        {% if item.Permalink != Page.Permalink %}
+        <div class="card">
+          <header><h3><a href="{{ item.Permalink }}" style="text-decoration:none;color:inherit">{{ item.Title }}</a></h3></header>
+          {% if item.Meta.Fields.description %}<p>{{ item.Meta.Fields.description }}</p>{% endif %}
+          <footer>
+            <a href="{{ item.Permalink }}" role="button" data-variant="ghost" data-size="sm">Read →</a>
+          </footer>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="callout" data-tone="info">
+        <strong>Coming soon:</strong> Documentation is being written. Check back shortly.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

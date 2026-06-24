@@ -1,0 +1,754 @@
+/* ============================================================
+   Omnideck — site.css
+   Token overrides and custom components only.
+   Ivy + Lattice handle everything else.
+   ============================================================ */
+
+/* ── Token Overrides ──────────────────────────────────────── */
+:root {
+  /* Dark palette — matches the Omnideck brand */
+  --color-bg-dark:           #0B0F1A;
+  --color-text-dark:         #F0EEE9;
+  --color-muted-dark:        #94A3B8;
+  --color-link-dark:         #818CF8;
+  --color-primary-dark:      #6366F1;
+  --color-primary-text-dark: #ffffff;
+  --color-secondary-dark:    #EC4899;
+  --color-secondary-text-dark: #ffffff;
+  --color-border-dark:       rgba(99, 102, 241, 0.18);
+  --color-surface-dark:      #111827;
+  --surface-2-dark:          #1C2333;
+  --surface-3-dark:          #2D3748;
+
+  /* Light palette — clean indigo counterpart */
+  --color-bg-light:           #ffffff;
+  --color-text-light:         #0f172a;
+  --color-muted-light:        #64748b;
+  --color-link-light:         #4f46e5;
+  --color-primary-light:      #4f46e5;
+  --color-primary-text-light: #ffffff;
+  --color-secondary-light:    #db2777;
+  --color-secondary-text-light: #ffffff;
+  --color-border-light:       #e2e8f0;
+  --color-surface-light:      #f8fafc;
+  --surface-2-light:          #f1f5f9;
+  --surface-3-light:          #e8eef5;
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+  --measure:   72ch;
+
+  /* Layout */
+  --lat-container-width: 1100px;
+  --radius: 0.5rem;
+}
+
+/* ── Accent colors for custom components ────────────────────── */
+:root {
+  --c-navy-2:  #111827;
+  --c-navy-3:  #1C2333;
+  --c-indigo:  #6366F1;
+  --c-indigo-l:#818CF8;
+  --c-magenta: #EC4899;
+  --c-green:   #4ADE80;
+  --c-amber:   #FCD34D;
+  --c-muted:   #94A3B8;
+}
+
+/* ── Layout fixes ───────────────────────────────────────────── */
+
+/* Remove Ivy's measure constraint from full-width main */
+main.full-width {
+  max-width: none;
+  margin:    0;
+  padding:   0;
+}
+
+/* Make .container usable inside non-lattice-grid contexts */
+.container {
+  max-width:     var(--lat-container-width);
+  margin-inline: auto;
+  padding-inline: var(--lat-space, 1rem);
+}
+
+/* ── Logo ───────────────────────────────────────────────────── */
+.site-logo {
+  font-weight:     700;
+  font-size:       1.1rem;
+  letter-spacing:  -0.02em;
+  text-decoration: none;
+  color:           var(--color-text);
+}
+
+.site-logo .logo-accent {
+  color: var(--color-primary);
+}
+
+/* ── Section labels ─────────────────────────────────────────── */
+.section-label {
+  font-family:    var(--font-mono);
+  font-size:      0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:          var(--c-indigo-l);
+  display:        block;
+  margin-bottom:  0.75rem;
+}
+
+.section-label-muted {
+  color: var(--c-magenta);
+}
+
+/* ── h1 em gradient text ────────────────────────────────────── */
+h1 em {
+  font-style:              normal;
+  background:              linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip:         text;
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.hero-section {
+  padding: 7rem 0 5rem;
+}
+
+.hero-eyebrow {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            0.5rem;
+  font-family:    var(--font-mono);
+  font-size:      0.75rem;
+  color:          var(--c-green);
+  background:     rgba(74, 222, 128, 0.08);
+  border:         1px solid rgba(74, 222, 128, 0.2);
+  border-radius:  100px;
+  padding:        0.3rem 0.75rem;
+  margin-bottom:  1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.hero-eyebrow-dot {
+  width:         7px;
+  height:        7px;
+  background:    var(--c-green);
+  border-radius: 50%;
+  flex-shrink:   0;
+  animation:     pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .4; transform: scale(.85); }
+}
+
+.hero-sub {
+  font-size:     1.1rem;
+  color:         var(--color-muted);
+  line-height:   1.7;
+  margin-bottom: 2rem;
+  max-width:     480px;
+}
+
+.trust-badges {
+  display:   flex;
+  gap:       1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.trust-badge {
+  display:        flex;
+  align-items:    center;
+  gap:            0.4rem;
+  font-family:    var(--font-mono);
+  font-size:      0.72rem;
+  color:          var(--color-muted);
+  letter-spacing: 0.04em;
+}
+
+.badge-dot {
+  width:         6px;
+  height:        6px;
+  border-radius: 50%;
+  background:    var(--c-green);
+  flex-shrink:   0;
+}
+
+/* ── Terminal ───────────────────────────────────────────────── */
+.terminal {
+  background:    var(--c-navy-2);
+  border:        1px solid var(--color-border);
+  border-radius: 12px;
+  overflow:      hidden;
+  font-family:   var(--font-mono);
+  font-size:     0.78rem;
+  box-shadow:    0 24px 80px rgba(0, 0, 0, .45);
+}
+
+.terminal-bar {
+  display:         flex;
+  align-items:     center;
+  gap:             0.5rem;
+  padding:         0.75rem 1rem;
+  background:      var(--c-navy-3);
+  border-bottom:   1px solid var(--color-border);
+}
+
+.terminal-dots {
+  display: flex;
+  gap:     0.4rem;
+}
+
+.t-dot {
+  width:         10px;
+  height:        10px;
+  border-radius: 50%;
+}
+
+.t-dot-red   { background: #FF5F57; }
+.t-dot-amber { background: #FEBC2E; }
+.t-dot-green { background: #28C840; }
+
+.terminal-title {
+  font-size:   0.72rem;
+  color:       var(--c-muted);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.terminal-body {
+  padding:    1.25rem;
+  min-height: 280px;
+}
+
+.t-line {
+  display:       block;
+  margin-bottom: 0.3rem;
+  color:         var(--c-muted);
+  line-height:   1.6;
+}
+
+.t-prompt  { color: var(--c-indigo-l); }
+.t-tool    { color: var(--c-green); }
+.t-val     { color: var(--c-amber); }
+.t-dim     { color: #475569; }
+.t-ok      { color: var(--c-green); }
+.t-agent   { color: var(--c-magenta); font-weight: 500; }
+.t-think   { color: var(--c-magenta); font-style: italic; }
+
+/* ── Colored bands ──────────────────────────────────────────── */
+.band {
+  padding: 5rem 0;
+}
+
+.band-surface {
+  background:    var(--color-surface);
+  border-top:    1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ── Pain list ──────────────────────────────────────────────── */
+.pain-list {
+  list-style: none;
+  padding:    0;
+  display:    flex;
+  flex-direction: column;
+  gap:        0.9rem;
+  margin:     0;
+}
+
+.pain-list li {
+  display:     flex;
+  align-items: flex-start;
+  gap:         0.75rem;
+  font-size:   0.95rem;
+  color:       var(--color-muted);
+  line-height: 1.55;
+}
+
+.pain-list li::before {
+  content:     "×";
+  color:       var(--color-secondary);
+  font-weight: 700;
+  font-size:   1rem;
+  flex-shrink: 0;
+  margin-top:  2px;
+}
+
+/* ── Steps ──────────────────────────────────────────────────── */
+.step-num {
+  font-family:    var(--font-mono);
+  font-size:      0.7rem;
+  color:          var(--c-indigo-l);
+  letter-spacing: 0.1em;
+  margin-bottom:  0.75rem;
+}
+
+.step-icon {
+  font-size:     1.5rem;
+  margin-bottom: 0.75rem;
+  display:       block;
+}
+
+/* ── Feature bullets (arrow list) ───────────────────────────── */
+.feature-bullets {
+  list-style: none;
+  padding:    0;
+  margin:     0;
+  display:    flex;
+  flex-direction: column;
+  gap:        0.75rem;
+}
+
+.feature-bullets li {
+  display:     flex;
+  align-items: flex-start;
+  gap:         0.75rem;
+  font-size:   0.9rem;
+  color:       var(--color-muted);
+  line-height: 1.55;
+}
+
+.feature-bullets li::before {
+  content:     "→";
+  color:       var(--c-indigo-l);
+  flex-shrink: 0;
+  margin-top:  1px;
+}
+
+/* ── Agent visual (multi-agent section) ─────────────────────── */
+.agent-stack {
+  display:        flex;
+  flex-direction: column;
+  gap:            0.6rem;
+}
+
+.agent-row {
+  background:    var(--color-bg);
+  border:        1px solid var(--color-border);
+  border-radius: 10px;
+  padding:       0.9rem 1.1rem;
+  display:       flex;
+  align-items:   center;
+  gap:           0.9rem;
+}
+
+.agent-row.active {
+  border-color: var(--c-indigo);
+  background:   rgba(99, 102, 241, 0.06);
+}
+
+.agent-row.spawned {
+  margin-left:  1.5rem;
+  border-color: rgba(236, 72, 153, 0.3);
+  background:   rgba(236, 72, 153, 0.04);
+}
+
+.agent-row.idle {
+  opacity: 0.5;
+}
+
+.agent-avatar {
+  width:           32px;
+  height:          32px;
+  border-radius:   8px;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       1rem;
+  flex-shrink:     0;
+}
+
+.agent-avatar.primary { background: rgba(99, 102, 241, 0.2); }
+.agent-avatar.sub     { background: rgba(236, 72, 153, 0.15); }
+.agent-avatar.sub2    { background: rgba(74, 222, 128, 0.12); }
+
+.agent-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.agent-name {
+  font-size:   0.875rem;
+  font-weight: 600;
+  color:       var(--color-text);
+}
+
+.agent-name .spawned-label {
+  font-size:   0.8em;
+  font-weight: 400;
+  color:       var(--color-muted);
+}
+
+.agent-model {
+  font-family: var(--font-mono);
+  font-size:   0.68rem;
+  color:       var(--color-muted);
+  margin-top:  2px;
+  overflow:    hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agent-status {
+  font-family:    var(--font-mono);
+  font-size:      0.65rem;
+  letter-spacing: 0.06em;
+  padding:        0.2rem 0.55rem;
+  border-radius:  100px;
+  flex-shrink:    0;
+}
+
+.agent-status.running  { background: rgba(99, 102, 241, 0.15); color: var(--c-indigo-l); }
+.agent-status.working  { background: rgba(236, 72, 153, 0.12); color: var(--c-magenta); }
+.agent-status.done     { background: rgba(74, 222, 128, 0.1);  color: var(--c-green); }
+.agent-status.idle     { background: rgba(148, 163, 184, 0.08); color: var(--c-muted); }
+
+.spawn-connector {
+  height:      0.6rem;
+  margin-left: 2rem;
+  border-left: 1px dashed rgba(236, 72, 153, 0.3);
+}
+
+.agent-note {
+  font-family:    var(--font-mono);
+  font-size:      0.7rem;
+  color:          var(--color-muted);
+  text-align:     center;
+  letter-spacing: 0.04em;
+  margin-top:     0.75rem;
+}
+
+/* ── Provider chips ─────────────────────────────────────────── */
+.provider-chips {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       0.5rem;
+  margin-top: 1rem;
+}
+
+.chip {
+  font-family:   var(--font-mono);
+  font-size:     0.72rem;
+  padding:       0.3rem 0.65rem;
+  border-radius: 100px;
+  border:        1px solid var(--color-border);
+  color:         var(--color-muted);
+  background:    var(--color-bg);
+}
+
+.chip.active {
+  border-color: var(--color-primary);
+  color:        var(--c-indigo-l);
+}
+
+/* ── Mini terminal (inside bento cards) ─────────────────────── */
+.mini-terminal {
+  margin-top:    1rem;
+  background:    var(--color-bg);
+  border:        1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 8px;
+  padding:       0.9rem;
+  font-family:   var(--font-mono);
+  font-size:     0.72rem;
+  line-height:   1.7;
+  color:         var(--color-muted);
+}
+
+.mini-terminal .mt-g { color: var(--c-green); }
+.mini-terminal .mt-i { color: var(--c-indigo-l); }
+.mini-terminal .mt-y { color: var(--c-amber); }
+.mini-terminal .mt-m { color: var(--c-magenta); }
+
+/* ── Security diagram ───────────────────────────────────────── */
+.sec-diagram {
+  font-family: var(--font-mono);
+  font-size:   0.78rem;
+  line-height: 1.9;
+}
+
+.sec-box {
+  border:        1px solid var(--color-border);
+  border-radius: 10px;
+  padding:       1.1rem 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.sec-box.outer {
+  border-color: rgba(74, 222, 128, 0.25);
+  background:   rgba(74, 222, 128, 0.03);
+}
+
+.sec-box.inner {
+  margin:       0.5rem 0.75rem;
+  border-color: rgba(99, 102, 241, 0.25);
+  background:   rgba(99, 102, 241, 0.04);
+}
+
+.sec-box.vault {
+  margin:       0.25rem 1.5rem;
+  border-color: rgba(236, 72, 153, 0.25);
+  background:   rgba(236, 72, 153, 0.04);
+}
+
+.sec-label {
+  font-size:      0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom:  0.4rem;
+  display:        block;
+}
+
+.sec-label.sl-green  { color: var(--c-green); }
+.sec-label.sl-indigo { color: var(--c-indigo-l); }
+.sec-label.sl-magenta{ color: var(--c-magenta); }
+
+.sec-item {
+  display: block;
+  color:   var(--color-muted);
+  font-size: 0.72rem;
+}
+
+.sec-item::before {
+  content: "· ";
+  color:   #475569;
+}
+
+.sec-divider {
+  height:     1px;
+  background: var(--color-border);
+  margin:     1rem 0;
+}
+
+.sec-notes {
+  color:       var(--color-muted);
+  font-size:   0.72rem;
+  line-height: 1.8;
+}
+
+/* ── Tasks mini log ─────────────────────────────────────────── */
+.tasks-log {
+  background:    var(--color-surface);
+  border:        1px solid var(--color-border);
+  border-radius: 12px;
+  padding:       1.4rem;
+  font-family:   var(--font-mono);
+  font-size:     0.75rem;
+  line-height:   1.9;
+  color:         var(--color-muted);
+}
+
+.tasks-log-head {
+  color:          var(--color-text);
+  font-weight:    500;
+  border-bottom:  1px solid var(--color-border);
+  padding-bottom: 0.65rem;
+  margin-bottom:  0.65rem;
+  font-size:      0.8rem;
+}
+
+.log-row {
+  display:         flex;
+  justify-content: space-between;
+}
+
+.log-ok   { color: var(--c-green); }
+.log-run  { color: var(--c-indigo-l); }
+.log-sched{ color: var(--c-amber); }
+.log-notify { color: var(--c-indigo-l); margin-top: 0.5rem; display: block; }
+
+/* ── Quote band ─────────────────────────────────────────────── */
+.quote-band {
+  background:    linear-gradient(135deg, rgba(99, 102, 241, .12) 0%, rgba(236, 72, 153, .06) 100%);
+  border-top:    1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding:       5rem 0;
+  text-align:    center;
+}
+
+.quote-band blockquote {
+  font-size:      clamp(1.2rem, 2.2vw, 1.7rem);
+  font-weight:    500;
+  line-height:    1.5;
+  letter-spacing: -0.02em;
+  color:          var(--color-text);
+  border:         none;
+  padding:        0;
+  font-style:     normal;
+}
+
+.quote-band blockquote em {
+  font-style: normal;
+  color:      var(--c-indigo-l);
+}
+
+.quote-attr {
+  margin-top:     1.5rem;
+  font-family:    var(--font-mono);
+  font-size:      0.75rem;
+  color:          var(--color-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ── CTA section ────────────────────────────────────────────── */
+.cta-section {
+  text-align: center;
+  padding:    6rem 0;
+}
+
+/* ── UI preview placeholder ─────────────────────────────────── */
+.ui-preview {
+  background:    var(--color-surface);
+  border:        1px solid var(--color-border);
+  border-radius: 16px;
+  aspect-ratio:  16 / 9;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  position:      relative;
+  overflow:      hidden;
+}
+
+.ui-preview-label {
+  font-family: var(--font-mono);
+  font-size:   0.78rem;
+  color:       var(--color-muted);
+  text-align:  center;
+}
+
+/* ── Bento card overrides ───────────────────────────────────── */
+.bcard-tag {
+  font-family:    var(--font-mono);
+  font-size:      0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color:          var(--c-indigo-l);
+  margin-bottom:  0.75rem;
+  display:        block;
+}
+
+.bcard-icon {
+  font-size:     1.5rem;
+  margin-bottom: 0.75rem;
+  display:       block;
+}
+
+/* ── Nav links ──────────────────────────────────────────────── */
+.nav-link {
+  font-size:       0.875rem;
+  color:           var(--color-muted);
+  text-decoration: none;
+  transition:      color 0.15s;
+}
+
+.nav-link:hover {
+  color: var(--color-text);
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding:    2.5rem 0;
+}
+
+.footer-text {
+  font-family:    var(--font-mono);
+  font-size:      0.72rem;
+  letter-spacing: 0.04em;
+  color:          var(--color-muted);
+}
+
+/* ── Docs layout ────────────────────────────────────────────── */
+.docs-sidebar {
+  font-size: 0.9rem;
+}
+
+.docs-sidebar nav a {
+  display:       block;
+  padding:       0.35rem 0.5rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color:           var(--color-muted);
+  border-left:     2px solid transparent;
+}
+
+.docs-sidebar nav a:hover {
+  color:        var(--color-text);
+  border-color: var(--color-border);
+}
+
+.docs-sidebar nav a.active {
+  color:        var(--color-primary);
+  border-color: var(--color-primary);
+  font-weight:  600;
+}
+
+.docs-nav-label {
+  font-family:    var(--font-mono);
+  font-size:      0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color:          var(--color-muted);
+  padding:        0 0.5rem;
+  margin-bottom:  0.5rem;
+  display:        block;
+}
+
+/* ── No-telemetry callout ───────────────────────────────────── */
+.no-telemetry {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            0.5rem;
+  background:     rgba(74, 222, 128, 0.08);
+  border:         1px solid rgba(74, 222, 128, 0.2);
+  border-radius:  8px;
+  padding:        0.7rem 1rem;
+  font-family:    var(--font-mono);
+  font-size:      0.75rem;
+  color:          var(--c-green);
+  margin-top:     1rem;
+}
+
+/* ── Blog card ──────────────────────────────────────────────── */
+.blog-card-title {
+  margin: 0 0 0.25rem;
+}
+
+.blog-card-link {
+  text-decoration: none;
+  color:           inherit;
+}
+
+.blog-card-link:hover {
+  color: var(--color-primary);
+}
+
+.blog-card-date {
+  font-size:     0.875rem;
+  margin:        0 0 0.75rem;
+}
+
+.blog-card-desc {
+  margin: 0 0 0.75rem;
+}
+
+/* ── Responsive helpers ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 4rem 0 3rem;
+  }
+
+  .band {
+    padding: 3.5rem 0;
+  }
+
+  .cta-section {
+    padding: 4rem 0;
+  }
+
+  .quote-band {
+    padding: 3.5rem 0;
+  }
+}

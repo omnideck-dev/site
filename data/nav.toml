@@ -1,0 +1,11 @@
+[[items]]
+label = "Docs"
+url   = "/docs/"
+
+[[items]]
+label = "About"
+url   = "/about.html"
+
+[[items]]
+label = "GitHub"
+url   = "https://github.com/omnideck/omnideck"

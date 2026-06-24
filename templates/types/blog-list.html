@@ -1,0 +1,29 @@
+{% extends "templates/layouts/base.html" %}
+{% block title %}Blog | {{ Site.Config.Site.Title }}{% endblock %}
+{% block body %}
+<div class="container py-5">
+  <h1>Blog</h1>
+  <p class="muted">Updates, announcements, and deep dives from the Omnideck team.</p>
+  <hr>
+  {% if Items %}
+  <div class="grid gap-3 mt-4">
+    {% for item in Items %}
+    <article class="card">
+      <h2 class="blog-card-title"><a href="{{ item.Permalink }}" class="blog-card-link">{{ item.Title }}</a></h2>
+      <p class="muted blog-card-date"><time>{{ item.Date|godate:"January 2, 2006" }}</time></p>
+      {% if item.Meta.Fields.description %}<p class="blog-card-desc">{{ item.Meta.Fields.description }}</p>{% endif %}
+      <a href="{{ item.Permalink }}" role="button" data-variant="ghost" data-size="sm">Read post →</a>
+    </article>
+    {% endfor %}
+  </div>
+  {% if Pager %}
+  <nav class="d-flex justify-between mt-4" aria-label="Pagination">
+    {% if Pager.HasPrev %}<a href="{{ Pager.PrevURL }}" role="button" data-variant="outline" data-size="sm">← Newer</a>{% endif %}
+    {% if Pager.HasNext %}<a href="{{ Pager.NextURL }}" role="button" data-variant="outline" data-size="sm">Older →</a>{% endif %}
+  </nav>
+  {% endif %}
+  {% else %}
+  <p class="muted">No posts yet. Check back soon.</p>
+  {% endif %}
+</div>
+{% endblock %}
