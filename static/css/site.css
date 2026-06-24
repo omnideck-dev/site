@@ -20,19 +20,19 @@
   --surface-2-dark:          #1C2333;
   --surface-3-dark:          #2D3748;
 
-  /* Light palette — clean indigo counterpart */
+  /* Light palette — stronger contrast for bright monitors */
   --color-bg-light:           #ffffff;
   --color-text-light:         #0f172a;
-  --color-muted-light:        #64748b;
-  --color-link-light:         #4f46e5;
-  --color-primary-light:      #4f46e5;
+  --color-muted-light:        #475569;   /* slate-600: 6.5:1 on white */
+  --color-link-light:         #4338ca;   /* indigo-700: 5.5:1 on white */
+  --color-primary-light:      #4338ca;
   --color-primary-text-light: #ffffff;
-  --color-secondary-light:    #db2777;
+  --color-secondary-light:    #be185d;   /* pink-700: 5.2:1 on white */
   --color-secondary-text-light: #ffffff;
-  --color-border-light:       #e2e8f0;
-  --color-surface-light:      #f8fafc;
-  --surface-2-light:          #f1f5f9;
-  --surface-3-light:          #e8eef5;
+  --color-border-light:       #94a3b8;   /* slate-400: clearly visible */
+  --color-surface-light:      #e8edf5;   /* distinctly off-white for bands */
+  --surface-2-light:          #dce3ee;
+  --surface-3-light:          #cfd8e6;
 
   /* Typography */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -45,15 +45,59 @@
 }
 
 /* ── Accent colors for custom components ────────────────────── */
+/* Default = light-mode accessible values (WCAG AA on white/surface) */
 :root {
-  --c-navy-2:  #111827;
-  --c-navy-3:  #1C2333;
-  --c-indigo:  #6366F1;
-  --c-indigo-l:#818CF8;
-  --c-magenta: #EC4899;
-  --c-green:   #4ADE80;
-  --c-amber:   #FCD34D;
-  --c-muted:   #94A3B8;
+  --c-navy-2:  #111827;  /* terminal bg — always dark */
+  --c-navy-3:  #1C2333;  /* terminal bar — always dark */
+  --c-indigo:  #4338ca;  /* indigo-700 — 5.5:1 on white */
+  --c-indigo-l:#4338ca;  /* same — used for labels/badges */
+  --c-magenta: #be185d;  /* pink-700   — 5.2:1 on white */
+  --c-green:   #15803d;  /* green-700  — 5.5:1 on white */
+  --c-amber:   #a16207;  /* amber-700  — 4.9:1 on white */
+  --c-muted:   #475569;  /* slate-600  — 6.5:1 on white */
+
+  /* Component tints — adapt to theme */
+  --c-green-tint: rgba(21, 128, 61, 0.1);
+  --c-green-ring: rgba(21, 128, 61, 0.3);
+}
+
+/* ── Dark mode: restore neon accent colors ───────────────────── */
+html.dark,
+html[data-theme=dark] {
+  --c-indigo:   #6366F1;
+  --c-indigo-l: #818CF8;
+  --c-magenta:  #EC4899;
+  --c-green:    #4ADE80;
+  --c-amber:    #FCD34D;
+  --c-muted:    #94A3B8;
+  --c-green-tint: rgba(74, 222, 128, 0.08);
+  --c-green-ring: rgba(74, 222, 128, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme=light]):not(.light) {
+    --c-indigo:   #6366F1;
+    --c-indigo-l: #818CF8;
+    --c-magenta:  #EC4899;
+    --c-green:    #4ADE80;
+    --c-amber:    #FCD34D;
+    --c-muted:    #94A3B8;
+    --c-green-tint: rgba(74, 222, 128, 0.08);
+    --c-green-ring: rgba(74, 222, 128, 0.2);
+  }
+}
+
+/* ── Terminal/mini-terminal: always neon (always dark bg) ────── */
+/* These elements have a fixed dark background regardless of theme, */
+/* so neon colors must always apply inside them.                    */
+.terminal,
+.mini-terminal {
+  --c-indigo:   #6366F1;
+  --c-indigo-l: #818CF8;
+  --c-magenta:  #EC4899;
+  --c-green:    #4ADE80;
+  --c-amber:    #FCD34D;
+  --c-muted:    #94A3B8;
 }
 
 /* ── Layout fixes ───────────────────────────────────────────── */
@@ -121,8 +165,8 @@ h1 em {
   font-family:    var(--font-mono);
   font-size:      0.75rem;
   color:          var(--c-green);
-  background:     rgba(74, 222, 128, 0.08);
-  border:         1px solid rgba(74, 222, 128, 0.2);
+  background:     var(--c-green-tint);
+  border:         1px solid var(--c-green-ring);
   border-radius:  100px;
   padding:        0.3rem 0.75rem;
   margin-bottom:  1.5rem;
@@ -409,7 +453,8 @@ h1 em {
 .spawn-connector {
   height:      0.6rem;
   margin-left: 2rem;
-  border-left: 1px dashed rgba(236, 72, 153, 0.3);
+  border-left: 1px dashed var(--c-magenta);
+  opacity:     0.45;
 }
 
 .agent-note {
@@ -445,16 +490,17 @@ h1 em {
 }
 
 /* ── Mini terminal (inside bento cards) ─────────────────────── */
+/* Always dark — it's code output, same as a code block */
 .mini-terminal {
   margin-top:    1rem;
-  background:    var(--color-bg);
-  border:        1px solid rgba(99, 102, 241, 0.15);
+  background:    #0f1623;
+  border:        1px solid rgba(99, 102, 241, 0.3);
   border-radius: 8px;
   padding:       0.9rem;
   font-family:   var(--font-mono);
   font-size:     0.72rem;
   line-height:   1.7;
-  color:         var(--color-muted);
+  color:         #94A3B8;
 }
 
 .mini-terminal .mt-g { color: var(--c-green); }
@@ -701,8 +747,8 @@ h1 em {
   display:        inline-flex;
   align-items:    center;
   gap:            0.5rem;
-  background:     rgba(74, 222, 128, 0.08);
-  border:         1px solid rgba(74, 222, 128, 0.2);
+  background:     var(--c-green-tint);
+  border:         1px solid var(--c-green-ring);
   border-radius:  8px;
   padding:        0.7rem 1rem;
   font-family:    var(--font-mono);
