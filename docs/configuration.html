@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Configure LLM providers, execution policy, and shared file access.">
+  <meta name="description" content="Configure LLM providers, memory limits, and manage multiple Omnideck instances.">
   <title>Configuration | Docs | Omnideck</title>
   <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/ivy.full.css">
   <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/lattice.full.css">
@@ -39,7 +39,13 @@
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
+    <a href="/docs/cli-reference.html">CLI Reference</a>
+    
     <a href="/docs/configuration.html">Configuration</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
     
     <a href="/docs/agents.html">Agents</a>
     
@@ -52,48 +58,60 @@
     <article class="span-12 md-span-9">
       <h1>Configuration</h1>
       
-      <p class="muted">Configure LLM providers, execution policy, and shared file access.</p>
+      <p class="muted">Configure LLM providers, memory limits, and manage multiple Omnideck instances.</p>
       <hr>
       
-      <p>Omnideck stores its configuration in <code>~/.omnideck/config.toml</code>. You can edit this file directly or use the settings panel in the UI.</p>
-<h2>LLM Providers</h2>
-<p>Add provider credentials under <code>[[providers]]</code>. Credentials are stored in an encrypted local vault — the agent never receives your raw API keys.</p>
-<pre><code class="language-toml">[[providers]]
-name   = &quot;anthropic&quot;
-type   = &quot;anthropic&quot;
-key_env = &quot;ANTHROPIC_API_KEY&quot;
-
-[[providers]]
-name   = &quot;openai&quot;
-type   = &quot;openai&quot;
-key_env = &quot;OPENAI_API_KEY&quot;
-
-[[providers]]
-name   = &quot;local-ollama&quot;
-type   = &quot;ollama&quot;
-base_url = &quot;http://localhost:11434&quot;
+      <p>Omnideck has two layers of configuration: the CLI config (managed by the <code>omnideck</code> CLI on your host) and the in-app settings (managed through the web UI at <code>http://localhost:2337</code>).</p>
+<h2>CLI configuration</h2>
+<p>The CLI stores a config file per instance at:</p>
+<pre><code>~/.config/omnideck-cli/instances/&lt;container-name&gt;.yaml
 </code></pre>
-<h2>Execution Policy</h2>
-<p>Control what the agent is allowed to run. Policies are evaluated before every bash command.</p>
-<pre><code class="language-toml">[execution]
-allow_bash         = true
-allowed_commands   = [&quot;python&quot;, &quot;node&quot;, &quot;git&quot;, &quot;curl&quot;, &quot;ls&quot;, &quot;cat&quot;, &quot;grep&quot;]
-blocked_patterns   = [&quot;rm -rf /&quot;, &quot;curl.*169.254&quot;]
-max_runtime_secs   = 120
+<p>A typical config looks like this:</p>
+<pre><code class="language-yaml">container_name: omnideck
+shared_dir: /home/user/Omnideck
+state_dir: /home/user/Omnideck/.state
+memory: 3g
+shm_size: 1536m
+web_ui_port: &quot;2337&quot;
+engine: docker
+image: ghcr.io/omnideck-dev/omnideck:main
+installed_at: 2025-01-15T10:30:00Z
 </code></pre>
-<h2>Shared File Space</h2>
-<p>Define the directory tree the agent can read and write. Paths outside this boundary are inaccessible.</p>
-<pre><code class="language-toml">[filesystem]
-shared_path = &quot;~/omnideck-workspace&quot;
+<p>You can inspect or update config values using the CLI:</p>
+<pre><code class="language-bash">omnideck config show                   # pretty-print the saved config
+omnideck config set memory 4g          # change the memory limit
+omnideck config set web_ui_port 2338   # change the port
+omnideck config path                   # print the config file path
 </code></pre>
-<h2>Telegram Notifications</h2>
-<p>Enable notifications for autonomous task completions.</p>
-<pre><code class="language-toml">[notifications]
-telegram_bot_token = &quot;...&quot;
-telegram_chat_id   = &quot;...&quot;
+<p>Changes to <code>memory</code> or <code>web_ui_port</code> take effect on the next <code>omnideck restart</code>.</p>
+<h2>Memory limits</h2>
+<p>The install wizard suggests a memory limit based on your system RAM (roughly 20% of host RAM, between 1 GB and 8 GB). You can adjust this at any time:</p>
+<pre><code class="language-bash">omnideck config set memory 6g
+omnideck restart
 </code></pre>
+<h2>LLM providers</h2>
+<p>LLM providers and API keys are configured through the <strong>Settings → Providers</strong> tab in the web UI, not in the CLI config file. The app stores credentials in an encrypted local vault inside the container — your API keys are never written to the CLI config file.</p>
+<p>Supported providers:</p>
+<ul>
+<li><strong>Anthropic</strong> (Claude models)</li>
+<li><strong>OpenAI</strong> (GPT models)</li>
+<li><strong>OpenRouter</strong> (multi-provider routing)</li>
+<li><strong>Any OpenAI-compatible endpoint</strong> (custom or self-hosted)</li>
+<li><strong>Ollama</strong> (local models — see <a href="/docs/local-models.html">Local Models</a>)</li>
+</ul>
+<h2>Shared file directory</h2>
+<p>The <code>shared_dir</code> in the CLI config is mounted into the container and visible as <code>~/Omnideck</code> both on your host and inside the container. This is where the agent reads and writes files, and where conversations and memory are stored. You set this during <code>omnideck install</code> and it persists across updates.</p>
+<p>The <code>state_dir</code> (a hidden <code>.state</code> subdirectory inside <code>shared_dir</code>) holds persistent container state — you won't normally need to interact with it directly.</p>
+<h2>Multiple instances</h2>
+<p>You can run more than one Omnideck container on different ports. When Omnideck is already installed, <code>omnideck install</code> asks whether to update the existing instance or install a new one. New instances get a unique container name (<code>omnideck2</code>, <code>omnideck3</code>, …), separate data directories, and an incremented port.</p>
+<p>To manage a specific instance by name:</p>
+<pre><code class="language-bash">omnideck --name omnideck2 status
+omnideck --name omnideck2 stop
+omnideck --name omnideck2 uninstall
+</code></pre>
+<p>When more than one instance exists, commands that need an instance show a picker if <code>--name</code> is not given.</p>
 <div class="callout" data-tone="warn">
-<strong>Security note:</strong> Never commit your config file to a public repository. Use environment variables for all secrets.
+<strong>Security note:</strong> The CLI config file does not contain API keys or credentials — those live in the encrypted vault inside the container. Do not share your <code>~/Omnideck/.state</code> directory, as it contains the vault master key.
 </div>
 
     </article>

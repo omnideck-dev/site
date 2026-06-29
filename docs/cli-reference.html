@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete reference for the omnideck CLI — commands, flags, and configuration.">
+  <title>CLI Reference | Docs | Omnideck</title>
+  <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/ivy.full.css">
+  <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/lattice.full.css">
+  <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/site.css">
+  <script type="module" src="https://omnideck-dev.github.io/site/js/dark-mode-toggle.js"></script>
+  
+</head>
+<body class="lattice">
+  <header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+    <nav class="d-flex gap-4 items-center">
+      
+        <a href="/docs/" class="nav-link">Docs</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="https://github.com/omnideck/omnideck" class="nav-link">GitHub</a>
+      
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+  </div>
+</header>
+
+  <main class="full-width">
+    
+<div class="container py-5">
+  <div class="grid gap-5">
+    <div class="span-12 md-span-3">
+      <aside class="docs-sidebar">
+  <span class="docs-nav-label">Documentation</span>
+  <nav>
+    
+    <a href="/docs/getting-started.html">Getting Started</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
+    
+    <a href="/docs/configuration.html">Configuration</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/agents.html">Agents</a>
+    
+    <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+  </nav>
+</aside>
+
+    </div>
+    <article class="span-12 md-span-9">
+      <h1>CLI Reference</h1>
+      
+      <p class="muted">Complete reference for the omnideck CLI — commands, flags, and configuration.</p>
+      <hr>
+      
+      <p>The <code>omnideck</code> CLI installs, manages, and monitors your Omnideck container. It wraps Docker or Podman with a guided installer and simple management commands.</p>
+<h2>Commands</h2>
+<p>| Command | Description |
+|---|---|
+| <code>install</code> | Interactive TUI wizard — install or update an existing instance |
+| <code>update</code> | Pull the latest image and recreate the container |
+| <code>start</code> | Start a stopped container |
+| <code>stop</code> | Gracefully stop the running container |
+| <code>restart</code> | Stop then start |
+| <code>status</code> | Print a status table (container, data dirs, Ollama, web UI port) |
+| <code>logs</code> | Tail container logs |
+| <code>doctor</code> | Run parallel health checks and print a pass/warn/fail report |
+| <code>config show</code> | Pretty-print the saved config |
+| <code>config set &lt;key&gt; &lt;value&gt;</code> | Update a single config key |
+| <code>config path</code> | Print the config file path |
+| <code>uninstall</code> | Stop, remove container, optionally delete data |</p>
+<h2>Global flags</h2>
+<pre><code>--config string   Config file path (default: ~/.config/omnideck-cli/config.yaml)
+--name string     Instance name (e.g. omnideck, omnideck2)
+--no-color        Disable color output
+--debug           Print raw engine commands and stderr
+--version         Print version and exit
+</code></pre>
+<h2>Install flags</h2>
+<pre><code>--image string    Override the container image (for testing alternate builds)
+</code></pre>
+<h2>Logs flags</h2>
+<pre><code>--follow, -f      Follow log output
+--tail int        Number of lines to show from the end of the logs
+</code></pre>
+<h2>Examples</h2>
+<pre><code class="language-bash"># Tail logs and follow
+omnideck logs --follow --tail 100
+
+# Run health checks
+omnideck doctor
+
+# Manage a specific instance by name
+omnideck --name omnideck2 status
+omnideck --name omnideck2 stop
+
+# Test an alternate image without changing the default
+omnideck install --image ghcr.io/example/omnideck:dev
+
+# Update a config value
+omnideck config set memory 6g
+
+# Uninstall a specific instance
+omnideck --name omnideck2 uninstall
+</code></pre>
+<h2>The <code>doctor</code> command</h2>
+<p><code>omnideck doctor</code> runs parallel health checks and prints a pass/warn/fail report:</p>
+<ul>
+<li><strong>Container</strong> — is the container running and on the expected image?</li>
+<li><strong>Data directories</strong> — does <code>~/Omnideck</code> exist and is it writable?</li>
+<li><strong>Ollama</strong> — is Ollama reachable on the host? (only relevant for local models)</li>
+<li><strong>Web UI</strong> — is the web UI responding on the configured port?</li>
+</ul>
+<p>Start here when something isn't working. The output tells you exactly what's wrong and how to fix it.</p>
+<h2>Multiple instances</h2>
+<p>If Omnideck is already installed, <code>omnideck install</code> asks whether to update the existing instance or install a new one. New instances get a unique container name (<code>omnideck2</code>, <code>omnideck3</code>, …), separate data directories under <code>~/Omnideck2</code>, and an incremented port.</p>
+<p>Commands that need an instance (e.g. <code>start</code>, <code>status</code>) show a picker when more than one instance exists, or accept <code>--name</code> to skip the prompt.</p>
+<h2>Configuration file</h2>
+<p>Config files live at:</p>
+<pre><code>~/.config/omnideck-cli/instances/&lt;container-name&gt;.yaml
+</code></pre>
+<pre><code class="language-yaml">container_name: omnideck
+shared_dir: /home/user/Omnideck
+state_dir: /home/user/Omnideck/.state
+memory: 3g
+shm_size: 1536m
+web_ui_port: &quot;2337&quot;
+engine: docker
+image: ghcr.io/omnideck-dev/omnideck:main
+installed_at: 2025-01-15T10:30:00Z
+</code></pre>
+<ul>
+<li><strong><code>shared_dir</code></strong> — mounted into the container, visible to you as <code>~/Omnideck</code></li>
+<li><strong><code>state_dir</code></strong> — hidden subdirectory for persistent container state</li>
+<li><strong><code>memory</code></strong> and <strong><code>shm_size</code></strong> — set by the wizard, can be changed with <code>config set</code></li>
+</ul>
+<h2>Building from source</h2>
+<p>To build the Omnideck container image yourself instead of pulling from the registry:</p>
+<pre><code class="language-bash">git clone https://github.com/omnideck-dev/omnideck
+cd omnideck
+docker build -f container/Dockerfile -t omnideck:latest .
+</code></pre>
+<p>Then point the CLI at your local image:</p>
+<pre><code class="language-bash">omnideck install --image omnideck:latest
+</code></pre>
+
+    </article>
+  </div>
+</div>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      Omnideck is open source —
+      <a href="https://github.com/omnideck/omnideck">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="/docs/">Documentation</a>
+      &nbsp;·&nbsp;
+      MIT License
+      &nbsp;·&nbsp;
+      No telemetry, ever.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

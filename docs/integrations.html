@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Connect Gmail, Calendar, Drive, and other services so agents can read and act on them.">
+  <title>Integrations | Docs | Omnideck</title>
+  <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/ivy.full.css">
+  <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/lattice.full.css">
+  <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/site.css">
+  <script type="module" src="https://omnideck-dev.github.io/site/js/dark-mode-toggle.js"></script>
+  
+</head>
+<body class="lattice">
+  <header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+    <nav class="d-flex gap-4 items-center">
+      
+        <a href="/docs/" class="nav-link">Docs</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="https://github.com/omnideck/omnideck" class="nav-link">GitHub</a>
+      
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+  </div>
+</header>
+
+  <main class="full-width">
+    
+<div class="container py-5">
+  <div class="grid gap-5">
+    <div class="span-12 md-span-3">
+      <aside class="docs-sidebar">
+  <span class="docs-nav-label">Documentation</span>
+  <nav>
+    
+    <a href="/docs/getting-started.html">Getting Started</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
+    
+    <a href="/docs/configuration.html">Configuration</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/agents.html">Agents</a>
+    
+    <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+  </nav>
+</aside>
+
+    </div>
+    <article class="span-12 md-span-9">
+      <h1>Integrations</h1>
+      
+      <p class="muted">Connect Gmail, Calendar, Drive, and other services so agents can read and act on them.</p>
+      <hr>
+      
+      <p>Integrations give the agent access to external services — email, calendar, and (in future versions) more. Each integration becomes a set of agent tools the agent can call by name.</p>
+<h2>Supported integrations</h2>
+<p>| Provider | Capabilities |
+|---|---|
+| <strong>Gmail</strong> | Read email, search messages, send email, move messages |
+| <strong>iCloud</strong> | Read email (IMAP), send email (SMTP), read calendar (CalDAV) |</p>
+<p>More integrations — Drive, Notion, Slack, and others — are planned.</p>
+<h2>Adding an integration</h2>
+<p>Go to <strong>Settings → Integrations</strong> in the web UI and click <strong>Add Integration</strong>.</p>
+<ol>
+<li><strong>Pick your provider</strong> — Gmail or iCloud</li>
+<li><strong>Generate an app password</strong> — the wizard links directly to your provider's app-passwords page. You must use an app-specific password, not your main account password.
+<ul>
+<li>Gmail: <a href="https://myaccount.google.com/apppasswords">myaccount.google.com/apppasswords</a></li>
+<li>iCloud: <a href="https://appleid.apple.com">appleid.apple.com</a> → Sign-In and Security → App-Specific Passwords</li>
+</ul>
+</li>
+<li><strong>Enter your email and app password</strong> and click Save</li>
+<li>Omnideck verifies the credentials by connecting to the provider. If they're accepted, the integration shows as <strong>connected</strong>.</li>
+</ol>
+<h2>Write access</h2>
+<p>By default, integrations are read-only — the agent can read messages and events but can't send email or modify calendar entries. This is a deliberate safe default.</p>
+<p>To allow writes, open the integration in <strong>Settings → Integrations</strong> and enable <strong>Allow writes</strong>. Omnideck will restart the broker process briefly (~1–3 seconds) and the integration shows as connected again.</p>
+<p>With writes enabled, the agent gains tools for sending email, moving messages, and (for iCloud) creating or modifying calendar events.</p>
+<h2>Integration status</h2>
+<p>| Status | Meaning |
+|---|---|
+| Connecting | Broker is starting; verifying credentials with the provider |
+| Connected | Broker is running and upstream auth succeeded |
+| Auth failed | Provider rejected the credential — generate a fresh app password and re-add |
+| Not running | Broker crashed three times; check <code>omnideck logs</code> for details |</p>
+<h2>Editing an integration</h2>
+<p>Open the integration in <strong>Settings → Integrations</strong>. You can:</p>
+<ul>
+<li><strong>Change the label</strong> — cosmetic only, no reconnect needed</li>
+<li><strong>Toggle Allow writes</strong> — the broker respawns briefly to pick up the new setting</li>
+</ul>
+<p>You cannot change the email address or integration ID after creation — delete and re-add instead.</p>
+<h2>Deleting an integration</h2>
+<p>Click <strong>Delete</strong> on the integration. This stops the broker, removes the encrypted credentials, and removes the integration's tools from the agent immediately.</p>
+<h2>Security model</h2>
+<p>Credentials are stored in an encrypted vault inside the container and are never accessible to the agent:</p>
+<ul>
+<li>Credentials are encrypted with AES-256-GCM and stored at <code>/var/lib/computron/vault/</code> inside the container. This directory is owned by a separate OS user that the agent cannot read.</li>
+<li>The agent never receives raw credentials — it calls broker tools over a Unix socket, and the broker talks to the upstream provider.</li>
+<li>The broker wipes credentials from its process environment immediately after connecting to the provider, so they don't appear in process listings.</li>
+<li>Write tools are hidden from the agent's tool registry when writes are disabled, so the agent can't attempt writes even indirectly.</li>
+</ul>
+<div class="callout" data-tone="warn">
+<strong>Backup security:</strong> The <code>~/Omnideck/.state</code> directory contains the vault master key alongside the encrypted credentials. Treat backups of this directory the same way you'd treat a password manager export — keep them encrypted and access-controlled.
+</div>
+<h2>Troubleshooting</h2>
+<p><strong>Integration shows &quot;auth failed&quot; shortly after adding</strong></p>
+<p>The app password was wrong, expired, or revoked. Generate a fresh app password from your provider's app-passwords page and re-add the integration. You cannot edit credentials in place — delete and re-add.</p>
+<p><strong>Integration shows &quot;not running&quot;</strong></p>
+<p>The broker crashed repeatedly before completing its initial handshake. Check <code>omnideck logs</code> for lines tagged with the integration name — common causes are a network firewall blocking outbound IMAP/SMTP/CalDAV connections, or the provider being temporarily unavailable.</p>
+<p><strong>&quot;Integrations unavailable&quot; in the Settings tab</strong></p>
+<p>The app can't reach the credential vault supervisor. Check <code>omnideck logs</code> for <code>[supervisor]</code> errors. If the container was stopped uncleanly, <code>omnideck restart</code> usually resolves it.</p>
+<p><strong>The agent says it can't list emails but the integration shows &quot;connected&quot;</strong></p>
+<p>Email servers sometimes drop idle connections after 10–30 minutes. Omnideck reconnects automatically. Check <code>omnideck logs</code> for a reconnect message — if the reconnect succeeded, the next agent call will work. If the reconnect failed, treat it as a real network issue.</p>
+
+    </article>
+  </div>
+</div>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      Omnideck is open source —
+      <a href="https://github.com/omnideck/omnideck">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="/docs/">Documentation</a>
+      &nbsp;·&nbsp;
+      MIT License
+      &nbsp;·&nbsp;
+      No telemetry, ever.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

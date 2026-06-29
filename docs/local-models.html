@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Run Omnideck fully offline using local models via Ollama.">
+  <title>Local Models with Ollama | Docs | Omnideck</title>
+  <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/ivy.full.css">
+  <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/lattice.full.css">
+  <link rel="stylesheet" href="https://omnideck-dev.github.io/site/css/site.css">
+  <script type="module" src="https://omnideck-dev.github.io/site/js/dark-mode-toggle.js"></script>
+  
+</head>
+<body class="lattice">
+  <header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+    <nav class="d-flex gap-4 items-center">
+      
+        <a href="/docs/" class="nav-link">Docs</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="https://github.com/omnideck/omnideck" class="nav-link">GitHub</a>
+      
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+  </div>
+</header>
+
+  <main class="full-width">
+    
+<div class="container py-5">
+  <div class="grid gap-5">
+    <div class="span-12 md-span-3">
+      <aside class="docs-sidebar">
+  <span class="docs-nav-label">Documentation</span>
+  <nav>
+    
+    <a href="/docs/getting-started.html">Getting Started</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
+    
+    <a href="/docs/configuration.html">Configuration</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/agents.html">Agents</a>
+    
+    <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+  </nav>
+</aside>
+
+    </div>
+    <article class="span-12 md-span-9">
+      <h1>Local Models with Ollama</h1>
+      
+      <p class="muted">Run Omnideck fully offline using local models via Ollama.</p>
+      <hr>
+      
+      <p>If you'd rather run models locally than send data to a cloud provider, Omnideck supports <a href="https://ollama.com/">Ollama</a> for fully local inference. Install Ollama on your host, pull the models you want, and Omnideck lists them automatically in the setup wizard.</p>
+<h2>Install Ollama</h2>
+<p>Download and install Ollama from <a href="https://ollama.com/">ollama.com</a>. After installing, pull the models you want to use:</p>
+<pre><code class="language-bash">ollama pull kimi-k2.5      # main model (chat, compaction, titles)
+ollama pull qwen3.5        # vision model (optional — for image input)
+</code></pre>
+<p>Verify Ollama is running and your models are available:</p>
+<pre><code class="language-bash">ollama list
+</code></pre>
+<h2>Recommended models</h2>
+<p>| Role | Suggested model | Notes |
+|---|---|---|
+| Main | <code>kimi-k2.5</code> | Used for chat, context compaction, and conversation title generation |
+| Vision | <code>qwen3.5</code> | Must support image input — or use your main model if it does |</p>
+<p>The main model handles everything by default. A separate vision model is only needed if you want a model specifically optimized for image input.</p>
+<h2>Connect Omnideck to Ollama</h2>
+<p>During <code>omnideck install</code>, the wizard checks whether Ollama is reachable on the host and warns if it isn't. If Ollama is running, select it as your provider in the setup wizard — Omnideck will list the models you've pulled.</p>
+<p>If Omnideck is already running, go to <strong>Settings → Providers</strong> in the web UI and add Ollama as a provider. The list of available models updates automatically from your local Ollama install.</p>
+<h2>macOS and Docker Desktop</h2>
+<p>On macOS with Docker Desktop, Ollama must be bound to <code>0.0.0.0</code> (not just <code>127.0.0.1</code>, which is the default) so the container can reach it on the host. Set this before starting Ollama:</p>
+<pre><code class="language-bash">export OLLAMA_HOST=0.0.0.0
+ollama serve
+</code></pre>
+<p>Or set it permanently in your shell profile. <code>omnideck doctor</code> will report whether Ollama is reachable from inside the container.</p>
+<h2>Ollama cloud variants</h2>
+<p>Ollama can also broker cloud-hosted model variants alongside your local models, so they appear the same way in Omnideck. After <code>ollama login</code>, pull a cloud variant:</p>
+<pre><code class="language-bash">ollama pull kimi-k2.5:cloud
+</code></pre>
+<p>Cloud variants skip your local GPU but still need to be pulled so Ollama exposes them. This is useful if you want a unified provider interface that can mix local and cloud models.</p>
+<h2>Troubleshooting</h2>
+<p><strong>&quot;Ollama connection refused&quot; in <code>omnideck doctor</code></strong></p>
+<p>Only matters if you're using local models. Make sure:</p>
+<ol>
+<li>Ollama is running (<code>ollama serve</code>)</li>
+<li>On macOS / Docker Desktop, <code>OLLAMA_HOST=0.0.0.0</code> is set (see above)</li>
+<li>On Linux with Podman, the firewall isn't blocking the host network bridge</li>
+</ol>
+<p><strong>Models don't appear in the setup wizard</strong></p>
+<p>The wizard lists models already pulled in Ollama. Pull your desired models first (<code>ollama pull &lt;model&gt;</code>), then reopen Settings in the Omnideck UI.</p>
+
+    </article>
+  </div>
+</div>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      Omnideck is open source —
+      <a href="https://github.com/omnideck/omnideck">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="/docs/">Documentation</a>
+      &nbsp;·&nbsp;
+      MIT License
+      &nbsp;·&nbsp;
+      No telemetry, ever.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

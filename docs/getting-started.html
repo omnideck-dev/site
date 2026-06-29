@@ -39,7 +39,13 @@
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
+    <a href="/docs/cli-reference.html">CLI Reference</a>
+    
     <a href="/docs/configuration.html">Configuration</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
     
     <a href="/docs/agents.html">Agents</a>
     
@@ -55,37 +61,69 @@
       <p class="muted">Install and run Omnideck in under five minutes.</p>
       <hr>
       
-      <p>Omnideck runs inside a container managed by the <code>omnideck</code> CLI. You'll need Docker or Podman installed on your machine.</p>
+      <p>Omnideck runs inside a container managed by the <code>omnideck</code> CLI. You need a container engine (Docker or Podman) and either a cloud LLM API key or a local Ollama install.</p>
 <h2>Prerequisites</h2>
 <ul>
-<li>Docker 24+ or Podman 4+</li>
-<li>4 GB RAM minimum (8 GB recommended for local models)</li>
-<li>At least one LLM API key, or a running Ollama instance</li>
+<li><strong>Container engine:</strong> Docker 20.10+ or Podman 4.0+</li>
+<li><strong>LLM provider:</strong> an API key for OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint — or <a href="https://ollama.com/">Ollama</a> for local models</li>
+<li><strong>RAM:</strong> 4 GB minimum (8 GB recommended for local models)</li>
 </ul>
 <h2>Install the CLI</h2>
-<pre><code class="language-bash">curl -fsSL https://omnideck.dev/install.sh | sh
+<p>The <code>omnideck</code> CLI wraps your container engine with a guided installer and simple management commands. Download the binary for your platform:</p>
+<p><strong>Linux</strong> (and Windows via WSL2):</p>
+<pre><code class="language-bash">curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-linux-amd64 \
+  -o omnideck &amp;&amp; chmod +x omnideck &amp;&amp; sudo mv omnideck /usr/local/bin/
 </code></pre>
-<p>Or download the binary directly from the <a href="https://github.com/omnideck/omnideck/releases">releases page</a>.</p>
-<h2>Start Omnideck</h2>
-<pre><code class="language-bash">omnideck start
+<p><strong>macOS (Apple Silicon):</strong></p>
+<pre><code class="language-bash">curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-darwin-arm64 \
+  -o omnideck &amp;&amp; chmod +x omnideck &amp;&amp; sudo mv omnideck /usr/local/bin/
 </code></pre>
-<p>The first run pulls the container image and launches the setup wizard. The wizard will guide you through:</p>
+<p>For Intel Macs or ARM Linux, grab the <code>darwin-amd64</code> or <code>linux-arm64</code> build from the <a href="https://github.com/omnideck-dev/cli/releases/latest">releases page</a>.</p>
+<p>Verify it's on your path:</p>
+<pre><code class="language-bash">omnideck --version
+</code></pre>
+<h2>Install Omnideck</h2>
+<pre><code class="language-bash">omnideck install
+</code></pre>
+<p>The install wizard:</p>
 <ol>
-<li>Choosing your container runtime (Docker or Podman)</li>
-<li>Adding your first LLM provider</li>
-<li>Creating your first agent profile</li>
-<li>Setting a shared file directory</li>
+<li>Detects your container engine (Docker or Podman)</li>
+<li>Checks whether Ollama is reachable on the host</li>
+<li>Suggests container memory limits sized for your system</li>
+<li>Pulls the container image and starts the container</li>
 </ol>
-<h2>Access the UI</h2>
-<p>Once started, Omnideck is available at <code>http://localhost:3000</code> in your browser.</p>
+<p>When the wizard finishes, open <strong><a href="http://localhost:2337">http://localhost:2337</a></strong> in your browser.</p>
+<h2>First-run setup</h2>
+<p>A setup wizard runs in the UI the first time you open it. It guides you through:</p>
+<ol>
+<li><strong>Adding an LLM provider</strong> — cloud (OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint) or local Ollama</li>
+<li><strong>Picking your main model</strong> — used for chat, context compaction, and conversation titles</li>
+<li><strong>Picking an optional vision model</strong> — for tasks that involve image input</li>
+</ol>
+<p>Cloud providers list available models automatically. Ollama lists whatever you've already pulled.</p>
+<p>That's it — you're running.</p>
+<h2>Managing Omnideck</h2>
+<p>Everything is driven through the CLI:</p>
+<pre><code class="language-bash">omnideck status      # container state, data dirs, Ollama reachability, and web UI port
+omnideck stop        # gracefully stop the container
+omnideck start       # start it back up
+omnideck restart     # stop then start
+omnideck update      # pull the latest image and recreate the container
+omnideck logs -f     # tail container logs
+omnideck doctor      # run health checks and print a pass/warn/fail report
+omnideck uninstall   # remove the container (optionally back up and delete data)
+</code></pre>
+<p>Your data lives in <code>~/Omnideck</code> and survives restarts and upgrades. Conversations, memory, agent profiles, goals, and generated files are all preserved when you <code>update</code>.</p>
 <h2>Next steps</h2>
 <ul>
-<li><a href="/docs/configuration.html">Configuration</a> — tune your providers, models, and execution policy</li>
-<li><a href="/docs/agents.html">Agents</a> — create and configure agent profiles</li>
+<li><a href="/docs/cli-reference.html">CLI Reference</a> — full command and flag reference</li>
+<li><a href="/docs/local-models.html">Local Models</a> — run Omnideck fully offline with Ollama</li>
+<li><a href="/docs/integrations.html">Integrations</a> — connect Gmail, Calendar, and Drive</li>
+<li><a href="/docs/agents.html">Agents</a> — create and customize agent profiles</li>
 <li><a href="/docs/tasks.html">Autonomous Tasks</a> — schedule background goals</li>
 </ul>
 <div class="callout" data-tone="info">
-<strong>Note:</strong> Omnideck never makes outbound connections to Omnideck servers. Your data stays on your machine.
+<strong>Privacy:</strong> Omnideck never makes outbound connections to Omnideck servers. Everything runs on your machine. Your data stays in <code>~/Omnideck</code>.
 </div>
 
     </article>
