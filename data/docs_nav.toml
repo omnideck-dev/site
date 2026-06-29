@@ -3,8 +3,20 @@ title = "Getting Started"
 url   = "/docs/getting-started.html"
 
 [[items]]
+title = "CLI Reference"
+url   = "/docs/cli-reference.html"
+
+[[items]]
 title = "Configuration"
 url   = "/docs/configuration.html"
+
+[[items]]
+title = "Local Models"
+url   = "/docs/local-models.html"
+
+[[items]]
+title = "Integrations"
+url   = "/docs/integrations.html"
 
 [[items]]
 title = "Agents"
