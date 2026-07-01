@@ -1,7 +1,7 @@
 [[items]]
 icon  = "🌐"
 title = "Real Browser Automation"
-desc  = "A persistent Playwright browser handles full web automation — structural navigation, screenshot fallback, and persistent session state."
+desc  = "A persistent, headed browser handles full web automation — structural navigation, screenshot fallback, and persistent session state."
 
 [[items]]
 icon  = "💻"
@@ -11,12 +11,12 @@ desc  = "Agents write files, run bash commands with full stdout/stderr streaming
 [[items]]
 icon  = "🧠"
 title = "Persistent Memory"
-desc  = "Agents store and retrieve keyed facts across conversations. Atomic writes ensure nothing is lost mid-turn."
+desc  = "Agents store and retrieve keyed facts across conversations, preserved across session resets."
 
 [[items]]
 icon  = "🔗"
-title = "Integrations & MCP"
-desc  = "Connect Google Workspace and any MCP server to extend what agents can access and control."
+title = "Integrations"
+desc  = "Connect Gmail and iCloud so agents can read, search, and send email. More integrations on the roadmap."
 
 [[items]]
 icon  = "📁"

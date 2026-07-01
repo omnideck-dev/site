@@ -20,17 +20,18 @@ Omnideck fixes this by giving you a full agent workbench that runs locally, supp
 ## What's in the first release
 
 - **Multi-agent profiles** — build a team of specialized agents, each with its own model, system prompt, and tool access
-- **Real browser automation** — Playwright-powered, with both structural and visual navigation
+- **Real browser automation** — headed browser with both structural and visual navigation
 - **Code execution** — write and run code with full output streaming
 - **Persistent memory** — keyed facts that survive session resets
 - **Autonomous tasks** — cron-scheduled goals with notification on completion
-- **Google Workspace integration** — Gmail, Calendar, and Drive
-- **MCP server support** — connect any Model Context Protocol server
+- **Gmail and iCloud integration** — read, search, and send email from inside the agent
 
 ## What's next
 
 We're working on:
 
+- MCP server support — connect any Model Context Protocol server
+- Google Calendar and Drive integration
 - Windows and ARM support
 - Visual workflow builder for task chains
 - Plugin API for custom tools
@@ -38,11 +39,22 @@ We're working on:
 
 ## Get started
 
+**Linux** (and Windows via WSL2):
+
 ```bash
-curl -fsSL https://omnideck.dev/install.sh | sh
-omnideck start
+curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-linux-amd64 \
+  -o omnideck && chmod +x omnideck && sudo mv omnideck /usr/local/bin/
+omnideck install
 ```
 
-Then open `http://localhost:3000` and follow the setup wizard.
+**macOS (Apple Silicon):**
 
-Feedback and contributions are welcome on [GitHub](https://github.com/omnideck/omnideck).
+```bash
+curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-darwin-arm64 \
+  -o omnideck && chmod +x omnideck && sudo mv omnideck /usr/local/bin/
+omnideck install
+```
+
+Then open `http://localhost:2337` and follow the setup wizard.
+
+Feedback and contributions are welcome on [GitHub](https://github.com/omnideck-dev/omnideck).
