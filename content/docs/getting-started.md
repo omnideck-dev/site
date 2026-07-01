@@ -11,39 +11,73 @@ order = 1
 
 Omnideck runs inside a container managed by the `omnideck` CLI. You need a container engine (Docker or Podman) and either a cloud LLM API key or a local Ollama install.
 
+<ol class="gs-steps">
+  <li><a href="#step-1-install-the-cli">Install the CLI</a> — Homebrew (recommended) or binary download</li>
+  <li><a href="#step-2-install-omnideck">Install Omnideck</a> — the setup wizard handles the rest</li>
+  <li><a href="#step-3-open-the-tool">Open the tool</a> — connect your LLM and start working</li>
+</ol>
+
 ## Prerequisites
 
 - **Container engine:** Docker 20.10+ or Podman 4.0+
 - **LLM provider:** an API key for OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint — or [Ollama](https://ollama.com/) for local models
 - **RAM:** 4 GB minimum (8 GB recommended for local models)
 
-## Install the CLI
+## Step 1: Install the CLI
 
-The `omnideck` CLI wraps your container engine with a guided installer and simple management commands. Download the binary for your platform:
+The `omnideck` CLI wraps your container engine with a guided installer and simple management commands.
 
-**Linux** (and Windows via WSL2):
+### Homebrew (macOS and Linux)
 
-```bash
-curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-linux-amd64 \
-  -o omnideck && chmod +x omnideck && sudo mv omnideck /usr/local/bin/
-```
-
-**macOS (Apple Silicon):**
+The recommended way to install on macOS or Linux:
 
 ```bash
-curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-darwin-arm64 \
-  -o omnideck && chmod +x omnideck && sudo mv omnideck /usr/local/bin/
+brew tap omnideck-dev/omnideck
+brew trust omnideck-dev/omnideck
+brew install omnideck
 ```
 
-For Intel Macs or ARM Linux, grab the `darwin-amd64` or `linux-arm64` build from the [releases page](https://github.com/omnideck-dev/cli/releases/latest).
+Or as a single command:
 
-Verify it's on your path:
+```bash
+brew tap omnideck-dev/omnideck && brew trust omnideck-dev/omnideck && brew install omnideck
+```
+
+The `brew trust` step is required once by Homebrew's third-party tap security policy.
+
+To upgrade later:
+
+```bash
+brew upgrade omnideck
+```
+
+### Download a binary
+
+Grab the binary for your OS from the [releases page](https://github.com/omnideck-dev/cli/releases):
+
+| Platform | File | SHA-256 |
+|---|---|---|
+| macOS (Apple Silicon) | `omnideck-darwin-arm64.tar.gz` | `c93e4f17…9d7af8` |
+| macOS (Intel) | `omnideck-darwin-amd64.tar.gz` | `07b70880…e06728` |
+| Linux (x86-64) | `omnideck-linux-amd64.tar.gz` | `e550a2fa…ed30d9` |
+| Linux (ARM64) | `omnideck-linux-arm64.tar.gz` | `63d2057b…00032d` |
+| Windows (x86-64) | `omnideck-windows-amd64.zip` | `b1dd6da9…c249366` |
+
+Extract the archive and move the binary to a directory on your `PATH`. On Linux or macOS:
+
+```bash
+tar -xzf omnideck-linux-amd64.tar.gz
+chmod +x omnideck
+sudo mv omnideck /usr/local/bin/
+```
+
+### Verify the install
 
 ```bash
 omnideck --version
 ```
 
-## Install Omnideck
+## Step 2: Install Omnideck
 
 ```bash
 omnideck install
@@ -58,7 +92,7 @@ The install wizard:
 
 When the wizard finishes, open **[http://localhost:2337](http://localhost:2337)** in your browser.
 
-## First-run setup
+## Step 3: Open the tool
 
 A setup wizard runs in the UI the first time you open it. It guides you through:
 
