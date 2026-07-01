@@ -17,7 +17,7 @@
     <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
     <nav class="d-flex gap-4 items-center">
       
-        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
         <a href="/about.html" class="nav-link">About</a>
       
@@ -39,17 +39,17 @@
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/cli-reference.html">CLI Reference</a>
-    
     <a href="/docs/configuration.html">Configuration</a>
-    
-    <a href="/docs/local-models.html">Local Models</a>
-    
-    <a href="/docs/integrations.html">Integrations</a>
     
     <a href="/docs/agents.html">Agents</a>
     
     <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
     
   </nav>
 </aside>
@@ -63,10 +63,24 @@
       
       <p>Integrations give the agent access to external services — email, calendar, and (in future versions) more. Each integration becomes a set of agent tools the agent can call by name.</p>
 <h2>Supported integrations</h2>
-<p>| Provider | Capabilities |
-|---|---|
-| <strong>Gmail</strong> | Read email, search messages, send email, move messages |
-| <strong>iCloud</strong> | Read email (IMAP), send email (SMTP), read calendar (CalDAV) |</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Capabilities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gmail</strong></td>
+<td>Read email, search messages, send email, move messages</td>
+</tr>
+<tr>
+<td><strong>iCloud</strong></td>
+<td>Read email (IMAP), send email (SMTP), read calendar (CalDAV)</td>
+</tr>
+</tbody>
+</table>
 <p>More integrations — Drive, Notion, Slack, and others — are planned.</p>
 <h2>Adding an integration</h2>
 <p>Go to <strong>Settings → Integrations</strong> in the web UI and click <strong>Add Integration</strong>.</p>
@@ -86,12 +100,32 @@
 <p>To allow writes, open the integration in <strong>Settings → Integrations</strong> and enable <strong>Allow writes</strong>. Omnideck will restart the broker process briefly (~1–3 seconds) and the integration shows as connected again.</p>
 <p>With writes enabled, the agent gains tools for sending email, moving messages, and (for iCloud) creating or modifying calendar events.</p>
 <h2>Integration status</h2>
-<p>| Status | Meaning |
-|---|---|
-| Connecting | Broker is starting; verifying credentials with the provider |
-| Connected | Broker is running and upstream auth succeeded |
-| Auth failed | Provider rejected the credential — generate a fresh app password and re-add |
-| Not running | Broker crashed three times; check <code>omnideck logs</code> for details |</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connecting</td>
+<td>Broker is starting; verifying credentials with the provider</td>
+</tr>
+<tr>
+<td>Connected</td>
+<td>Broker is running and upstream auth succeeded</td>
+</tr>
+<tr>
+<td>Auth failed</td>
+<td>Provider rejected the credential — generate a fresh app password and re-add</td>
+</tr>
+<tr>
+<td>Not running</td>
+<td>Broker crashed three times; check <code>omnideck logs</code> for details</td>
+</tr>
+</tbody>
+</table>
 <h2>Editing an integration</h2>
 <p>Open the integration in <strong>Settings → Integrations</strong>. You can:</p>
 <ul>

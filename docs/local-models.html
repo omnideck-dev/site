@@ -17,7 +17,7 @@
     <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
     <nav class="d-flex gap-4 items-center">
       
-        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
         <a href="/about.html" class="nav-link">About</a>
       
@@ -39,17 +39,17 @@
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/cli-reference.html">CLI Reference</a>
-    
     <a href="/docs/configuration.html">Configuration</a>
-    
-    <a href="/docs/local-models.html">Local Models</a>
-    
-    <a href="/docs/integrations.html">Integrations</a>
     
     <a href="/docs/agents.html">Agents</a>
     
     <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
     
   </nav>
 </aside>
@@ -71,10 +71,27 @@ ollama pull qwen3.5        # vision model (optional — for image input)
 <pre><code class="language-bash">ollama list
 </code></pre>
 <h2>Recommended models</h2>
-<p>| Role | Suggested model | Notes |
-|---|---|---|
-| Main | <code>kimi-k2.5</code> | Used for chat, context compaction, and conversation title generation |
-| Vision | <code>qwen3.5</code> | Must support image input — or use your main model if it does |</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Suggested model</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Main</td>
+<td><code>kimi-k2.5</code></td>
+<td>Used for chat, context compaction, and conversation title generation</td>
+</tr>
+<tr>
+<td>Vision</td>
+<td><code>qwen3.5</code></td>
+<td>Must support image input — or use your main model if it does</td>
+</tr>
+</tbody>
+</table>
 <p>The main model handles everything by default. A separate vision model is only needed if you want a model specifically optimized for image input.</p>
 <h2>Connect Omnideck to Ollama</h2>
 <p>During <code>omnideck install</code>, the wizard checks whether Ollama is reachable on the host and warns if it isn't. If Ollama is running, select it as your provider in the setup wizard — Omnideck will list the models you've pulled.</p>

@@ -17,7 +17,7 @@
     <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
     <nav class="d-flex gap-4 items-center">
       
-        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
         <a href="/about.html" class="nav-link">About</a>
       
@@ -39,17 +39,17 @@
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/cli-reference.html">CLI Reference</a>
-    
     <a href="/docs/configuration.html">Configuration</a>
-    
-    <a href="/docs/local-models.html">Local Models</a>
-    
-    <a href="/docs/integrations.html">Integrations</a>
     
     <a href="/docs/agents.html">Agents</a>
     
     <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
     
   </nav>
 </aside>
@@ -62,27 +62,79 @@
       <hr>
       
       <p>Omnideck runs inside a container managed by the <code>omnideck</code> CLI. You need a container engine (Docker or Podman) and either a cloud LLM API key or a local Ollama install.</p>
+<ol class="gs-steps">
+  <li><a href="#step-1-install-the-cli">Install the CLI</a> — Homebrew (recommended) or binary download</li>
+  <li><a href="#step-2-install-omnideck">Install Omnideck</a> — the setup wizard handles the rest</li>
+  <li><a href="#step-3-open-the-tool">Open the tool</a> — connect your LLM and start working</li>
+</ol>
 <h2>Prerequisites</h2>
 <ul>
 <li><strong>Container engine:</strong> Docker 20.10+ or Podman 4.0+</li>
 <li><strong>LLM provider:</strong> an API key for OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint — or <a href="https://ollama.com/">Ollama</a> for local models</li>
 <li><strong>RAM:</strong> 4 GB minimum (8 GB recommended for local models)</li>
 </ul>
-<h2>Install the CLI</h2>
-<p>The <code>omnideck</code> CLI wraps your container engine with a guided installer and simple management commands. Download the binary for your platform:</p>
-<p><strong>Linux</strong> (and Windows via WSL2):</p>
-<pre><code class="language-bash">curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-linux-amd64 \
-  -o omnideck &amp;&amp; chmod +x omnideck &amp;&amp; sudo mv omnideck /usr/local/bin/
+<h2>Step 1: Install the CLI</h2>
+<p>The <code>omnideck</code> CLI wraps your container engine with a guided installer and simple management commands.</p>
+<h3>Homebrew (macOS and Linux)</h3>
+<p>The recommended way to install on macOS or Linux:</p>
+<pre><code class="language-bash">brew tap omnideck-dev/omnideck
+brew trust omnideck-dev/omnideck
+brew install omnideck
 </code></pre>
-<p><strong>macOS (Apple Silicon):</strong></p>
-<pre><code class="language-bash">curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-darwin-arm64 \
-  -o omnideck &amp;&amp; chmod +x omnideck &amp;&amp; sudo mv omnideck /usr/local/bin/
+<p>Or as a single command:</p>
+<pre><code class="language-bash">brew tap omnideck-dev/omnideck &amp;&amp; brew trust omnideck-dev/omnideck &amp;&amp; brew install omnideck
 </code></pre>
-<p>For Intel Macs or ARM Linux, grab the <code>darwin-amd64</code> or <code>linux-arm64</code> build from the <a href="https://github.com/omnideck-dev/cli/releases/latest">releases page</a>.</p>
-<p>Verify it's on your path:</p>
+<p>The <code>brew trust</code> step is required once by Homebrew's third-party tap security policy.</p>
+<p>To upgrade later:</p>
+<pre><code class="language-bash">brew upgrade omnideck
+</code></pre>
+<h3>Download a binary</h3>
+<p>Grab the binary for your OS from the <a href="https://github.com/omnideck-dev/cli/releases">releases page</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>File</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>macOS (Apple Silicon)</td>
+<td><code>omnideck-darwin-arm64.tar.gz</code></td>
+<td><code>c93e4f17…9d7af8</code></td>
+</tr>
+<tr>
+<td>macOS (Intel)</td>
+<td><code>omnideck-darwin-amd64.tar.gz</code></td>
+<td><code>07b70880…e06728</code></td>
+</tr>
+<tr>
+<td>Linux (x86-64)</td>
+<td><code>omnideck-linux-amd64.tar.gz</code></td>
+<td><code>e550a2fa…ed30d9</code></td>
+</tr>
+<tr>
+<td>Linux (ARM64)</td>
+<td><code>omnideck-linux-arm64.tar.gz</code></td>
+<td><code>63d2057b…00032d</code></td>
+</tr>
+<tr>
+<td>Windows (x86-64)</td>
+<td><code>omnideck-windows-amd64.zip</code></td>
+<td><code>b1dd6da9…c249366</code></td>
+</tr>
+</tbody>
+</table>
+<p>Extract the archive and move the binary to a directory on your <code>PATH</code>. On Linux or macOS:</p>
+<pre><code class="language-bash">tar -xzf omnideck-linux-amd64.tar.gz
+chmod +x omnideck
+sudo mv omnideck /usr/local/bin/
+</code></pre>
+<h3>Verify the install</h3>
 <pre><code class="language-bash">omnideck --version
 </code></pre>
-<h2>Install Omnideck</h2>
+<h2>Step 2: Install Omnideck</h2>
 <pre><code class="language-bash">omnideck install
 </code></pre>
 <p>The install wizard:</p>
@@ -93,7 +145,7 @@
 <li>Pulls the container image and starts the container</li>
 </ol>
 <p>When the wizard finishes, open <strong><a href="http://localhost:2337">http://localhost:2337</a></strong> in your browser.</p>
-<h2>First-run setup</h2>
+<h2>Step 3: Open the tool</h2>
 <p>A setup wizard runs in the UI the first time you open it. It guides you through:</p>
 <ol>
 <li><strong>Adding an LLM provider</strong> — cloud (OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint) or local Ollama</li>

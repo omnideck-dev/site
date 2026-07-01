@@ -17,7 +17,7 @@
     <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
     <nav class="d-flex gap-4 items-center">
       
-        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
         <a href="/about.html" class="nav-link">About</a>
       
@@ -39,17 +39,17 @@
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/cli-reference.html">CLI Reference</a>
-    
     <a href="/docs/configuration.html">Configuration</a>
-    
-    <a href="/docs/local-models.html">Local Models</a>
-    
-    <a href="/docs/integrations.html">Integrations</a>
     
     <a href="/docs/agents.html">Agents</a>
     
     <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
     
   </nav>
 </aside>
@@ -73,14 +73,40 @@
 </ul>
 <h2>Tool access</h2>
 <p>Tool access is scoped per agent profile. A research agent might have full web and memory access but no bash. A DevOps agent might have bash and filesystem but no browser.</p>
-<p>| Tool | Description |
-|---|---|
-| Browser automation | Full browser control — clicking, typing, scrolling, and screenshotting |
-| Web search | Search the web (via configured search provider) |
-| Code execution | Write and run Python, install packages, build projects |
-| Filesystem | Read and write files in the shared workspace (<code>~/Omnideck</code>) |
-| Memory | Read and write persistent facts across conversations |
-| Integrations | Access Gmail and iCloud (requires configured integrations) |</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Browser automation</td>
+<td>Full browser control — clicking, typing, scrolling, and screenshotting</td>
+</tr>
+<tr>
+<td>Web search</td>
+<td>Search the web (via configured search provider)</td>
+</tr>
+<tr>
+<td>Code execution</td>
+<td>Write and run Python, install packages, build projects</td>
+</tr>
+<tr>
+<td>Filesystem</td>
+<td>Read and write files in the shared workspace (<code>~/Omnideck</code>)</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>Read and write persistent facts across conversations</td>
+</tr>
+<tr>
+<td>Integrations</td>
+<td>Access Gmail and iCloud (requires configured integrations)</td>
+</tr>
+</tbody>
+</table>
 <p>Restricting tools improves focus and reduces the chance of unintended side effects. A dedicated research agent doesn't need bash.</p>
 <h2>Context management</h2>
 <p>As a conversation grows, Omnideck tracks token usage and compacts older messages when a configurable threshold is reached. Compaction summarizes older turns and replaces them with a compact summary, preserving recent context verbatim. This keeps conversations going indefinitely without hitting model context limits.</p>

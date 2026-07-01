@@ -17,7 +17,7 @@
     <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
     <nav class="d-flex gap-4 items-center">
       
-        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
         <a href="/about.html" class="nav-link">About</a>
       
@@ -39,17 +39,17 @@
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/cli-reference.html">CLI Reference</a>
-    
     <a href="/docs/configuration.html">Configuration</a>
-    
-    <a href="/docs/local-models.html">Local Models</a>
-    
-    <a href="/docs/integrations.html">Integrations</a>
     
     <a href="/docs/agents.html">Agents</a>
     
     <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
     
   </nav>
 </aside>
@@ -63,20 +63,64 @@
       
       <p>The <code>omnideck</code> CLI installs, manages, and monitors your Omnideck container. It wraps Docker or Podman with a guided installer and simple management commands.</p>
 <h2>Commands</h2>
-<p>| Command | Description |
-|---|---|
-| <code>install</code> | Interactive TUI wizard — install or update an existing instance |
-| <code>update</code> | Pull the latest image and recreate the container |
-| <code>start</code> | Start a stopped container |
-| <code>stop</code> | Gracefully stop the running container |
-| <code>restart</code> | Stop then start |
-| <code>status</code> | Print a status table (container, data dirs, Ollama, web UI port) |
-| <code>logs</code> | Tail container logs |
-| <code>doctor</code> | Run parallel health checks and print a pass/warn/fail report |
-| <code>config show</code> | Pretty-print the saved config |
-| <code>config set &lt;key&gt; &lt;value&gt;</code> | Update a single config key |
-| <code>config path</code> | Print the config file path |
-| <code>uninstall</code> | Stop, remove container, optionally delete data |</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>install</code></td>
+<td>Interactive TUI wizard — install or update an existing instance</td>
+</tr>
+<tr>
+<td><code>update</code></td>
+<td>Pull the latest image and recreate the container</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>Start a stopped container</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td>Gracefully stop the running container</td>
+</tr>
+<tr>
+<td><code>restart</code></td>
+<td>Stop then start</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Print a status table (container, data dirs, Ollama, web UI port)</td>
+</tr>
+<tr>
+<td><code>logs</code></td>
+<td>Tail container logs</td>
+</tr>
+<tr>
+<td><code>doctor</code></td>
+<td>Run parallel health checks and print a pass/warn/fail report</td>
+</tr>
+<tr>
+<td><code>config show</code></td>
+<td>Pretty-print the saved config</td>
+</tr>
+<tr>
+<td><code>config set &lt;key&gt; &lt;value&gt;</code></td>
+<td>Update a single config key</td>
+</tr>
+<tr>
+<td><code>config path</code></td>
+<td>Print the config file path</td>
+</tr>
+<tr>
+<td><code>uninstall</code></td>
+<td>Stop, remove container, optionally delete data</td>
+</tr>
+</tbody>
+</table>
 <h2>Global flags</h2>
 <pre><code>--config string   Config file path (default: ~/.config/omnideck-cli/config.yaml)
 --name string     Instance name (e.g. omnideck, omnideck2)

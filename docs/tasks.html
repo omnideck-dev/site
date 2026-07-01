@@ -17,7 +17,7 @@
     <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
     <nav class="d-flex gap-4 items-center">
       
-        <a href="/docs/" class="nav-link">Docs</a>
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
         <a href="/about.html" class="nav-link">About</a>
       
@@ -39,17 +39,17 @@
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/cli-reference.html">CLI Reference</a>
-    
     <a href="/docs/configuration.html">Configuration</a>
-    
-    <a href="/docs/local-models.html">Local Models</a>
-    
-    <a href="/docs/integrations.html">Integrations</a>
     
     <a href="/docs/agents.html">Agents</a>
     
     <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
     
   </nav>
 </aside>
@@ -77,12 +77,32 @@ Write the digest to ~/Omnideck/digests/{date}.md
 </code></pre>
 <h2>Scheduling</h2>
 <p>Omnideck supports standard cron expressions:</p>
-<p>| Expression | Meaning |
-|---|---|
-| <code>@daily</code> | Once a day at midnight |
-| <code>@hourly</code> | Once an hour |
-| <code>0 9 * * 1</code> | Every Monday at 09:00 |
-| <code>0 */4 * * *</code> | Every 4 hours |</p>
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@daily</code></td>
+<td>Once a day at midnight</td>
+</tr>
+<tr>
+<td><code>@hourly</code></td>
+<td>Once an hour</td>
+</tr>
+<tr>
+<td><code>0 9 * * 1</code></td>
+<td>Every Monday at 09:00</td>
+</tr>
+<tr>
+<td><code>0 */4 * * *</code></td>
+<td>Every 4 hours</td>
+</tr>
+</tbody>
+</table>
 <p>Leave the schedule blank to create a manual-only task you trigger yourself.</p>
 <h2>Task history</h2>
 <p>Every run is recorded: start time, end time, status, the agent's full output, and any files written. Drill into a run in the <strong>Goals</strong> view to see the agent's full activity log — thinking, tool calls, and output — exactly as you'd see it in a live conversation.</p>
