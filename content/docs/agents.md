@@ -32,8 +32,7 @@ Tool access is scoped per agent profile. A research agent might have full web an
 | Code execution | Write and run Python, install packages, build projects |
 | Filesystem | Read and write files in the shared workspace (`~/Omnideck`) |
 | Memory | Read and write persistent facts across conversations |
-| Integrations | Access Gmail, Calendar, Drive (requires configured integrations) |
-| Custom MCP servers | Connect to any configured MCP server |
+| Integrations | Access Gmail and iCloud (requires configured integrations) |
 
 Restricting tools improves focus and reduces the chance of unintended side effects. A dedicated research agent doesn't need bash.
 

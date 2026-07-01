@@ -11,20 +11,20 @@
       <div>
         <p class="hero-eyebrow">
           <span class="hero-eyebrow-dot"></span>
-          runs locally · open source · no telemetry
+          runs locally · open source · freedom-first
         </p>
         <h1>A full AI agent workbench.<br><em>On your machine.<br>Under your control.</em></h1>
         <p class="hero-sub">
           Omnideck runs on your desktop or home server — not in a cloud you don't own. Create multiple specialized agents, switch between them mid-conversation, and watch sub-agents work in real time. Bring any LLM, cloud or local.
         </p>
         <div class="d-flex gap-3 flex-wrap items-center">
-          <a href="https://github.com/omnideck/omnideck" role="button" data-variant="primary" data-size="lg">Get started free</a>
+          <a href="https://github.com/omnideck-dev/omnideck" role="button" data-variant="primary" data-size="lg">Get started free</a>
           <a href="#how-it-works" role="button" data-variant="ghost">How it works →</a>
         </div>
         <div class="trust-badges">
           <span class="trust-badge"><span class="badge-dot"></span>No data leaves your machine</span>
           <span class="trust-badge"><span class="badge-dot"></span>Zero telemetry</span>
-          <span class="trust-badge"><span class="badge-dot"></span>Container-isolated agents</span>
+          <span class="trust-badge"><span class="badge-dot"></span>Container-isolated</span>
         </div>
       </div>
 
@@ -222,7 +222,7 @@
         <span class="bcard-tag">web</span>
         <span class="bcard-icon">🌐</span>
         <h3>Real browser automation — structural and visual</h3>
-        <p>A persistent Playwright browser handles full web automation. Agents navigate via accessibility trees for structured UIs and fall back to screenshot + vision model analysis for anything custom. Sessions, cookies, and auth state persist across tool calls.</p>
+        <p>A persistent, headed browser handles full web automation. Agents navigate via accessibility trees for structured UIs and fall back to screenshot + vision model analysis for anything custom. Sessions, cookies, and auth state persist across tool calls.</p>
         <div class="mini-terminal">
           <span class="mt-i">→ tool:</span> browse_page <span class="mt-y">"https://news.ycombinator.com"</span><br>
           <span class="mt-g">✓</span> 30 interactive elements found<br>
@@ -258,8 +258,8 @@
       <div class="card">
         <span class="bcard-tag">integrations</span>
         <span class="bcard-icon">🔗</span>
-        <h3>Gmail, Calendar, Drive — and custom MCP servers</h3>
-        <p>Connect your Google Workspace and any MCP server to extend what agents can access and control.</p>
+        <h3>Gmail, iCloud, and more coming</h3>
+        <p>Connect Gmail and iCloud so agents can read, search, and send email — each integration isolated in its own broker process, credentials never exposed to the agent. MCP server support and additional providers on the roadmap.</p>
       </div>
       <div class="card">
         <span class="bcard-tag">files</span>
@@ -281,7 +281,7 @@
           <span class="sec-label sl-green">🛡 Omnideck Container (isolated)</span>
           <span class="sec-item">Agent UI &amp; API server</span>
           <span class="sec-item">Agent loop + tools</span>
-          <span class="sec-item">Browser (Playwright, headless)</span>
+          <span class="sec-item">Browser automation (headed, isolated)</span>
           <span class="sec-item">Code execution (policy-controlled)</span>
           <div class="sec-box inner">
             <span class="sec-label sl-indigo">🔌 Integration Supervisor (isolated process)</span>
@@ -297,8 +297,8 @@
         <div class="sec-notes">
           <span>📂 Shared file space — you define the boundary</span><br>
           <span>🚫 No access to rest of your filesystem</span><br>
-          <span>🚫 SSRF protection blocks cloud metadata endpoints</span><br>
-          <span>🚫 CSRF guard on all mutating API requests</span>
+          <span>🚫 No telemetry or tracking</span><br>
+          <span>🚫 Agent cannot read the credential vault</span>
         </div>
       </div>
 
@@ -309,13 +309,11 @@
         <p class="muted" style="line-height:1.75;margin-bottom:1.25rem">Credentials for external services live in an encrypted local vault managed by an isolated supervisor process. The agent itself never handles raw API keys.</p>
         <ul class="feature-bullets" style="margin-bottom:1.5rem">
           <li>Container boundary prevents filesystem and process access beyond the shared space</li>
-          <li>Credentials encrypted at rest, never visible to the agent or the LLM</li>
+          <li>Credentials encrypted at rest (AES-256-GCM), never visible to the agent or the LLM</li>
+          <li>Three-UID process model — the agent's OS user literally cannot open the credential vault</li>
           <li>Execution policy controls which bash commands the agent is allowed to run</li>
-          <li>SSRF protection blocks requests to cloud metadata services</li>
-          <li>CSRF guard on all mutating API calls</li>
-          <li>Atomic writes prevent data corruption from crashes or power loss</li>
+          <li>No outbound connections to tracking servers — your data stays on your machine</li>
         </ul>
-        <span class="no-telemetry">✓ &nbsp;Zero telemetry — Omnideck never phones home. Ever.</span>
       </div>
 
     </div>
@@ -369,7 +367,7 @@
     <h2>Your agents. Your models.<br>Your machine.</h2>
     <p class="muted" style="margin:1rem auto 2rem;max-width:480px">Omnideck is open source and free to run. Pull the container, connect your LLMs, and have your first agent working in under five minutes.</p>
     <div class="d-flex gap-3 flex-wrap justify-center">
-      <a href="https://github.com/omnideck/omnideck" role="button" data-variant="primary" data-size="lg">Install Omnideck →</a>
+      <a href="https://github.com/omnideck-dev/omnideck" role="button" data-variant="primary" data-size="lg">Install Omnideck →</a>
       <a href="/docs/" role="button" data-variant="outline" data-size="lg">Read the docs</a>
     </div>
   </div>
