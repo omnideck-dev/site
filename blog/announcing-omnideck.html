@@ -21,7 +21,7 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://github.com/omnideck/omnideck" class="nav-link">GitHub</a>
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
       <dark-mode-toggle></dark-mode-toggle>
     </nav>
@@ -46,27 +46,35 @@
 <h2>What's in the first release</h2>
 <ul>
 <li><strong>Multi-agent profiles</strong> — build a team of specialized agents, each with its own model, system prompt, and tool access</li>
-<li><strong>Real browser automation</strong> — Playwright-powered, with both structural and visual navigation</li>
+<li><strong>Real browser automation</strong> — headed browser with both structural and visual navigation</li>
 <li><strong>Code execution</strong> — write and run code with full output streaming</li>
 <li><strong>Persistent memory</strong> — keyed facts that survive session resets</li>
 <li><strong>Autonomous tasks</strong> — cron-scheduled goals with notification on completion</li>
-<li><strong>Google Workspace integration</strong> — Gmail, Calendar, and Drive</li>
-<li><strong>MCP server support</strong> — connect any Model Context Protocol server</li>
+<li><strong>Gmail and iCloud integration</strong> — read, search, and send email from inside the agent</li>
 </ul>
 <h2>What's next</h2>
 <p>We're working on:</p>
 <ul>
+<li>MCP server support — connect any Model Context Protocol server</li>
+<li>Google Calendar and Drive integration</li>
 <li>Windows and ARM support</li>
 <li>Visual workflow builder for task chains</li>
 <li>Plugin API for custom tools</li>
 <li>Expanded model provider support</li>
 </ul>
 <h2>Get started</h2>
-<pre><code class="language-bash">curl -fsSL https://omnideck.dev/install.sh | sh
-omnideck start
+<p><strong>Linux</strong> (and Windows via WSL2):</p>
+<pre><code class="language-bash">curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-linux-amd64 \
+  -o omnideck &amp;&amp; chmod +x omnideck &amp;&amp; sudo mv omnideck /usr/local/bin/
+omnideck install
 </code></pre>
-<p>Then open <code>http://localhost:3000</code> and follow the setup wizard.</p>
-<p>Feedback and contributions are welcome on <a href="https://github.com/omnideck/omnideck">GitHub</a>.</p>
+<p><strong>macOS (Apple Silicon):</strong></p>
+<pre><code class="language-bash">curl -L https://github.com/omnideck-dev/cli/releases/latest/download/omnideck-darwin-arm64 \
+  -o omnideck &amp;&amp; chmod +x omnideck &amp;&amp; sudo mv omnideck /usr/local/bin/
+omnideck install
+</code></pre>
+<p>Then open <code>http://localhost:2337</code> and follow the setup wizard.</p>
+<p>Feedback and contributions are welcome on <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>.</p>
 
   </article>
 </div>
@@ -76,13 +84,13 @@ omnideck start
   <div class="container text-center">
     <p class="footer-text">
       Omnideck is open source —
-      <a href="https://github.com/omnideck/omnideck">GitHub</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
       &nbsp;·&nbsp;
       <a href="/docs/">Documentation</a>
       &nbsp;·&nbsp;
       MIT License
       &nbsp;·&nbsp;
-      No telemetry, ever.
+      Your data stays on your machine.
     </p>
   </div>
 </footer>
