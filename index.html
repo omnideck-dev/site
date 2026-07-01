@@ -56,30 +56,8 @@
         </div>
       </div>
 
-      <aside class="terminal" aria-label="Omnideck agent session example">
-        <div class="terminal-bar">
-          <span class="terminal-dots">
-            <span class="t-dot t-dot-red"></span>
-            <span class="t-dot t-dot-amber"></span>
-            <span class="t-dot t-dot-green"></span>
-          </span>
-          <span class="terminal-title">omnideck · research-agent · turn 4</span>
-        </div>
-        <div class="terminal-body">
-          <span class="t-line"><span class="t-dim"># user: "research top 3 competitors and write a comparison doc"</span></span>
-          <span class="t-line"><span class="t-think">→ planning: spawning research sub-agent…</span></span>
-          <span class="t-line"><span class="t-prompt">→ spawn_agent</span> <span class="t-agent">"research-sub"</span> <span class="t-val">model=claude-sonnet-4-6</span></span>
-          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-tool">browse_page</span> <span class="t-val">"https://competitor-a.com"</span></span>
-          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-ok">✓</span> page read — 2,100 tokens</span>
-          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-tool">browse_page</span> <span class="t-val">"https://competitor-b.com"</span></span>
-          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-ok">✓</span> page read — 1,800 tokens</span>
-          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[research-sub]</span> <span class="t-tool">remember</span> <span class="t-val">"comp_notes" "{…}"</span></span>
-          <span class="t-line"><span class="t-ok">✓</span> <span class="t-agent">research-sub</span> complete — passing results back</span>
-          <span class="t-line"><span class="t-prompt">→ spawn_agent</span> <span class="t-agent">"writing-sub"</span> <span class="t-val">model=gpt-4o</span></span>
-          <span class="t-line"><span class="t-dim">&nbsp;&nbsp;[writing-sub]</span> <span class="t-tool">write_file</span> <span class="t-val">"comparison.md"</span></span>
-          <span class="t-line"><span class="t-ok">✓</span> <span class="t-agent">writing-sub</span> complete — comparison.md ready</span>
-          <span class="t-line"><span class="t-think">Here's your competitor comparison. I used Claude for research and GPT-4o for the write-up…</span></span>
-        </div>
+      <aside class="hero-screenshot" aria-label="Omnideck interface screenshot">
+        <img src="/omnideck-hero-b.png" alt="Omnideck agent workbench interface" width="881" height="892">
       </aside>
 
     </div>
@@ -141,7 +119,7 @@
 <section style="padding:0 0 4rem">
   <div class="container">
     <div class="ui-preview">
-      <p class="ui-preview-label">UI screenshot coming soon</p>
+      <img src="/omnideck-full-ui-b.png" alt="Omnideck full interface" width="1440" height="810">
     </div>
   </div>
 </section>
