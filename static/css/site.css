@@ -640,7 +640,23 @@ h1 em {
   padding:    6rem 0;
 }
 
-/* ── UI preview placeholder ─────────────────────────────────── */
+/* ── Hero screenshot (replaces terminal in hero section) ────── */
+.hero-screenshot {
+  border-radius: 12px;
+  overflow:      hidden;
+  box-shadow:    0 24px 80px rgba(0, 0, 0, .45);
+  height:        420px;
+}
+
+.hero-screenshot img {
+  width:            100%;
+  height:           100%;
+  object-fit:       cover;
+  object-position:  top center;
+  display:          block;
+}
+
+/* ── UI preview ─────────────────────────────────────────────── */
 .ui-preview {
   background:      var(--color-surface);
   border:          1px solid var(--color-border);
@@ -653,11 +669,11 @@ h1 em {
   overflow:        hidden;
 }
 
-.ui-preview-label {
-  font-family: var(--font-mono);
-  font-size:   0.78rem;
-  color:       var(--color-muted);
-  text-align:  center;
+.ui-preview img {
+  width:      100%;
+  height:     100%;
+  object-fit: cover;
+  display:    block;
 }
 
 /* ── Bento card overrides ───────────────────────────────────── */
