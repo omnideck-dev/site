@@ -154,34 +154,6 @@ h1 em {
   padding: 7rem 0 5rem;
 }
 
-.hero-eyebrow {
-  display:        inline-flex;
-  align-items:    center;
-  gap:            0.5rem;
-  font-family:    var(--font-mono);
-  font-size:      0.75rem;
-  color:          var(--c-green);
-  background:     var(--c-green-tint);
-  border:         1px solid var(--c-green-ring);
-  border-radius:  100px;
-  padding:        0.3rem 0.75rem;
-  margin-bottom:  1.5rem;
-  letter-spacing: 0.05em;
-}
-
-.hero-eyebrow-dot {
-  width:         7px;
-  height:        7px;
-  background:    var(--c-green);
-  border-radius: 50%;
-  flex-shrink:   0;
-  animation:     pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: .4; transform: scale(.85); }
-}
 
 .hero-sub {
   font-size:     1.1rem;
@@ -216,34 +188,81 @@ h1 em {
   flex-shrink:   0;
 }
 
-/* ── Platform support + quick install (hero) ────────────────── */
-.platform-support {
-  display:     flex;
-  gap:         1.25rem;
-  flex-wrap:   wrap;
-  margin-top:  1.25rem;
-  font-family: var(--font-mono);
-  font-size:   0.8rem;
-  color:       var(--color-muted);
+.badge-icon {
+  width:      12px;
+  height:     12px;
+  flex-shrink: 0;
+  fill:       currentColor;
 }
 
-.hero-quick-install {
-  display:     flex;
-  align-items: center;
-  gap:         0.6rem;
-  flex-wrap:   wrap;
-  margin-top:  0.6rem;
-  font-size:   0.82rem;
-  color:       var(--color-muted);
+/* ── Install tabs (hero) ────────────────────────────────────── */
+.tabs-container {
+  background:    var(--color-surface);
+  border:        1px solid var(--color-border);
+  border-radius: 12px;
+  overflow:      hidden;
+  max-width:     460px;
+  margin-bottom: 1.5rem;
 }
 
-.hero-quick-install code {
-  font-size:     0.78rem;
-  background:    rgba(99, 102, 241, 0.1);
-  border:        1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 6px;
-  padding:       0.2rem 0.55rem;
-  color:         var(--c-indigo-l);
+.tab-bar {
+  display:       flex;
+  border-bottom: 1px solid var(--color-border);
+  background:    var(--surface-2);
+}
+
+.tab {
+  font-family:  var(--font-mono);
+  font-size:    0.8125rem;
+  padding:      10px 16px;
+  cursor:       pointer;
+  flex:         1;
+  text-align:   center;
+  color:        var(--color-muted);
+  background:   none;
+  border:       none;
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  border-bottom: 2px solid var(--c-indigo);
+  background:    var(--color-surface);
+  color:         var(--color-text);
+}
+
+.tab-content {
+  display: none;
+  padding: 16px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.install-terminal {
+  font-family:  var(--font-mono);
+  font-size:    0.8rem;
+  background:   var(--c-navy-2);
+  color:        #8B96C8;
+  border-radius: 8px;
+  padding:      12px;
+  margin-bottom: 10px;
+  white-space:  pre-wrap;
+  word-break:   break-word;
+}
+
+.t-cmd {
+  color: #E2E8F0;
+}
+
+.install-link {
+  font-size:       0.8125rem;
+  color:           var(--color-link);
+  text-decoration: none;
+}
+
+.install-link:hover {
+  text-decoration: underline;
 }
 
 /* ── Terminal ───────────────────────────────────────────────── */
@@ -670,20 +689,45 @@ h1 em {
   padding:    6rem 0;
 }
 
-/* ── Hero screenshot (replaces terminal in hero section) ────── */
-.hero-screenshot {
+/* ── Hero screenshot ────────────────────────────────────────── */
+.screenshot-container {
   border-radius: 12px;
   overflow:      hidden;
-  box-shadow:    0 24px 80px rgba(0, 0, 0, .45);
-  height:        420px;
+  box-shadow:    0 20px 60px rgba(22, 18, 68, 0.15);
+  border:        1px solid var(--color-border);
+  position:      relative;
 }
 
-.hero-screenshot img {
-  width:            100%;
-  height:           100%;
-  object-fit:       cover;
-  object-position:  top center;
-  display:          block;
+html.dark .screenshot-container,
+html[data-theme=dark] .screenshot-container {
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.screenshot-container::after {
+  content:        '';
+  position:       absolute;
+  bottom:         0;
+  left:           0;
+  right:          0;
+  height:         30%;
+  background:     linear-gradient(to bottom, transparent 70%, var(--color-bg) 100%);
+  pointer-events: none;
+}
+
+.screenshot {
+  width:   100%;
+  height:  auto;
+  display: block;
+}
+
+/* ── Scroll indicator ───────────────────────────────────────── */
+.scroll-indicator {
+  text-align:  center;
+  margin-top:  3rem;
+  font-family: var(--font-mono);
+  font-size:   0.875rem;
+  color:       var(--color-muted);
+  opacity:     0.6;
 }
 
 /* ── UI preview ─────────────────────────────────────────────── */
