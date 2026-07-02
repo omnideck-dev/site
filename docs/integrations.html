@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Connect Gmail, Calendar, Drive, and other services so agents can read and act on them.">
+  <meta name="description" content="Connect Gmail, Google Workspace, iCloud, and HTTP APIs so agents can read and act on them.">
   <title>Integrations | Docs | Omnideck</title>
   <link rel="stylesheet" href="/css/ivy.full.css">
   <link rel="stylesheet" href="/css/lattice.full.css">
@@ -58,47 +58,80 @@
     <article class="span-12 md-span-9">
       <h1>Integrations</h1>
       
-      <p class="muted">Connect Gmail, Calendar, Drive, and other services so agents can read and act on them.</p>
+      <p class="muted">Connect Gmail, Google Workspace, iCloud, and HTTP APIs so agents can read and act on them.</p>
       <hr>
       
-      <p>Integrations give the agent access to external services — email, calendar, and (in future versions) more. Each integration becomes a set of agent tools the agent can call by name.</p>
+      <p>Integrations give the agent access to external services — email, calendar, drive, contacts, and HTTP APIs. Each integration becomes a set of agent tools the agent can call by name.</p>
 <h2>Supported integrations</h2>
 <table>
 <thead>
 <tr>
 <th>Provider</th>
 <th>Capabilities</th>
+<th>Auth method</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><strong>Google Workspace</strong></td>
+<td>Mail, Calendar, Drive, and Contacts — full read and write access</td>
+<td>OAuth (your own Google Cloud credentials)</td>
+</tr>
+<tr>
 <td><strong>Gmail</strong></td>
 <td>Read email, search messages, send email, move messages</td>
+<td>App-specific password</td>
 </tr>
 <tr>
 <td><strong>iCloud</strong></td>
 <td>Read email (IMAP), send email (SMTP), read calendar (CalDAV)</td>
+<td>App-specific password</td>
+</tr>
+<tr>
+<td><strong>HTTP API</strong></td>
+<td>Call any REST endpoint with a bearer token</td>
+<td>Bearer token</td>
 </tr>
 </tbody>
 </table>
-<p>More integrations — Drive, Notion, Slack, and others — are planned.</p>
+<p>More integrations — Notion, Slack, and others — are planned.</p>
 <h2>Adding an integration</h2>
-<p>Go to <strong>Settings → Integrations</strong> in the web UI and click <strong>Add Integration</strong>.</p>
+<p>Go to <strong>Settings → Integrations</strong> in the web UI and click <strong>Add Integration</strong>. The wizard walks you through setup for each provider.</p>
+<h3>Gmail and iCloud</h3>
+<p>Both use app-specific passwords — credentials your provider issues for third-party apps, separate from your main account password. You need two-factor authentication enabled on your account.</p>
 <ol>
 <li><strong>Pick your provider</strong> — Gmail or iCloud</li>
-<li><strong>Generate an app password</strong> — the wizard links directly to your provider's app-passwords page. You must use an app-specific password, not your main account password.
+<li><strong>Generate an app password</strong> — the wizard links directly to your provider's app-passwords page:
 <ul>
 <li>Gmail: <a href="https://myaccount.google.com/apppasswords">myaccount.google.com/apppasswords</a></li>
 <li>iCloud: <a href="https://appleid.apple.com">appleid.apple.com</a> → Sign-In and Security → App-Specific Passwords</li>
 </ul>
 </li>
-<li><strong>Enter your email and app password</strong> and click Save</li>
+<li><strong>Enter your email and app password</strong> and click Verify &amp; save</li>
 <li>Omnideck verifies the credentials by connecting to the provider. If they're accepted, the integration shows as <strong>connected</strong>.</li>
 </ol>
+<h3>Google Workspace</h3>
+<p>Google Workspace uses OAuth with your own Google Cloud credentials — no shared app, no third-party servers. The wizard walks you through a one-time ~5 minute setup:</p>
+<ol>
+<li><strong>Create a Google Cloud project</strong> — the wizard links to the Google Cloud Console</li>
+<li><strong>Enable the APIs</strong> — Gmail, Calendar, Drive, and People APIs</li>
+<li><strong>Set up the Google Auth Platform</strong> — configure the consent screen</li>
+<li><strong>Publish the app</strong> — set the app status to &quot;In production&quot; (it's only for you)</li>
+<li><strong>Create the OAuth client</strong> — get a Client ID and Client Secret</li>
+<li><strong>Paste your Client ID and Client Secret</strong> into the wizard and click Authorize</li>
+</ol>
+<p>You also choose which capabilities to share (Gmail, Calendar, Drive, Contacts) and at what access level (read-only or read-write) before authorizing.</p>
+<h3>HTTP API</h3>
+<p>Point your agent at any REST endpoint that authenticates with a static token:</p>
+<ol>
+<li><strong>Enter a base URL</strong> — all agent requests are locked to this host</li>
+<li><strong>Enter a bearer token</strong> — passed as an <code>Authorization: Bearer</code> header</li>
+<li><strong>Give it a label</strong> and click Verify &amp; save</li>
+</ol>
 <h2>Write access</h2>
-<p>By default, integrations are read-only — the agent can read messages and events but can't send email or modify calendar entries. This is a deliberate safe default.</p>
+<p>By default, integrations are read-only — the agent can read messages, events, and files but can't send email, modify calendar entries, or write to Drive. This is a deliberate safe default.</p>
 <p>To allow writes, open the integration in <strong>Settings → Integrations</strong> and enable <strong>Allow writes</strong>. Omnideck will restart the broker process briefly (~1–3 seconds) and the integration shows as connected again.</p>
-<p>With writes enabled, the agent gains tools for sending email, moving messages, and (for iCloud) creating or modifying calendar events.</p>
+<p>With writes enabled, the agent gains tools for sending email, moving messages, creating or modifying calendar events, uploading and editing Drive files, and making mutating HTTP requests.</p>
 <h2>Integration status</h2>
 <table>
 <thead>
@@ -148,9 +181,9 @@
 </div>
 <h2>Troubleshooting</h2>
 <p><strong>Integration shows &quot;auth failed&quot; shortly after adding</strong></p>
-<p>The app password was wrong, expired, or revoked. Generate a fresh app password from your provider's app-passwords page and re-add the integration. You cannot edit credentials in place — delete and re-add.</p>
+<p>The credentials were wrong, expired, or revoked. Generate a fresh app password (or OAuth credentials) from your provider and re-add the integration. You cannot edit credentials in place — delete and re-add.</p>
 <p><strong>Integration shows &quot;not running&quot;</strong></p>
-<p>The broker crashed repeatedly before completing its initial handshake. Check <code>omnideck logs</code> for lines tagged with the integration name — common causes are a network firewall blocking outbound IMAP/SMTP/CalDAV connections, or the provider being temporarily unavailable.</p>
+<p>The broker crashed repeatedly before completing its initial handshake. Check <code>omnideck logs</code> for lines tagged with the integration name — common causes are a network firewall blocking outbound connections, or the provider being temporarily unavailable.</p>
 <p><strong>&quot;Integrations unavailable&quot; in the Settings tab</strong></p>
 <p>The app can't reach the credential vault supervisor. Check <code>omnideck logs</code> for <code>[supervisor]</code> errors. If the container was stopped uncleanly, <code>omnideck restart</code> usually resolves it.</p>
 <p><strong>The agent says it can't list emails but the integration shows &quot;connected&quot;</strong></p>
