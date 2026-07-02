@@ -26,7 +26,7 @@ Omnideck is freedom-first: everything runs in a container on your hardware, you 
 
 ## Open source
 
-Omnideck is MIT-licensed and developed in the open. Contributions, bug reports, and feedback are welcome on [GitHub](https://github.com/omnideck-dev/omnideck).
+Omnideck is Apache 2 licensed and developed in the open. Contributions, bug reports, and feedback are welcome on [GitHub](https://github.com/omnideck-dev/omnideck).
 
 ## Get in touch
 
