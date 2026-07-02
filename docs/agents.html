@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Create and configure agent profiles — each with its own model, system prompt, and tool access.">
+  <meta name="description" content="Create and configure agent profiles — each with its own model, system prompt, and skills.">
   <title>Agents | Docs | Omnideck</title>
   <link rel="stylesheet" href="/css/ivy.full.css">
   <link rel="stylesheet" href="/css/lattice.full.css">
@@ -58,56 +58,54 @@
     <article class="span-12 md-span-9">
       <h1>Agents</h1>
       
-      <p class="muted">Create and configure agent profiles — each with its own model, system prompt, and tool access.</p>
+      <p class="muted">Create and configure agent profiles — each with its own model, system prompt, and skills.</p>
       <hr>
       
-      <p>An agent profile is a named configuration that defines how a particular agent thinks and what it can do. Omnideck ships with a default profile. You can create as many profiles as you like and switch between them at any point in a conversation.</p>
+      <p>An agent profile is a named configuration that defines how a particular agent thinks and what it can do. Omnideck ships with four default profiles. You can create as many profiles as you like and switch between them at any point in a conversation.</p>
 <h2>Creating a profile</h2>
 <p>Go to <strong>Settings → Profiles</strong> in the web UI and click <strong>New Profile</strong>. Fill in:</p>
 <ul>
 <li><strong>Name</strong> — a descriptive label (e.g. &quot;Research Agent&quot;, &quot;Code Agent&quot;)</li>
 <li><strong>Model</strong> — which LLM provider and model to use for this agent</li>
 <li><strong>System prompt</strong> — the agent's core instructions, persona, and constraints</li>
-<li><strong>Tools</strong> — which capabilities the agent has access to</li>
+<li><strong>Skills</strong> — which skill bundles the agent loads (each skill grants a set of tool categories)</li>
 <li><strong>Inference parameters</strong> — temperature, top-p, and other model settings</li>
 </ul>
-<h2>Tool access</h2>
-<p>Tool access is scoped per agent profile. A research agent might have full web and memory access but no bash. A DevOps agent might have bash and filesystem but no browser.</p>
+<h2>Skills</h2>
+<p>Agents don't toggle individual tools. Instead, you assign <strong>skills</strong> — curated bundles of tool categories. Each skill loads a specific set of capabilities. Omnideck ships with four built-in skills:</p>
 <table>
 <thead>
 <tr>
-<th>Tool</th>
-<th>Description</th>
+<th>Skill</th>
+<th>Tool categories</th>
+<th>What it does</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Browser automation</td>
-<td>Full browser control — clicking, typing, scrolling, and screenshotting</td>
+<td><strong>assistant</strong></td>
+<td>Memory, Email, Calendar, Drive, Contacts, HTTP / API</td>
+<td>Persistent memory across conversations and access to connected integrations</td>
 </tr>
 <tr>
-<td>Web search</td>
-<td>Search the web (via configured search provider)</td>
+<td><strong>browser</strong></td>
+<td>Web Browsing, Web Fetch</td>
+<td>Full browser automation — navigate, click, type, scroll, fill forms, and take screenshots. Also fetches pages as clean text without a browser.</td>
 </tr>
 <tr>
-<td>Code execution</td>
-<td>Write and run Python, install packages, build projects</td>
+<td><strong>coder</strong></td>
+<td>Coding &amp; Files</td>
+<td>Read, write, edit, and patch files. Run bash commands, install packages, search codebases.</td>
 </tr>
 <tr>
-<td>Filesystem</td>
-<td>Read and write files in the shared workspace (<code>~/Omnideck</code>)</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>Read and write persistent facts across conversations</td>
-</tr>
-<tr>
-<td>Integrations</td>
-<td>Access Gmail and iCloud (requires configured integrations)</td>
+<td><strong>goal_planner</strong></td>
+<td>Goal Planning</td>
+<td>Create and manage autonomous goals with scheduled tasks that run in the background.</td>
 </tr>
 </tbody>
 </table>
-<p>Restricting tools improves focus and reduces the chance of unintended side effects. A dedicated research agent doesn't need bash.</p>
+<p>You can mix and match skills per profile. A research agent might load <strong>browser</strong> and <strong>assistant</strong> but not <strong>coder</strong>. A DevOps agent might load <strong>coder</strong> and <strong>assistant</strong> but not <strong>browser</strong>. Restricting skills improves focus and reduces the chance of unintended side effects.</p>
+<p>Tool categories from integrations — Email, Calendar, Drive, Contacts, and HTTP / API — become available automatically when you connect an integration and load the <strong>assistant</strong> skill.</p>
 <h2>Context management</h2>
 <p>As a conversation grows, Omnideck tracks token usage and compacts older messages when a configurable threshold is reached. Compaction summarizes older turns and replaces them with a compact summary, preserving recent context verbatim. This keeps conversations going indefinitely without hitting model context limits.</p>
 <p>The compaction model is configured in <strong>Settings → Providers</strong> — you can use a smaller, cheaper model for compaction and a larger one for actual work.</p>
@@ -117,8 +115,6 @@
 <p>Sub-agent spawning is enabled or disabled per agent profile in Settings.</p>
 <h2>Switching agents mid-conversation</h2>
 <p>Use the profile selector at the top of the chat panel to switch to a different profile. The conversation history is preserved; the new agent's system prompt takes effect from the next turn.</p>
-<h2>Starter prompts</h2>
-<p>Each profile can define a set of starter prompts — suggested first messages displayed when you open a new conversation with that profile. Configure these in <strong>Settings → Profiles</strong> to help collaborators or your future self get started quickly.</p>
 
     </article>
   </div>
