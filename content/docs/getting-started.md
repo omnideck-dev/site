@@ -27,23 +27,13 @@ Omnideck runs inside a container managed by the `omnideck` CLI. You need a conta
 
 The `omnideck` CLI wraps your container engine with a guided installer and simple management commands.
 
-### Homebrew (macOS and Linux)
+### Option A: Homebrew (macOS and Linux)
 
 The recommended way to install on macOS or Linux:
 
 ```bash
-brew tap omnideck-dev/omnideck
-brew trust omnideck-dev/omnideck
-brew install omnideck
+brew install omnideck-dev/tap/omnideck
 ```
-
-Or as a single command:
-
-```bash
-brew tap omnideck-dev/omnideck && brew trust omnideck-dev/omnideck && brew install omnideck
-```
-
-The `brew trust` step is required once by Homebrew's third-party tap security policy.
 
 To upgrade later:
 
@@ -51,17 +41,17 @@ To upgrade later:
 brew upgrade omnideck
 ```
 
-### Download a binary
+### Option B: Download a binary
 
 Grab the binary for your OS from the [releases page](https://github.com/omnideck-dev/cli/releases):
 
-| Platform | File | SHA-256 |
-|---|---|---|
-| macOS (Apple Silicon) | `omnideck-darwin-arm64.tar.gz` | `c93e4f17…9d7af8` |
-| macOS (Intel) | `omnideck-darwin-amd64.tar.gz` | `07b70880…e06728` |
-| Linux (x86-64) | `omnideck-linux-amd64.tar.gz` | `e550a2fa…ed30d9` |
-| Linux (ARM64) | `omnideck-linux-arm64.tar.gz` | `63d2057b…00032d` |
-| Windows (x86-64) | `omnideck-windows-amd64.zip` | `b1dd6da9…c249366` |
+| Platform | File | 
+|---|---|
+| macOS (Apple Silicon) | `omnideck-darwin-arm64.tar.gz` | 
+| macOS (Intel) | `omnideck-darwin-amd64.tar.gz` |
+| Linux (x86-64) | `omnideck-linux-amd64.tar.gz` | 
+| Linux (ARM64) | `omnideck-linux-arm64.tar.gz` | 
+| Windows (x86-64) | `omnideck-windows-amd64.zip` | 
 
 Extract the archive and move the binary to a directory on your `PATH`. On Linux or macOS:
 
