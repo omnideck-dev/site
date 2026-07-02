@@ -75,54 +75,42 @@
 </ul>
 <h2>Step 1: Install the CLI</h2>
 <p>The <code>omnideck</code> CLI wraps your container engine with a guided installer and simple management commands.</p>
-<h3>Homebrew (macOS and Linux)</h3>
+<h3>Option A: Homebrew (macOS and Linux)</h3>
 <p>The recommended way to install on macOS or Linux:</p>
-<pre><code class="language-bash">brew tap omnideck-dev/omnideck
-brew trust omnideck-dev/omnideck
-brew install omnideck
+<pre><code class="language-bash">brew install omnideck-dev/tap/omnideck
 </code></pre>
-<p>Or as a single command:</p>
-<pre><code class="language-bash">brew tap omnideck-dev/omnideck &amp;&amp; brew trust omnideck-dev/omnideck &amp;&amp; brew install omnideck
-</code></pre>
-<p>The <code>brew trust</code> step is required once by Homebrew's third-party tap security policy.</p>
 <p>To upgrade later:</p>
 <pre><code class="language-bash">brew upgrade omnideck
 </code></pre>
-<h3>Download a binary</h3>
+<h3>Option B: Download a binary</h3>
 <p>Grab the binary for your OS from the <a href="https://github.com/omnideck-dev/cli/releases">releases page</a>:</p>
 <table>
 <thead>
 <tr>
 <th>Platform</th>
 <th>File</th>
-<th>SHA-256</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>macOS (Apple Silicon)</td>
 <td><code>omnideck-darwin-arm64.tar.gz</code></td>
-<td><code>c93e4f17…9d7af8</code></td>
 </tr>
 <tr>
 <td>macOS (Intel)</td>
 <td><code>omnideck-darwin-amd64.tar.gz</code></td>
-<td><code>07b70880…e06728</code></td>
 </tr>
 <tr>
 <td>Linux (x86-64)</td>
 <td><code>omnideck-linux-amd64.tar.gz</code></td>
-<td><code>e550a2fa…ed30d9</code></td>
 </tr>
 <tr>
 <td>Linux (ARM64)</td>
 <td><code>omnideck-linux-arm64.tar.gz</code></td>
-<td><code>63d2057b…00032d</code></td>
 </tr>
 <tr>
 <td>Windows (x86-64)</td>
 <td><code>omnideck-windows-amd64.zip</code></td>
-<td><code>b1dd6da9…c249366</code></td>
 </tr>
 </tbody>
 </table>
