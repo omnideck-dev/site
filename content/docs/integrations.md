@@ -5,39 +5,42 @@ draft    = false
 template = "templates/types/docs.html"
 
 [extra]
-description = "Connect Gmail, Calendar, Drive, and other services so agents can read and act on them."
+description = "Connect Gmail, Google Workspace, iCloud, and HTTP APIs so agents can read and act on them."
 order = 7
 +++
 
-Integrations give the agent access to external services — email, calendar, and (in future versions) more. Each integration becomes a set of agent tools the agent can call by name.
+Integrations give the agent access to external services — email, calendar, drive, contacts, and HTTP APIs. Each integration becomes a set of agent tools the agent can call by name.
 
 ## Supported integrations
 
 | Provider | Capabilities |
 |---|---|
+| **Google Workspace** | Mail, Calendar, Drive, and Contacts — full read and write access |
 | **Gmail** | Read email, search messages, send email, move messages |
 | **iCloud** | Read email (IMAP), send email (SMTP), read calendar (CalDAV) |
+| **HTTP API** | Call any REST endpoint with a bearer token |
 
-More integrations — Drive, Notion, Slack, and others — are planned.
+More integrations — Notion, Slack, and others — are planned.
 
 ## Adding an integration
 
 Go to **Settings → Integrations** in the web UI and click **Add Integration**.
 
-1. **Pick your provider** — Gmail or iCloud
-2. **Generate an app password** — the wizard links directly to your provider's app-passwords page. You must use an app-specific password, not your main account password.
-   - Gmail: [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
+1. **Pick your provider** — Google Workspace, Gmail, iCloud, or HTTP API
+2. **Generate an app password** — for email and Workspace providers, the wizard links directly to your provider's app-passwords page. You must use an app-specific password, not your main account password.
+   - Gmail / Google Workspace: [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
    - iCloud: [appleid.apple.com](https://appleid.apple.com) → Sign-In and Security → App-Specific Passwords
-3. **Enter your email and app password** and click Save
+   - HTTP API: provide the base URL and a bearer token
+3. **Enter your credentials** and click Save
 4. Omnideck verifies the credentials by connecting to the provider. If they're accepted, the integration shows as **connected**.
 
 ## Write access
 
-By default, integrations are read-only — the agent can read messages and events but can't send email or modify calendar entries. This is a deliberate safe default.
+By default, integrations are read-only — the agent can read messages, events, and files but can't send email, modify calendar entries, or write to Drive. This is a deliberate safe default.
 
 To allow writes, open the integration in **Settings → Integrations** and enable **Allow writes**. Omnideck will restart the broker process briefly (~1–3 seconds) and the integration shows as connected again.
 
-With writes enabled, the agent gains tools for sending email, moving messages, and (for iCloud) creating or modifying calendar events.
+With writes enabled, the agent gains tools for sending email, moving messages, creating or modifying calendar events, uploading and editing Drive files, and making mutating HTTP requests.
 
 ## Integration status
 
