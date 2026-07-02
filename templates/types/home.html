@@ -16,16 +16,16 @@
 
         <div class="tabs-container">
           <div class="tab-bar">
-            <button class="tab active" data-tab="macos">macOS</button>
-            <button class="tab" data-tab="linux">Linux</button>
-            <button class="tab" data-tab="windows">Windows</button>
+            <button class="tab active" data-tab="macos"><span class="tab-icon icon-macos" aria-hidden="true"></span>macOS</button>
+            <button class="tab" data-tab="linux"><span class="tab-icon icon-linux" aria-hidden="true"></span>Linux</button>
+            <button class="tab" data-tab="windows"><span class="tab-icon icon-windows" aria-hidden="true"></span>Windows</button>
           </div>
           <div class="tab-content active" id="macos-tab">
-            <div class="install-terminal"><span class="t-prompt">$ </span><span class="t-cmd">brew tap omnideck-dev/omnideck &amp;&amp; brew install omnideck</span></div>
+            <div class="install-terminal"><span class="t-prompt">$ </span><span class="t-cmd">brew tap omnideck-dev/omnideck &amp;&amp; brew install omnideck</span><button class="copy-btn" aria-label="Copy command">copy</button></div>
             <a href="/docs/getting-started.html" class="install-link">all install options →</a>
           </div>
           <div class="tab-content" id="linux-tab">
-            <div class="install-terminal"><span class="t-prompt">$ </span><span class="t-cmd">brew tap omnideck-dev/omnideck &amp;&amp; brew install omnideck</span></div>
+            <div class="install-terminal"><span class="t-prompt">$ </span><span class="t-cmd">brew tap omnideck-dev/omnideck &amp;&amp; brew install omnideck</span><button class="copy-btn" aria-label="Copy command">copy</button></div>
             <a href="/docs/getting-started.html" class="install-link">all install options →</a>
           </div>
           <div class="tab-content" id="windows-tab">
@@ -61,7 +61,7 @@
   </div>
 </section>
 
-<section class="band band-surface home-section" id="problem">
+<section class="band band-surface" id="problem">
   <div class="container">
     <div class="grid col-1 md-col-2 gap-5 items-center">
       <div>
@@ -110,7 +110,7 @@
   </div>
 </section>
 
-<section style="padding:0 0 4rem">
+<section class="home-section-top">
   <div class="container">
     <div class="ui-preview">
       <img src="/omnideck-full-ui-b.png" alt="Omnideck full interface" width="1440" height="810">
@@ -395,6 +395,20 @@
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       tab.classList.add('active');
       document.getElementById(tab.dataset.tab + '-tab').classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.closest('.install-terminal').querySelector('.t-cmd').textContent;
+      navigator.clipboard.writeText(cmd).then(() => {
+        btn.textContent = 'copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
     });
   });
 </script>

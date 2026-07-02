@@ -95,10 +95,6 @@ html[data-theme=dark] {
   padding: 0 0 3rem;
 }
 
-.home-section-bottom {
-  padding: 3rem 0 0;
-}
-
 /* ── Terminal/mini-terminal: always neon (always dark bg) ────── */
 .terminal,
 .mini-terminal {
@@ -220,17 +216,38 @@ h1 em {
 }
 
 .tab {
-  font-family:  var(--font-mono);
-  font-size:    0.8125rem;
-  padding:      10px 16px;
-  cursor:       pointer;
-  flex:         1;
-  text-align:   center;
-  color:        var(--color-muted);
-  background:   none;
-  border:       none;
-  border-bottom: 2px solid transparent;
+  font-family:     var(--font-mono);
+  font-size:       0.8125rem;
+  padding:         10px 16px;
+  cursor:          pointer;
+  flex:            1;
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             6px;
+  color:           var(--color-muted);
+  background:      none;
+  border:          none;
+  border-bottom:   2px solid transparent;
 }
+
+.tab-icon {
+  display:              inline-block;
+  width:                13px;
+  height:               13px;
+  flex-shrink:          0;
+  background-color:     currentColor;
+  -webkit-mask-size:    contain;
+  -webkit-mask-repeat:  no-repeat;
+  -webkit-mask-position: center;
+  mask-size:            contain;
+  mask-repeat:          no-repeat;
+  mask-position:        center;
+}
+
+.icon-macos   { -webkit-mask-image: url(/icons/apple.svg);   mask-image: url(/icons/apple.svg); }
+.icon-linux   { -webkit-mask-image: url(/icons/linux.svg);   mask-image: url(/icons/linux.svg); }
+.icon-windows { -webkit-mask-image: url(/icons/windows.svg); mask-image: url(/icons/windows.svg); }
 
 .tab.active {
   border-bottom: 2px solid var(--c-indigo);
@@ -248,15 +265,42 @@ h1 em {
 }
 
 .install-terminal {
+  position:     relative;
   font-family:  var(--font-mono);
   font-size:    0.8rem;
   background:   var(--c-navy-2);
   color:        #8B96C8;
   border-radius: 8px;
-  padding:      12px;
+  padding:      12px 52px 12px 12px;
   margin-bottom: 10px;
   white-space:  pre-wrap;
   word-break:   break-word;
+}
+
+.copy-btn {
+  position:    absolute;
+  top:         8px;
+  right:       8px;
+  font-family: var(--font-mono);
+  font-size:   0.7rem;
+  padding:     3px 8px;
+  background:  transparent;
+  border:      1px solid rgba(139, 150, 200, 0.3);
+  border-radius: 4px;
+  color:       #8B96C8;
+  cursor:      pointer;
+  line-height: 1.4;
+  transition:  color 0.15s, border-color 0.15s;
+}
+
+.copy-btn:hover {
+  border-color: rgba(139, 150, 200, 0.6);
+  color:        #E2E8F0;
+}
+
+.copy-btn.copied {
+  color:        #4ADE80;
+  border-color: rgba(74, 222, 128, 0.4);
 }
 
 .t-cmd {
