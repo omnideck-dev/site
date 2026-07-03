@@ -1,0 +1,16 @@
+[[bundle]]
+name    = "css/bundle.css"
+type    = "css"
+sources = [
+  "static/css/ivy.full.css",
+  "static/css/lattice.full.css",
+  "static/css/site.css",
+]
+
+[[bundle]]
+name    = "js/bundle.js"
+type    = "js"
+sources = [
+  "static/js/dark-mode-toggle.js",
+  "static/js/site.js",
+]

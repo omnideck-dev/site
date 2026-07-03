@@ -1,10 +1,8 @@
 {% extends "templates/layouts/base.html" %}
 {% block title %}{{ Page.Title }} | {{ Site.Config.Site.Title }}{% endblock %}
 {% block body %}
-<div class="container py-5">
-  <article>
-    <h1>{{ Page.Title }}</h1>
-    {{ Page.HTMLContent|safe }}
-  </article>
-</div>
+<article class="container py-5">
+  <h1>{{ Page.Title }}</h1>
+  {{ Page.HTMLContent|safe }}
+</article>
 {% endblock %}

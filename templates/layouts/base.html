@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% if Page.Meta.Fields.description %}<meta name="description" content="{{ Page.Meta.Fields.description }}">{% endif %}
   <title>{% block title %}{{ Site.Config.Site.Title }}{% endblock %}</title>
-  {{ Assets.CSS|safe }} 
-  {{ Assets.JS|safe }} 
+  {{ Assets.CSS|safe }}
   {% block head %}{% endblock %}
 </head>
 <body class="lattice">
@@ -15,6 +14,7 @@
     {% block body %}{% endblock %}
   </main>
   {% include "templates/partials/footer.html" %}
+  {{ Assets.JS|safe }}
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

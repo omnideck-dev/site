@@ -911,12 +911,14 @@ html[data-theme=dark] .screenshot-container {
   margin: 0 0 0.25rem;
 }
 
-.blog-card-link {
+.blog-card-link,
+.doc-card-link {
   text-decoration: none;
   color:           inherit;
 }
 
-.blog-card-link:hover {
+.blog-card-link:hover,
+.doc-card-link:hover {
   color: var(--color-primary);
 }
 
@@ -927,6 +929,27 @@ html[data-theme=dark] .screenshot-container {
 
 .blog-card-desc {
   margin: 0 0 0.75rem;
+}
+
+/* ── Blog post ──────────────────────────────────────────────── */
+.blog-article {
+  max-width: 720px;
+}
+
+.blog-header {
+  margin-bottom: 2rem;
+}
+
+/* ── Section copy paragraphs ────────────────────────────────── */
+.section-p {
+  line-height:   1.75;
+  margin-bottom: 1rem;
+}
+
+/* ── CTA intro text ─────────────────────────────────────────── */
+.cta-body {
+  margin:    1rem auto 2rem;
+  max-width: 480px;
 }
 
 /* ── Responsive helpers ─────────────────────────────────────── */

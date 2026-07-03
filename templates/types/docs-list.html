@@ -18,7 +18,7 @@
         {% for item in Items %}
         {% if item.Permalink != Page.Permalink %}
         <div class="card">
-          <header><h3><a href="{{ item.Permalink }}" style="text-decoration:none;color:inherit">{{ item.Title }}</a></h3></header>
+          <header><h3><a href="{{ item.Permalink }}" class="doc-card-link">{{ item.Title }}</a></h3></header>
           {% if item.Meta.Fields.description %}<p>{{ item.Meta.Fields.description }}</p>{% endif %}
           <footer>
             <a href="{{ item.Permalink }}" role="button" data-variant="ghost" data-size="sm">Read →</a>
