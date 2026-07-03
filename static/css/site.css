@@ -107,6 +107,16 @@ html[data-theme=dark] {
   --c-muted:    #94A3B8;
 }
 
+/* ── Paint the page background from the theme token ─────────── */
+/* Ivy leaves body transparent; on a dark-OS the browser canvas
+   shows through as grey. Bind it explicitly so light/dark hold. */
+html { background: var(--color-bg); }
+
+body {
+  background: var(--color-bg);
+  color:      var(--color-text);
+}
+
 /* ── Layout fixes ───────────────────────────────────────────── */
 
 main.full-width {
@@ -1197,14 +1207,4 @@ html[data-theme=dark] .screenshot-container {
 /* ── Reduced motion ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .card { transition: none; }
-}
-
-/* ── Paint the page background from the theme token ─────────── */
-/* Ivy leaves body transparent; on a dark-OS the browser canvas
-   shows through as grey. Bind it explicitly so light/dark hold. */
-html { background: var(--color-bg); }
-
-body {
-  background: var(--color-bg);
-  color:      var(--color-text);
 }
