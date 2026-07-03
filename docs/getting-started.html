@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Install and run Omnideck in under five minutes.">
   <title>Getting Started | Docs | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=c56c3c28">
+  <link rel="stylesheet" href="/css/bundle.css?v=ee376a3c">
   
 </head>
-<body class="lattice">
+<body class="lattice ">
   <header class="full-width sticky">
   <div class="container d-flex items-center justify-between py-2">
     <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
@@ -30,7 +30,7 @@
 <div class="container py-5">
   <div class="grid gap-5">
     <div class="span-12 md-span-3">
-      <aside class="docs-sidebar">
+      <aside class="docs-sidebar sticky">
   <span class="docs-nav-label">Documentation</span>
   <nav>
     
@@ -70,7 +70,7 @@
 <li><strong>LLM provider:</strong> an API key for OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint — or <a href="https://ollama.com/">Ollama</a> for local models</li>
 <li><strong>RAM:</strong> 4 GB minimum (8 GB recommended for local models)</li>
 </ul>
-<h2>Step 1: Install the CLI</h2>
+<h2 id="step-1-install-the-cli">Step 1: Install the CLI</h2>
 <p>The <code>omnideck</code> CLI wraps your container engine with a guided installer and simple management commands.</p>
 <h3>Option A: Homebrew (macOS and Linux)</h3>
 <p>The recommended way to install on macOS or Linux:</p>
@@ -119,7 +119,7 @@ sudo mv omnideck /usr/local/bin/
 <h3>Verify the install</h3>
 <pre><code class="language-bash">omnideck --version
 </code></pre>
-<h2>Step 2: Install Omnideck</h2>
+<h2 id="step-2-install-omnideck">Step 2: Install Omnideck</h2>
 <pre><code class="language-bash">omnideck install
 </code></pre>
 <p>The install wizard:</p>
@@ -130,7 +130,7 @@ sudo mv omnideck /usr/local/bin/
 <li>Pulls the container image and starts the container</li>
 </ol>
 <p>When the wizard finishes, open <strong><a href="http://localhost:2337">http://localhost:2337</a></strong> in your browser.</p>
-<h2>Step 3: Open the tool</h2>
+<h2 id="step-3-open-the-tool">Step 3: Open the tool</h2>
 <p>A setup wizard runs in the UI the first time you open it. It guides you through:</p>
 <ol>
 <li><strong>Adding an LLM provider</strong> — cloud (OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint) or local Ollama</li>
