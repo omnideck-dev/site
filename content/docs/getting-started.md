@@ -23,7 +23,7 @@ Omnideck runs inside a container managed by the `omnideck` CLI. You need a conta
 - **LLM provider:** an API key for OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint — or [Ollama](https://ollama.com/) for local models
 - **RAM:** 4 GB minimum (8 GB recommended for local models)
 
-## Step 1: Install the CLI
+<h2 id="step-1-install-the-cli">Step 1: Install the CLI</h2>
 
 The `omnideck` CLI wraps your container engine with a guided installer and simple management commands.
 
@@ -67,7 +67,7 @@ sudo mv omnideck /usr/local/bin/
 omnideck --version
 ```
 
-## Step 2: Install Omnideck
+<h2 id="step-2-install-omnideck">Step 2: Install Omnideck</h2>
 
 ```bash
 omnideck install
@@ -82,7 +82,7 @@ The install wizard:
 
 When the wizard finishes, open **[http://localhost:2337](http://localhost:2337)** in your browser.
 
-## Step 3: Open the tool
+<h2 id="step-3-open-the-tool">Step 3: Open the tool</h2>
 
 A setup wizard runs in the UI the first time you open it. It guides you through:
 
