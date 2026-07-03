@@ -8,7 +8,7 @@
   {{ Assets.CSS|safe }}
   {% block head %}{% endblock %}
 </head>
-<body class="lattice">
+<body class="lattice {% block body_class %}{% endblock %}">
   {% include "templates/partials/header.html" %}
   <main class="full-width">
     {% block body %}{% endblock %}
