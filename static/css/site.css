@@ -6,7 +6,7 @@
 
 /* ── Token Overrides ──────────────────────────────────────── */
 :root {
-  /* Dark palette — unchanged, already approved */
+  /* Dark palette */
   --color-bg-dark:           #0B0F1A;
   --color-text-dark:         #F0EEE9;
   --color-muted-dark:        #94A3B8;
