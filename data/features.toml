@@ -16,7 +16,7 @@ desc  = "Agents store and retrieve keyed facts across conversations, preserved a
 [[items]]
 icon  = "🔗"
 title = "Integrations"
-desc  = "Connect Gmail and iCloud so agents can read, search, and send email. More integrations on the roadmap."
+desc  = "Connect Gmail, Google Workspace, iCloud, and HTTP APIs so agents can read email, manage calendars, access Drive, and call any REST endpoint."
 
 [[items]]
 icon  = "📁"
