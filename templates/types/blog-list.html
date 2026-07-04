@@ -7,14 +7,14 @@
   <hr>
   {% if Items %}
   <div class="grid col-1 gap-3 mt-4">
-    {% for item in Items %}
+    {% for item in Items reversed %}{% if item.Permalink != "/blog/" %}
     <article class="card">
       <h2 class="blog-card-title"><a href="{{ item.Permalink }}" class="blog-card-link">{{ item.Title }}</a></h2>
       <p class="muted blog-card-date"><time>{{ item.Date|godate:"January 2, 2006" }}</time></p>
       {% if item.Meta.Fields.description %}<p class="blog-card-desc">{{ item.Meta.Fields.description }}</p>{% endif %}
       <a href="{{ item.Permalink }}" role="button" data-variant="ghost" data-size="sm">Read post →</a>
     </article>
-    {% endfor %}
+    {% endif %}{% endfor %}
   </div>
   {% if Pager %}
   <nav class="d-flex justify-between mt-4" aria-label="Pagination">
