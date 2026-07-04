@@ -9,7 +9,7 @@ description = "Complete reference for the omnideck CLI — commands, flags, and 
 order = 5
 +++
 
-The `omnideck` CLI installs, manages, and monitors your Omnideck container. It wraps Docker or Podman with a guided installer and simple management commands.
+The `omnideck` CLI installs, manages, and monitors your Omnideck container. It wraps Podman or Docker with a guided installer and simple management commands. Other container engines (such as Colima) are not supported at this time.
 
 ## Commands
 
