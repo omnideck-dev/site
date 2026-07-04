@@ -58,7 +58,7 @@
       <p class="muted">Install and run Omnideck in under five minutes.</p>
       <hr>
       
-      <p>Omnideck runs inside a container managed by the <code>omnideck</code> CLI. You need a container engine (Docker or Podman) and either a cloud LLM API key or a local Ollama install.</p>
+      <p>Omnideck runs inside a container managed by the <code>omnideck</code> CLI. You need a container engine (Podman or Docker) and either a cloud LLM API key or a local Ollama install.</p>
 <ol class="gs-steps">
   <li><a href="#step-1-install-the-cli">Install the CLI</a> — Homebrew (recommended) or binary download</li>
   <li><a href="#step-2-install-omnideck">Install Omnideck</a> — the setup wizard handles the rest</li>
@@ -66,7 +66,7 @@
 </ol>
 <h2>Prerequisites</h2>
 <ul>
-<li><strong>Container engine:</strong> Docker 20.10+ or Podman 4.0+</li>
+<li><strong>Container engine:</strong> Podman 4.0+ (recommended) or Docker 20.10+. Other container engines such as Colima are not supported at this time. We recommend Podman for its open-source nature and smaller resource footprint.</li>
 <li><strong>LLM provider:</strong> an API key for OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint — or <a href="https://ollama.com/">Ollama</a> for local models</li>
 <li><strong>RAM:</strong> 4 GB minimum (8 GB recommended for local models)</li>
 </ul>
