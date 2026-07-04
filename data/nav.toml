@@ -3,6 +3,10 @@ label = "Docs"
 url   = "/docs/getting-started.html"
 
 [[items]]
+label = "Blog"
+url   = "/blog/"
+
+[[items]]
 label = "About"
 url   = "/about.html"
 
