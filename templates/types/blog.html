@@ -1,6 +1,11 @@
 {% extends "templates/layouts/base.html" %}
 {% block title %}{{ Page.Title }} | Blog | {{ Site.Config.Site.Title }}{% endblock %}
 {% block body %}
+{% if Page.Meta.Fields.featured_image %}
+<div class="container blog-hero-image">
+  <img src="{{ Page.Meta.Fields.featured_image }}" alt="{{ Page.Title }}" class="blog-hero-img">
+</div>
+{% endif %}
 <article class="container py-5 blog-article">
   <header class="blog-header">
     <p class="muted"><a href="/blog/">← Blog</a></p>

@@ -8,7 +8,7 @@ template = "templates/types/blog.html"
 [extra]
 description    = "Omnideck is an open-source, local-first, multi-agent AI system you run yourself. No telemetry, no locked-in models, no gatekeepers. Here's what it is and how to get started."
 author         = "Ron Northcutt"
-featured_image = "/images/omnideck-hero.png"
+featured_image = "/omnideck-hero.png"
 +++
 
 **TL;DR:** Omnideck is an open-source, local-first, multi-agent AI workbench with a real UI, not just a terminal. You need a container engine (Docker or Podman), an LLM source (a local Ollama install or a cloud API key), and about five minutes. Install with Homebrew on Mac or Linux, or grab a binary. The setup wizard does the rest. Full steps are in the [getting started guide](https://www.omnideck.dev/docs/getting-started.html).
