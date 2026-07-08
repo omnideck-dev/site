@@ -2,9 +2,19 @@
 
 This is the public site for Omnideck. Content is written in Markdown with TOML front matter. No build tools or Node.js required.
 
-## Previewing the site
+## First-time setup
 
-From the repo root:
+Clone the repo, then activate the git hook that keeps tags in sync automatically:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+That's it. No npm install, no build step.
+
+---
+
+## Previewing the site
 
 ```bash
 ./arbor preview
@@ -42,11 +52,11 @@ Your content here...
 | `title` | yes | Displayed as the page `<h1>` |
 | `date` | yes | Format: `YYYY-MM-DD` |
 | `draft` | yes | Set `true` to hide from the live site |
-| `tags` | no | Array of strings |
+| `tags` | no | Array of strings — see [Tags](#tags) below |
 | `template` | yes | Always `"templates/types/blog.html"` for blog posts |
 | `description` | no | Used in meta tags and the blog listing |
 | `author` | no | Shown below the title |
-| `featured_image` | no | Path relative to `static/` — place images in `static/images/`. Displayed full-width above the post and used for social link previews. |
+| `featured_image` | no | Path under `static/images/` — e.g. `/images/my-photo.jpg`. Shown full-width above the title and used for social link previews. |
 
 To create a new post stub:
 
@@ -106,11 +116,38 @@ Your content here...
 
 ---
 
+## Tags
+
+Tags appear as chips on blog posts and cards. Each tag has its own listing page linked from a sidebar on the blog.
+
+**Tags are managed automatically.** Just add them to a post's front matter:
+
+```toml
+tags = ["AI", "Open Source", "New Tag"]
+```
+
+When you commit, the pre-commit hook runs `sync-tags.py`, which:
+- Updates `data/tags.toml` with current counts
+- Creates any missing `content/blog/tags/<slug>.md` pages
+- Stages those changes so they're included in your commit
+
+You never need to touch `data/tags.toml` or the tag pages directly.
+
+If you want to run it manually outside of a commit:
+
+```bash
+./sync-tags.py
+```
+
+The script is a no-op if nothing has changed — safe to run anytime.
+
+---
+
 ## Images
 
-Place images in `static/images/` and reference them with `/images/filename.jpg`. They will be copied to the build output as-is.
+Place images in `static/images/` and reference them as `/images/filename.jpg`.
 
-For blog post hero images, use the `featured_image` field in front matter. The image will appear full-width above the post title and will be included in social preview meta tags.
+For blog post hero images, set `featured_image` in the front matter. The image appears full-width above the post title and is included in Open Graph meta tags for social previews.
 
 ---
 

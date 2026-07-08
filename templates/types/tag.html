@@ -1,15 +1,15 @@
 {% extends "templates/layouts/base.html" %}
-{% block title %}Blog | {{ Site.Config.Site.Title }}{% endblock %}
+{% block title %}{{ Page.Title }} | Blog | {{ Site.Config.Site.Title }}{% endblock %}
 {% block body %}
 <div class="container py-5">
   <div class="blog-index-layout">
     <div class="blog-index-main">
-      <h1>Blog</h1>
-      <p class="muted">Updates, announcements, and deep dives from the Omnideck team.</p>
+      <p class="muted"><a href="/blog/">← Blog</a></p>
+      <h1>{{ Page.Title }}</h1>
       <hr>
-      {% if Items %}
       <div class="grid col-1 gap-3 mt-4">
-        {% for item in Items reversed %}{% if item.Permalink != "/blog/" and not "/tags/" in item.Permalink %}
+        {% for item in Site.Index reversed %}
+        {% if item.Tags and Page.Title in item.Tags %}
         <article class="card">
           <h2 class="blog-card-title"><a href="{{ item.Permalink }}" class="blog-card-link">{{ item.Title }}</a></h2>
           <p class="muted blog-card-date"><time>{{ item.Date|godate:"January 2, 2006" }}</time></p>
@@ -17,22 +17,14 @@
           {% if item.Meta.Fields.description %}<p class="blog-card-desc">{{ item.Meta.Fields.description }}</p>{% endif %}
           <a href="{{ item.Permalink }}" role="button" data-variant="ghost" data-size="sm">Read post →</a>
         </article>
-        {% endif %}{% endfor %}
+        {% endif %}
+        {% endfor %}
       </div>
-      {% if Pager %}
-      <nav class="d-flex justify-between mt-4" aria-label="Pagination">
-        {% if Pager.HasPrev %}<a href="{{ Pager.PrevURL }}" role="button" data-variant="outline" data-size="sm">← Newer</a>{% endif %}
-        {% if Pager.HasNext %}<a href="{{ Pager.NextURL }}" role="button" data-variant="outline" data-size="sm">Older →</a>{% endif %}
-      </nav>
-      {% endif %}
-      {% else %}
-      <p class="muted">No posts yet. Check back soon.</p>
-      {% endif %}
     </div>
     <aside class="blog-index-sidebar">
       <p class="docs-nav-label">Tags</p>
       {% for tag in Data.tags.tags %}
-      <a href="/blog/tags/{{ tag.slug }}.html" class="tag-sidebar-link">{{ tag.name }} <span class="tag-sidebar-count">({{ tag.count }})</span></a>
+      <a href="/blog/tags/{{ tag.slug }}.html" class="tag-sidebar-link{% if tag.name == Page.Title %} active{% endif %}">{{ tag.name }} <span class="tag-sidebar-count">({{ tag.count }})</span></a>
       {% endfor %}
     </aside>
   </div>
