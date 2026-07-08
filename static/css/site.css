@@ -936,6 +936,10 @@ html[data-theme=dark] .screenshot-container {
 }
 
 /* ── Blog index layout (listing + tag sidebar) ───────────────── */
+.blog-index-main article {
+  max-width: 100%;
+}
+
 .blog-index-layout {
   display:               grid;
   grid-template-columns: 1fr 200px;
@@ -1012,6 +1016,10 @@ html[data-theme=dark] .screenshot-container {
 }
 
 /* ── Blog post ──────────────────────────────────────────────── */
+.blog-header {
+  padding: 0;
+}
+
 .blog-hero-image {
   width:      100%;
   max-height: 480px;
@@ -1028,10 +1036,6 @@ html[data-theme=dark] .screenshot-container {
 
 .blog-article {
   max-width: 720px;
-}
-
-.blog-header {
-  margin-bottom: 2rem;
 }
 
 /* ── Section copy paragraphs ────────────────────────────────── */
