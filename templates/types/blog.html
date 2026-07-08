@@ -8,9 +8,9 @@
 {% endif %}
 <article class="container py-5 blog-article">
   <header class="blog-header">
-    <p class="muted"><a href="/blog/">← Blog</a></p>
     <h1>{{ Page.Title }}</h1>
     <p class="muted"><time>{{ Page.Date|godate:"January 2, 2006" }}</time>{% if Page.Meta.Fields.author %} · {{ Page.Meta.Fields.author }}{% endif %}</p>
+    {% if Page.Tags %}<div class="tag-chips">{% for tag in Data.tags.tags %}{% if tag.name in Page.Tags %}<a href="/blog/tags/{{ tag.slug }}.html" class="tag-chip">{{ tag.name }}</a>{% endif %}{% endfor %}</div>{% endif %}
     {% if Page.Meta.Fields.description %}<p>{{ Page.Meta.Fields.description }}</p>{% endif %}
   </header>
   <hr>

@@ -1,0 +1,33 @@
+{% extends "templates/layouts/base.html" %}
+{% block title %}{{ Page.Title }} | Blog | {{ Site.Config.Site.Title }}{% endblock %}
+{% block body %}
+<div class="container py-5">
+  <div class="blog-index-layout">
+    <div class="blog-index-main">
+      <h1>{{ Page.Title }}</h1>
+      <hr>
+      <div class="grid col-1 gap-3 mt-4">
+        {% for item in Items reversed %}
+        {% if not item.Meta.Fields.tag_index and item.Permalink != "/blog/" %}
+        {% for tag in item.Tags %}{% if tag == Page.Title %}
+        <article class="card">
+          <h2 class="blog-card-title"><a href="{{ item.Permalink }}" class="blog-card-link">{{ item.Title }}</a></h2>
+          <p class="muted blog-card-date"><time>{{ item.Date|godate:"January 2, 2006" }}</time></p>
+          {% if item.Tags %}<div class="tag-chips">{% for t in Data.tags.tags %}{% if t.name in item.Tags %}<a href="/blog/tags/{{ t.slug }}.html" class="tag-chip">{{ t.name }}</a>{% endif %}{% endfor %}</div>{% endif %}
+          {% if item.Meta.Fields.description %}<p class="blog-card-desc">{{ item.Meta.Fields.description }}</p>{% endif %}
+          <a href="{{ item.Permalink }}" role="button" data-variant="ghost" data-size="sm">Read post →</a>
+        </article>
+        {% endif %}{% endfor %}
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <aside class="blog-index-sidebar">
+      <p class="docs-nav-label">Tags</p>
+      {% for tag in Data.tags.tags %}
+      <a href="/blog/tags/{{ tag.slug }}.html" class="tag-sidebar-link{% if tag.name == Page.Title %} active{% endif %}">{{ tag.name }} <span class="tag-sidebar-count">({{ tag.count }})</span></a>
+      {% endfor %}
+    </aside>
+  </div>
+</div>
+{% endblock %}

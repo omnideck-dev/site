@@ -1,0 +1,24 @@
+[[tags]]
+name  = "AI"
+slug  = "ai"
+count = 1
+
+[[tags]]
+name  = "Automation"
+slug  = "automation"
+count = 1
+
+[[tags]]
+name  = "Multi-Agent Systems"
+slug  = "multi-agent-systems"
+count = 1
+
+[[tags]]
+name  = "Open Source"
+slug  = "open-source"
+count = 1
+
+[[tags]]
+name  = "Privacy"
+slug  = "privacy"
+count = 1
