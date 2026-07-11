@@ -14,7 +14,7 @@ It's weird to look back and realize that Omnideck (a tool I now depend on every 
 
 I was just curious. As a software developer, I've always been the type to poke at new tech until it either breaks or starts working well enough to be useful. Local LLMs were no different. I wanted to see what they could do, how they could fit into my workflow, and (let's be honest) whether they were just hype or something truly worth paying attention to. So, I built a basic harness to talk to them. It wasn't pretty, but it worked, which in software is basically the same thing as pretty.
 
-## From Toy to Tool
+## From Toy to Tool 
 
 At first, `computron_9000` was little more than a command-line script with delusions of grandeur. But the more I used it, the more I recognized I needed something better. I needed a way to keep my experiments isolated from the rest of my system, so I containerized it, mostly so a bad prompt couldn't take down my whole machine. I wanted a UI, so I leaned on my React experience and built one. It was still rough around the edges, but it was *mine* — a tool that evolved alongside my needs, and occasionally against my will.
 
