@@ -20,7 +20,7 @@ We built Omnideck to close that gap. It's a multi-agent AI system that runs on y
 
 ## What Omnideck actually is
 
-Omnideck is a team of AI agents you manage from a clean, local web UI, no terminal required. Each agent has its own skills, its own personality, and its own set of tools, so instead of one general-purpose assistant trying to do everything reasonably well, you get specialists. One writes code. One does research. One drafts your emails or pulls files from Gmail and Drive. You bring them in as you need them.
+Omnideck is a team of AI agents you manage from a clean, local web UI, no terminal required. Each agent has its own skills, its own personality, and its own set of tools, so instead of one general-purpose assistant trying to do everything reasonably well, you get specialists. One writes code. One does research. One drafts your emails or pulls files from Gmail and Drive. You bring them in as you need them. 
 
 A few things make it different from the AI chat tool you're already using:
 

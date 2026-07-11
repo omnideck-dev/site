@@ -12,9 +12,9 @@
   <meta property="og:title" content="{{ Page.Title }}">
   {% if Page.Meta.Fields.description %}<meta property="og:description" content="{{ Page.Meta.Fields.description }}">{% endif %}
   {% if Page.Meta.Fields.featured_image %}
-  <meta property="og:image" content="{{ Site.Config.Site.BaseUrl }}{{ Page.Meta.Fields.featured_image }}">
+  <meta property="og:image" content="{{ Site.Config.Site.BaseURL }}{{ Page.Meta.Fields.featured_image }}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="{{ Site.Config.Site.BaseUrl }}{{ Page.Meta.Fields.featured_image }}">
+  <meta name="twitter:image" content="{{ Site.Config.Site.BaseURL }}{{ Page.Meta.Fields.featured_image }}">
   {% endif %}
   <title>{% block title %}{{ Site.Config.Site.Title }}{% endblock %}</title>
   {{ Assets.CSS|safe }}
