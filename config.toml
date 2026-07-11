@@ -1,6 +1,6 @@
 [site]
 title       = "Omnideck"
-base_url    = "https://omnideck.dev"
+base_url    = "https://www.omnideck.dev"
 language    = "en"
 page_size   = 10
 
