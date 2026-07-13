@@ -17,11 +17,15 @@ For a detailed list, checkout the [`#project-updates` channel on Slack](https://
 
 We are currently looking at some more educational content and a focus on a backlog of smaller improvements and refeinements. There are a few UX changes coming, and we are discussing the new "custom apps" feature. Join us on Slack to tell us what you think.
 
+---
+
 ## Agent profiles are portable now
 
 ![Import/export agent profiles](/images/update/26-07-12-import-export-agents.png)
 
 You can export and import agent profiles and skills as packs (#137). This is the foundation for sharing agent configs between people or environments instead of rebuilding them by hand every time. A follow-up fix made sure that when a pack is exported with skills off, the imported agent has no skills (#150). No silent leakage of capability you didn't intend to share.
+
+---
 
 ## Inline artifact editing
 
@@ -29,11 +33,15 @@ You can export and import agent profiles and skills as packs (#137). This is the
 
 We also turned the preview source view into a proper editable, saveable code editor (#138), so you're not stuck looking at read-only output when you want to tweak something quickly. Go ahead and change it directly instead of asking the agent to do so.
 
+---
+
 ## Chat history finally has structure
 
 ![Conversation folders for organization](/images/update/26-07-12-conversation-folders.png)
 
 This was the week conversation management grew up. Archiving landed (#161), then folder organization (#164), then a round of polish on top: header cleanup, unpin-on-move behavior, archived counts, and flat search across folders (#168). We also split the ConversationsPanel into focused modules as part of that polish pass (#169), which should make this area easier to extend going forward.
+
+---
 
 ## CLI dashboard upgrade
 
@@ -41,23 +49,33 @@ This was the week conversation management grew up. Archiving landed (#161), then
 
 The CLI got a TUI dashboard upgrade, better logging, and some config changes (#11). More visibility into what's happening under the hood without leaving the terminal.
 
+---
+
 ## Chat got real multi-file support
 
 ![Multi-file support for conversations](/images/update/26-07-12-multi-file.png)
 
 Multiple file attachments in chat are in (#139), along with a unified chip UI for those attachments and a cleaner composer experience overall (#145). 
 
+---
+
 ## Steady UI cleanup
 
 A few smaller refactors kept the codebase honest: `formatAgentName` moved into `utils/agentUtils.js` (#160), a new `formatTokens` utility landed with test coverage (#162), and token size formatting now drops the decimal places (#163). Not flashy, but this is the kind of housekeeping that keeps the bigger features easy to build on.
+
+---
 
 ## Browser tools got smarter and more resilient
 
 The browsing agent picked up three real upgrades. `read_page` now returns the whole page instead of forcing you to guess at chunking, with navigation by chunk and query layered on top (#148). The DOM walk in `browse_page` stopped pruning subtrees just because they're off-viewport (#149), so the agent can see content that isn't currently on screen. We also added a `curl_cffi` fetch fallback for sites that throw up anti-bot interstitials (#132). The agent doesn't just stall out when a site gets defensive.
 
+---
+
 ## Site work picked up too
 
 The Omnideck site now supports blog hero images (#47) and tags (#48). Larry's first blog post went up (#49), along with fixes to make `og:image` work for social previews (#50, #52, #53) and an update to the origin story post (#51). If you've shared an Omnideck link on X or LinkedIn recently, this is why the preview image finally looks right.
+
+---
 
 ## Docs and distribution
 
