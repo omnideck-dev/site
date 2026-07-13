@@ -1,0 +1,9 @@
+- mobile hamburger menu
+- standardize tag format (sentence case with lowercase slug)
+- tag strategy
+- image resizing for cards
+- blog listing page - image card (on the side when large, top when small)
+- blog alternative layout - latest blog as a big one at the top, others as smaller crads in a 2 or 3 col grid
+- blog pagination
+- footer menu - privacy, about, license
+- nav - icon links for YT, Slack, Github
