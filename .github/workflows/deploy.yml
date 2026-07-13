@@ -18,6 +18,9 @@ jobs:
       - name: Make arbor executable
         run: chmod +x ./arbor
 
+      - name: Sync site data
+        run: bash scripts/sync-data.sh
+
       - name: Build site
         run: ./arbor build
 

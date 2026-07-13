@@ -1,8 +1,0 @@
-#!/bin/bash
-# Sync blog tags whenever content files are staged.
-# Automatically stages any resulting changes to tags.toml and tag pages.
-
-if git diff --cached --name-only | grep -q "^content/"; then
-    python3 "$(git rev-parse --show-toplevel)/sync-tags.py"
-    git add data/tags.toml content/blog/tags/ 2>/dev/null
-fi
