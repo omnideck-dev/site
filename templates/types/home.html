@@ -4,6 +4,20 @@
 {% block head %}<meta name="description" content="Omnideck runs on your desktop or home server. Create multiple specialized agents, switch between them mid-conversation, and watch sub-agents work in real time.">{% endblock %}
 {% block body %}
 
+<!-- ── LATEST POST RIBBON ──────────────────────────────────── -->
+{% if Data.homepage.latest_post %}
+<section class="latest-post-ribbon" aria-label="Latest update">
+  <div class="container">
+    <div class="ribbon-inner">
+      <span class="ribbon-label">Latest update</span>
+      <a href="{{ Data.homepage.latest_post.url }}" class="ribbon-title">{{ Data.homepage.latest_post.title }}</a>
+      {% if Data.homepage.latest_post.date %}<time class="ribbon-date">{{ Data.homepage.latest_post.date }}</time>{% endif %}
+      <a href="{{ Data.homepage.latest_post.url }}" class="ribbon-cta">Read →</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <!-- ── HERO ──────────────────────────────────────────────── -->
 <section class="home-section">
   <div class="container">
