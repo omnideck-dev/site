@@ -9,6 +9,11 @@ slug  = "automation"
 count = 1
 
 [[tags]]
+name  = "Changelog"
+slug  = "changelog"
+count = 1
+
+[[tags]]
 name  = "Multi-Agent Systems"
 slug  = "multi-agent-systems"
 count = 1
@@ -21,4 +26,24 @@ count = 1
 [[tags]]
 name  = "Privacy"
 slug  = "privacy"
+count = 1
+
+[[tags]]
+name  = "freedom-first"
+slug  = "freedom-first"
+count = 1
+
+[[tags]]
+name  = "local-ai"
+slug  = "local-ai"
+count = 1
+
+[[tags]]
+name  = "open-source"
+slug  = "open-source"
+count = 1
+
+[[tags]]
+name  = "origin-story"
+slug  = "origin-story"
 count = 1

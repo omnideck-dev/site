@@ -211,6 +211,71 @@ h1 em {
   fill:       currentColor;
 }
 
+/* ── Latest post ribbon ─────────────────────────────────────── */
+.latest-post-ribbon {
+  border-top:    1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background:    linear-gradient(90deg,
+                   rgba(99, 102, 241, 0.06) 0%,
+                   rgba(232, 121, 196, 0.03) 100%);
+  padding:       0.7rem 0;
+}
+
+.ribbon-inner {
+  display:     flex;
+  align-items: center;
+  gap:         0.75rem;
+  flex-wrap:   wrap;
+}
+
+.ribbon-label {
+  font-family:    var(--font-mono);
+  font-size:      0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color:          var(--c-indigo-l);
+  background:     rgba(99, 102, 241, 0.1);
+  border:         1px solid rgba(99, 102, 241, 0.25);
+  border-radius:  100px;
+  padding:        0.18rem 0.65rem;
+  flex-shrink:    0;
+}
+
+.ribbon-title {
+  font-size:       0.9rem;
+  color:           var(--color-text);
+  text-decoration: none;
+  flex:            1;
+  min-width:       0;
+  overflow:        hidden;
+  text-overflow:   ellipsis;
+  white-space:     nowrap;
+}
+
+.ribbon-title:hover { color: var(--color-primary); }
+
+.ribbon-date {
+  font-family: var(--font-mono);
+  font-size:   0.72rem;
+  color:       var(--color-muted);
+  flex-shrink: 0;
+}
+
+.ribbon-cta {
+  font-family:     var(--font-mono);
+  font-size:       0.75rem;
+  color:           var(--c-indigo-l);
+  text-decoration: none;
+  flex-shrink:     0;
+}
+
+.ribbon-cta:hover { color: var(--color-primary); }
+
+@media (max-width: 600px) {
+  .ribbon-title { white-space: normal; }
+  .ribbon-date  { display: none; }
+}
+
 /* ── Install tabs (hero) ────────────────────────────────────── */
 .tabs-container {
   background:    var(--color-surface);
