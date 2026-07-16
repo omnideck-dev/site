@@ -9,7 +9,7 @@
       <hr>
       {% if Items %}
       <div class="grid col-1 gap-3 mt-4">
-        {% for item in Items reversed %}{% if item.Permalink != "/blog/" and not item.Meta.Fields.tag_index %}
+        {% for item in Items|sortbydate %}{% if item.Permalink != "/blog/" and not item.Meta.Fields.tag_index %}
         <article class="card">
           <h2 class="blog-card-title"><a href="{{ item.Permalink }}" class="blog-card-link">{{ item.Title }}</a></h2>
           <p class="muted blog-card-date"><time>{{ item.Date|godate:"January 2, 2006" }}</time></p>
