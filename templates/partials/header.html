@@ -11,7 +11,7 @@
     </nav>
 
     <!-- Mobile nav toggle -->
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
@@ -19,7 +19,7 @@
   </div>
 
   <!-- Mobile nav drawer -->
-  <nav class="nav-mobile" aria-label="Mobile navigation">
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
     {% for item in Data.nav.items %}
       <a href="{{ item.url }}" class="nav-mobile-link">{{ item.label }}</a>
     {% endfor %}

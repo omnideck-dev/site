@@ -112,7 +112,7 @@ html[data-theme=dark] {
    shows through as grey. Bind it explicitly so light/dark hold. */
 html {
   background: var(--color-bg);
-  overflow-x: hidden;
+  overflow-x: clip; /* clip doesn't create a scroll container, preserving position:sticky */
 }
 
 body {
@@ -1002,7 +1002,7 @@ html[data-theme=dark] .screenshot-container {
   }
 
   .nav-mobile.open {
-    max-height: 400px;
+    max-height: 100dvh;
     padding: 0.5rem 1rem 1rem;
     border-bottom: 1px solid var(--color-border);
   }
@@ -1022,9 +1022,10 @@ html[data-theme=dark] .screenshot-container {
 }
 
 .footer-sep {
-  display:          inline-block;
-  margin:           0 0.35rem;
-  opacity:          0.5;
+  display:       inline-block;
+  margin:        0 0.35rem;
+  opacity:       0.5;
+  white-space:   nowrap;
 }
 
 /* ── Docs layout ────────────────────────────────────────────── */
@@ -1190,9 +1191,11 @@ html[data-theme=dark] .screenshot-container {
 }
 
 .blog-hero-image {
-  width:      100%;
-  max-height: 480px;
-  overflow:   hidden;
+  width:        100%;
+  max-height:   480px;
+  overflow:     hidden;
+  padding-left:  0;
+  padding-right: 0;
 }
 
 .blog-hero-img {
@@ -1205,6 +1208,10 @@ html[data-theme=dark] .screenshot-container {
 
 .blog-article {
   max-width: 720px;
+}
+
+.blog-article img {
+  padding: 0 var(--lat-space, 1rem);
 }
 
 /* ── Section copy paragraphs ────────────────────────────────── */
@@ -1478,7 +1485,8 @@ html[data-theme=dark] .screenshot-container {
 
 /* ── Reduced motion ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .card { transition: none; }
+  .card      { transition: none; }
+  .nav-mobile { transition: none; }
 }
 
 /* ============================================================
