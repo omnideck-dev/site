@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="description" content="Connect Omnideck to Slack for DMs, threads, and channel mentions — locked to your user only, with reactions, live status, and mid-response cancellation.">
+  <meta property="og:title" content="Slack Integration">
+  <meta property="og:description" content="Connect Omnideck to Slack for DMs, threads, and channel mentions — locked to your user only, with reactions, live status, and mid-response cancellation.">
+  
+  <title>Slack Integration | Docs | Omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  
+</head>
+<body class="lattice ">
+  <header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+
+    <!-- Desktop nav -->
+    <nav class="d-flex gap-4 items-center nav-desktop">
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+
+    <!-- Mobile nav toggle -->
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+
+  <!-- Mobile nav drawer -->
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    <div class="nav-mobile-footer">
+      <dark-mode-toggle></dark-mode-toggle>
+    </div>
+  </nav>
+</header>
+
+  <main class="full-width">
+    
+<div class="container py-5">
+  <div class="grid gap-5">
+    <div class="span-12 md-span-3">
+      <aside class="docs-sidebar sticky">
+  <span class="docs-nav-label">Documentation</span>
+  <nav>
+    
+    <a href="/docs/getting-started.html">Getting Started</a>
+    
+    <a href="/docs/configuration.html">Configuration</a>
+    
+    <a href="/docs/agents.html">Agents</a>
+    
+    <a href="/docs/tasks.html">Autonomous Tasks</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
+    
+  </nav>
+  <span class="docs-nav-label">Guides</span>
+  <nav>
+    
+    <a href="/guides/slack-integration.html">Slack Integration</a>
+    
+  </nav>
+</aside>
+
+    </div>
+    <article class="span-12 md-span-9">
+      <h1>Slack Integration</h1>
+      
+      <p class="muted">Connect Omnideck to Slack for DMs, threads, and channel mentions — locked to your user only, with reactions, live status, and mid-response cancellation.</p>
+      <hr>
+      
+      <h1>Connect Slack to Omnideck</h1>
+<p>This guide gets Omnideck talking to you through Slack: DMs, threads, and any
+public or private channel you invite the bot into. It only responds to you,
+not to anyone else in the workspace, and you can stop it mid-response with
+&quot;stop,&quot; &quot;cancel,&quot; or just deleting your message.</p>
+<p>You'll do three things, in this order:</p>
+<ol>
+<li>Set up the Slack app</li>
+<li>Collect the handful of values the bridge needs</li>
+<li>Paste one prompt into Omnideck, which fetches the bridge script and starts it for you</li>
+</ol>
+<p>No terminal commands. No local setup on your end.</p>
+<hr>
+<h2>Step 1: Set up the Slack app</h2>
+<h3>Create the Slack app</h3>
+<ol>
+<li>Go to <a href="https://api.slack.com/apps">api.slack.com/apps</a> and click <strong>Create New App</strong>.</li>
+<li>Choose <strong>From an app manifest</strong>.</li>
+<li>Select the workspace you want the bot in.</li>
+<li>Paste the manifest <a href="https://gist.github.com/rlnorthcutt/34a0d61db5c7dce12bc0ad5da80725f9">from this Gist</a> *(switch the editor to the <strong>JSON</strong> tab if it defaults to YAML).</li>
+<li>Click <strong>Next</strong>, then <strong>Create</strong>.</li>
+</ol>
+<p>Feel free to rename &quot;Omni&quot; to whatever you want your bot called first — the manifest is just a starting point.</p>
+<blockquote>
+<p><strong>Why these specific scopes and events, and nothing more:</strong> this manifest
+only grants what the bridge script actually uses (read/post messages,
+read/write files, add reactions).  Fewer
+permissions means less exposure if a token ever leaks.</p>
+</blockquote>
+<hr>
+<h3>Install the app to your workspace</h3>
+<p>Creating the app from a manifest doesn't install it yet — you still need to do this once.</p>
+<ol>
+<li>In the left sidebar, go to <strong>OAuth &amp; Permissions</strong>.</li>
+<li>Click <strong>Install to Workspace</strong>.</li>
+<li>Review the permissions and click <strong>Allow</strong>.</li>
+</ol>
+<hr>
+<h2>Step 2: Get the data for the connection</h2>
+<h3>Collect your tokens</h3>
+<p>You need two tokens, from two different pages.</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Where to find it</th>
+<th>Starts with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bot Token</td>
+<td><strong>OAuth &amp; Permissions</strong> → Bot User OAuth Token</td>
+<td><code>xoxb-</code></td>
+</tr>
+<tr>
+<td>App Token</td>
+<td><strong>Basic Information</strong> → App-Level Tokens → <strong>Generate Token and Scopes</strong> → add the <code>connections:write</code> scope → <strong>Generate</strong></td>
+<td><code>xapp-</code></td>
+</tr>
+</tbody>
+</table>
+<p>Copy both somewhere safe for a moment — you'll hand them to Omnideck in Step 6.</p>
+<hr>
+<h3>Get your Slack user ID</h3>
+<p>The bridge is locked down to respond to exactly one person: you. It needs
+your Slack user ID to do that.</p>
+<ol>
+<li>Click your profile picture in Slack (top right).</li>
+<li>Click <strong>Profile</strong>.</li>
+<li>Click the <strong>More</strong> (•••) button on your profile card.</li>
+<li>Click <strong>Copy member ID</strong>.</li>
+</ol>
+<p>You'll get something like <code>U0123ABC456</code>. That's it.</p>
+<p>(Menu wording can shift slightly between Slack versions — if you don't see
+&quot;Copy member ID&quot; in that exact spot, it's usually one click away in the same
+profile card.)</p>
+<hr>
+<h3>Invite the bot to any channels you want it in</h3>
+<p>The bot only sees messages in channels it's actually a member of — this is
+true for public channels too, not just private ones. For each channel you
+want it active in:</p>
+<pre><code>/invite @Omni
+</code></pre>
+<p>(swap in whatever name you gave the bot in Step 1). DMs don't need this —
+you can just message the bot directly once it's running.</p>
+<hr>
+<h2>Step 3: Set up the bridge in Omnideck</h2>
+<p>Now hand everything off to Omnideck. Paste the prompt below into Omnideck,
+filling in your own values first:</p>
+<pre><code>- `&lt;SLACK_BOT_TOKEN&gt;` — your `xoxb-...` token from Step 3
+- `&lt;SLACK_APP_TOKEN&gt;` — your `xapp-...` token from Step 3
+- `&lt;YOUR_SLACK_USER_ID&gt;` — your `U...` ID from Step 4
+
+The script itself is already linked below:
+`https://gist.githubusercontent.com/rlnorthcutt/33751b3b79af10b872d65b44038e0a61/raw/slack_bridge.py`
+
+
+Set up my Slack bridge. Do this:
+
+1. Download the Python script from this URL and save it as slack_bridge.py:
+   https://gist.github.com/rlnorthcutt/33751b3b79af10b872d65b44038e0a61/raw/f3932f378eb0ecdacbc1dcea2bd6e66f79ae3f45/slack_bridge.py
+
+2. Install its dependencies (slack-bolt, slack-sdk, aiohttp) if they aren't
+   already available.
+
+3. Set these environment variables for the process:
+   SLACK_BOT_TOKEN=&lt;SLACK_BOT_TOKEN&gt;
+   SLACK_APP_TOKEN=&lt;SLACK_APP_TOKEN&gt;
+   ALLOWED_USER_IDS=&lt;YOUR_SLACK_USER_ID&gt;
+
+   Leave OMNIDECK_URL and OMNIDECK_PROFILE_ID unset unless I tell you
+   otherwise — they default to this Omnideck instance and the &quot;omnideck&quot;
+   profile.
+
+4. Run the script so it keeps running persistently in the background (not
+   just for this session) and will restart automatically if it crashes or
+   this machine reboots.
+
+5. Confirm it started successfully and tell me how to check its logs later
+   if I need to.
+
+If anything above is missing or unclear, ask me before proceeding — don't
+guess at token values or skip a step.
+</code></pre>
+<p>Omnideck will ask you for anything you left blank. Once it confirms the
+bridge is running, you're done — no separate terminal session required.</p>
+<blockquote>
+<p><strong>Keep those tokens private.</strong> Treat <code>xoxb-</code> and <code>xapp-</code> values like
+passwords — anyone with the bot token can act as your bot in Slack.</p>
+</blockquote>
+<hr>
+<h3>Verify it's working</h3>
+<p>Send the bot a DM, or <code>@Ozri</code> mention it in a channel you invited it to.
+You should see, in order:</p>
+<ol>
+<li>A 🤔 reaction appear on your message (it saw you)</li>
+<li>A reply posted in-thread</li>
+<li>A ✅ reaction replacing the 🤔 once it's done</li>
+</ol>
+<p>Try sending &quot;stop&quot; partway through a long response — it should cancel and
+show 🛑 instead of ✅. Deleting your message mid-response does the same
+thing.</p>
+<p>If none of that happens, jump to Troubleshooting below.</p>
+<hr>
+<h2>Environment variable reference</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required?</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SLACK_BOT_TOKEN</code></td>
+<td>Yes</td>
+<td>Bot token from Step 3 (<code>xoxb-...</code>)</td>
+</tr>
+<tr>
+<td><code>SLACK_APP_TOKEN</code></td>
+<td>Yes</td>
+<td>App-level token from Step 3 (<code>xapp-...</code>)</td>
+</tr>
+<tr>
+<td><code>ALLOWED_USER_IDS</code></td>
+<td>Strongly recommended</td>
+<td>Comma-separated Slack user IDs allowed to use the bot. Leave unset and <em>anyone</em> in the workspace who can DM or mention the bot gets a response.</td>
+</tr>
+<tr>
+<td><code>OMNIDECK_URL</code></td>
+<td>No</td>
+<td>Defaults to <code>http://localhost:8080</code>. Only set this if Omnideck runs somewhere else.</td>
+</tr>
+<tr>
+<td><code>OMNIDECK_PROFILE_ID</code></td>
+<td>No</td>
+<td>Defaults to <code>omnideck</code>. Set this if you want the bridge talking to a different agent profile.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bot never replies to anything</td>
+<td>Check the manifest's <code>event_subscriptions.bot_events</code> includes <code>message.channels</code>, <code>message.groups</code>, and <code>message.im</code>. Socket Mode being &quot;on&quot; isn't enough by itself — the event subscriptions have to be declared too.</td>
+</tr>
+<tr>
+<td>Bot works in DMs but not in a channel</td>
+<td>You need to <code>/invite</code> the bot to that channel (Step 5) — this applies to public channels too, not just private ones.</td>
+</tr>
+<tr>
+<td>Private channel messages ignored</td>
+<td>Confirm <code>groups:history</code> and <code>groups:read</code> are in the app's scopes, and that the bot has been invited to that channel.</td>
+</tr>
+<tr>
+<td>File attachments don't come through</td>
+<td>Confirm <code>files:read</code> and <code>files:write</code> are in the app's scopes.</td>
+</tr>
+<tr>
+<td>Bot replies to people who aren't you</td>
+<td><code>ALLOWED_USER_IDS</code> isn't set, or has the wrong ID. Double-check Step 4.</td>
+</tr>
+<tr>
+<td>Reactions (🤔/✅/🛑) don't appear but replies still work</td>
+<td>Confirm <code>reactions:write</code> is in the app's scopes, then reinstall the app (Step 2) — Slack requires reinstalling after scopes change on an already-installed app.</td>
+</tr>
+<tr>
+<td>Bot stops responding after several hours with no crash message</td>
+<td>Check the manifest has <code>token_rotation_enabled: false</code>. Rotating tokens expire every few hours and need a refresh flow this bridge doesn't implement — with rotation off, the bot token doesn't expire on its own.</td>
+</tr>
+<tr>
+<td>Bot goes offline after a machine restart</td>
+<td>The bridge has no built-in supervisor — ask Omnideck (Step 6, item 4) to confirm it set it up to auto-restart, or check what process manager it used.</td>
+</tr>
+<tr>
+<td>&quot;Stop&quot;/deleting a message shows 🛑 but Omnideck seems to keep working</td>
+<td>The bridge tells Omnideck to stop server-side via <code>/api/chat/stop</code>, in addition to closing its own connection. If Omnideck doesn't have that endpoint (or it errors), you'll see a logged warning but the cancel still closes the Slack-side connection either way — worth confirming that endpoint exists on your Omnideck version.</td>
+</tr>
+<tr>
+<td>Bot missed messages sent while it was restarting</td>
+<td>Expected — this bridge is Socket Mode only, with no polling fallback, so anything sent during a genuine outage isn't retried. Short reconnects (a few seconds) are handled automatically and don't lose messages.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>What this bot can and can't do</h2>
+<p><strong>Can:</strong></p>
+<ul>
+<li>Reply to DMs and thread replies</li>
+<li>Respond to <code>@mentions</code> in any channel it's been invited to (public or private)</li>
+<li>Read and forward file attachments you send it</li>
+<li>Post back files Omnideck generates</li>
+<li>Show a live &quot;thinking&quot; status and a done/cancelled reaction on your message</li>
+<li>Be stopped mid-response with &quot;stop,&quot; &quot;cancel,&quot; or by deleting your message</li>
+</ul>
+<p><strong>Can't (by design, to keep this simple and locked-down):</strong></p>
+<ul>
+<li>Respond to anyone but you (<code>ALLOWED_USER_IDS</code>)</li>
+<li>React to other people's reactions, run polls, or post to Slack Lists/Canvas — none of that is wired up in this version</li>
+<li>Recover messages sent during an actual outage (no polling fallback)</li>
+</ul>
+
+    </article>
+  </div>
+</div>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      Omnideck is open source —
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="/docs/">Documentation</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      Apache 2 License
+      <span class="footer-sep" aria-hidden="true">·</span>
+      Your data stays on your machine.
+    </p>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>
