@@ -1033,6 +1033,10 @@ html[data-theme=dark] .screenshot-container {
   top: 8rem;
 }
 
+.docs-sidebar nav {
+  padding-left: 0.5rem;
+}
+
 .docs-sidebar nav a {
   display:         block;
   padding:         0.35rem 0.5rem;

@@ -25,3 +25,7 @@ url   = "/docs/local-models.html"
 [[items]]
 title = "CLI Reference"
 url   = "/docs/cli-reference.html"
+
+[[guides]]
+title = "Slack Integration"
+url   = "/guides/slack-integration.html"
