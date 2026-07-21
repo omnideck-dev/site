@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="description" content="20 PRs merged across two repos this week. Custom Apps gets a real runtime, browser tools get more careful about what they click and see, and CI finally covers them.">
+  <meta property="og:title" content="Omnideck weekly update: July 13-19, 2026">
+  <meta property="og:description" content="20 PRs merged across two repos this week. Custom Apps gets a real runtime, browser tools get more careful about what they click and see, and CI finally covers them.">
+  
+  <meta property="og:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  
+  <title>Omnideck weekly update: July 13-19, 2026 | Blog | Omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  
+</head>
+<body class="lattice ">
+  <header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+
+    <!-- Desktop nav -->
+    <nav class="d-flex gap-4 items-center nav-desktop">
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+
+    <!-- Mobile nav toggle -->
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+
+  <!-- Mobile nav drawer -->
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    <div class="nav-mobile-footer">
+      <dark-mode-toggle></dark-mode-toggle>
+    </div>
+  </nav>
+</header>
+
+  <main class="full-width">
+    
+
+<div class="container blog-hero-image">
+  <img src="/images/weekly-update.png" alt="Omnideck weekly update: July 13-19, 2026" class="blog-hero-img">
+</div>
+
+<article class="container py-5 blog-article">
+  <header class="blog-header">
+    <h1>Omnideck weekly update: July 13-19, 2026</h1>
+    <p class="muted"><time>July 20, 2026</time> · Ron Northcutt</p>
+    <div class="tag-chips"><a href="/blog/tags/changelog.html" class="tag-chip">Changelog</a></div>
+    <p>20 PRs merged across two repos this week. Custom Apps gets a real runtime, browser tools get more careful about what they click and see, and CI finally covers them.</p>
+  </header>
+  <hr>
+  <p>Twenty PRs this week, all in omnideck and site. Fewer than last week's 25, but the biggest one had been sitting on the list for a while: Custom Apps got its first real runtime!</p>
+<p>Browser tools took the rest of the attention, mostly in the form of fixing edge cases that only show up once real pages start throwing a weird DOM at the agent. The site kept its own pace too, with a guides section, a mobile fix, and two more blog posts live.</p>
+<hr>
+<h2>Custom Apps gets a runtime</h2>
+<p><img src="/images/update/26-07-20-custom-apps.jpg" alt="Custom apps in Omnideck"></p>
+<p>The Custom Apps feature we mentioned last week now has an actual runtime and workspace behind it (#122). This is the piece that turns &quot;custom apps&quot; from an idea on the roadmap into something an agent can run.</p>
+<p>The core idea is that you can instruct Omnideck on how to build, manage, and update your custom software, and run it from your instance! This makes the AI Workbench even more useful.</p>
+<h3>Example 1 : IDE App</h3>
+<p><img src="/images/update/26-07-20-ide-app.jpg" alt="IDE App"></p>
+<p>You can already write code and edit files in Omnideck, but its not the best experience. As a test, Larry spent an hour having Omnideck build an IDE app from scratch. This is surprising usefula, and gives us a great path forward to making Omnideck even more useful. Of course, you could also just ask Omnideck to install something like <a href="https://github.com/code-oss-dev/code">Code OSS</a> or another tool.</p>
+<h3>Example 2 : Omnideck Projects</h3>
+<p><img src="/images/update/26-07-20-project-app.jpg" alt="Project App"></p>
+<p>This is another experiment. We've talked for a while about creating a workspace/project feature in Omnideck, but we are always trying to balance the utility we provide with flexibility. Opinions are helpful, but they can also constrain.</p>
+<p>So, Larry created a pretty nifty Projects tool that lets you organize your conversations, artifacts, files, etc. into a project that you can manage. It also has a feature for managing and cleaning up your files. This is more of an experimental POC, but it does have value!</p>
+<h3>Alpha testers</h3>
+<p><img src="/images/update/26-07-20-app-enable.jpg" alt="Enable custom apps"></p>
+<p>This is currently in alpha, so it is not enabled by default. You can turn on the custom apps feature if you want to try it out, but there may be breaking changes in the future. That shouldn't be a problem because Omnideck can just adjust your custom apps to adapt, but this is more for advanced users.</p>
+<p>Just go to <code>Settings -&gt; System -&gt; Enable Custom Apps</code> to turn it on. You can also see Larry's <a href="https://github.com/lefoulkrod/omnideck-custom-apps">sample repo of apps</a> above for an example AND a skill you can import to help create your own apps.</p>
+<hr>
+<h2>Browser tools get more careful</h2>
+<p>Last week's browsing agent work was about resilience. This week was about correctness.</p>
+<p><code>browse_page</code> now returns a fallback instead of failing outright when a snapshot can't be taken (#184), so a bad page no longer stalls the whole run. Controls sitting inside ARIA wrappers are exposed properly now (#181), which matters for any site that leans on accessibility markup for its interactive elements. When a click opens a new tab, the agent lands on that tab instead of continuing to act on the old one (#175). And the logic that decides what counts as an &quot;interactive descendant&quot; got fixed (#170), which cleans up a class of false positives where the agent thought something was clickable when it wasn't.</p>
+<p>None of these are visible features. They're the difference between an agent that <em>mostly</em> works and one that reliably works.</p>
+<hr>
+<h2>Testing catches up to the browser tools</h2>
+<p>With that much surface area in the browsing agent, it needed real test coverage, and it got some. Browser tests now run in CI (#179) instead of relying on manual checks, and they run in parallel (#182) so the suite doesn't slow everything else down. A stale shadow ref collision bug also got fixed in agent infrastructure (#183), the kind of thing that's much easier to catch with tests running on every PR than by hand.</p>
+<hr>
+<h2>One more fix, locked in with tests</h2>
+<p>The modal-in-collapsed-wrapper bug from a couple weeks back got pinned down for good, with regression tests added alongside the fix (#155). Once something like this has a test guarding it, it stays fixed.</p>
+<hr>
+<h2>Site picked up a guides section</h2>
+<p>The Omnideck site added a guides section to the docs, including the first walkthrough for a <a href="https://www.omnideck.dev/guides/slack-integration.html">Slack integration</a> (#64). The site is also properly mobile responsive now (#63), the blog listing sorts by date correctly (#61), and there's an updated <a href="https://github.com/rlnorthcutt/arbor">arbor (static site generator)</a> binary available (#62).</p>
+<p>Two more posts went up: one on <a href="https://www.omnideck.dev/blog/using-openrouter-free-models.html">OpenRouter's free models</a> (#60) and Omnideck's (the AI) first blog post on <a href="https://www.omnideck.dev/blog/self-testing-ai-browser-tools.html">how it uses its browser tools to find bugs in its browser tools</a> (#59). Small housekeeping rounded out the rest: a todo file for tracking future work (#56), a community link in the nav (#55), a changelog page (#54), and screenshots added to last week's update (#57, #58).</p>
+<hr>
+<p>Join us on <a href="https://omnideckcommunity.slack.com/archives/C0BGWDQN2TY/p1783946625666379">Slack</a> if you want to keep up to date and help guide the future of the project.</p>
+
+</article>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      Omnideck is open source —
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="/docs/">Documentation</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      Apache 2 License
+      <span class="footer-sep" aria-hidden="true">·</span>
+      Your data stays on your machine.
+    </p>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>
