@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="description" content="15 PRs merged across four repos this week. The desktop app has an alpha, container setup got a lot more forgiving, and CLI releases are locked down.">
+  <meta property="og:title" content="Omnideck weekly update: July 20-26, 2026">
+  <meta property="og:description" content="15 PRs merged across four repos this week. The desktop app has an alpha, container setup got a lot more forgiving, and CLI releases are locked down.">
+  
+  <meta property="og:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  
+  <title>Omnideck weekly update: July 20-26, 2026 | Blog | Omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  
+</head>
+<body class="lattice ">
+  <header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+
+    <!-- Desktop nav -->
+    <nav class="d-flex gap-4 items-center nav-desktop">
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+
+    <!-- Mobile nav toggle -->
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+
+  <!-- Mobile nav drawer -->
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    <div class="nav-mobile-footer">
+      <dark-mode-toggle></dark-mode-toggle>
+    </div>
+  </nav>
+</header>
+
+  <main class="full-width">
+    
+
+<div class="container blog-hero-image">
+  <img src="/images/weekly-update.png" alt="Omnideck weekly update: July 20-26, 2026" class="blog-hero-img">
+</div>
+
+<article class="container py-5 blog-article">
+  <header class="blog-header">
+    <h1>Omnideck weekly update: July 20-26, 2026</h1>
+    <p class="muted"><time>July 27, 2026</time> · Ron Northcutt</p>
+    <div class="tag-chips"><a href="/blog/tags/changelog.html" class="tag-chip">Changelog</a></div>
+    <p>15 PRs merged across four repos this week. The desktop app has an alpha, container setup got a lot more forgiving, and CLI releases are locked down.</p>
+  </header>
+  <hr>
+  <p>15 PRs this week across omnideck, cli, site, and homebrew-tap. Fewer PRs than the last two weeks, but the work behind them was heavier: most of it went into making Omnideck easier to actually get running, on Windows, macOS, and now as a standalone desktop app.</p>
+<hr>
+<h2>The desktop app has an alpha</h2>
+<p><img src="/images/update/26-07-26-desktop-alpha.png" alt="Desktop Alpha App"></p>
+<p>We shipped an early alpha of the Omnideck desktop app (#224). It installs its own dependencies and runs as a self-contained app instead of something you set up by hand. Right now it's limited to a single deck install. That's on purpose. This alpha exists to work out the install and recovery process before we open it up to multiple decks, not to be feature-complete on day one.</p>
+<p>Alongside it, the Electron runtime image is now pinned by digest instead of a floating tag (#223), so the desktop app builds on something that can't shift under you between releases.</p>
+<p>Please note that this is VERY experimental, probably will break, and we will almost certainly refactor/rebuild it. BUT - its very cool and we are looking for good feedback.</p>
+<hr>
+<h3>Silliness</h3>
+<p>And sorry folks - the little &quot;Agent Dash&quot; game in the setup screen is not sticking around. Sometimes Larry likes to do silly things... like use the powerful new Apps feature to make a tamagotchi environment. If you'd like to try that out, ask him on <a href="https://omnideckcommunity.slack.com/archives/C0BGWDQN2TY/p1783946625666379">Slack</a>.</p>
+<hr>
+<h2>Container setup is a lot more forgiving</h2>
+<p>If you've tried to get Omnideck running in a container and hit a wall, this week's work was aimed at you. Windows runtime setup no longer gets stuck retrying against a stale selection (#20). The same class of retry bug got fixed on macOS (#23). Stale Podman credential settings are handled properly now instead of failing silently (#25), and a failed container engine gives you a real error to act on instead of a dead end (#24). The setup guidance itself is clearer too (#21).</p>
+<p>None of this is new features. It's the difference between Omnideck working the first time you try it and giving up on the second retry.</p>
+<hr>
+<h2>Removing an instance is even cleaner now</h2>
+<p>Earlier, when removing a deck instance, there were cases where some things might need a manual removal. Instance management got a proper safe-removal workflow (#22), so tearing down a deck instance no longer risks leaving orphaned state behind.</p>
+<hr>
+<h2>Release and repo security got hardened</h2>
+<p>The CLI release process and repository went through a security hardening pass (#17), and Omnideck v0.1.0-alpha.3 shipped with bounded logs (#221). Container log growth is capped now too (#26). A long-running instance won't quietly fill a disk anymore.</p>
+<hr>
+<h2>Smaller fixes</h2>
+<p>Chat scrolling has more reliable controls, and dev sync was hardened along with it (#222). On the distribution side, the Homebrew formula moved up to Omnideck 0.9.0 (#5), and formula verification runs faster (#6). The site also picked up last week's update post (#65).</p>
+<hr>
+<p>Come tell us how the desktop alpha installs on your machine in <a href="https://omnideckcommunity.slack.com/archives/C0BGWDQN2TY/p1783946625666379">Slack</a>. That feedback is exactly what this alpha is for.</p>
+
+</article>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      Omnideck is open source —
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="/docs/">Documentation</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      Apache 2 License
+      <span class="footer-sep" aria-hidden="true">·</span>
+      Your data stays on your machine.
+    </p>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>
