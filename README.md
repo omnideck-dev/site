@@ -156,3 +156,7 @@ For blog post hero images, set `featured_image` in the front matter. The image a
 ## Drafts
 
 Set `draft = true` in any file's front matter to exclude it from the live site. Drafts are visible during local preview by default.
+
+## Roadmap
+
+See the public [Omnideck Roadmap](https://github.com/orgs/omnideck-dev/projects/1) board for what's planned, in progress, and recently shipped.
