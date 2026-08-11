@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="description" content="33 PRs merged across four repos this week. The desktop app left Electron behind for Tauri, CLI and runtime setup converged on a single Podman path, and release engineering got real teeth.">
+  <meta property="og:title" content="Omnideck weekly update: August 2-9, 2026">
+  <meta property="og:description" content="33 PRs merged across four repos this week. The desktop app left Electron behind for Tauri, CLI and runtime setup converged on a single Podman path, and release engineering got real teeth.">
+  
+  <meta property="og:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  
+  <title>Omnideck weekly update: August 2-9, 2026 | Blog | Omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  
+</head>
+<body class="lattice ">
+  <header class="full-width sticky">
+  <div class="container d-flex items-center justify-between py-2">
+    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+
+    <!-- Desktop nav -->
+    <nav class="d-flex gap-4 items-center nav-desktop">
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+      <dark-mode-toggle></dark-mode-toggle>
+    </nav>
+
+    <!-- Mobile nav toggle -->
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+
+  <!-- Mobile nav drawer -->
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    <div class="nav-mobile-footer">
+      <dark-mode-toggle></dark-mode-toggle>
+    </div>
+  </nav>
+</header>
+
+  <main class="full-width">
+    
+
+<div class="container blog-hero-image">
+  <img src="/images/weekly-update.png" alt="Omnideck weekly update: August 2-9, 2026" class="blog-hero-img">
+</div>
+
+<article class="container py-5 blog-article">
+  <header class="blog-header">
+    <h1>Omnideck weekly update: August 2-9, 2026</h1>
+    <p class="muted"><time>August 10, 2026</time> · Ron Northcutt</p>
+    <div class="tag-chips"><a href="/blog/tags/changelog.html" class="tag-chip">Changelog</a></div>
+    <p>33 PRs merged across four repos this week. The desktop app left Electron behind for Tauri, CLI and runtime setup converged on a single Podman path, and release engineering got real teeth.</p>
+  </header>
+  <hr>
+  <p>33 PRs this week, the biggest week yet, spread across omnideck, desktop, cli, and roadmap. Most of it traces back to one decision: moving the desktop app off Electron and onto Tauri. That single change touched setup, CI, release process, and testing.</p>
+<hr>
+<h2>The desktop app leaves Electron for Tauri (beta)</h2>
+<p><img src="/images/update/26-08-10-desktop-beta.png" alt="Desktop beta App"></p>
+<p>The desktop host is now built on Tauri instead of Electron. It's a rewrite of the foundation the whole desktop app sits on. The weeks since have gone into making that foundation solid: a refactor of the Tauri host ahead of alpha.10, desktop setup improvements for alpha.9, and an alpha.6 release before that.</p>
+<p>The desktop app now uses the shared CLI for its own runtime management instead of duplicating that logic. That means you can use the desktop app, the CLI, or both... it doesn't matter. Your decks are visible and reporting accurately regardless of how you choose to manage them!s</p>
+<p>Desktop releases are also decoupled from container releases, so one doesn't have to wait on the other. The product name is lowercase &quot;omnideck&quot; everywhere now too.</p>
+<p>On the desktop repo itself, initial setup work landed, along with GitHub Actions CI using tag-triggered, review-gated releases. CI was split into a reusable test workflow, and the README got restructured. A version bump to 0.5.0-alpha.2 came with a tighter release version check, plus a release-artifact contract check and a ported hardware smoke script.</p>
+<p>A few things broke along the way, which is normal for a migration this size. A blank screen issue on AppImage builds needed two separate fixes before it held.</p>
+<hr>
+<h2>CLI and runtime setup converge on one path</h2>
+<p>Setup used to have more than one way to get a runtime working. Now it doesn't. Setup is unified on the shared Podman runtime, and the plumbing behind Podman-only setup got simplified. Native runtime setup reporting is clearer, and there's now disposable VM end-to-end coverage for the CLI. Omnideck now stays up to date and visible from the command line tool itself, and CLI 0.1.0 shipped.</p>
+<p>One more fix worth calling out: container removal that gets interrupted, and the name conflicts that used to follow, now recover cleanly.</p>
+<hr>
+<h2>Release engineering got real teeth</h2>
+<p>Testing and release process stopped being an afterthought. Automated desktop VM end-to-end coverage landed, alongside a proper desktop testing and release structure. Setup UX principles moved next to the tests they govern.</p>
+<p>On the CLI side, release contract gates went in, and the testing policy is now authoritative rather than advisory. The first-run test lines up with automatic setup, and cross-platform stable upgrade tests are documented. Evidence-backed direct stable promotion is now allowed, and the local release VM lab is documented for anyone who needs to reproduce a release environment.</p>
+<hr>
+<h2>UI and docs</h2>
+<p>System settings are grouped now. Model pickers stay visible instead of getting buried in a menu. On the documentation side, a capabilities doc and an RFC/meta writeup for the pack system upgrade are in, and the roadmap repo picked up a new script.</p>
+<hr>
+<p>If you're running the desktop alpha, the Tauri move is the thing to watch for. Report anything that feels different in <a href="https://omnideckcommunity.slack.com/archives/C0BGWDQN2TY/p1783946625666379">Slack</a>.</p>
+
+</article>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container text-center">
+    <p class="footer-text">
+      Omnideck is open source —
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="/docs/">Documentation</a>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      Apache 2 License
+      <span class="footer-sep" aria-hidden="true">·</span>
+      Your data stays on your machine.
+    </p>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>
