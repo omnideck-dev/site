@@ -3,26 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="description" content="Omnideck is an open-source AI agent workbench you run on your own machine.">
-  <meta property="og:title" content="About Omnideck">
-  <meta property="og:description" content="Omnideck is an open-source AI agent workbench you run on your own machine.">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="omnideck is an open-source AI agent workbench you run on your own machine.">
+  <meta property="og:title" content="About omnideck">
+  <meta property="og:description" content="omnideck is an open-source AI agent workbench you run on your own machine.">
   
-  <title>About Omnideck | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  <title>About omnideck | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
   
 </head>
 <body class="lattice ">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -30,23 +49,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -54,37 +80,37 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
 <article class="container py-5">
-  <h1>About Omnideck</h1>
-  <p>Omnideck is an open-source AI agent workbench you run on your own machine — not someone else's cloud. You own your agents, your models, your machine.</p>
-<h2>Why Omnideck?</h2>
-<p>Cloud AI agents are convenient until they aren't. Your conversations, files, and credentials flow through servers you don't control. You're locked to one model per tool. Autonomous background tasks are expensive add-ons or simply missing.</p>
-<p>Omnideck is freedom-first: everything runs in a container on your hardware, you bring any LLM you want, and all your data stays on your machine.</p>
+  <h1>About omnideck</h1>
+  <p>omnideck is an open-source AI agent workbench you run on your own machine — not someone else's cloud. You own your agents, your models, your machine.</p>
+<h2>Why omnideck?</h2>
+<p>Cloud AI agents are convenient until they aren't. Your conversations, files, and credentials flow through servers you don't control. You're locked to one model per tool. Recurring agent work is often an expensive add-on or simply missing.</p>
+<p>omnideck is freedom-first: everything runs in a container on your hardware, you bring any LLM you want, and all your data stays on your machine.</p>
 <h2>What it does</h2>
 <ul>
 <li><strong>Multi-agent workbench</strong> — build a team of specialized agents, each with its own model, prompt, and tool access</li>
-<li><strong>Local-first</strong> — everything runs in a container on your machine; no connections to Omnideck servers</li>
+<li><strong>Local-first</strong> — everything runs in a container on your machine; no connections to omnideck servers</li>
 <li><strong>Model-agnostic</strong> — connect any LLM: OpenAI, Anthropic, Ollama, OpenRouter, or any OpenAI-compatible endpoint</li>
-<li><strong>Autonomous tasks</strong> — schedule goals that run in the background and notify you on completion</li>
+<li><strong>Routines</strong> — create repeatable agent work that runs now or on a schedule</li>
 <li><strong>Integrated tools</strong> — browser automation, code execution, filesystem access, persistent memory, and email integrations (Gmail and iCloud) out of the box</li>
 </ul>
 <h2>Open source</h2>
-<p>Omnideck is Apache 2 licensed and developed in the open. Contributions, bug reports, and feedback are welcome on <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>.</p>
+<p>omnideck is Apache 2 licensed and developed in the open. Contributions, bug reports, and feedback are welcome on <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>.</p>
 <h2>Get in touch</h2>
 <ul>
 <li><a href="https://github.com/omnideck-dev/omnideck">GitHub</a> — issues, pull requests, discussions</li>
+<li><a href="/community.html">Community</a> — Slack, workflow ideas, and beta feedback</li>
 <li><a href="/blog/">Blog</a> — updates and announcements</li>
 </ul>
 
@@ -92,21 +118,26 @@
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

@@ -3,26 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
   <meta name="description" content="Connect Gmail, Google Workspace, iCloud, and HTTP APIs so agents can read and act on them.">
   <meta property="og:title" content="Integrations">
   <meta property="og:description" content="Connect Gmail, Google Workspace, iCloud, and HTTP APIs so agents can read and act on them.">
   
-  <title>Integrations | Docs | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  <title>Integrations | Docs | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
   
 </head>
 <body class="lattice ">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -30,23 +49,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -54,32 +80,31 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
 <div class="container py-5">
   <div class="grid gap-5">
     <div class="span-12 md-span-3">
-      <aside class="docs-sidebar sticky">
+      <aside class="docs-sidebar">
   <span class="docs-nav-label">Documentation</span>
   <nav>
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/configuration.html">Configuration</a>
+    <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
     
     <a href="/docs/agents.html">Agents</a>
     
-    <a href="/docs/tasks.html">Autonomous Tasks</a>
+    <a href="/docs/routines.html">Routines</a>
     
     <a href="/docs/integrations.html">Integrations</a>
     
@@ -96,6 +121,36 @@
   </nav>
 </aside>
 
+<details class="docs-mobile-nav">
+  <summary>Documentation</summary>
+  <div class="docs-mobile-nav-body">
+    <span class="docs-nav-label">Documentation</span>
+    <nav>
+      
+      <a href="/docs/getting-started.html">Getting Started</a>
+      
+      <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
+      
+      <a href="/docs/agents.html">Agents</a>
+      
+      <a href="/docs/routines.html">Routines</a>
+      
+      <a href="/docs/integrations.html">Integrations</a>
+      
+      <a href="/docs/local-models.html">Local Models</a>
+      
+      <a href="/docs/cli-reference.html">CLI Reference</a>
+      
+    </nav>
+    <span class="docs-nav-label">Guides</span>
+    <nav>
+      
+      <a href="/guides/slack-integration.html">Slack Integration</a>
+      
+    </nav>
+  </div>
+</details>
+
     </div>
     <article class="span-12 md-span-9">
       <h1>Integrations</h1>
@@ -103,7 +158,7 @@
       <p class="muted">Connect Gmail, Google Workspace, iCloud, and HTTP APIs so agents can read and act on them.</p>
       <hr>
       
-      <p>Integrations give the agent access to external services — email, calendar, drive, contacts, and HTTP APIs. Each integration becomes a set of agent tools the agent can call by name.</p>
+      <p>Integrations give agents tools for services you connect: email, calendars, Google Drive, contacts, and token-authenticated HTTP APIs. The raw credentials stay outside the agent process.</p>
 <h2>Supported integrations</h2>
 <table>
 <thead>
@@ -116,64 +171,64 @@
 <tbody>
 <tr>
 <td><strong>Google Workspace</strong></td>
-<td>Mail, Calendar, Drive, and Contacts — full read and write access</td>
-<td>OAuth (your own Google Cloud credentials)</td>
+<td>Gmail, Calendar, Drive, and Contacts, selected individually</td>
+<td>OAuth using your own Google Cloud desktop client</td>
 </tr>
 <tr>
 <td><strong>Gmail</strong></td>
-<td>Read email, search messages, send email, move messages</td>
+<td>Email</td>
 <td>App-specific password</td>
 </tr>
 <tr>
 <td><strong>iCloud</strong></td>
-<td>Read email (IMAP), send email (SMTP), read calendar (CalDAV)</td>
+<td>Email and calendar</td>
 <td>App-specific password</td>
 </tr>
 <tr>
 <td><strong>HTTP API</strong></td>
-<td>Call any REST endpoint with a bearer token</td>
-<td>Bearer token</td>
+<td>Requests to one base-URL host</td>
+<td>Static token in a configurable request header</td>
 </tr>
 </tbody>
 </table>
-<p>More integrations — Notion, Slack, and others — are planned.</p>
 <h2>Adding an integration</h2>
-<p>Go to <strong>Settings → Integrations</strong> in the web UI and click <strong>Add Integration</strong>. The wizard walks you through setup for each provider.</p>
+<p>Go to <strong>Settings → Integrations</strong> and click <strong>Add integration</strong>. The wizard shows the credentials and permission choices required by each provider.</p>
 <h3>Gmail and iCloud</h3>
 <p>Both use app-specific passwords — credentials your provider issues for third-party apps, separate from your main account password. You need two-factor authentication enabled on your account.</p>
 <ol>
 <li><strong>Pick your provider</strong> — Gmail or iCloud</li>
-<li><strong>Generate an app password</strong> — the wizard links directly to your provider's app-passwords page:
+<li><strong>Generate an app password</strong> — the wizard links directly to your provider's account page:
 <ul>
 <li>Gmail: <a href="https://myaccount.google.com/apppasswords">myaccount.google.com/apppasswords</a></li>
-<li>iCloud: <a href="https://appleid.apple.com">appleid.apple.com</a> → Sign-In and Security → App-Specific Passwords</li>
+<li>iCloud: <a href="https://account.apple.com/account/manage">account.apple.com</a> → Sign-In and Security → App-Specific Passwords</li>
 </ul>
 </li>
-<li><strong>Enter your email and app password</strong> and click Verify &amp; save</li>
-<li>Omnideck verifies the credentials by connecting to the provider. If they're accepted, the integration shows as <strong>connected</strong>.</li>
+<li><strong>Enter your email and app password</strong>, then choose <strong>Read only</strong> or <strong>Read + Write</strong> for each available capability.</li>
+<li>Click <strong>Verify &amp; save</strong>. If the provider accepts the credentials, the integration appears as <strong>connected</strong>.</li>
 </ol>
 <h3>Google Workspace</h3>
-<p>Google Workspace uses OAuth with your own Google Cloud credentials — no shared app, no third-party servers. The wizard walks you through a one-time ~5 minute setup:</p>
+<p>Google Workspace uses OAuth with a desktop client you create in your own Google Cloud project. The wizard walks you through the setup:</p>
 <ol>
 <li><strong>Create a Google Cloud project</strong> — the wizard links to the Google Cloud Console</li>
 <li><strong>Enable the APIs</strong> — Gmail, Calendar, Drive, and People APIs</li>
 <li><strong>Set up the Google Auth Platform</strong> — configure the consent screen</li>
-<li><strong>Publish the app</strong> — set the app status to &quot;In production&quot; (it's only for you)</li>
-<li><strong>Create the OAuth client</strong> — get a Client ID and Client Secret</li>
-<li><strong>Paste your Client ID and Client Secret</strong> into the wizard and click Authorize</li>
+<li><strong>Publish the app</strong> — this prevents a testing-mode refresh token from expiring after seven days</li>
+<li><strong>Create a Desktop app OAuth client</strong> — copy its Client ID and Client Secret</li>
+<li><strong>Paste the credentials</strong> into omnideck and authorize in the Google window that opens</li>
 </ol>
-<p>You also choose which capabilities to share (Gmail, Calendar, Drive, Contacts) and at what access level (read-only or read-write) before authorizing.</p>
+<p>Before authorization, choose which capabilities to connect and their access levels. Gmail, Calendar, and Drive support read-only or read-write access; Contacts is read-only. The wizard currently starts Gmail, Calendar, and Drive at <strong>Read + Write</strong>, so review the selections before continuing.</p>
 <h3>HTTP API</h3>
-<p>Point your agent at any REST endpoint that authenticates with a static token:</p>
+<p>Point an agent at a REST API that authenticates with a static token:</p>
 <ol>
 <li><strong>Enter a base URL</strong> — all agent requests are locked to this host</li>
-<li><strong>Enter a bearer token</strong> — passed as an <code>Authorization: Bearer</code> header</li>
-<li><strong>Give it a label</strong> and click Verify &amp; save</li>
+<li><strong>Enter the header name and value template</strong> — the defaults produce <code>Authorization: Bearer {token}</code></li>
+<li><strong>Enter the token</strong>, choose read-only or read-write access, and optionally add a label</li>
+<li>Click <strong>Save</strong></li>
 </ol>
-<h2>Write access</h2>
-<p>By default, integrations are read-only — the agent can read messages, events, and files but can't send email, modify calendar entries, or write to Drive. This is a deliberate safe default.</p>
-<p>To allow writes, open the integration in <strong>Settings → Integrations</strong> and enable <strong>Allow writes</strong>. Omnideck will restart the broker process briefly (~1–3 seconds) and the integration shows as connected again.</p>
-<p>With writes enabled, the agent gains tools for sending email, moving messages, creating or modifying calendar events, uploading and editing Drive files, and making mutating HTTP requests.</p>
+<p>Read-only HTTP access allows <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code>. Read-write access also allows <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, and <code>DELETE</code>.</p>
+<h2>Permissions</h2>
+<p>Permissions are set per capability. Gmail, iCloud, and HTTP connections start at <strong>Read only</strong>; Google Workspace uses the defaults shown above. Open a connected integration to change each capability among <strong>Off</strong>, <strong>Read</strong>, and <strong>Read + Write</strong>, when the provider and granted OAuth scopes allow it.</p>
+<p>Reducing or changing permissions updates the tools available to agents. If a Google capability was authorized with read-only scopes, broader access requires deleting the integration and adding it again with read-write selected.</p>
 <h2>Integration status</h2>
 <table>
 <thead>
@@ -184,10 +239,6 @@
 </thead>
 <tbody>
 <tr>
-<td>Connecting</td>
-<td>Broker is starting; verifying credentials with the provider</td>
-</tr>
-<tr>
 <td>Connected</td>
 <td>Broker is running and upstream auth succeeded</td>
 </tr>
@@ -197,39 +248,39 @@
 </tr>
 <tr>
 <td>Not running</td>
-<td>Broker crashed three times; check <code>omnideck logs</code> for details</td>
+<td>omnideck could not reach or start the integration; delete and re-add it</td>
 </tr>
 </tbody>
 </table>
 <h2>Editing an integration</h2>
 <p>Open the integration in <strong>Settings → Integrations</strong>. You can:</p>
 <ul>
-<li><strong>Change the label</strong> — cosmetic only, no reconnect needed</li>
-<li><strong>Toggle Allow writes</strong> — the broker respawns briefly to pick up the new setting</li>
+<li><strong>Change its label</strong></li>
+<li><strong>Change permissions</strong> for each available capability</li>
 </ul>
-<p>You cannot change the email address or integration ID after creation — delete and re-add instead.</p>
+<p>Credentials and account identity cannot be edited in place. Delete and re-add the integration to replace them.</p>
 <h2>Deleting an integration</h2>
-<p>Click <strong>Delete</strong> on the integration. This stops the broker, removes the encrypted credentials, and removes the integration's tools from the agent immediately.</p>
+<p>Click <strong>Delete</strong>, then confirm. This stops its broker, removes its credentials from the vault, and removes its tools from future agent turns.</p>
 <h2>Security model</h2>
-<p>Credentials are stored in an encrypted vault inside the container and are never accessible to the agent:</p>
+<p>omnideck separates credentials from agent execution:</p>
 <ul>
-<li>Credentials are encrypted with AES-256-GCM and stored at <code>/var/lib/computron/vault/</code> inside the container. This directory is owned by a separate OS user that the agent cannot read.</li>
+<li>Credentials are encrypted with AES-256-GCM in a vault owned by a separate container user.</li>
 <li>The agent never receives raw credentials — it calls broker tools over a Unix socket, and the broker talks to the upstream provider.</li>
-<li>The broker wipes credentials from its process environment immediately after connecting to the provider, so they don't appear in process listings.</li>
-<li>Write tools are hidden from the agent's tool registry when writes are disabled, so the agent can't attempt writes even indirectly.</li>
+<li>Tools are exposed according to the permission selected for each capability.</li>
+<li>HTTP credentials are only sent to the host in the configured base URL.</li>
 </ul>
 <div class="callout" data-tone="warn">
-<strong>Backup security:</strong> The <code>~/Omnideck/.state</code> directory contains the vault master key alongside the encrypted credentials. Treat backups of this directory the same way you'd treat a password manager export — keep them encrypted and access-controlled.
+<strong>Treat the omnideck state volume as sensitive.</strong> It contains encrypted credential data and the local key used to decrypt it. Protect exported copies like a password-manager backup.
 </div>
 <h2>Troubleshooting</h2>
-<p><strong>Integration shows &quot;auth failed&quot; shortly after adding</strong></p>
+<p><strong>The integration shows “auth failed”</strong></p>
 <p>The credentials were wrong, expired, or revoked. Generate a fresh app password (or OAuth credentials) from your provider and re-add the integration. You cannot edit credentials in place — delete and re-add.</p>
-<p><strong>Integration shows &quot;not running&quot;</strong></p>
-<p>The broker crashed repeatedly before completing its initial handshake. Check <code>omnideck logs</code> for lines tagged with the integration name — common causes are a network firewall blocking outbound connections, or the provider being temporarily unavailable.</p>
-<p><strong>&quot;Integrations unavailable&quot; in the Settings tab</strong></p>
-<p>The app can't reach the credential vault supervisor. Check <code>omnideck logs</code> for <code>[supervisor]</code> errors. If the container was stopped uncleanly, <code>omnideck restart</code> usually resolves it.</p>
-<p><strong>The agent says it can't list emails but the integration shows &quot;connected&quot;</strong></p>
-<p>Email servers sometimes drop idle connections after 10–30 minutes. Omnideck reconnects automatically. Check <code>omnideck logs</code> for a reconnect message — if the reconnect succeeded, the next agent call will work. If the reconnect failed, treat it as a real network issue.</p>
+<p><strong>The integration shows “not running”</strong></p>
+<p>omnideck could not reach or start it. Check the network and provider status, then delete and re-add the connection. CLI users can inspect runtime output with <code>omnideck logs --follow=false</code>.</p>
+<p><strong>Settings says “Integrations unavailable”</strong></p>
+<p>The app cannot reach its credential service. Restart omnideck. If you manage the runtime with the CLI, run <code>omnideck restart</code>, then inspect <code>omnideck logs --follow=false</code> if the error returns.</p>
+<p><strong>An integration is connected but an agent cannot use it</strong></p>
+<p>Check that the capability is not set to <strong>Off</strong> and that the agent has the <strong>assistant</strong> skill, which grants the connected-service tool categories.</p>
 
     </article>
   </div>
@@ -237,21 +288,26 @@
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

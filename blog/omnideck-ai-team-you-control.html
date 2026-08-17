@@ -3,30 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="description" content="Omnideck is an open-source, local-first, multi-agent AI system you run yourself. No telemetry, no locked-in models, no gatekeepers. Here&#39;s what it is and how to get started.">
-  <meta property="og:title" content="Omnideck: an AI team you actually control">
-  <meta property="og:description" content="Omnideck is an open-source, local-first, multi-agent AI system you run yourself. No telemetry, no locked-in models, no gatekeepers. Here&#39;s what it is and how to get started.">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="omnideck is an open-source, local-first, multi-agent AI system you run yourself. No telemetry, no locked-in models, no gatekeepers. Here&#39;s what it is and how to get started.">
+  <meta property="og:title" content="omnideck: an AI team you actually control">
+  <meta property="og:description" content="omnideck is an open-source, local-first, multi-agent AI system you run yourself. No telemetry, no locked-in models, no gatekeepers. Here&#39;s what it is and how to get started.">
   
   <meta property="og:image" content="https://www.omnideck.dev/images/agent-list.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://www.omnideck.dev/images/agent-list.png">
   
-  <title>Omnideck: an AI team you actually control | Blog | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  <title>omnideck: an AI team you actually control | Blog | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
   
 </head>
 <body class="lattice ">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -34,23 +53,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -58,44 +84,43 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
 
 <div class="container blog-hero-image">
-  <img src="/images/agent-list.png" alt="Omnideck: an AI team you actually control" class="blog-hero-img">
+  <img src="/images/agent-list.png" alt="omnideck: an AI team you actually control" class="blog-hero-img">
 </div>
 
 <article class="container py-5 blog-article">
   <header class="blog-header">
-    <h1>Omnideck: an AI team you actually control</h1>
+    <h1>omnideck: an AI team you actually control</h1>
     <p class="muted"><time>July 4, 2026</time> · Ron Northcutt</p>
     <div class="tag-chips"><a href="/blog/tags/ai.html" class="tag-chip">AI</a><a href="/blog/tags/automation.html" class="tag-chip">Automation</a><a href="/blog/tags/multi-agent-systems.html" class="tag-chip">Multi-Agent Systems</a><a href="/blog/tags/open-source.html" class="tag-chip">Open Source</a><a href="/blog/tags/privacy.html" class="tag-chip">Privacy</a></div>
-    <p>Omnideck is an open-source, local-first, multi-agent AI system you run yourself. No telemetry, no locked-in models, no gatekeepers. Here&#39;s what it is and how to get started.</p>
+    <p>omnideck is an open-source, local-first, multi-agent AI system you run yourself. No telemetry, no locked-in models, no gatekeepers. Here&#39;s what it is and how to get started.</p>
   </header>
   <hr>
-  <div class="callout info"><strong>TL;DR:</strong> Omnideck is an open-source, local-first, multi-agent AI workbench with a real UI, not just a terminal. You need a container engine (Docker or Podman), an LLM source (a local Ollama install or a cloud API key), and about five minutes. <br><br>Install with Homebrew on Mac or Linux, or grab a binary. The setup wizard does the rest. Full steps are in the <a href="https://www.omnideck.dev/docs/getting-started.html">getting started guide</a>.
+  <div class="callout info"><strong>TL;DR:</strong> omnideck is an open-source, local-first, multi-agent AI workbench with a real UI, not just a terminal. <a href="/install.html">Download omnideck</a> for macOS, Windows, or Linux, follow the guided setup, and bring a local Ollama model or a cloud API key. Full steps are in the <a href="https://www.omnideck.dev/docs/getting-started.html">getting started guide</a>.
 </div>
 <p>Everyone's talking about agentic AI right now, about handing off real work to a team of agents instead of babysitting one chatbot. But if you've actually tried to set that up yourself, you know it's a mess. You're stitching together frameworks, wiring up orchestration logic, and reading documentation that assumes you already have a PhD in the subject. It's powerful in theory and fiddly in practice, and that gap is exactly what got us going.</p>
-<p>We built Omnideck to close that gap. It's a multi-agent AI system that runs on your own machine, works with whatever model you want, and never phones home with your data. No orchestration code to write, no framework to wire up by hand. You open a browser tab, and your AI team is already there, ready to work. It's still early, and we wanted to share it while your feedback can still shape where it goes.</p>
-<h2>What Omnideck actually is</h2>
-<p>Omnideck is a team of AI agents you manage from a clean, local web UI, no terminal required. Each agent has its own skills, its own personality, and its own set of tools, so instead of one general-purpose assistant trying to do everything reasonably well, you get specialists. One writes code. One does research. One drafts your emails or pulls files from Gmail and Drive. You bring them in as you need them.</p>
+<p>We built omnideck to close that gap. It's a multi-agent AI system that runs on your own machine, works with whatever model you want, and never phones home with your data. No orchestration code to write, no framework to wire up by hand. You open a browser tab, and your AI team is already there, ready to work. It's still early, and we wanted to share it while your feedback can still shape where it goes.</p>
+<h2>What omnideck actually is</h2>
+<p>omnideck is a team of AI agents you manage from a clean, local web UI, no terminal required. Each agent has its own skills, its own personality, and its own set of tools, so instead of one general-purpose assistant trying to do everything reasonably well, you get specialists. One writes code. One does research. One drafts your emails or pulls files from Gmail and Drive. You bring them in as you need them.</p>
 <p>A few things make it different from the AI chat tool you're already using:</p>
 <ul>
-<li><strong>It's UI-based.</strong> You click through setup, manage agents, and run tasks in a browser at <code>localhost:2337</code>. If you can use a web app, you can use Omnideck.</li>
+<li><strong>It's UI-based.</strong> You click through setup, manage agents, and run tasks in a browser at <code>localhost:2337</code>. If you can use a web app, you can use omnideck.</li>
 <li><strong>Agents are customizable.</strong> Adjust skills, tools, and behavior per agent instead of getting one general-purpose assistant that's mediocre at everything.</li>
 <li><strong>You can hot-swap agents.</strong> Switch to a different one mid-task without losing your place in the conversation.</li>
 <li><strong>Manager agents can spawn sub-agents.</strong> A big task gets broken down and delegated automatically, the way a lead hands pieces of a project to the right people on their team.</li>
-<li><strong>It runs in a container.</strong> Omnideck can't touch the rest of your system. Your API keys and credentials sit in a broker vault, and agents can use the tools without ever seeing the keys themselves.</li>
+<li><strong>It runs in a container.</strong> omnideck can't touch the rest of your system. Your API keys and credentials sit in a broker vault, and agents can use the tools without ever seeing the keys themselves.</li>
 <li><strong>There's no telemetry.</strong> We don't collect usage data, and nothing leaves your machine except what you choose to send to your LLM provider.</li>
 <li><strong>It's model-agnostic.</strong> Run it fully offline with Ollama, or point it at OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible API. Your choice, and you can change your mind later.</li>
 </ul>
@@ -105,51 +130,56 @@
 <p>The general agent pulls it all together into a short report you can actually use: what each competitor does well, where they fall short, and where your feature has an edge. From there, you can switch to a tech agent to fact-check the details and confirm nothing got garbled along the way. Once you trust the research, you switch again, this time to a creative agent you've customized to write social posts in your voice. You draft a rough paragraph or two yourself, hand it over, and ask for a review. It suggests edits, you push back on some and take others, and you go back and forth until it reads the way you want. When it's ready, you copy it out and post it.</p>
 <p>Start to finish, that's one conversation, four specialized agents, and work that would otherwise mean hours of open tabs, half-finished notes, and a draft you never quite got around to polishing.</p>
 <h2>Where this came from</h2>
-<p>Larry started Omnideck as an experiment in the summer of 2025, poking at what a local, container-isolated multi-agent setup could look like. I joined in early 2026 to help push it from proof-of-concept into something other people could actually install and use.</p>
-<p>Between the two of us, we use Omnideck every day now, for research, drafting, and the kind of work that's easy but slow: the stuff that used to mean five browser tabs and three different tools open at once. Once it started saving us real time, it seemed pointless to keep it to ourselves.</p>
-<p>It's still in beta. There are rough edges and gaps we're actively closing. But we'd rather ship it now and let real use shape the roadmap than sit on it until it's &quot;done.&quot; A lot of what makes Omnideck useful came from someone hitting a wall and telling us about it, and that only happens once people are actually using it.</p>
+<p>Larry started omnideck as an experiment in the summer of 2025, poking at what a local, container-isolated multi-agent setup could look like. I joined in early 2026 to help push it from proof-of-concept into something other people could actually install and use.</p>
+<p>Between the two of us, we use omnideck every day now, for research, drafting, and the kind of work that's easy but slow: the stuff that used to mean five browser tabs and three different tools open at once. Once it started saving us real time, it seemed pointless to keep it to ourselves.</p>
+<p>It's still in beta. There are rough edges and gaps we're actively closing. But we'd rather ship it now and let real use shape the roadmap than sit on it until it's &quot;done.&quot; A lot of what makes omnideck useful came from someone hitting a wall and telling us about it, and that only happens once people are actually using it.</p>
 <p>Larry's got more on the technical origin story and what the early experiments looked like. That's the next post.</p>
 <h2>What's coming next</h2>
 <p>A few things on the near-term roadmap:</p>
 <ul>
-<li><strong>More integrations.</strong> If there's a service you want Omnideck talking to, tell us.</li>
+<li><strong>More integrations.</strong> If there's a service you want omnideck talking to, tell us.</li>
 <li><strong>Deeper agent customization.</strong> The agent profile system is getting more knobs, so you can dial in exactly how each agent behaves.</li>
 <li><strong>Team features.</strong> Sharing agent setups and workflows across a team, not just running solo.</li>
 <li><strong>Performance work.</strong> Faster, leaner, more efficient, on an ongoing basis.</li>
 </ul>
 <p>We're building this in the open, so the roadmap bends toward what people actually ask for. If you hit a wall or want something it doesn't do yet, that feedback goes somewhere.</p>
 <h2>What this is really about</h2>
-<p>Omnideck augments your judgment and your voice, it doesn't replace them. You end up with your own small team of helpers that can handle the things that are easy but time-consuming, like digging through the web for competitor research, or the things that are specialized, like editing copy into a consistent style. That frees you up for the part that actually needs you: synthesizing the research, drafting the post, deciding what's worth saying, and polishing the result until it's right. And it does all of that in a fraction of the time it would take you to do it alone.</p>
+<p>omnideck augments your judgment and your voice, it doesn't replace them. You end up with your own small team of helpers that can handle the things that are easy but time-consuming, like digging through the web for competitor research, or the things that are specialized, like editing copy into a consistent style. That frees you up for the part that actually needs you: synthesizing the research, drafting the post, deciding what's worth saying, and polishing the result until it's right. And it does all of that in a fraction of the time it would take you to do it alone.</p>
 <h2>Get started</h2>
-<p>Install takes about five minutes:</p>
+<p>The desktop app is now the default installation path:</p>
 <ol>
-<li><strong>Install the CLI.</strong> Homebrew is the easiest path on macOS or Linux (<code>brew install omnideck-dev/tap/omnideck</code>), or download a binary for your platform.</li>
-<li><strong>Run <code>omnideck install</code>.</strong> The wizard detects Docker or Podman, checks for Ollama, and pulls the container image.</li>
-<li><strong>Open <code>localhost:2337</code>.</strong> A setup wizard walks you through connecting an LLM provider and picking your models.</li>
+<li><strong><a href="https://www.omnideck.dev/install.html">Install omnideck</a>.</strong> Choose the native installer for your operating system and architecture.</li>
+<li><strong>Select Set up omnideck.</strong> The app prepares Podman and the local runtime, including any required operating-system permissions or restart.</li>
+<li><strong>Open your workbench.</strong> Connect an LLM provider or local Ollama and start creating agents.</li>
 </ol>
 <p>That's it. Your data lives in <code>~/Omnideck</code> and survives updates.</p>
-<p>Full instructions, prerequisites, and CLI reference are in the <a href="https://www.omnideck.dev/docs/getting-started.html">getting started docs</a>. The <a href="https://github.com/omnideck-dev/omnideck">GitHub repo</a> has the source, and it's Apache 2 licensed, so you can look under the hood or fork it outright.</p>
+<p>Full instructions, real installation screenshots, and the advanced CLI path are in the <a href="https://www.omnideck.dev/docs/getting-started.html">getting started docs</a>. The <a href="https://github.com/omnideck-dev/omnideck">GitHub repo</a> has the source, and it's Apache 2 licensed, so you can look under the hood or fork it outright.</p>
 <p>Try it, break it, tell us what's missing. That's how this gets better.</p>
 
 </article>
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

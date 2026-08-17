@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="Create repeatable work that one or more agents can run now or on a schedule.">
+  <meta property="og:title" content="Routines">
+  <meta property="og:description" content="Create repeatable work that one or more agents can run now or on a schedule.">
+  
+  <title>Routines | Docs | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
+  
+</head>
+<body class="lattice ">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="/community.html" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    </div>
+  </div>
+
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="/community.html" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    </div>
+  </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
+</header>
+
+  <main id="main-content" class="full-width">
+    
+<div class="container py-5">
+  <div class="grid gap-5">
+    <div class="span-12 md-span-3">
+      <aside class="docs-sidebar">
+  <span class="docs-nav-label">Documentation</span>
+  <nav>
+    
+    <a href="/docs/getting-started.html">Getting Started</a>
+    
+    <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
+    
+    <a href="/docs/agents.html">Agents</a>
+    
+    <a href="/docs/routines.html">Routines</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
+    
+  </nav>
+  <span class="docs-nav-label">Guides</span>
+  <nav>
+    
+    <a href="/guides/slack-integration.html">Slack Integration</a>
+    
+  </nav>
+</aside>
+
+<details class="docs-mobile-nav">
+  <summary>Documentation</summary>
+  <div class="docs-mobile-nav-body">
+    <span class="docs-nav-label">Documentation</span>
+    <nav>
+      
+      <a href="/docs/getting-started.html">Getting Started</a>
+      
+      <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
+      
+      <a href="/docs/agents.html">Agents</a>
+      
+      <a href="/docs/routines.html">Routines</a>
+      
+      <a href="/docs/integrations.html">Integrations</a>
+      
+      <a href="/docs/local-models.html">Local Models</a>
+      
+      <a href="/docs/cli-reference.html">CLI Reference</a>
+      
+    </nav>
+    <span class="docs-nav-label">Guides</span>
+    <nav>
+      
+      <a href="/guides/slack-integration.html">Slack Integration</a>
+      
+    </nav>
+  </div>
+</details>
+
+    </div>
+    <article class="span-12 md-span-9">
+      <h1>Routines</h1>
+      
+      <p class="muted">Create repeatable work that one or more agents can run now or on a schedule.</p>
+      <hr>
+      
+      <p>A routine is repeatable work carried out by one or more agents. It can run once as soon as it is created, run again whenever you choose, or recur on a schedule.</p>
+<h2>Create a routine</h2>
+<p>Create routines by describing them to an agent in a conversation. The <strong>General</strong> agent can load the <strong>routine_planner</strong> skill when needed; you can also assign that skill to another agent.</p>
+<p>Open <strong>Routines</strong> in the sidebar to see starter ideas, or start a new conversation and ask for what you want directly:</p>
+<pre><code class="language-text">Create a routine that every weekday at 8:00 AM America/Chicago
+reviews my unread email and today's calendar, then writes a short
+morning brief.
+</code></pre>
+<p>The agent turns the request into a routine with at least one task. Each task has its own instruction and agent. Tasks run in sequence by default, or the agent can make independent tasks run in parallel.</p>
+<h2>Scheduling</h2>
+<p>Scheduled routines use a standard five-field cron expression and an IANA timezone such as <code>America/Chicago</code> or <code>UTC</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0 8 * * 1-5</code></td>
+<td>Weekdays at 08:00</td>
+</tr>
+<tr>
+<td><code>0 * * * *</code></td>
+<td>At the start of every hour</td>
+</tr>
+<tr>
+<td><code>0 9 * * 1</code></td>
+<td>Every Monday at 09:00</td>
+</tr>
+<tr>
+<td><code>0 */4 * * *</code></td>
+<td>Every 4 hours</td>
+</tr>
+</tbody>
+</table>
+<p>If you create a routine without a schedule, omnideck queues its first run immediately. It remains in <strong>Routines</strong>, where you can run it again with <strong>Run now</strong>.</p>
+<h2>Review and manage routines</h2>
+<p>The Routines list shows each routine's status, schedule, and most recent run. Open one to:</p>
+<ul>
+<li><strong>Pause</strong> or <strong>Resume</strong> its future scheduled runs</li>
+<li><strong>Run now</strong> without waiting for its next scheduled time</li>
+<li>inspect <strong>Recent Runs</strong>, including status, duration, task completion, and each task's output</li>
+<li>inspect <strong>Tasks</strong>, including the assigned agent, dependencies, and retry limit</li>
+<li>delete a run or the entire routine</li>
+</ul>
+<p>Pausing a routine prevents future scheduled runs. It does not cancel a run already in progress.</p>
+<div class="callout" data-tone="info">
+<strong>Routines survive restarts.</strong> If omnideck restarts while a task is marked as running, that task is returned to pending so the runner can pick it up again.
+</div>
+
+    </article>
+  </div>
+</div>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+    <p class="footer-text">
+      Open source · Apache 2
+    </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=f6211ced"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>

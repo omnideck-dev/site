@@ -3,26 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="description" content="Create and configure agent profiles — each with its own model, system prompt, and skills.">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="Create agents with their own model, instructions, skills, and autonomy settings.">
   <meta property="og:title" content="Agents">
-  <meta property="og:description" content="Create and configure agent profiles — each with its own model, system prompt, and skills.">
+  <meta property="og:description" content="Create agents with their own model, instructions, skills, and autonomy settings.">
   
-  <title>Agents | Docs | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  <title>Agents | Docs | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
   
 </head>
 <body class="lattice ">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -30,23 +49,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -54,32 +80,31 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
 <div class="container py-5">
   <div class="grid gap-5">
     <div class="span-12 md-span-3">
-      <aside class="docs-sidebar sticky">
+      <aside class="docs-sidebar">
   <span class="docs-nav-label">Documentation</span>
   <nav>
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/configuration.html">Configuration</a>
+    <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
     
     <a href="/docs/agents.html">Agents</a>
     
-    <a href="/docs/tasks.html">Autonomous Tasks</a>
+    <a href="/docs/routines.html">Routines</a>
     
     <a href="/docs/integrations.html">Integrations</a>
     
@@ -96,25 +121,85 @@
   </nav>
 </aside>
 
+<details class="docs-mobile-nav">
+  <summary>Documentation</summary>
+  <div class="docs-mobile-nav-body">
+    <span class="docs-nav-label">Documentation</span>
+    <nav>
+      
+      <a href="/docs/getting-started.html">Getting Started</a>
+      
+      <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
+      
+      <a href="/docs/agents.html">Agents</a>
+      
+      <a href="/docs/routines.html">Routines</a>
+      
+      <a href="/docs/integrations.html">Integrations</a>
+      
+      <a href="/docs/local-models.html">Local Models</a>
+      
+      <a href="/docs/cli-reference.html">CLI Reference</a>
+      
+    </nav>
+    <span class="docs-nav-label">Guides</span>
+    <nav>
+      
+      <a href="/guides/slack-integration.html">Slack Integration</a>
+      
+    </nav>
+  </div>
+</details>
+
     </div>
     <article class="span-12 md-span-9">
       <h1>Agents</h1>
       
-      <p class="muted">Create and configure agent profiles — each with its own model, system prompt, and skills.</p>
+      <p class="muted">Create agents with their own model, instructions, skills, and autonomy settings.</p>
       <hr>
       
-      <p>An agent profile is a named configuration that defines how a particular agent thinks and what it can do. Omnideck ships with four default profiles. You can create as many profiles as you like and switch between them at any point in a conversation.</p>
-<h2>Creating a profile</h2>
-<p>Go to <strong>Settings → Profiles</strong> in the web UI and click <strong>New Profile</strong>. Fill in:</p>
+      <p>Agents are reusable configurations for different kinds of work. Each one can use its own model, instructions, skills, and inference settings. omnideck includes four agents to start with, and you can create more.</p>
+<h2>The agents included with omnideck</h2>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Starting point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>General</strong></td>
+<td>Adapts to the job, loads skills when needed, and can delegate larger work to other agents</td>
+</tr>
+<tr>
+<td><strong>Code Expert</strong></td>
+<td>Programming, debugging, and code review with the <strong>coder</strong> skill</td>
+</tr>
+<tr>
+<td><strong>Research Agent</strong></td>
+<td>Research and analysis with the <strong>browser</strong> and <strong>coder</strong> skills</td>
+</tr>
+<tr>
+<td><strong>Creative Writer</strong></td>
+<td>Brainstorming and writing with more creative inference settings</td>
+</tr>
+</tbody>
+</table>
+<p>These are editable starting points. The model selected during initial setup is applied to all four.</p>
+<h2>Create or edit an agent</h2>
+<p>Open <strong>Agents</strong> in the sidebar, then select an existing agent or click <strong>New agent</strong>. An agent can define:</p>
 <ul>
-<li><strong>Name</strong> — a descriptive label (e.g. &quot;Research Agent&quot;, &quot;Code Agent&quot;)</li>
-<li><strong>Model</strong> — which LLM provider and model to use for this agent</li>
-<li><strong>System prompt</strong> — the agent's core instructions, persona, and constraints</li>
-<li><strong>Skills</strong> — which skill bundles the agent loads (each skill grants a set of tool categories)</li>
-<li><strong>Inference parameters</strong> — temperature, top-p, and other model settings</li>
+<li><strong>Identity</strong> — name, description, icon, and whether the agent is enabled</li>
+<li><strong>Provider and model</strong> — the model used when this agent handles a turn or a routine task</li>
+<li><strong>System prompt</strong> — its role, instructions, and boundaries</li>
+<li><strong>Skills</strong> — bundles of tools and guidance available to the agent</li>
+<li><strong>Autonomy</strong> — whether it may spawn other agents or load more skills during a conversation</li>
+<li><strong>Inference settings</strong> — presets or advanced model-specific controls such as temperature, context window, thinking, and compaction threshold</li>
 </ul>
+<p>You can also duplicate, import, and export agents. An agent assigned to a routine cannot be deleted until the routine no longer uses it.</p>
 <h2>Skills</h2>
-<p>Agents don't toggle individual tools. Instead, you assign <strong>skills</strong> — curated bundles of tool categories. Each skill loads a specific set of capabilities. Omnideck ships with four built-in skills:</p>
+<p>Skills bundle tools with the instructions for using them. omnideck includes four skills:</p>
 <table>
 <thead>
 <tr>
@@ -126,37 +211,36 @@
 <tbody>
 <tr>
 <td><strong>assistant</strong></td>
-<td>Memory, Email, Calendar, Drive, Contacts, HTTP / API</td>
-<td>Persistent memory across conversations and access to connected integrations</td>
+<td>Memory, Email, Calendar, Drive, Contacts, HTTP</td>
+<td>Use persistent memory and services you have connected</td>
 </tr>
 <tr>
 <td><strong>browser</strong></td>
-<td>Web Browsing, Web Fetch</td>
-<td>Full browser automation — navigate, click, type, scroll, fill forms, and take screenshots. Also fetches pages as clean text without a browser.</td>
+<td>Browser, Web Fetch</td>
+<td>Navigate and interact with websites, capture screenshots, and read known URLs as text</td>
 </tr>
 <tr>
 <td><strong>coder</strong></td>
-<td>Coding &amp; Files</td>
-<td>Read, write, edit, and patch files. Run bash commands, install packages, search codebases.</td>
+<td>Coding</td>
+<td>Read and edit files, search code, run commands, and install packages</td>
 </tr>
 <tr>
-<td><strong>goal_planner</strong></td>
-<td>Goal Planning</td>
-<td>Create and manage autonomous goals with scheduled tasks that run in the background.</td>
+<td><strong>routine_planner</strong></td>
+<td>Planning</td>
+<td>Create, inspect, and run routines made of one or more agent tasks</td>
 </tr>
 </tbody>
 </table>
-<p>You can mix and match skills per profile. A research agent might load <strong>browser</strong> and <strong>assistant</strong> but not <strong>coder</strong>. A DevOps agent might load <strong>coder</strong> and <strong>assistant</strong> but not <strong>browser</strong>. Restricting skills improves focus and reduces the chance of unintended side effects.</p>
-<p>Tool categories from integrations — Email, Calendar, Drive, Contacts, and HTTP / API — become available automatically when you connect an integration and load the <strong>assistant</strong> skill.</p>
+<p>Assign skills in the agent editor. If <strong>Allow loading skills mid-conversation</strong> is enabled, an agent can also load an available skill when a job requires it.</p>
+<p>Connected-service tools only appear when the corresponding integration is available. The <strong>assistant</strong> skill grants access to those email, calendar, drive, contacts, and HTTP tool categories; it does not create the connection itself.</p>
 <h2>Context management</h2>
-<p>As a conversation grows, Omnideck tracks token usage and compacts older messages when a configurable threshold is reached. Compaction summarizes older turns and replaces them with a compact summary, preserving recent context verbatim. This keeps conversations going indefinitely without hitting model context limits.</p>
-<p>The compaction model is configured in <strong>Settings → Providers</strong> — you can use a smaller, cheaper model for compaction and a larger one for actual work.</p>
+<p>As a conversation grows, omnideck tracks context usage and can compact older turns into a summary when the agent's configured threshold is reached. Recent context remains available while the summary carries forward the important earlier information.</p>
+<p>Set the threshold in the agent's advanced inference settings. Choose the model used for compaction in <strong>Settings → System</strong>.</p>
 <h2>Sub-agents</h2>
-<p>Agents can spawn sub-agents for delegated, parallel work. The parent agent describes a goal, the sub-agent runs it, and results are passed back. This enables multi-step workflows where different agents handle different parts of a task.</p>
-<p>Sub-agent activity is visible in the <strong>Agent Network</strong> view — each running sub-agent appears as a node with its own activity stream, active tool, and context usage.</p>
-<p>Sub-agent spawning is enabled or disabled per agent profile in Settings.</p>
-<h2>Switching agents mid-conversation</h2>
-<p>Use the profile selector at the top of the chat panel to switch to a different profile. The conversation history is preserved; the new agent's system prompt takes effect from the next turn.</p>
+<p>When <strong>Allow spawning agents</strong> is enabled, an agent can delegate self-contained parts of a job to other agents. Each delegated agent uses the selected profile and works in its own context.</p>
+<p>Open <strong>Agent Network</strong> from the conversation to see the delegation graph, running/completed/error counts, and the activity for an individual agent. Browser or terminal workspaces opened by an agent can also be opened from its activity when available.</p>
+<h2>Switch agents in a conversation</h2>
+<p>Use the agent selector at the top of the conversation. The selected agent handles the next message; the existing conversation remains in place.</p>
 
     </article>
   </div>
@@ -164,21 +248,26 @@
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

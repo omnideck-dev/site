@@ -3,26 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="description" content="Schedule goals that run in the background and notify you on completion.">
-  <meta property="og:title" content="Autonomous Tasks">
-  <meta property="og:description" content="Schedule goals that run in the background and notify you on completion.">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="Routines have moved to their own documentation page.">
+  <meta property="og:title" content="Routines">
+  <meta property="og:description" content="Routines have moved to their own documentation page.">
   
-  <title>Autonomous Tasks | Docs | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  <title>Routines | Docs | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
   
+  <link rel="canonical" href="https://www.omnideck.dev/docs/routines.html">
+  <meta http-equiv="refresh" content="0; url=/docs/routines.html">
+  <script>
+    const destination = `/docs/routines.html`;
+    const baseDestination = destination.split('#')[0];
+    location.replace(location.hash ? `${baseDestination}${location.hash}` : destination);
+  </script>
+
 </head>
 <body class="lattice ">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -30,23 +57,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -54,129 +88,46 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
-<div class="container py-5">
-  <div class="grid gap-5">
-    <div class="span-12 md-span-3">
-      <aside class="docs-sidebar sticky">
-  <span class="docs-nav-label">Documentation</span>
-  <nav>
-    
-    <a href="/docs/getting-started.html">Getting Started</a>
-    
-    <a href="/docs/configuration.html">Configuration</a>
-    
-    <a href="/docs/agents.html">Agents</a>
-    
-    <a href="/docs/tasks.html">Autonomous Tasks</a>
-    
-    <a href="/docs/integrations.html">Integrations</a>
-    
-    <a href="/docs/local-models.html">Local Models</a>
-    
-    <a href="/docs/cli-reference.html">CLI Reference</a>
-    
-  </nav>
-  <span class="docs-nav-label">Guides</span>
-  <nav>
-    
-    <a href="/guides/slack-integration.html">Slack Integration</a>
-    
-  </nav>
-</aside>
-
-    </div>
-    <article class="span-12 md-span-9">
-      <h1>Autonomous Tasks</h1>
-      
-      <p class="muted">Schedule goals that run in the background and notify you on completion.</p>
-      <hr>
-      
-      <p>The task engine lets you define goals that Omnideck runs autonomously — on a schedule, at a specific time, or triggered manually. Tasks use the same agent loop and tool access as interactive conversations.</p>
-<h2>Creating a task</h2>
-<p>Go to <strong>Goals</strong> in the sidebar and click <strong>New Goal</strong>. Configure:</p>
-<ul>
-<li><strong>Name</strong> — human-readable label</li>
-<li><strong>Agent</strong> — which agent profile to use</li>
-<li><strong>Goal</strong> — the instruction the agent receives at the start of each run</li>
-<li><strong>Schedule</strong> — cron expression, one-off datetime, or manual only</li>
-</ul>
-<p>Example goal:</p>
-<pre><code>Search for the top 5 AI news stories from the last 24 hours.
-Summarize each in 2-3 sentences.
-Write the digest to ~/Omnideck/digests/{date}.md
-</code></pre>
-<h2>Scheduling</h2>
-<p>Omnideck supports standard cron expressions:</p>
-<table>
-<thead>
-<tr>
-<th>Expression</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>@daily</code></td>
-<td>Once a day at midnight</td>
-</tr>
-<tr>
-<td><code>@hourly</code></td>
-<td>Once an hour</td>
-</tr>
-<tr>
-<td><code>0 9 * * 1</code></td>
-<td>Every Monday at 09:00</td>
-</tr>
-<tr>
-<td><code>0 */4 * * *</code></td>
-<td>Every 4 hours</td>
-</tr>
-</tbody>
-</table>
-<p>Leave the schedule blank to create a manual-only task you trigger yourself.</p>
-<h2>Task history</h2>
-<p>Every run is recorded: start time, end time, status, the agent's full output, and any files written. Drill into a run in the <strong>Goals</strong> view to see the agent's full activity log — thinking, tool calls, and output — exactly as you'd see it in a live conversation.</p>
-<h2>Output files</h2>
-<p>Files the agent writes to <code>~/Omnideck</code> during a task run are available on your host filesystem immediately. They also appear in the file preview panel if the task is open in the UI.</p>
-<div class="callout" data-tone="info">
-<strong>Crash safety:</strong> If Omnideck restarts while a task is running, the task is automatically reset to pending on the next start. It will run again at its next scheduled time.
-</div>
-<h2>Stopping a running task</h2>
-<p>Open the task in the <strong>Goals</strong> view and click <strong>Stop</strong>. The agent receives a stop signal and wraps up gracefully — it finishes its current step and then exits cleanly rather than being killed mid-tool-call.</p>
-
-    </article>
+<section class="home-section">
+  <div class="container">
+    <h1>Routines</h1>
+    <p>This page has moved to <a href="/docs/routines.html">the Routines guide</a>.</p>
   </div>
-</div>
+</section>
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="Install omnideck on macOS, Windows, or Linux with the right package and a step-by-step guide for your operating system.">
+  <meta property="og:title" content="Install omnideck">
+  <meta property="og:description" content="Install omnideck on macOS, Windows, or Linux with the right package and a step-by-step guide for your operating system.">
+  
+  <title>Install omnideck — macOS, Windows &amp; Linux</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
+  
+</head>
+<body class="lattice page-install">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="/community.html" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    </div>
+  </div>
+
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="/community.html" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    </div>
+  </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
+</header>
+
+  <main id="main-content" class="full-width">
+    
+
+<section class="downloads-hero">
+  <div class="container downloads-hero-inner">
+    <div>
+      <div class="product-kicker">
+        <img src="/images/omnideck-app-icon.svg" alt="" width="36" height="36">
+        <span class="section-label">omnideck</span>
+      </div>
+      <h1>Install omnideck.<br><em>Run your agents locally.</em></h1>
+      <p class="downloads-lede">Choose your system to get the right package and follow its setup from download to a ready local workbench.</p>
+    </div>
+    <aside class="release-panel" aria-label="Current desktop release">
+      <span class="release-channel">Preview release</span>
+      <strong>v0.1.0-beta.8</strong>
+      <time datetime="2026-08-14T22:48:46Z">Published August 14, 2026</time>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.8" target="_blank" rel="noopener">Release notes ↗<span class="sr-only"> (opens in a new tab)</span></a>
+    </aside>
+  </div>
+</section>
+
+<section id="install" class="install-guide downloads-section" aria-labelledby="install-title">
+  <div class="container">
+    <header class="home-section-header downloads-section-heading">
+      <span class="section-label">Choose your system</span>
+      <h2 id="install-title">Install omnideck</h2>
+    </header>
+
+    <div class="install-tabs tabs-container" data-tabs data-detect-os data-sync-hash>
+      <div class="tab-bar" role="tablist" aria-label="Installation guide by operating system">
+        <button id="install-tab-macos" class="tab active" role="tab" aria-selected="true" aria-controls="install-macos-panel" data-tab="macos"><span class="tab-icon icon-macos" aria-hidden="true"></span>macOS</button>
+        <button id="install-tab-windows" class="tab" role="tab" aria-selected="false" aria-controls="install-windows-panel" data-tab="windows" tabindex="-1"><span class="tab-icon icon-windows" aria-hidden="true"></span>Windows</button>
+        <button id="install-tab-linux" class="tab" role="tab" aria-selected="false" aria-controls="install-linux-panel" data-tab="linux" tabindex="-1"><span class="tab-icon icon-linux" aria-hidden="true"></span>Linux</button>
+      </div>
+
+      <div id="install-macos-panel" class="tab-content active install-panel" role="tabpanel" aria-labelledby="install-tab-macos">
+        <section class="install-package" aria-labelledby="download-macos-title">
+          <header class="install-package-header">
+            <span class="download-os-icon icon-macos" aria-hidden="true"></span>
+            <div>
+              <span class="install-platform-label">macOS · Apple silicon or Intel</span>
+              <h3 id="download-macos-title">Download for Mac</h3>
+              <p>Choose the DMG that matches your Mac.</p>
+            </div>
+          </header>
+          <div class="download-options install-package-options">
+            <div class="download-option">
+              <div><strong>Apple silicon</strong><span>M1 or newer · 9.0 MB</span></div>
+              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_aarch64.dmg" role="button" data-variant="primary">Download DMG</a>
+            </div>
+            <div class="download-option">
+              <div><strong>Intel</strong><span>x86-64 · 9.8 MB</span></div>
+              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_x64.dmg" role="button" data-variant="outline">Download DMG</a>
+            </div>
+          </div>
+          <div class="install-package-meta">
+            <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_aarch64.dmg.sha256">Apple silicon checksum</a>
+            <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_x64.dmg.sha256">Intel checksum</a>
+          </div>
+          <p class="install-package-note"><strong>Preview package:</strong> macOS may ask you to approve omnideck in Privacy &amp; Security. Only continue when the DMG came from the link above and its SHA-256 checksum matches the release.</p>
+        </section>
+        <header class="install-steps-heading">
+          <div>
+            <span class="install-platform-label">Installation</span>
+            <h3>Install and set up omnideck</h3>
+          </div>
+        </header>
+        <ol class="install-walkthrough">
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Install omnideck</h4>
+              <p>Open the DMG, drag omnideck onto the Applications shortcut, then eject the disk image.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/macos-dmg-install-720.webp 720w, /images/install/macos-dmg-install.webp 1656w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/macos-dmg-install.png" alt="omnideck disk image with an arrow from the app to the Applications folder" width="1656" height="1140" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Approve omnideck in Settings</h4>
+              <p>Open omnideck from Applications. If macOS blocks it, select <strong>Done</strong>, then open <strong>System Settings → Privacy &amp; Security</strong> and select <strong>Open Anyway</strong>.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/macos-privacy-security-720.webp 720w, /images/install/macos-privacy-security.webp 1654w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/macos-privacy-security.png" alt="macOS Privacy and Security settings with the Open Anyway button for omnideck" width="1654" height="1474" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Confirm with an administrator</h4>
+              <p>Use an administrator’s Touch ID or password, then confirm <strong>Open Anyway</strong> if macOS asks once more.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/macos-security-approval-720.webp 720w, /images/install/macos-security-approval.webp 2880w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/macos-security-approval.png" alt="macOS administrator approval prompt for opening omnideck" width="2880" height="1800" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Set up omnideck</h4>
+              <p>Select <strong>Set up omnideck</strong>. The app prepares the local runtime for your workbench.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/macos-first-launch-720.webp 720w, /images/install/macos-first-launch.webp 2784w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/macos-first-launch.png" alt="omnideck welcome screen with the Set up omnideck button" width="2784" height="1838" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Finish setup</h4>
+              <p>When setup reports that omnideck is ready, select <strong>Open omnideck</strong>.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/macos-setup-complete-720.webp 720w, /images/install/macos-setup-complete.webp 2784w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/macos-setup-complete.png" alt="omnideck setup complete screen on macOS" width="2784" height="1838" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step install-workbench-ready">
+  <div class="install-step-copy">
+    <h4>Open your workbench</h4>
+    <p>When setup finishes, omnideck opens your local workbench. Start a new conversation or choose a suggested task.</p>
+  </div>
+  <div class="install-step-media">
+    <picture>
+      <source type="image/webp" srcset="/images/install/workbench-ready-720.webp 720w, /images/install/workbench-ready.webp 1440w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+      <img src="/images/install/workbench-ready.webp" alt="omnideck open to a new local workbench with suggested tasks" width="1440" height="900" loading="lazy" decoding="async">
+    </picture>
+  </div>
+</li>
+
+        </ol>
+      </div>
+
+      <div id="install-windows-panel" class="tab-content install-panel" role="tabpanel" aria-labelledby="install-tab-windows" hidden>
+        <section class="install-package" aria-labelledby="download-windows-title">
+          <header class="install-package-header">
+            <span class="download-os-icon icon-windows" aria-hidden="true"></span>
+            <div>
+              <span class="install-platform-label">Windows 11 · x86-64 or ARM64</span>
+              <h3 id="download-windows-title">Download for Windows</h3>
+              <p>Choose the EXE that matches your PC.</p>
+            </div>
+          </header>
+          <div class="download-options install-package-options">
+            <div class="download-option">
+              <div><strong>x86-64</strong><span>Intel or AMD · 8.0 MB</span></div>
+              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_x64-setup.exe" role="button" data-variant="primary">Download EXE</a>
+            </div>
+            <div class="download-option">
+              <div><strong>ARM64</strong><span>Snapdragon · 7.2 MB</span></div>
+              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_arm64-setup.exe" role="button" data-variant="outline">Download EXE</a>
+            </div>
+          </div>
+          <div class="install-package-meta">
+            <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_x64-setup.exe.sha256">x86-64 checksum</a>
+            <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_arm64-setup.exe.sha256">ARM64 checksum</a>
+          </div>
+          <p class="install-package-note"><strong>Preview package:</strong> Windows may show a SmartScreen warning. Only continue when the EXE came from the link above and its SHA-256 checksum matches the release.</p>
+        </section>
+        <header class="install-steps-heading">
+          <span class="install-platform-label">Installation</span>
+          <h3>Install and set up omnideck</h3>
+        </header>
+        <ol class="install-walkthrough">
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Approve the installer</h4>
+              <p>If SmartScreen opens, select <strong>More info</strong>, confirm the publisher details, then select <strong>Run anyway</strong>.</p>
+            </div>
+            <div class="install-step-media install-step-media-pair">
+              <picture>
+                <source type="image/webp" srcset="/images/install/windows-smartscreen-warning-720.webp 720w, /images/install/windows-smartscreen-warning.webp 1280w" sizes="(min-width: 769px) 350px, calc(100vw - 64px)">
+                <img src="/images/install/windows-smartscreen-warning.png" alt="Windows SmartScreen warning with the More info link" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+              <picture>
+                <source type="image/webp" srcset="/images/install/windows-smartscreen-run-anyway-720.webp 720w, /images/install/windows-smartscreen-run-anyway.webp 1280w" sizes="(min-width: 769px) 350px, calc(100vw - 64px)">
+                <img src="/images/install/windows-smartscreen-run-anyway.png" alt="Windows SmartScreen with the Run anyway button visible" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Install omnideck</h4>
+              <p>Select <strong>Next</strong>, finish the installer, then open omnideck and select <strong>Set up omnideck</strong>.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/windows-installer-720.webp 720w, /images/install/windows-installer.webp 1280w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/windows-installer.png" alt="Welcome to omnideck Setup on Windows 11" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Approve required Windows changes</h4>
+              <p>Select <strong>Yes</strong> when User Account Control asks to prepare a required Windows component.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/windows-uac-720.webp 720w, /images/install/windows-uac.webp 1280w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/windows-uac.png" alt="Windows User Account Control asking to allow a required system change" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Restart if prompted</h4>
+              <p>Select <strong>Restart now</strong>. After you sign back in, omnideck reopens and continues setup automatically.</p>
+            </div>
+            <div class="install-step-media install-step-media-pair">
+              <picture>
+                <source type="image/webp" srcset="/images/install/windows-restart-required-720.webp 720w, /images/install/windows-restart-required.webp 1280w" sizes="(min-width: 769px) 350px, calc(100vw - 64px)">
+                <img src="/images/install/windows-restart-required.png" alt="omnideck showing Restart needed with a Restart now button" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+              <picture>
+                <source type="image/webp" srcset="/images/install/windows-setup-resume-720.webp 720w, /images/install/windows-setup-resume.webp 1280w" sizes="(min-width: 769px) 350px, calc(100vw - 64px)">
+                <img src="/images/install/windows-setup-resume.png" alt="omnideck continuing setup after Windows sign-in" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Finish setup</h4>
+              <p>When setup reports that omnideck is ready, select <strong>Open omnideck</strong>.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/windows-setup-complete-720.webp 720w, /images/install/windows-setup-complete.webp 1280w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/windows-setup-complete.png" alt="omnideck setup complete screen on Windows 11" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step install-workbench-ready">
+  <div class="install-step-copy">
+    <h4>Open your workbench</h4>
+    <p>When setup finishes, omnideck opens your local workbench. Start a new conversation or choose a suggested task.</p>
+  </div>
+  <div class="install-step-media">
+    <picture>
+      <source type="image/webp" srcset="/images/install/workbench-ready-720.webp 720w, /images/install/workbench-ready.webp 1440w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+      <img src="/images/install/workbench-ready.webp" alt="omnideck open to a new local workbench with suggested tasks" width="1440" height="900" loading="lazy" decoding="async">
+    </picture>
+  </div>
+</li>
+
+        </ol>
+      </div>
+
+      <div id="install-linux-panel" class="tab-content install-panel" role="tabpanel" aria-labelledby="install-tab-linux" hidden>
+        <section class="install-package" aria-labelledby="download-linux-title">
+          <header class="install-package-header">
+            <span class="download-os-icon icon-linux" aria-hidden="true"></span>
+            <div>
+              <span class="install-platform-label">Desktop Linux · x86-64 or ARM64</span>
+              <h3 id="download-linux-title">Download for Linux</h3>
+              <p>Use a native DEB or RPM package. AppImage remains a secondary compatibility option for Ubuntu.</p>
+            </div>
+          </header>
+          <div class="linux-install-options">
+            <div class="linux-package-group">
+              <strong>x86-64</strong>
+              <div class="package-links">
+                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_amd64.deb" role="button" data-variant="primary">Download DEB</a>
+                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck-0.1.0-beta.8-1.x86_64.rpm" role="button" data-variant="outline">Download RPM</a>
+              </div>
+              <a class="package-secondary-download" href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_amd64.AppImage">Download AppImage</a>
+            </div>
+            <div class="linux-package-group">
+              <strong>ARM64</strong>
+              <div class="package-links">
+                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_arm64.deb" role="button" data-variant="primary">Download DEB</a>
+                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck-0.1.0-beta.8-1.aarch64.rpm" role="button" data-variant="outline">Download RPM</a>
+              </div>
+              <a class="package-secondary-download" href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.8/omnideck_0.1.0-beta.8_aarch64.AppImage">Download AppImage</a>
+            </div>
+          </div>
+          <div class="install-package-meta">
+            <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.8" target="_blank" rel="noopener">Checksums and all Linux packages ↗<span class="sr-only"> (opens in a new tab)</span></a>
+          </div>
+        </section>
+        <header class="install-steps-heading">
+          <span class="install-platform-label">Installation</span>
+          <h3>Install and set up omnideck</h3>
+        </header>
+        <ol class="install-walkthrough">
+          <li class="install-walkthrough-step install-step-text">
+            <div class="install-step-copy">
+              <h4>Install omnideck</h4>
+              <p>Use the commands for the package and architecture you downloaded.</p>
+              <div class="linux-install-commands">
+                <section class="linux-install-command-group" aria-labelledby="linux-command-x64">
+                  <h5 id="linux-command-x64">x86-64</h5>
+                  <div class="install-command">
+                    <span class="install-command-label">DEB · Debian or Ubuntu</span>
+                    <div class="install-terminal">
+                      <code class="t-cmd">sudo apt install ./omnideck_0.1.0-beta.8_amd64.deb</code>
+                      <button class="copy-btn" type="button" aria-label="Copy x86-64 DEB install command" data-copy-label="Copy x86-64 DEB install command">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-clipboard"/></svg>
+                      </button>
+                      <span class="sr-only copy-status" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
+                  <div class="install-command">
+                    <span class="install-command-label">RPM · Fedora or RHEL</span>
+                    <div class="install-terminal">
+                      <code class="t-cmd">sudo dnf install ./omnideck-0.1.0-beta.8-1.x86_64.rpm</code>
+                      <button class="copy-btn" type="button" aria-label="Copy x86-64 RPM install command" data-copy-label="Copy x86-64 RPM install command">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-clipboard"/></svg>
+                      </button>
+                      <span class="sr-only copy-status" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
+                </section>
+                <section class="linux-install-command-group" aria-labelledby="linux-command-arm64">
+                  <h5 id="linux-command-arm64">ARM64</h5>
+                  <div class="install-command">
+                    <span class="install-command-label">DEB · Debian or Ubuntu</span>
+                    <div class="install-terminal">
+                      <code class="t-cmd">sudo apt install ./omnideck_0.1.0-beta.8_arm64.deb</code>
+                      <button class="copy-btn" type="button" aria-label="Copy ARM64 DEB install command" data-copy-label="Copy ARM64 DEB install command">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-clipboard"/></svg>
+                      </button>
+                      <span class="sr-only copy-status" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
+                  <div class="install-command">
+                    <span class="install-command-label">RPM · Fedora or RHEL</span>
+                    <div class="install-terminal">
+                      <code class="t-cmd">sudo dnf install ./omnideck-0.1.0-beta.8-1.aarch64.rpm</code>
+                      <button class="copy-btn" type="button" aria-label="Copy ARM64 RPM install command" data-copy-label="Copy ARM64 RPM install command">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-clipboard"/></svg>
+                      </button>
+                      <span class="sr-only copy-status" role="status" aria-live="polite"></span>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Set up omnideck</h4>
+              <p>Open omnideck and select <strong>Set up omnideck</strong>.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/linux-first-launch-720.webp 720w, /images/install/linux-first-launch.webp 1280w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/linux-first-launch.png" alt="omnideck welcome screen with the Set up omnideck button on Linux" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Prepare the local runtime</h4>
+              <p>Approve an administrator prompt if your system asks. omnideck prepares the local runtime for your workbench.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/linux-runtime-setup-720.webp 720w, /images/install/linux-runtime-setup.webp 1280w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/linux-runtime-setup.png" alt="omnideck preparing the local runtime on Linux" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step">
+            <div class="install-step-copy">
+              <h4>Finish setup</h4>
+              <p>When setup reports that omnideck is ready, select <strong>Open omnideck</strong>.</p>
+            </div>
+            <div class="install-step-media">
+              <picture>
+                <source type="image/webp" srcset="/images/install/linux-setup-complete-720.webp 720w, /images/install/linux-setup-complete.webp 1280w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+                <img src="/images/install/linux-setup-complete.png" alt="omnideck setup complete screen on Ubuntu" width="1280" height="800" loading="lazy" decoding="async">
+              </picture>
+            </div>
+          </li>
+          <li class="install-walkthrough-step install-workbench-ready">
+  <div class="install-step-copy">
+    <h4>Open your workbench</h4>
+    <p>When setup finishes, omnideck opens your local workbench. Start a new conversation or choose a suggested task.</p>
+  </div>
+  <div class="install-step-media">
+    <picture>
+      <source type="image/webp" srcset="/images/install/workbench-ready-720.webp 720w, /images/install/workbench-ready.webp 1440w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+      <img src="/images/install/workbench-ready.webp" alt="omnideck open to a new local workbench with suggested tasks" width="1440" height="900" loading="lazy" decoding="async">
+    </picture>
+  </div>
+</li>
+
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="downloads-section downloads-advanced">
+  <div class="container">
+    <div>
+      <span class="section-label">Advanced: command line</span>
+      <h2>Need the CLI for a server or automation?</h2>
+      <p>The desktop app above is the default way to use omnideck. Use the standalone CLI if you prefer to install and manage omnideck from a terminal.</p>
+    </div>
+    <a href="/docs/cli-reference.html" role="button" data-variant="outline" data-size="lg">View CLI reference →</a>
+  </div>
+</section>
+
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+    <p class="footer-text">
+      Open source · Apache 2
+    </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=f6211ced"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>

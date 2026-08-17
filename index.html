@@ -3,26 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="description" content="Omnideck runs on your desktop or home server. Create multiple specialized agents, switch between them mid-conversation, and watch sub-agents work in real time.">
-  <meta property="og:title" content="Omnideck — Local AI Agent Workbench">
-  <meta property="og:description" content="Omnideck runs on your desktop or home server. Create multiple specialized agents, switch between them mid-conversation, and watch sub-agents work in real time.">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="Install omnideck on macOS, Windows, or Linux. Create specialized agents, use cloud or local models, and keep your work on your own machine.">
+  <meta property="og:title" content="omnideck — Local AI Agent Workbench">
+  <meta property="og:description" content="Install omnideck on macOS, Windows, or Linux. Create specialized agents, use cloud or local models, and keep your work on your own machine.">
   
-  <title>Omnideck — Local AI Agent Workbench</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
-  <meta name="description" content="Omnideck runs on your desktop or home server. Create multiple specialized agents, switch between them mid-conversation, and watch sub-agents work in real time.">
+  <title>omnideck — Your Local AI Agent Workbench</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
+  
 </head>
 <body class="lattice page-home">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -30,23 +49,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -54,414 +80,325 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
 
 <!-- ── LATEST POST RIBBON ──────────────────────────────────── -->
 
-<section class="latest-post-ribbon" aria-label="Latest update">
+<aside class="latest-post-ribbon" aria-label="Latest update">
   <div class="container">
     <div class="ribbon-inner">
       <span class="ribbon-label">Latest update</span>
-      <a href="/blog/weekly-update-2026-08-10.html" class="ribbon-title">Omnideck weekly update: August 2-9, 2026</a>
+      <a href="/blog/weekly-update-2026-08-10.html" class="ribbon-title">omnideck weekly update: August 2-9, 2026</a>
       <time class="ribbon-date">August 10, 2026</time>
       <a href="/blog/weekly-update-2026-08-10.html" class="ribbon-cta">Read →</a>
     </div>
   </div>
-</section>
+</aside>
 
 
 <!-- ── HERO ──────────────────────────────────────────────── -->
-<section class="home-section">
+<section class="home-section home-hero">
   <div class="container">
-    <div class="grid col-1 md-col-2 gap-5 items-center">
+    <div class="home-hero-layout">
 
-      <div>
-        <span class="section-label">Local AI Agent Workbench</span>
-        <h1>Your agents.<br>Your system.<br><em>Your rules.</em></h1>
+      <div class="home-hero-copy">
+        <div class="product-kicker">
+          <img src="/images/omnideck-app-icon.svg" alt="" width="36" height="36">
+          <span class="section-label">omnideck</span>
+        </div>
+        <h1>Own your<br><em>AI workbench.</em></h1>
         <p class="hero-sub">
-          Run multiple custom agents on your own machine — with any LLM, cloud or local.
+          Put AI agents to work on research, projects, and recurring tasks from one desktop app. The workbench runs on your computer, and you choose the models and tools each agent can use.
         </p>
 
-        <div class="tabs-container">
-          <div class="tab-bar">
-            <button class="tab active" data-tab="macos"><span class="tab-icon icon-macos" aria-hidden="true"></span>macOS</button>
-            <button class="tab" data-tab="linux"><span class="tab-icon icon-linux" aria-hidden="true"></span>Linux</button>
-            <button class="tab" data-tab="windows"><span class="tab-icon icon-windows" aria-hidden="true"></span>Windows</button>
-          </div>
-          <div id="macos-tab" class="tab-content active">
-            <div class="install-terminal"><span class="t-prompt">$ </span><span class="t-cmd">brew install omnideck-dev/tap/omnideck</span><button class="copy-btn" aria-label="Copy command"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M8 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-2"/></svg></button></div>
-            <a href="/docs/getting-started.html" class="install-link">All install options →</a>
-          </div>
-          <div id="linux-tab" class="tab-content">
-            <div class="install-terminal"><span class="t-prompt">$ </span><span class="t-cmd">brew install omnideck-dev/tap/omnideck</span><button class="copy-btn" aria-label="Copy command"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M8 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-2"/></svg></button></div>
-            <a href="/docs/getting-started.html" class="install-link">All install options →</a>
-          </div>
-          <div id="windows-tab" class="tab-content">
-            <div class="install-terminal">Windows installer available — see setup guide.</div>
-            <a href="/docs/getting-started.html#windows" class="install-link">View Windows setup →</a>
-          </div>
+        <div class="hero-actions d-flex gap-3 flex-wrap">
+          <a href="/install.html" role="button" data-variant="primary" data-size="lg">Install omnideck →</a>
+          <a href="#capabilities" role="button" data-variant="outline" data-size="lg">Explore capabilities</a>
         </div>
 
-        <div class="trust-badges">
-          <span class="trust-badge">
-            <span class="badge-dot"></span>
+        <p class="hero-availability"><a href="/install.html">Download the free public beta</a> for macOS, Windows 11, or Linux. No omnideck account required.</p>
+
+        <ul class="trust-badges" aria-label="Product details">
+          <li class="trust-badge">
             <svg class="badge-icon" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M5.5 3L1 8l4.5 5L7 11.5 3.5 8 7 4.5 5.5 3zm5 0L6 8l4.5 5L12 11.5 8.5 8 12 4.5 10.5 3z"/></svg>
             Open source
-          </span>
-          <span class="trust-badge">
-            <span class="badge-dot"></span>
+          </li>
+          <li class="trust-badge">
             <svg class="badge-icon" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0l8 3v6c0 3.5-4 6.5-8 7-4-.5-8-3.5-8-7V3l8-3zm0 2L2 5v5c0 2.5 3 5 6 5.5 3-.5 6-3 6-5.5V5l-6-3z"/><path d="M6 8l2 2 4-4 1 1-5 5-3-3 1-1z"/></svg>
-            Privacy first
-          </span>
-          <span class="trust-badge">
-            <span class="badge-dot"></span>
+            Runs locally
+          </li>
+          <li class="trust-badge">
             <svg class="badge-icon" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M3 2h10v10H3V2zm-1 1v10c0 .6.4 1 1 1h10c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1H3c-.6 0-1 .4-1 1z"/><path d="M5 4h6v2H5V4zm0 3h6v2H5V7zm0 3h6v2H5v-2z"/></svg>
-            Container isolated
-          </span>
-        </div>
-      </div>
-
-      <aside class="screenshot-container" aria-label="Omnideck interface screenshot">
-        <img src="/images/omnideck-hero-b.png" alt="Omnideck agent workbench interface" class="screenshot" width="881" height="892">
-      </aside>
-
-    </div>
-  </div>
-</section>
-
-<section id="problem" class="band band-surface">
-  <div class="container">
-    <div class="grid col-1 md-col-2 gap-5 items-center">
-      <div>
-        <span class="section-label section-label-muted">the problem</span>
-        <h2>Cloud AI agents were designed for vendor convenience, <em>not yours.</em></h2>
-      </div>
-      <ul class="problem-list">
-        <li>Your conversations, files, and credentials flow through servers you don't control or audit.</li>
-        <li>You're locked to one model per tool. Switching providers means starting over.</li>
-        <li>One agent fits all — no way to have a coding agent, a research agent, and a writing agent with their own configs.</li>
-        <li>Autonomous background tasks are either expensive add-ons or simply missing.</li>
-        <li>Running a local model like Llama or Mistral? Agent tooling that connects to it barely exists.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section id="how-it-works" class="home-section">
-  <div class="container">
-    <header class="text-center mb-5">
-      <span class="section-label">how it works</span>
-      <h2>Install once. Configure once. <em>Just use it.</em></h2>
-      <p class="muted">The <code>omnideck</code> CLI wraps Docker or Podman and handles everything — install, update, health checks. No YAML archaeology required.</p>
-    </header>
-
-    <div class="grid col-1 md-col-3 gap-4">
-      <div class="card">
-        <span class="step-num">01 —</span>
-        <span class="step-icon">📦</span>
-        <h3>Pull and run</h3>
-        <p>One CLI command pulls the container and starts Omnideck. The setup wizard walks you through connecting your LLM providers. Everything runs locally — no accounts, no signup, no cloud dependency.</p>
-      </div>
-      <div class="card">
-        <span class="step-num">02 —</span>
-        <span class="step-icon">🤖</span>
-        <h3>Create your agents</h3>
-        <p>Build agent profiles — each with its own system prompt, model, skills, and tool access. A coding agent running on a local Llama model. A research agent on GPT-4o. A writing agent on Claude. All in one UI.</p>
-      </div>
-      <div class="card">
-        <span class="step-num">03 —</span>
-        <span class="step-icon">⚡</span>
-        <h3>Put them to work</h3>
-        <p>Chat with any agent. Switch agents mid-conversation. Watch sub-agents spin up and complete tasks in real time. Set recurring background tasks and get notified when they finish.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="home-section-top">
-  <div class="container">
-    <div class="ui-preview">
-      <img src="/images/omnideck-full-ui-b.png" alt="Omnideck full interface" width="1440" height="810">
-    </div>
-  </div>
-</section>
-
-<section id="agents" class="band band-surface">
-  <div class="container">
-    <div class="grid col-1 md-col-2 gap-5 items-center">
-
-      <div class="agent-stack">
-        <div class="agent-row active">
-          <span class="agent-avatar primary">🧠</span>
-          <div class="agent-meta">
-            <div class="agent-name">Research Agent</div>
-            <div class="agent-model">claude-sonnet-4-6 · custom prompt · web + memory tools</div>
-          </div>
-          <span class="agent-status running">active</span>
-        </div>
-
-        <div class="spawn-connector"></div>
-
-        <div class="agent-row spawned">
-          <span class="agent-avatar sub">💻</span>
-          <div class="agent-meta">
-            <div class="agent-name">Code Agent <span class="spawned-label">↳ spawned</span></div>
-            <div class="agent-model">llama-3.3-70b (local) · strict execution tools only</div>
-          </div>
-          <span class="agent-status working">working</span>
-        </div>
-
-        <div class="agent-row spawned">
-          <span class="agent-avatar sub2">✍️</span>
-          <div class="agent-meta">
-            <div class="agent-name">Summary Agent <span class="spawned-label">↳ spawned</span></div>
-            <div class="agent-model">gpt-4o-mini · write + read tools</div>
-          </div>
-          <span class="agent-status done">done</span>
-        </div>
-
-        <div class="agent-row idle">
-          <span class="agent-avatar primary">✍️</span>
-          <div class="agent-meta">
-            <div class="agent-name">Writing Agent</div>
-            <div class="agent-model">gpt-4o · focused system prompt · no browser</div>
-          </div>
-          <span class="agent-status idle">idle</span>
-        </div>
-
-        <div class="agent-row idle">
-          <span class="agent-avatar sub2">🔧</span>
-          <div class="agent-meta">
-            <div class="agent-name">DevOps Agent</div>
-            <div class="agent-model">qwen3-32b (local) · bash + files · no web</div>
-          </div>
-          <span class="agent-status idle">idle</span>
-        </div>
-
-        <p class="agent-note">switch agents at any point in the conversation →</p>
-      </div>
-
-      <div>
-        <span class="section-label">multi-agent</span>
-        <h2>One workbench.<br><em>As many agents as you need.</em></h2>
-        <p class="muted section-p">Most AI tools give you one generic assistant. Omnideck lets you build a team. Each agent is a fully independent configuration — its own model, system prompt, tool access, memory, and inference parameters. Swap between them in any conversation.</p>
-        <p class="muted section-p">And when a task calls for parallel work, the active agent can spin up sub-agents on the fly — dedicated helpers that run autonomously and report back.</p>
-        <ul class="feature-bullets">
-          <li>Per-agent model selection — mix cloud and local models in the same session</li>
-          <li>Per-agent tool access — lock an agent to only the tools it needs</li>
-          <li>Per-agent system prompts, temperature, and context window settings</li>
-          <li>Switch the active agent mid-conversation without losing context</li>
-          <li>Agents can spawn sub-agents for delegated, parallel workstreams</li>
-          <li>Watch sub-agent turns stream live — every tool call, every result</li>
+            Cloud + local models
+          </li>
         </ul>
       </div>
 
+      <figure class="hero-product">
+        <figcaption class="media-frame-header">
+          <span>omnideck · Workbench</span>
+          <button class="hero-product-context" type="button" data-lightbox-open aria-haspopup="dialog">
+            Open full size
+            <svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-arrows-fullscreen"/></svg>
+          </button>
+        </figcaption>
+        <button class="hero-product-open" type="button" data-lightbox-open aria-haspopup="dialog" aria-label="Open a larger view of the omnideck workbench screenshot">
+          <picture>
+            <source media="(max-width: 560px)" type="image/webp" srcset="/images/omnideck-artifact-mobile.webp" width="881" height="892">
+            <source type="image/webp" srcset="/images/omnideck-workbench-960.webp 960w, /images/omnideck-workbench-1440.webp 1440w" sizes="(min-width: 1180px) 640px, (min-width: 961px) 54vw, calc(100vw - 32px)">
+            <img src="/images/omnideck-full-ui-b.png" alt="omnideck showing an agent conversation beside a live artifact with code execution, browser automation, files, memory, integrations, and scheduled routines" width="1440" height="810" fetchpriority="high" decoding="async">
+          </picture>
+        </button>
+      </figure>
+
+      <dialog class="media-lightbox" data-lightbox aria-labelledby="workbench-lightbox-title">
+        <div class="media-lightbox-frame">
+          <header class="media-lightbox-header">
+            <span id="workbench-lightbox-title" data-lightbox-title>omnideck · Workbench</span>
+            <button class="media-lightbox-close" type="button" data-lightbox-close aria-label="Close larger image view">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-x-lg"/></svg>
+            </button>
+          </header>
+          <div class="media-lightbox-viewport">
+            <img src="/images/omnideck-full-ui.png" alt="omnideck showing an agent conversation beside a live artifact with code execution, browser automation, files, memory, integrations, and scheduled routines" width="2880" height="1620" loading="lazy" decoding="async" data-lightbox-image>
+          </div>
+        </div>
+      </dialog>
+
     </div>
   </div>
 </section>
 
-<section id="models" class="home-section">
+<section id="positioning" class="band band-surface home-positioning home-chapter">
   <div class="container">
-    <header class="text-center mb-4">
-      <span class="section-label">model flexibility</span>
-      <h2>The right model for <em>every job.</em></h2>
-      <p class="muted">Switch models per agent profile in seconds. Route to a local model for anything sensitive. No vendor lock-in, ever.</p>
+    <header class="home-section-header home-section-header-standalone">
+      <span class="section-label">why omnideck</span>
+      <h2>Your model provider shouldn’t own <em>your workbench.</em></h2>
+      <p>Proprietary AI platforms often bundle the model, workspace, automation, and your history into one closed service. omnideck keeps the workbench open and on your machine. You choose what agents can access, whether each job uses a local or hosted model, and when work leaves your computer.</p>
+    </header>
+  </div>
+</section>
+
+<section id="capabilities" class="home-section home-chapter">
+  <div class="container">
+    <header class="home-section-header">
+      <span class="section-label">what omnideck does</span>
+      <h2>Research, create, and automate <em>from one workbench.</em></h2>
+      <p>Put local agents to work across the web and your connected services. Keep the results as artifacts or schedule the work to run again.</p>
     </header>
 
-    <div class="grid col-1 md-col-2 gap-4">
-      <div class="card">
-        <span class="bcard-tag">per-agent model selection</span>
+    <ol class="capability-story" aria-label="A research task completed in omnideck">
+      <li class="capability-story-step">
+        <div class="capability-story-copy">
+          <span class="step-num">01 —</span>
+          <h3>Research and act on the web</h3>
+          <p>Have an agent compare sources, collect information, and move through browser-based work while you watch the live browser or take over when needed.</p>
+        </div>
+        <figure class="capability-proof">
+          <figcaption class="media-frame-header">
+            <span>Live browser · Hugging Face, Ollama, and vLLM</span>
+          </figcaption>
+          <button class="capability-proof-open" type="button" data-lightbox-open data-lightbox-src="/images/capabilities/browser-research.webp" data-lightbox-title="omnideck · Live browser research" data-lightbox-alt="omnideck showing source findings beside a live browser with Hugging Face, Ollama, and vLLM documentation open" data-lightbox-width="1440" data-lightbox-height="900" aria-haspopup="dialog" aria-label="Open a larger view of the live browser research screenshot">
+            <picture>
+              <source media="(max-width: 760px)" type="image/webp" srcset="/images/capabilities/browser-research-720.webp" width="720" height="450">
+              <img src="/images/capabilities/browser-research.webp" alt="omnideck showing source findings beside a live browser with Hugging Face, Ollama, and vLLM documentation open" width="1440" height="900" loading="lazy" decoding="async">
+            </picture>
+          </button>
+        </figure>
+      </li>
+
+      <li class="capability-story-step">
+        <div class="capability-story-copy">
+          <span class="step-num">02 —</span>
+          <h3>Create work you can use</h3>
+          <p>Turn the research into a report, spreadsheet, document, image, or working app. Each result stays in the workbench as an artifact you can inspect, refine, and download.</p>
+        </div>
+        <figure class="capability-proof">
+          <figcaption class="media-frame-header">
+            <span>Artifact preview · Model choice brief</span>
+          </figcaption>
+          <button class="capability-proof-open" type="button" data-lightbox-open data-lightbox-src="/images/capabilities/artifact-brief.webp" data-lightbox-title="omnideck · Finished artifact" data-lightbox-alt="omnideck showing a completed source-backed comparison brief open beside the conversation that created it" data-lightbox-width="1440" data-lightbox-height="900" aria-haspopup="dialog" aria-label="Open a larger view of the finished artifact screenshot">
+            <picture>
+              <source media="(max-width: 760px)" type="image/webp" srcset="/images/capabilities/artifact-brief-720.webp" width="720" height="450">
+              <img src="/images/capabilities/artifact-brief.webp" alt="omnideck showing a completed source-backed comparison brief open beside the conversation that created it" width="1440" height="900" loading="lazy" decoding="async">
+            </picture>
+          </button>
+        </figure>
+      </li>
+    </ol>
+
+    <div class="grid col-1 md-col-2 gap-4 capability-support home-card-grid">
+      <article class="card">
+        <span class="bcard-tag">recurring work</span>
+        <h3>Run useful routines</h3>
+        <p>Schedule research, monitoring, reports, and other repeatable jobs. Review every run and its results from the workbench.</p>
+      </article>
+      <article class="card">
+        <span class="bcard-tag">connected work</span>
+        <h3>Complete work across your services</h3>
+        <p>Connect email, calendars, cloud storage, contacts, and APIs so omnideck can take action across the services you already use—not just tell you what to do next.</p>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<section id="security" class="band band-surface ownership-section home-chapter">
+  <div class="container">
+    <header class="home-section-header">
+      <span class="section-label">security &amp; ownership</span>
+      <h2>The workbench runs <em>on your machine.</em></h2>
+      <p>You choose the files, services, and models an agent can use. omnideck keeps those boundaries local, visible, and under your control.</p>
+    </header>
+
+    <div class="grid col-1 md-col-2 gap-4 ownership-grid home-card-grid">
+      <article class="card">
+        <span class="bcard-tag">local by default</span>
+        <h3>Your machine is the workspace</h3>
+        <p>omnideck and its agent runtime run locally, so your workbench is not tied to a proprietary AI platform.</p>
+      </article>
+      <article class="card">
+        <span class="bcard-tag">contained execution</span>
+        <h3>Agents stay inside the boundary</h3>
+        <p>Agent work runs in an isolated container with access limited to the shared files and system commands you allow.</p>
+      </article>
+      <article class="card">
+        <span class="bcard-tag">protected credentials</span>
+        <h3>Raw keys stay out of reach</h3>
+        <p>API keys and OAuth tokens live in an encrypted local vault managed outside the agent process.</p>
+      </article>
+      <article class="card">
+        <span class="bcard-tag">your connections</span>
+        <h3>You decide what can leave</h3>
+        <p>Choose when a job uses a hosted model or connected service. omnideck itself adds no telemetry or tracking.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="workbench" class="home-section home-chapter">
+  <div class="container">
+    <header class="home-section-header">
+      <span class="section-label">your workbench</span>
+      <h2>Set it up around <em>the work you do.</em></h2>
+      <p>Create reusable agents for different kinds of work, then choose the model and tools each one should use.</p>
+    </header>
+
+    <figure class="ui-preview workbench-preview">
+      <figcaption class="media-frame-header"><span>AGENTS · 8 CONFIGURED</span></figcaption>
+      <picture>
+        <source type="image/webp" srcset="/images/agent-list-720.webp 720w, /images/agent-list.webp 1654w" sizes="(min-width: 1180px) 1140px, calc(100vw - 40px)">
+        <img src="/images/agent-list.png" alt="omnideck agent library with models, skills, and active status" width="1654" height="539" loading="lazy" decoding="async">
+      </picture>
+    </figure>
+
+    <div class="grid col-1 md-col-2 gap-4 workbench-options home-card-grid">
+      <article class="card">
+        <span class="bcard-tag">agent profiles</span>
+        <h3>A specialist for each kind of work</h3>
+        <p>Create agents for research, coding, writing, operations, or the work unique to you. Give each one its own instructions and tools, and carry useful project context into the next conversation.</p>
+      </article>
+      <article class="card">
+        <span class="bcard-tag">model choice</span>
         <h3>Cloud and local models, side by side</h3>
-        <p>Point each agent at OpenAI, Anthropic, OpenRouter, Ollama, or any OpenAI-compatible endpoint. Change the model on any agent profile in the settings panel — no restart required.</p>
-        <div class="provider-chips">
-          <span class="chip active">claude-sonnet-4-6</span>
-          <span class="chip active">gpt-4o</span>
-          <span class="chip active">llama-3.3-70b</span>
-          <span class="chip active">qwen3-32b</span>
-          <span class="chip">mistral-large</span>
-          <span class="chip">+ any endpoint</span>
-        </div>
-      </div>
-      <div class="card">
-        <span class="bcard-tag">smart context management</span>
-        <h3>Long conversations that don't break</h3>
-        <p>When a conversation approaches the model's context limit, Omnideck runs an automatic compaction pass — summarizing history while preserving critical facts. You can even assign a different, cheaper model just for compaction.</p>
-        <div class="mini-terminal">
-          <span class="mt-i">context</span>: <span class="mt-y">87,400</span> / <span class="mt-y">96,000</span> tokens<br>
-          <span class="mt-m">→ compacting with gpt-4o-mini…</span><br>
-          <span class="mt-g">✓</span> compacted to <span class="mt-y">12,200</span> tokens<br>
-          <span class="mt-g">✓</span> ready to continue
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="features" class="home-section-top">
-  <div class="container">
-    <header class="text-center mb-4">
-      <span class="section-label">built-in capabilities</span>
-      <h2>Every tool an agent needs, <em>already included.</em></h2>
-    </header>
-
-    <div class="grid gap-4 mb-4">
-      <div class="card span-12 md-span-7">
-        <span class="bcard-tag">web</span>
-        <span class="bcard-icon">🌐</span>
-        <h3>Real browser automation — structural and visual</h3>
-        <p>A persistent, headed browser handles full web automation. Agents navigate via accessibility trees for structured UIs and fall back to screenshot + vision model analysis for anything custom. Sessions, cookies, and auth state persist across tool calls.</p>
-        <div class="mini-terminal">
-          <span class="mt-i">→ tool:</span> browse_page <span class="mt-y">"https://news.ycombinator.com"</span><br>
-          <span class="mt-g">✓</span> 30 interactive elements found<br>
-          <span class="mt-i">→ tool:</span> read_page<br>
-          <span class="mt-g">✓</span> 3,800 tokens of clean markdown<br>
-          <span class="mt-i">→ tool:</span> remember <span class="mt-y">"top_story" "..."</span><br>
-          <span class="mt-g">✓</span> memory updated
-        </div>
-      </div>
-
-      <div class="card span-12 md-span-5">
-        <span class="bcard-tag">execution</span>
-        <span class="bcard-icon">💻</span>
-        <h3>Write and run code — for real</h3>
-        <p>The agent writes files, runs bash commands with full stdout/stderr streaming, installs packages, and sends output files back to the UI. Execution policy controls what it can and can't touch.</p>
-        <div class="mini-terminal">
-          <span class="mt-i">→ tool:</span> run_bash_cmd<br>
-          <span class="mt-y">"python analyze.py"</span><br>
-          <span class="mt-g">streaming…</span><br>
-          rows: 14,832 | anomalies: 3<br>
-          <span class="mt-g">✓</span> output: <span class="mt-m">report.csv</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid col-1 md-col-3 gap-4">
-      <div class="card">
-        <span class="bcard-tag">memory</span>
-        <span class="bcard-icon">🧠</span>
-        <h3>Facts that survive session resets</h3>
-        <p>Agents store and retrieve keyed facts across conversations. Atomic writes ensure nothing is lost mid-turn. Private keys are hidden from the UI.</p>
-      </div>
-      <div class="card">
-        <span class="bcard-tag">integrations</span>
-        <span class="bcard-icon">🔗</span>
-        <h3>Gmail, Google Workspace, iCloud, and HTTP APIs</h3>
-        <p>Connect Gmail, Google Workspace (Mail, Calendar, Drive, Contacts), iCloud (email and calendar), or any REST endpoint — each integration isolated in its own broker process, credentials never exposed to the agent.</p>
-      </div>
-      <div class="card">
-        <span class="bcard-tag">files</span>
-        <span class="bcard-icon">📁</span>
-        <h3>Full filesystem access in the shared space</h3>
-        <p>Read, write, edit, patch, grep, move. Agents work inside the shared file space you define — and only there.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="security" class="band band-surface">
-  <div class="container">
-    <div class="grid col-1 md-col-2 gap-5 items-center">
-
-      <div class="sec-diagram">
-        <div class="sec-box outer">
-          <span class="sec-label sl-green">🛡 Omnideck Container (isolated)</span>
-          <span class="sec-item">Agent UI &amp; API server</span>
-          <span class="sec-item">Agent loop + tools</span>
-          <span class="sec-item">Browser automation (headed, isolated)</span>
-          <span class="sec-item">Code execution (policy-controlled)</span>
-          <div class="sec-box inner">
-            <span class="sec-label sl-indigo">🔌 Integration Supervisor (isolated process)</span>
-            <span class="sec-item">Credential broker — agent never sees raw keys</span>
-            <span class="sec-item">LLM proxy for brokered providers</span>
-            <div class="sec-box vault">
-              <span class="sec-label sl-magenta">🔒 Encrypted Vault</span>
-              <span class="sec-item">API keys &amp; OAuth tokens at rest</span>
+        <p>Use recent open-weight models through Ollama, OpenRouter, or another OpenAI-compatible provider. Run models locally when they fit your machine and use hosted models when they fit the job.</p>
+        <div class="model-examples" aria-label="Current cloud and local model examples">
+          <div class="model-example-group">
+            <span class="model-example-label">Hosted</span>
+            <div class="provider-chips">
+              <span class="chip">DeepSeek V4 Flash</span>
+              <span class="chip">Kimi K2.6</span>
+              <span class="chip">GLM 5.2</span>
+            </div>
+          </div>
+          <div class="model-example-group">
+            <span class="model-example-label">Local</span>
+            <div class="provider-chips">
+              <span class="chip">Qwen 3.6</span>
+              <span class="chip">Gemma 4</span>
+              <span class="chip">Granite 4.1</span>
             </div>
           </div>
         </div>
-        <div class="sec-divider"></div>
-        <div class="sec-notes">
-          <span>📂 Shared file space — you define the boundary</span><br>
-          <span>🚫 No access to rest of your filesystem</span><br>
-          <span>🚫 No telemetry or tracking</span><br>
-          <span>🚫 Agent cannot read the credential vault</span>
-        </div>
-      </div>
-
-      <div>
-        <span class="section-label">security &amp; privacy</span>
-        <h2>The agent is sandboxed. <em>Your system is not its playground.</em></h2>
-        <p class="muted section-p">Omnideck runs entirely inside a container. The agent has no access to your filesystem, processes, or network outside of what you explicitly share. If an agent makes a mistake or goes off-script, the blast radius is the container — not your machine.</p>
-        <p class="muted section-p">Credentials for external services live in an encrypted local vault managed by an isolated supervisor process. The agent itself never handles raw API keys.</p>
-        <ul class="feature-bullets">
-          <li>Container boundary prevents filesystem and process access beyond the shared space</li>
-          <li>Credentials encrypted at rest (AES-256-GCM), never visible to the agent or the LLM</li>
-          <li>Three-UID process model — the agent's OS user literally cannot open the credential vault</li>
-          <li>Execution policy controls which bash commands the agent is allowed to run</li>
-          <li>No outbound connections to tracking servers — your data stays on your machine</li>
-        </ul>
-      </div>
-
+      </article>
     </div>
   </div>
 </section>
 
-<section id="tasks" class="home-section">
+<section id="extend" class="band band-surface home-chapter">
   <div class="container">
-    <div class="grid col-1 md-col-2 gap-5 items-center">
+    <header class="home-section-header">
+      <span class="section-label">extend omnideck</span>
+      <h2>Build the workbench <em>your work needs.</em></h2>
+      <p>Add new actions, repeatable ways of working, and focused interfaces without waiting for them to become built-in features.</p>
+    </header>
 
-      <div>
-        <span class="section-label">autonomous tasks</span>
-        <h2>Set it. Forget it.<br><em>Get notified.</em></h2>
-        <p class="muted section-p">Define goals with ordered task lists and recurring schedules. The task engine runs them in the background, using the same agent loop and tool access as interactive conversations. When a run completes — or fails — you get a notification with output files attached.</p>
-        <ul class="feature-bullets">
-          <li>Cron-style or one-off scheduling with full timezone support</li>
-          <li>Concurrent goal execution with configurable limits</li>
-          <li>Crash-safe: tasks stuck in "running" reset automatically on restart</li>
-          <li>Full goal, run, and result history persisted to disk</li>
-        </ul>
-      </div>
-
-      <div class="tasks-log">
-        <div class="tasks-log-head">⚡ task runner — 2 active</div>
-        <div class="log-row"><span>daily-digest</span>     <span class="log-sched">08:00 UTC</span></div>
-        <div class="log-row"><span>competitor-scan</span>  <span class="log-run">running…</span></div>
-        <div class="log-row"><span>backup-export</span>    <span class="log-ok">✓ completed</span></div>
-        <div class="log-row"><span>weekly-summary</span>   <span class="log-sched">fri 09:00</span></div>
-        <div class="log-row"><span>monitor-uptime</span>   <span class="log-ok">✓ completed</span></div>
-        <span class="log-notify">📬 "competitor-scan done — 3 new findings. report.pdf attached."</span>
-      </div>
-
+    <div class="grid col-1 md-col-3 gap-4 home-card-grid">
+      <article class="card">
+        <span class="bcard-tag">tools</span>
+        <h3>Connect new actions</h3>
+        <p>Connect APIs, local commands, and services so agents can carry work through to completion.</p>
+      </article>
+      <article class="card">
+        <span class="bcard-tag">skills</span>
+        <h3>Reuse the way you work</h3>
+        <p>Package instructions and resources that agents can apply whenever the same kind of work returns.</p>
+      </article>
+      <article class="card">
+        <span class="bcard-tag">custom apps</span>
+        <h3>Give workflows an interface</h3>
+        <p>Build focused interfaces for repeated workflows and run them directly inside the workbench.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="quote-band">
+<section id="get-started" class="home-section home-chapter">
   <div class="container">
-    <blockquote>
-      "You shouldn't have to choose between <em>a capable AI agent</em> and <em>owning your own data</em>. Omnideck is the workbench that doesn't make you pick."
-    </blockquote>
+    <header class="home-section-header">
+      <span class="section-label">get started</span>
+      <h2>Start in <em>three steps.</em></h2>
+      <p>Install the app, choose a model, and give an agent its first job.</p>
+    </header>
+
+    <div class="grid col-1 md-col-3 gap-4 home-card-grid">
+      <article class="card action-card">
+        <span class="step-num">01 —</span>
+        <h3><a href="/install.html">Install omnideck</a></h3>
+        <p>Choose the installer for your computer and follow setup into your local workbench.</p>
+      </article>
+      <article class="card">
+        <span class="step-num">02 —</span>
+        <h3>Choose a model</h3>
+        <p>Connect a hosted provider or use Ollama for models running on your machine.</p>
+      </article>
+      <article class="card">
+        <span class="step-num">03 —</span>
+        <h3>Give an agent a job</h3>
+        <p>Open the workbench and give an agent a job—research a question, create something useful, or set up work to run again.</p>
+      </article>
+    </div>
   </div>
 </section>
 
-<section class="band band-surface cta-section">
+<section class="band band-surface cta-section home-chapter">
   <div class="container">
-    <span class="section-label">get started</span>
-    <h2>Your agents. Your models.<br><em>Your machine.</em></h2>
-    <p class="muted cta-body">Omnideck is open source and free to run. Pull the container, connect your LLMs, and have your first agent working in under five minutes.</p>
+    <span class="section-label">install omnideck</span>
+    <h2>Your workbench. Your models.<br><em>Your machine.</em></h2>
+    <p class="muted cta-body">omnideck is open source and free to run. Install the app and put your local workbench to work.</p>
     <div class="d-flex gap-3 flex-wrap justify-center">
-      <a href="https://www.omnideck.dev/docs/getting-started.html" role="button" data-variant="primary" data-size="lg">Install Omnideck →</a>
+      <a href="/install.html" role="button" data-variant="primary" data-size="lg">Install omnideck →</a>
+      <a href="/docs/getting-started.html" role="button" data-variant="outline" data-size="lg">Read the quickstart</a>
     </div>
   </div>
 </section>
@@ -469,21 +406,26 @@
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

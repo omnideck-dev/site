@@ -3,26 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="description" content="Complete reference for the omnideck CLI — commands, flags, and configuration.">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="Install omnideck from the terminal and use the commands available in the current standalone CLI.">
   <meta property="og:title" content="CLI Reference">
-  <meta property="og:description" content="Complete reference for the omnideck CLI — commands, flags, and configuration.">
+  <meta property="og:description" content="Install omnideck from the terminal and use the commands available in the current standalone CLI.">
   
-  <title>CLI Reference | Docs | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  <title>CLI Reference | Docs | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
   
 </head>
 <body class="lattice ">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -30,23 +49,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -54,32 +80,31 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
 <div class="container py-5">
   <div class="grid gap-5">
     <div class="span-12 md-span-3">
-      <aside class="docs-sidebar sticky">
+      <aside class="docs-sidebar">
   <span class="docs-nav-label">Documentation</span>
   <nav>
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/configuration.html">Configuration</a>
+    <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
     
     <a href="/docs/agents.html">Agents</a>
     
-    <a href="/docs/tasks.html">Autonomous Tasks</a>
+    <a href="/docs/routines.html">Routines</a>
     
     <a href="/docs/integrations.html">Integrations</a>
     
@@ -96,147 +121,415 @@
   </nav>
 </aside>
 
+<details class="docs-mobile-nav">
+  <summary>Documentation</summary>
+  <div class="docs-mobile-nav-body">
+    <span class="docs-nav-label">Documentation</span>
+    <nav>
+      
+      <a href="/docs/getting-started.html">Getting Started</a>
+      
+      <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
+      
+      <a href="/docs/agents.html">Agents</a>
+      
+      <a href="/docs/routines.html">Routines</a>
+      
+      <a href="/docs/integrations.html">Integrations</a>
+      
+      <a href="/docs/local-models.html">Local Models</a>
+      
+      <a href="/docs/cli-reference.html">CLI Reference</a>
+      
+    </nav>
+    <span class="docs-nav-label">Guides</span>
+    <nav>
+      
+      <a href="/guides/slack-integration.html">Slack Integration</a>
+      
+    </nav>
+  </div>
+</details>
+
     </div>
     <article class="span-12 md-span-9">
       <h1>CLI Reference</h1>
       
-      <p class="muted">Complete reference for the omnideck CLI — commands, flags, and configuration.</p>
+      <p class="muted">Install omnideck from the terminal and use the commands available in the current standalone CLI.</p>
       <hr>
       
-      <p>The <code>omnideck</code> CLI installs, manages, and monitors your Omnideck container. It wraps Podman or Docker with a guided installer and simple management commands. Other container engines (such as Colima) are not supported at this time.</p>
+      <div class="callout" data-tone="info"><strong>Most people should start with the <a href="/install.html">omnideck desktop app</a>.</strong> Use the standalone CLI if you prefer to install and manage omnideck from a terminal.</div>
+<p>The <code>omnideck</code> CLI sets up and manages the same local omnideck runtime as the desktop app. It uses Podman on Windows, macOS, and Linux; other container runtimes are not supported.</p>
+<p>Running <code>omnideck</code> without a subcommand opens the appropriate interactive screen for first setup, runtime preparation, repair, or managing an existing installation.</p>
+<p>This reference was verified against the published <code>v0.10.0</code> stable and <code>v0.11.0-beta.5</code> preview binaries. Run <code>omnideck --version</code> to check the build installed on your computer.</p>
+<h2 id="install-the-cli">Install the CLI</h2>
+<h3>Homebrew on macOS or Linux</h3>
+<p>The Homebrew tap is the non-preview CLI channel:</p>
+<pre><code class="language-bash">brew install omnideck-dev/tap/omnideck
+</code></pre>
+<p>Upgrade it later with:</p>
+<pre><code class="language-bash">brew upgrade omnideck
+</code></pre>
+<h3>Release archive</h3>
+<p>For the current stable command set, Windows builds, preview builds, or a manual installation, download the archive for your operating system and architecture from the <a href="https://github.com/omnideck-dev/cli/releases" target="_blank" rel="noopener">omnideck CLI releases ↗<span class="sr-only"> (opens in a new tab)</span></a>. Releases include Linux and macOS tar archives, Windows ZIP archives, and a <code>SHA256SUMS</code> file.</p>
+<p>Extract <code>omnideck</code> (<code>omnideck.exe</code> on Windows), put it somewhere on your <code>PATH</code>, and verify the installation:</p>
+<pre><code class="language-bash">omnideck --version
+</code></pre>
+<p>Run <code>omnideck</code> as your normal user. Do not put <code>sudo</code> before it or choose <strong>Run as administrator</strong>; guided setup asks the operating system for approval only when a system change requires it.</p>
+<h2>First run</h2>
+<pre><code class="language-bash">omnideck
+</code></pre>
+<p>The first run prepares Podman when needed and guides you through creating the first omnideck installation. When setup finishes:</p>
+<pre><code class="language-bash">omnideck doctor
+omnideck status
+</code></pre>
+<p>The local browser address is normally <code>http://localhost:2337</code> and is also shown by <code>omnideck list</code> and <code>omnideck status</code>.</p>
 <h2>Commands</h2>
+<h3>Setup and everyday management</h3>
 <table>
 <thead>
 <tr>
 <th>Command</th>
-<th>Description</th>
+<th>What it does</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>install</code></td>
-<td>Interactive TUI wizard — install or update an existing instance</td>
+<td><code>omnideck</code></td>
+<td>Open the right interactive screen for setup, repair, or management</td>
 </tr>
 <tr>
-<td><code>update</code></td>
-<td>Pull the latest image and recreate the container</td>
+<td><code>omnideck tui</code></td>
+<td>Open the terminal dashboard directly</td>
 </tr>
 <tr>
-<td><code>start</code></td>
-<td>Start a stopped container</td>
+<td><code>omnideck add</code></td>
+<td>Set up one new instance; <code>install</code> and <code>setup</code> are supported aliases</td>
 </tr>
 <tr>
-<td><code>stop</code></td>
-<td>Gracefully stop the running container</td>
+<td><code>omnideck list</code></td>
+<td>List saved instances, their status, and browser addresses; <code>instances</code> is an alias</td>
 </tr>
 <tr>
-<td><code>restart</code></td>
-<td>Stop then start</td>
+<td><code>omnideck update</code></td>
+<td>Download the current omnideck image and safely recreate an instance while keeping its data</td>
 </tr>
 <tr>
-<td><code>status</code></td>
-<td>Print a status table (container, data dirs, Ollama, web UI port)</td>
+<td><code>omnideck start</code></td>
+<td>Start a stopped instance</td>
 </tr>
 <tr>
-<td><code>logs</code></td>
-<td>Tail container logs</td>
+<td><code>omnideck stop</code></td>
+<td>Stop an instance</td>
 </tr>
 <tr>
-<td><code>doctor</code></td>
-<td>Run parallel health checks and print a pass/warn/fail report</td>
+<td><code>omnideck restart</code></td>
+<td>Stop and start an instance without changing its saved configuration</td>
 </tr>
 <tr>
-<td><code>config show</code></td>
-<td>Pretty-print the saved config</td>
+<td><code>omnideck status</code></td>
+<td>Show the selected instance, image, runtime, volumes, Ollama status, and browser address</td>
 </tr>
 <tr>
-<td><code>config set &lt;key&gt; &lt;value&gt;</code></td>
-<td>Update a single config key</td>
+<td><code>omnideck logs</code></td>
+<td>Show logs and follow new output by default</td>
 </tr>
 <tr>
-<td><code>config path</code></td>
-<td>Print the config file path</td>
+<td><code>omnideck doctor</code></td>
+<td>Check Podman, the instance, browser access, saved data, available memory, and optional Ollama access</td>
 </tr>
 <tr>
-<td><code>uninstall</code></td>
-<td>Stop, remove container, optionally delete data</td>
+<td><code>omnideck remove NAME</code></td>
+<td>Remove one instance; keeps its data unless deletion is explicitly confirmed; <code>uninstall</code> is an alias</td>
+</tr>
+<tr>
+<td><code>omnideck help [command]</code></td>
+<td>Show help for the CLI or one command; <code>&lt;command&gt; --help</code> does the same thing</td>
 </tr>
 </tbody>
 </table>
+<h3>Saved configuration</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>omnideck config show</code></td>
+<td>Display the selected instance configuration</td>
+</tr>
+<tr>
+<td><code>omnideck config set &lt;key&gt; &lt;value&gt;</code></td>
+<td>Change one supported setting</td>
+</tr>
+<tr>
+<td><code>omnideck config path</code></td>
+<td>Print the selected instance configuration path</td>
+</tr>
+</tbody>
+</table>
+<p>Supported keys for <code>config set</code> are <code>home_volume</code>, <code>state_volume</code>, <code>memory</code>, <code>shm_size</code>, <code>web_ui_port</code>, and <code>image</code>. Apply a changed setting by running <code>omnideck update</code> for that instance; a simple restart does not recreate the container with new settings.</p>
+<h3>Runtime and automation</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>omnideck runtime status</code></td>
+<td>Report whether the shared Podman runtime is ready</td>
+</tr>
+<tr>
+<td><code>omnideck runtime ensure</code></td>
+<td>Prepare or repair the shared Podman runtime</td>
+</tr>
+<tr>
+<td><code>omnideck environment ensure</code></td>
+<td>Reconcile an exact application environment for the desktop app or automation</td>
+</tr>
+<tr>
+<td><code>omnideck completion &lt;shell&gt;</code></td>
+<td>Generate a completion script for Bash, Fish, PowerShell, or Zsh</td>
+</tr>
+</tbody>
+</table>
+<p><code>environment ensure</code> requires <code>--name</code> and accepts <code>--image</code>, <code>--port</code>, <code>--memory</code>, <code>--shm-size</code>, <code>--home-volume</code>, and <code>--state-volume</code>. It is primarily an integration surface for the desktop app and automation; interactive users normally use bare <code>omnideck</code> or <code>omnideck add</code>.</p>
 <h2>Global flags</h2>
-<pre><code>--config string   Config file path (default: ~/.config/omnideck-cli/config.yaml)
---name string     Instance name (e.g. omnideck, omnideck2)
---no-color        Disable color output
---debug           Print raw engine commands and stderr
---version         Print version and exit
-</code></pre>
-<h2>Install flags</h2>
-<pre><code>--image string    Override the container image (for testing alternate builds)
-</code></pre>
-<h2>Logs flags</h2>
-<pre><code>--follow, -f      Follow log output
---tail int        Number of lines to show from the end of the logs
-</code></pre>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--config &lt;path&gt;</code></td>
+<td>Use an explicit configuration file</td>
+</tr>
+<tr>
+<td><code>--name &lt;name&gt;</code>, <code>-n &lt;name&gt;</code></td>
+<td>Select an instance by name</td>
+</tr>
+<tr>
+<td><code>--no-color</code></td>
+<td>Disable styled output</td>
+</tr>
+<tr>
+<td><code>--debug</code></td>
+<td>Print raw Podman commands and output</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td>Emit machine-readable JSON or NDJSON; never prompt or open the terminal UI</td>
+</tr>
+</tbody>
+</table>
+<p>Run <code>omnideck --version</code> to print the version, commit, and build date. <code>--version</code> belongs to the root command rather than every subcommand.</p>
+<p>Every command also accepts <code>-h</code> or <code>--help</code>.</p>
+<p><code>--json</code> also selects the non-interactive path for commands that support one. When more than one instance exists, non-interactive commands require <code>--name</code> instead of opening a picker.</p>
+<h2>Command-specific flags</h2>
+<h3><code>add</code></h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--plain</code></td>
+<td>Run non-interactively with plain-text output</td>
+</tr>
+<tr>
+<td><code>--port &lt;port&gt;</code></td>
+<td>Set the local browser port; default is <code>2337</code></td>
+</tr>
+<tr>
+<td><code>--memory &lt;size&gt;</code></td>
+<td>Set the container memory limit, such as <code>2g</code></td>
+</tr>
+<tr>
+<td><code>--shm-size &lt;size&gt;</code></td>
+<td>Set shared memory, such as <code>1024m</code></td>
+</tr>
+<tr>
+<td><code>--image &lt;reference&gt;</code></td>
+<td>Use a different container image</td>
+</tr>
+<tr>
+<td><code>--runtime podman</code></td>
+<td>Compatibility flag; Podman is the only accepted runtime</td>
+</tr>
+<tr>
+<td><code>--suggest-defaults</code></td>
+<td>Print the next available name and port; intended for JSON automation</td>
+</tr>
+</tbody>
+</table>
+<p>The global <code>--name</code> flag sets the new instance name when used with <code>add</code>.</p>
+<h3><code>update</code></h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--plain</code></td>
+<td>Update non-interactively with plain-text output</td>
+</tr>
+</tbody>
+</table>
+<h3><code>logs</code></h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--follow</code>, <code>-f</code></td>
+<td>Follow new log output; defaults to <code>true</code> outside JSON mode</td>
+</tr>
+<tr>
+<td><code>--tail &lt;lines&gt;</code></td>
+<td>Start with this many lines; default is <code>50</code></td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>--follow=false</code> for a finite plain-text log read. In JSON mode, following defaults to <code>false</code> unless you explicitly pass <code>--follow</code>.</p>
+<h3><code>remove NAME</code></h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--plain</code></td>
+<td>Remove non-interactively with plain-text output</td>
+</tr>
+<tr>
+<td><code>--yes</code></td>
+<td>Skip the confirmation prompt; required with <code>--plain</code> or <code>--json</code></td>
+</tr>
+<tr>
+<td><code>--keep-volumes</code></td>
+<td>Keep saved data volumes</td>
+</tr>
+<tr>
+<td><code>--delete-volumes</code></td>
+<td>Permanently delete saved data volumes</td>
+</tr>
+<tr>
+<td><code>--backup</code></td>
+<td>Back up data before deleting volumes</td>
+</tr>
+<tr>
+<td><code>--no-backup</code></td>
+<td>Delete volumes without a backup</td>
+</tr>
+</tbody>
+</table>
+<p>Non-interactive removal requires exactly one of <code>--keep-volumes</code> or <code>--delete-volumes</code>. Deleting volumes also requires exactly one of <code>--backup</code> or <code>--no-backup</code>.</p>
 <h2>Examples</h2>
-<pre><code class="language-bash"># Tail logs and follow
-omnideck logs --follow --tail 100
+<pre><code class="language-bash"># Create another instance interactively
+omnideck add
 
-# Run health checks
-omnideck doctor
+# List every saved instance
+omnideck list
 
-# Manage a specific instance by name
+# Inspect and manage a specific instance
 omnideck --name omnideck2 status
 omnideck --name omnideck2 stop
+omnideck --name omnideck2 start
 
-# Test an alternate image without changing the default
-omnideck install --image ghcr.io/example/omnideck:dev
+# Follow logs, starting with the latest 100 lines
+omnideck --name omnideck2 logs --tail 100
 
-# Update a config value
-omnideck config set memory 6g
+# Run health checks
+omnideck --name omnideck2 doctor
 
-# Uninstall a specific instance
-omnideck --name omnideck2 uninstall
+# Change a setting, then recreate safely to apply it
+omnideck --name omnideck2 config set memory 4g
+omnideck --name omnideck2 update
+
+# Create an instance without a TUI
+omnideck add --plain --name staging --port 2338
+
+# Remove an instance interactively
+omnideck remove staging
 </code></pre>
-<h2>The <code>doctor</code> command</h2>
-<p><code>omnideck doctor</code> runs parallel health checks and prints a pass/warn/fail report:</p>
-<ul>
-<li><strong>Container</strong> — is the container running and on the expected image?</li>
-<li><strong>Data directories</strong> — does <code>~/Omnideck</code> exist and is it writable?</li>
-<li><strong>Ollama</strong> — is Ollama reachable on the host? (only relevant for local models)</li>
-<li><strong>Web UI</strong> — is the web UI responding on the configured port?</li>
-</ul>
-<p>Start here when something isn't working. The output tells you exactly what's wrong and how to fix it.</p>
 <h2>Multiple instances</h2>
-<p>If Omnideck is already installed, <code>omnideck install</code> asks whether to update the existing instance or install a new one. New instances get a unique container name (<code>omnideck2</code>, <code>omnideck3</code>, …), separate data directories under <code>~/Omnideck2</code>, and an incremented port.</p>
-<p>Commands that need an instance (e.g. <code>start</code>, <code>status</code>) show a picker when more than one instance exists, or accept <code>--name</code> to skip the prompt.</p>
-<h2>Configuration file</h2>
-<p>Config files live at:</p>
-<pre><code>~/.config/omnideck-cli/instances/&lt;container-name&gt;.yaml
-</code></pre>
+<p><code>omnideck add</code> creates one additional instance with its own name, browser port, home volume, and state volume. <code>omnideck list</code> shows all saved instances.</p>
+<p>Commands that act on one instance open a picker when more than one exists. Pass <code>--name</code> to select directly. Scripts and JSON callers must pass <code>--name</code>; the CLI never opens a picker without an interactive terminal.</p>
+<h2 id="configuration">Configuration</h2>
+<h3>Configuration files</h3>
+<p>Instance files live under the platform's conventional configuration directory:</p>
+<table>
+<thead>
+<tr>
+<th>Operating system</th>
+<th>Directory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux</td>
+<td><code>$XDG_CONFIG_HOME/omnideck-cli</code>, or <code>~/.config/omnideck-cli</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/omnideck-cli</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>%AppData%\omnideck-cli</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each instance is stored at <code>instances/&lt;name&gt;.yaml</code>. The shared Podman choice is stored separately in <code>settings.yaml</code>.</p>
 <pre><code class="language-yaml">container_name: omnideck
-shared_dir: /home/user/Omnideck
-state_dir: /home/user/Omnideck/.state
-memory: 3g
-shm_size: 1536m
+layout_version: 1
+home_volume: omnideck-home
+state_volume: omnideck-state
+memory: 2g
+shm_size: 1024m
 web_ui_port: &quot;2337&quot;
-engine: docker
-image: ghcr.io/omnideck-dev/omnideck:main
-installed_at: 2025-01-15T10:30:00Z
+image: ghcr.io/omnideck-dev/omnideck:latest
+installed_at: 2026-08-16T12:00:00Z
 </code></pre>
-<ul>
-<li><strong><code>shared_dir</code></strong> — mounted into the container, visible to you as <code>~/Omnideck</code></li>
-<li><strong><code>state_dir</code></strong> — hidden subdirectory for persistent container state</li>
-<li><strong><code>memory</code></strong> and <strong><code>shm_size</code></strong> — set by the wizard, can be changed with <code>config set</code></li>
-</ul>
-<h2>Building from source</h2>
-<p>To build the Omnideck container image yourself instead of pulling from the registry:</p>
-<pre><code class="language-bash">git clone https://github.com/omnideck-dev/omnideck
-cd omnideck
-docker build -f container/Dockerfile -t omnideck:latest .
+<p>The home and state values are Podman volume names, not host directory paths. The home volume holds user-visible working files; the state volume holds application state. <code>omnideck remove</code> keeps both unless you explicitly choose permanent deletion.</p>
+<div class="callout" data-tone="warn"><strong>Treat the state volume as sensitive.</strong> It contains application state, encrypted credential data, and the local key used to decrypt it. Protect exported copies like a password-manager backup.</div>
+<h3>Memory limits</h3>
+<p>Guided setup suggests a container memory limit based on the computer's total RAM, from 1 GB on smaller systems up to 6 GB on larger ones. Shared memory defaults to half of the container limit. On macOS, the container limit also stays below the memory assigned to the Podman machine.</p>
+<p>These limits apply to the omnideck container, not to Ollama or another model server running separately on the host. Check the requirements of any local model you plan to use.</p>
+<p>Change the limits, then recreate the container safely to apply them:</p>
+<pre><code class="language-bash">omnideck config set memory 4g
+omnideck config set shm_size 2g
+omnideck update
 </code></pre>
-<p>Then point the CLI at your local image:</p>
-<pre><code class="language-bash">omnideck install --image omnideck:latest
+<h2>Build from source</h2>
+<p>Building the CLI requires Go 1.25.13 or newer:</p>
+<pre><code class="language-bash">git clone https://github.com/omnideck-dev/cli
+cd cli
+go build -trimpath -o omnideck .
 </code></pre>
+<p>Run <code>./omnideck --version</code>, then move the binary to a directory on your <code>PATH</code> if you want it available system-wide.</p>
 
     </article>
   </div>
@@ -244,21 +537,26 @@ docker build -f container/Dockerfile -t omnideck:latest .
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

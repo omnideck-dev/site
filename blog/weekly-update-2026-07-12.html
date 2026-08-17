@@ -3,30 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
   <meta name="description" content="25 PRs merged across four repos this week. Conversation folders and archiving, portable agent profile packs, multi-file chat attachments, and a more resilient browsing agent.">
-  <meta property="og:title" content="Omnideck weekly update: July 6-12, 2026">
+  <meta property="og:title" content="omnideck weekly update: July 6-12, 2026">
   <meta property="og:description" content="25 PRs merged across four repos this week. Conversation folders and archiving, portable agent profile packs, multi-file chat attachments, and a more resilient browsing agent.">
   
   <meta property="og:image" content="https://www.omnideck.dev/images/weekly-update.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://www.omnideck.dev/images/weekly-update.png">
   
-  <title>Omnideck weekly update: July 6-12, 2026 | Blog | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  <title>omnideck weekly update: July 6-12, 2026 | Blog | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
   
 </head>
 <body class="lattice ">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -34,23 +53,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -58,26 +84,25 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
 
 <div class="container blog-hero-image">
-  <img src="/images/weekly-update.png" alt="Omnideck weekly update: July 6-12, 2026" class="blog-hero-img">
+  <img src="/images/weekly-update.png" alt="omnideck weekly update: July 6-12, 2026" class="blog-hero-img">
 </div>
 
 <article class="container py-5 blog-article">
   <header class="blog-header">
-    <h1>Omnideck weekly update: July 6-12, 2026</h1>
+    <h1>omnideck weekly update: July 6-12, 2026</h1>
     <p class="muted"><time>July 13, 2026</time> · Ron Northcutt</p>
     <div class="tag-chips"><a href="/blog/tags/changelog.html" class="tag-chip">Changelog</a></div>
     <p>25 PRs merged across four repos this week. Conversation folders and archiving, portable agent profile packs, multi-file chat attachments, and a more resilient browsing agent.</p>
@@ -114,7 +139,7 @@
 <p>The browsing agent picked up three real upgrades. <code>read_page</code> now returns the whole page instead of forcing you to guess at chunking, with navigation by chunk and query layered on top (#148). The DOM walk in <code>browse_page</code> stopped pruning subtrees just because they're off-viewport (#149), so the agent can see content that isn't currently on screen. We also added a <code>curl_cffi</code> fetch fallback for sites that throw up anti-bot interstitials (#132). The agent doesn't just stall out when a site gets defensive.</p>
 <hr>
 <h2>Site work picked up too</h2>
-<p>The Omnideck site now supports blog hero images (#47) and tags (#48). Larry's first blog post went up (#49), along with fixes to make <code>og:image</code> work for social previews (#50, #52, #53) and an update to the origin story post (#51). If you've shared an Omnideck link on X or LinkedIn recently, this is why the preview image finally looks right.</p>
+<p>The omnideck site now supports blog hero images (#47) and tags (#48). Larry's first blog post went up (#49), along with fixes to make <code>og:image</code> work for social previews (#50, #52, #53) and an update to the origin story post (#51). If you've shared an omnideck link on X or LinkedIn recently, this is why the preview image finally looks right.</p>
 <hr>
 <h2>Docs and distribution</h2>
 <p>The README and license got updated to Apache 2 (#144), making the open-source terms official. The Homebrew tap moved up to v0.8.0 (#4), so anyone installing via Homebrew gets the latest build.</p>
@@ -123,21 +148,26 @@
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

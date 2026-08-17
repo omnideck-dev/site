@@ -3,30 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="description" content="The origin story of Omnideck: from a summer experiment with local LLMs to an open-source AI agent workbench built on freedom-first principles.">
-  <meta property="og:title" content="How Omnideck Got Started">
-  <meta property="og:description" content="The origin story of Omnideck: from a summer experiment with local LLMs to an open-source AI agent workbench built on freedom-first principles.">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="The origin story of omnideck: from a summer experiment with local LLMs to an open-source AI agent workbench built on freedom-first principles.">
+  <meta property="og:title" content="How omnideck Got Started">
+  <meta property="og:description" content="The origin story of omnideck: from a summer experiment with local LLMs to an open-source AI agent workbench built on freedom-first principles.">
   
   <meta property="og:image" content="https://www.omnideck.dev/images/omnideck_hero_banner.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://www.omnideck.dev/images/omnideck_hero_banner.png">
   
-  <title>How Omnideck Got Started | Blog | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  <title>How omnideck Got Started | Blog | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
   
 </head>
 <body class="lattice ">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -34,23 +53,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -58,32 +84,31 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
 
 <div class="container blog-hero-image">
-  <img src="/images/omnideck_hero_banner.png" alt="How Omnideck Got Started" class="blog-hero-img">
+  <img src="/images/omnideck_hero_banner.png" alt="How omnideck Got Started" class="blog-hero-img">
 </div>
 
 <article class="container py-5 blog-article">
   <header class="blog-header">
-    <h1>How Omnideck Got Started</h1>
+    <h1>How omnideck Got Started</h1>
     <p class="muted"><time>July 4, 2026</time> · Larry Foulkrod</p>
     <div class="tag-chips"><a href="/blog/tags/freedom-first.html" class="tag-chip">freedom-first</a><a href="/blog/tags/local-ai.html" class="tag-chip">local-ai</a><a href="/blog/tags/open-source.html" class="tag-chip">open-source</a><a href="/blog/tags/origin-story.html" class="tag-chip">origin-story</a></div>
-    <p>The origin story of Omnideck: from a summer experiment with local LLMs to an open-source AI agent workbench built on freedom-first principles.</p>
+    <p>The origin story of omnideck: from a summer experiment with local LLMs to an open-source AI agent workbench built on freedom-first principles.</p>
   </header>
   <hr>
-  <p>It's weird to look back and realize that Omnideck (a tool I now depend on every single day, sometimes against my better judgment) originated as a glorified science experiment. A year ago, it didn't even have a &quot;proper&quot; name. I called it <code>computron_9000</code>, a half-baked project I assembled in the summer of 2025 to experiment with local LLMs. Back then, the idea of running language models on your own hardware was still new enough that you had to kludge together your own tools if you wanted to do anything useful. Open-source harnesses like OpenClaw weren't really a thing yet, so if you wanted to experiment, you were on your own, armed with nothing but Google searches and stubbornness.</p>
+  <p>It's weird to look back and realize that omnideck (a tool I now depend on every single day, sometimes against my better judgment) originated as a glorified science experiment. A year ago, it didn't even have a &quot;proper&quot; name. I called it <code>computron_9000</code>, a half-baked project I assembled in the summer of 2025 to experiment with local LLMs. Back then, the idea of running language models on your own hardware was still new enough that you had to kludge together your own tools if you wanted to do anything useful. Open-source harnesses like OpenClaw weren't really a thing yet, so if you wanted to experiment, you were on your own, armed with nothing but Google searches and stubbornness.</p>
 <p>I was just curious. As a software developer, I've always been the type to poke at new tech until it either breaks or starts working well enough to be useful. Local LLMs were no different. I wanted to see what they could do, how they could fit into my workflow, and (let's be honest) whether they were just hype or something truly worth paying attention to. So, I built a basic harness to talk to them. It wasn't pretty, but it worked, which in software is basically the same thing as pretty.</p>
 <h2>From Toy to Tool</h2>
 <p>At first, <code>computron_9000</code> was little more than a command-line script with delusions of grandeur. But the more I used it, the more I recognized I needed something better. I needed a way to keep my experiments isolated from the rest of my system, so I containerized it, mostly so a bad prompt couldn't take down my whole machine. I wanted a UI, so I leaned on my React experience and built one. It was still rough around the edges, but it was <em>mine</em> — a tool that evolved alongside my needs, and occasionally against my will.</p>
@@ -97,23 +122,23 @@
 <p>Ron's first reaction? <em>&quot;This is cool, but how the hell do I install it?&quot;</em></p>
 <p>Fair. I'd been running it locally for so long that I'd forgotten how much of a pain it was to set up. So, Ron did what any self-respecting developer would do when handed a mess: he built a CLI tool to make installation and upgrades easier, presumably so he'd never have to ask me for help again. Then he started using it. Then he started breaking it. Then he started filing tickets, suggesting improvements, and sending me PRs at ungodly hours, as if sleep were optional for both of us.</p>
 <p>We fell into a rhythm: I'd build something new, Ron would try to use it, and we'd spend evenings debating what worked, what didn't, and why. It wasn't always pretty. There were arguments about design choices, late-night debugging sessions, and more than a few &quot;why the hell did you do it that way?&quot; moments, but it was productive. Ron brought a fresh perspective, and his feedback pushed me to make the tool more robust, more intuitive, and (most importantly) more useful for someone who wasn't me.</p>
-<h2>From <code>computron_9000</code> to Omnideck</h2>
+<h2>From <code>computron_9000</code> to omnideck</h2>
 <p>By mid-2026, <code>computron_9000</code> had outgrown its joke of a name. It wasn't a toy anymore. It was a tool we both relied on and something that had quietly become a part of our daily workflows. We used it for research, planning projects, organizing data, even testing new models. It was flexible enough to adapt to whatever we threw at it, but opinionated enough to keep us from drowning in options, which is more than I can say for most of the AI tooling landscape.</p>
 <p>We realized two things:</p>
 <ol>
 <li>This thing was <em>good</em>. Not &quot;good for a side project&quot; good, but legitimately useful.</li>
 <li>If it was useful for us, it might be useful for other people too, assuming they could get past the name.</li>
 </ol>
-<p>So we decided to spin it off as a proper open-source project. We rebranded it since <code>computron_9000</code> was fun, but it wasn't going to convince anyone we were serious, and &quot;Omnideck&quot; actually sounded like a tool. Then, we started sketching out a roadmap. But we didn't want to build <em>just another AI tool</em>. The market was already flooded with options, and most of them fell into one of two traps:</p>
+<p>So we decided to spin it off as a proper open-source project. We rebranded it since <code>computron_9000</code> was fun, but it wasn't going to convince anyone we were serious, and &quot;omnideck&quot; actually sounded like a tool. Then, we started sketching out a roadmap. But we didn't want to build <em>just another AI tool</em>. The market was already flooded with options, and most of them fell into one of two traps:</p>
 <ul>
 <li><strong>Too open</strong>: Your system becomes a playground with no guardrails, and you spend more time configuring it than actually using it.</li>
 <li><strong>Too closed</strong>: You're locked into a vendor's ecosystem, with no control over your data or how the tool evolves.</li>
 </ul>
 <p>We wanted something different: a tool constructed for <em>real</em> work, with privacy, freedom, and user choice at its core. No vendor lock-in. No features bolted on as an afterthought. No telemetry, because frankly nobody needs a play-by-play of our prompt history. Your data remains on your hardware unless you deliberately choose otherwise. Your credentials are encrypted at rest in a vault the agent process can't directly access, because we've read enough headlines to know better.</p>
 <p>We also made a deliberate choice to be desktop-first. The full workbench experience (multiple agents, sub-agent monitoring, scheduled tasks, integration management) is constructed for a real screen and a real keyboard. We'd rather perfect that experience than ship something half-baked and call it &quot;mobile-first innovation.&quot;</p>
-<p>And because we believe freedom should extend to the license itself, Omnideck is open source under Apache 2.0.</p>
+<p>And because we believe freedom should extend to the license itself, omnideck is open source under Apache 2.0.</p>
 <h2>What We're Building (and Why It Matters)</h2>
-<p>Our roadmap isn't based on what other AI tools are doing. It's based on what we've needed over the past year of using Omnideck every day. Things like:</p>
+<p>Our roadmap isn't based on what other AI tools are doing. It's based on what we've needed over the past year of using omnideck every day. Things like:</p>
 <ul>
 <li><strong>Research</strong>: Whether it's for work or planning a trip, we needed a way to gather, organize, and synthesize information without jumping between a dozen tabs and tools.</li>
 <li><strong>Planning</strong>: Projects, features, even personal goals — we wanted a tool that could help us break them down, track progress, and adapt as things changed, ideally without a whiteboard involved.</li>
@@ -121,32 +146,37 @@
 <li><strong>Data Organization</strong>: From notes to code snippets to random ideas, we needed a way to keep everything accessible and searchable, instead of scattered across seventeen text files named &quot;notes_final_v2.&quot;</li>
 <li><strong>Model Testing</strong>: We're developers. We like to tinker. We wanted a way to test new models, compare them, and see how they fit into our workflows, without rewriting half our stack every time someone released a new one.</li>
 </ul>
-<p>Most importantly, we wanted a tool that <em>respects its users</em>. That means no creepy data collection, no forced upgrades, and no &quot;take it or leave it&quot; design choices. Omnideck is built to be yours and to adapt to how you work, not the other way around.</p>
+<p>Most importantly, we wanted a tool that <em>respects its users</em>. That means no creepy data collection, no forced upgrades, and no &quot;take it or leave it&quot; design choices. omnideck is built to be yours and to adapt to how you work, not the other way around.</p>
 <h2>What's Next?</h2>
-<p>We're excited to share Omnideck with the world, but we're also realistic. This is a side project — a labor of love built in the margins of our lives, mostly late at night, fueled by stubbornness and questionable amounts of coffee. We're not a big company with a marketing budget or a team of full-time developers. What we do have is a year of late nights, trial and error, and a tool that's been battle-tested in the real world by exactly the two people most likely to break it.</p>
-<p>We don't know what the future holds for Omnideck. But we do know this: we're building something we're proud of, something that's made our lives easier, and something we think could help others too, assuming they can handle a little chaos.</p>
-<p>If you're tired of AI tools that feel like they were designed by committee (or worse, by a sales team) give Omnideck a try. Kick the tires. Break it. Tell us what works and what doesn't. Better yet, contribute. We're just getting started, and we'd love for you to be part of the journey.</p>
+<p>We're excited to share omnideck with the world, but we're also realistic. This is a side project — a labor of love built in the margins of our lives, mostly late at night, fueled by stubbornness and questionable amounts of coffee. We're not a big company with a marketing budget or a team of full-time developers. What we do have is a year of late nights, trial and error, and a tool that's been battle-tested in the real world by exactly the two people most likely to break it.</p>
+<p>We don't know what the future holds for omnideck. But we do know this: we're building something we're proud of, something that's made our lives easier, and something we think could help others too, assuming they can handle a little chaos.</p>
+<p>If you're tired of AI tools that feel like they were designed by committee (or worse, by a sales team) give omnideck a try. Kick the tires. Break it. Tell us what works and what doesn't. Better yet, contribute. We're just getting started, and we'd love for you to be part of the journey.</p>
 <p>After all, that's how this whole thing started: with a couple of developers, a lot of curiosity, and a willingness to build something better, one late-night argument at a time.</p>
 
 </article>
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>

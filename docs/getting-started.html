@@ -3,26 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="description" content="Install and run Omnideck in under five minutes.">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="Choose the desktop app or standalone CLI and get omnideck running on your computer.">
   <meta property="og:title" content="Getting Started">
-  <meta property="og:description" content="Install and run Omnideck in under five minutes.">
+  <meta property="og:description" content="Choose the desktop app or standalone CLI and get omnideck running on your computer.">
   
-  <title>Getting Started | Docs | Omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=e297265b">
+  <title>Getting Started | Docs | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
   
 </head>
 <body class="lattice ">
-  <header class="full-width sticky">
-  <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">omni<span class="logo-accent">deck</span></a>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
 
-    <!-- Desktop nav -->
-    <nav class="d-flex gap-4 items-center nav-desktop">
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
       
         <a href="/docs/getting-started.html" class="nav-link">Docs</a>
       
@@ -30,23 +49,30 @@
       
         <a href="/about.html" class="nav-link">About</a>
       
-        <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-link">Community</a>
+        <a href="/community.html" class="nav-link">Community</a>
       
         <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
       
-      <dark-mode-toggle></dark-mode-toggle>
     </nav>
 
-    <!-- Mobile nav toggle -->
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
       <span class="nav-toggle-bar"></span>
     </button>
+    </div>
   </div>
 
-  <!-- Mobile nav drawer -->
   <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
     
       <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
     
@@ -54,32 +80,31 @@
     
       <a href="/about.html" class="nav-mobile-link">About</a>
     
-      <a href="https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg" class="nav-mobile-link">Community</a>
+      <a href="/community.html" class="nav-mobile-link">Community</a>
     
       <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
     
-    <div class="nav-mobile-footer">
-      <dark-mode-toggle></dark-mode-toggle>
     </div>
   </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
 </header>
 
-  <main class="full-width">
+  <main id="main-content" class="full-width">
     
 <div class="container py-5">
   <div class="grid gap-5">
     <div class="span-12 md-span-3">
-      <aside class="docs-sidebar sticky">
+      <aside class="docs-sidebar">
   <span class="docs-nav-label">Documentation</span>
   <nav>
     
     <a href="/docs/getting-started.html">Getting Started</a>
     
-    <a href="/docs/configuration.html">Configuration</a>
+    <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
     
     <a href="/docs/agents.html">Agents</a>
     
-    <a href="/docs/tasks.html">Autonomous Tasks</a>
+    <a href="/docs/routines.html">Routines</a>
     
     <a href="/docs/integrations.html">Integrations</a>
     
@@ -96,116 +121,114 @@
   </nav>
 </aside>
 
+<details class="docs-mobile-nav">
+  <summary>Documentation</summary>
+  <div class="docs-mobile-nav-body">
+    <span class="docs-nav-label">Documentation</span>
+    <nav>
+      
+      <a href="/docs/getting-started.html">Getting Started</a>
+      
+      <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
+      
+      <a href="/docs/agents.html">Agents</a>
+      
+      <a href="/docs/routines.html">Routines</a>
+      
+      <a href="/docs/integrations.html">Integrations</a>
+      
+      <a href="/docs/local-models.html">Local Models</a>
+      
+      <a href="/docs/cli-reference.html">CLI Reference</a>
+      
+    </nav>
+    <span class="docs-nav-label">Guides</span>
+    <nav>
+      
+      <a href="/guides/slack-integration.html">Slack Integration</a>
+      
+    </nav>
+  </div>
+</details>
+
     </div>
     <article class="span-12 md-span-9">
       <h1>Getting Started</h1>
       
-      <p class="muted">Install and run Omnideck in under five minutes.</p>
+      <p class="muted">Choose the desktop app or standalone CLI and get omnideck running on your computer.</p>
       <hr>
       
-      <p>Omnideck runs inside a container managed by the <code>omnideck</code> CLI. You need a container engine (Podman or Docker) and either a cloud LLM API key or a local Ollama install.</p>
-<ol class="gs-steps">
-  <li><a href="#step-1-install-the-cli">Install the CLI</a> — Homebrew (recommended) or binary download</li>
-  <li><a href="#step-2-install-omnideck">Install Omnideck</a> — the setup wizard handles the rest</li>
-  <li><a href="#step-3-open-the-tool">Open the tool</a> — connect your LLM and start working</li>
-</ol>
+      <p>Choose the desktop app for guided setup in a native window. Use the standalone CLI if you prefer to install and manage omnideck from a terminal.</p>
+<div class="setup-paths" aria-label="Choose a setup path">
+  <a class="setup-path-card" href="#desktop-app">
+    <span class="setup-path-label">Recommended</span>
+    <strong>Desktop app</strong>
+    <span>Guided installation and setup in a native app for Windows, macOS, and Linux.</span>
+    <span class="setup-path-link">Follow the desktop path →</span>
+  </a>
+  <a class="setup-path-card" href="#standalone-cli">
+    <span class="setup-path-label">Advanced</span>
+    <strong>Standalone CLI</strong>
+    <span>Install and manage the same omnideck runtime from a terminal.</span>
+    <span class="setup-path-link">Follow the CLI path →</span>
+  </a>
+</div>
 <h2>Prerequisites</h2>
 <ul>
-<li><strong>Container engine:</strong> Podman 4.0+ (recommended) or Docker 20.10+. Other container engines such as Colima are not supported at this time. We recommend Podman for its open-source nature and smaller resource footprint.</li>
-<li><strong>LLM provider:</strong> an API key for OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint — or <a href="https://ollama.com/">Ollama</a> for local models</li>
-<li><strong>RAM:</strong> 4 GB minimum (8 GB recommended for local models)</li>
+<li><strong>Supported computer:</strong> The desktop app supports Windows 11, macOS, and supported desktop Linux distributions. Choose a package offered for your operating system and architecture on the install page. The standalone CLI publishes x86-64 and ARM64 builds for Windows, macOS, and Linux.</li>
+<li><strong>Memory:</strong> The desktop app has a published minimum of 4 GB of system RAM. The CLI sizes omnideck's container between 1 GB and 6 GB based on the host. Local Ollama models need additional RAM or VRAM, and the amount varies by model.</li>
+<li><strong>Model connection:</strong> Agents need one configured model. Use Anthropic, OpenAI, or OpenRouter with an API key; a reachable OpenAI-compatible endpoint; or <a href="https://ollama.com/">Ollama</a> for local models. You can add this after installation.</li>
+<li><strong>Internet connection:</strong> Initial setup and updates download runtime and application files. After setup, internet access depends on the model provider and integrations you choose.</li>
 </ul>
-<h2 id="step-1-install-the-cli">Step 1: Install the CLI</h2>
-<p>The <code>omnideck</code> CLI wraps your container engine with a guided installer and simple management commands.</p>
-<h3>Option A: Homebrew (macOS and Linux)</h3>
-<p>The recommended way to install on macOS or Linux:</p>
-<pre><code class="language-bash">brew install omnideck-dev/tap/omnideck
-</code></pre>
-<p>To upgrade later:</p>
-<pre><code class="language-bash">brew upgrade omnideck
-</code></pre>
-<h3>Option B: Download a binary</h3>
-<p>Grab the binary for your OS from the <a href="https://github.com/omnideck-dev/cli/releases">releases page</a>:</p>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>File</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>macOS (Apple Silicon)</td>
-<td><code>omnideck-darwin-arm64.tar.gz</code></td>
-</tr>
-<tr>
-<td>macOS (Intel)</td>
-<td><code>omnideck-darwin-amd64.tar.gz</code></td>
-</tr>
-<tr>
-<td>Linux (x86-64)</td>
-<td><code>omnideck-linux-amd64.tar.gz</code></td>
-</tr>
-<tr>
-<td>Linux (ARM64)</td>
-<td><code>omnideck-linux-arm64.tar.gz</code></td>
-</tr>
-<tr>
-<td>Windows (x86-64)</td>
-<td><code>omnideck-windows-amd64.zip</code></td>
-</tr>
-</tbody>
-</table>
-<p>Extract the archive and move the binary to a directory on your <code>PATH</code>. On Linux or macOS:</p>
-<pre><code class="language-bash">tar -xzf omnideck-linux-amd64.tar.gz
-chmod +x omnideck
-sudo mv omnideck /usr/local/bin/
-</code></pre>
-<h3>Verify the install</h3>
-<pre><code class="language-bash">omnideck --version
-</code></pre>
-<h2 id="step-2-install-omnideck">Step 2: Install Omnideck</h2>
-<pre><code class="language-bash">omnideck install
-</code></pre>
-<p>The install wizard:</p>
+<p>You do not need to install Podman first; both guided setup paths can prepare it. The desktop app already includes the matching CLI, so desktop users do not install the standalone CLI separately.</p>
+<h2 id="desktop-app">Desktop app</h2>
+<p>The desktop app is the default way to run omnideck on a personal computer. It keeps installation and day-to-day runtime management in one place.</p>
+<h3 id="install-omnideck">1. Install omnideck</h3>
+<p>Open the <strong><a href="/install.html">omnideck install page</a></strong>, choose your operating system, and follow its visual walkthrough. The page points to the current desktop release and provides the correct packages and SHA-256 checksums for each supported architecture.</p>
+<p><a href="/install.html" role="button" data-variant="primary">Choose your installer →</a></p>
+<div class="callout" data-tone="warning">
+<strong>Preview packages:</strong> The current macOS and Windows installers do not yet carry paid publisher identities. Download only from the <a href="/install.html">official install page</a> and verify the checksum before approving a Gatekeeper or SmartScreen warning.
+</div>
+<h3 id="prepare-your-machine">2. Prepare your machine</h3>
+<p>Open omnideck and select <strong>Set up omnideck</strong>. Guided setup:</p>
 <ol>
-<li>Detects your container engine (Docker or Podman)</li>
-<li>Checks whether Ollama is reachable on the host</li>
-<li>Suggests container memory limits sized for your system</li>
-<li>Pulls the container image and starts the container</li>
+<li>Checks your operating system and architecture</li>
+<li>Installs, prepares, or repairs the supported Podman runtime</li>
+<li>Creates the local Podman machine where the platform requires one</li>
+<li>Pulls the application image pinned to your app release</li>
+<li>Starts omnideck and confirms that it is healthy</li>
 </ol>
-<p>When the wizard finishes, open <strong><a href="http://localhost:2337">http://localhost:2337</a></strong> in your browser.</p>
-<h2 id="step-3-open-the-tool">Step 3: Open the tool</h2>
-<p>A setup wizard runs in the UI the first time you open it. It guides you through:</p>
+<p>Setup can take several minutes. Agent Dash remains playable while the runtime is prepared. If Windows shows <strong>Restart needed</strong>, select <strong>Restart now</strong>; omnideck reopens and continues setup automatically after you sign back in.</p>
+<h3 id="connect-a-model">3. Connect a model</h3>
+<p>When the app reports that omnideck is ready, select <strong>Open omnideck</strong>. The workbench setup guides you through:</p>
 <ol>
-<li><strong>Adding an LLM provider</strong> — cloud (OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint) or local Ollama</li>
+<li><strong>Adding an LLM provider</strong> — OpenAI, Anthropic, OpenRouter, another OpenAI-compatible endpoint, or local Ollama</li>
 <li><strong>Picking your main model</strong> — used for chat, context compaction, and conversation titles</li>
-<li><strong>Picking an optional vision model</strong> — for tasks that involve image input</li>
+<li><strong>Picking an optional vision model</strong> — for work involving image input</li>
 </ol>
-<p>Cloud providers list available models automatically. Ollama lists whatever you've already pulled.</p>
-<p>That's it — you're running.</p>
-<h2>Managing Omnideck</h2>
-<p>Everything is driven through the CLI:</p>
-<pre><code class="language-bash">omnideck status      # container state, data dirs, Ollama reachability, and web UI port
-omnideck stop        # gracefully stop the container
-omnideck start       # start it back up
-omnideck restart     # stop then start
-omnideck update      # pull the latest image and recreate the container
-omnideck logs -f     # tail container logs
-omnideck doctor      # run health checks and print a pass/warn/fail report
-omnideck uninstall   # remove the container (optionally back up and delete data)
-</code></pre>
-<p>Your data lives in <code>~/Omnideck</code> and survives restarts and upgrades. Conversations, memory, agent profiles, goals, and generated files are all preserved when you <code>update</code>.</p>
+<p>Cloud providers list their available models automatically. Ollama lists the models already available on your machine.</p>
+<h3 id="open-your-workbench">4. Open your workbench</h3>
+<p>Open a new conversation and give an agent a useful job: research a question, create something you can use, or set up work you want to run again. Your conversations, agent profiles, routines, and generated files remain available when omnideck restarts or updates.</p>
+<p>Selecting <strong>Open omnideck</strong> replaces the setup screen with the workbench in the same desktop window. After setup, opening the desktop app takes you straight to the workbench. If the local environment needs setup or repair, omnideck shows that flow before opening it.</p>
+<h2 id="standalone-cli">Standalone CLI</h2>
+<p>The standalone <code>omnideck</code> CLI installs and manages the same local runtime from a terminal. Desktop users do not need to install it separately because the desktop app already includes the matching CLI.</p>
+<ol>
+<li>Follow the <strong><a href="/docs/cli-reference.html#install-the-cli">CLI installation instructions</a></strong>. The Homebrew tap provides a non-preview build for macOS and Linux, while the release archive provides the current command set and Windows builds.</li>
+<li>Run <code>omnideck</code> as your normal user. The first run opens guided setup and prepares Podman when needed.</li>
+<li>Run <code>omnideck doctor</code> to confirm the runtime, storage, and browser interface are healthy.</li>
+<li>Open the local workbench address reported by the CLI, normally <code>http://localhost:2337</code>.</li>
+</ol>
+<p>See the <strong><a href="/docs/cli-reference.html">CLI Reference</a></strong> for lifecycle commands, multiple instances, and non-interactive automation.</p>
 <h2>Next steps</h2>
 <ul>
-<li><a href="/docs/cli-reference.html">CLI Reference</a> — full command and flag reference</li>
-<li><a href="/docs/local-models.html">Local Models</a> — run Omnideck fully offline with Ollama</li>
+<li><a href="/install.html#install">Installation guide</a> — desktop walkthroughs for macOS, Windows, and Linux</li>
+<li><a href="/docs/local-models.html">Local Models</a> — run model inference locally with Ollama</li>
 <li><a href="/docs/integrations.html">Integrations</a> — connect Gmail, Calendar, and Drive</li>
 <li><a href="/docs/agents.html">Agents</a> — create and customize agent profiles</li>
-<li><a href="/docs/tasks.html">Autonomous Tasks</a> — schedule background goals</li>
+<li><a href="/docs/routines.html">Routines</a> — run useful work again on a schedule</li>
 </ul>
 <div class="callout" data-tone="info">
-<strong>Privacy:</strong> Omnideck never makes outbound connections to Omnideck servers. Everything runs on your machine. Your data stays in <code>~/Omnideck</code>.
+<strong>Privacy:</strong> omnideck does not require an omnideck account or hosted control plane. The application and its data run on your machine.
 </div>
 
     </article>
@@ -214,21 +237,26 @@ omnideck uninstall   # remove the container (optionally back up and delete data)
 
   </main>
   <footer class="full-width site-footer">
-  <div class="container text-center">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
     <p class="footer-text">
-      Omnideck is open source —
-      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="/docs/">Documentation</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Apache 2 License
-      <span class="footer-sep" aria-hidden="true">·</span>
-      Your data stays on your machine.
+      Open source · Apache 2
     </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=6d642fe4"></script>
+  <script src="/js/bundle.js?v=f6211ced"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>
