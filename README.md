@@ -18,6 +18,17 @@ Opens a live-reloading dev server at `http://localhost:8080`. Changes to content
 
 ---
 
+## Production build
+
+Run the production build in a container so its generated data and output stay
+outside the checkout:
+
+```bash
+docker build --platform linux/amd64 --file container/Dockerfile .
+```
+
+---
+
 ## Content types
 
 ### Blog posts
