@@ -3,16 +3,16 @@ title = "Getting Started"
 url   = "/docs/getting-started.html"
 
 [[items]]
-title = "Configuration"
-url   = "/docs/configuration.html"
+title = "Install omnideck"
+url   = "/docs/getting-started.html#install-omnideck"
 
 [[items]]
 title = "Agents"
 url   = "/docs/agents.html"
 
 [[items]]
-title = "Autonomous Tasks"
-url   = "/docs/tasks.html"
+title = "Routines"
+url   = "/docs/routines.html"
 
 [[items]]
 title = "Integrations"

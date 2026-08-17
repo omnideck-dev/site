@@ -1,124 +1,101 @@
 +++
 title    = "Getting Started"
-date     = 2025-06-01
+date     = 2026-08-15
 draft    = false
 template = "templates/types/docs.html"
 
 [extra]
-description = "Install and run Omnideck in under five minutes."
+description = "Choose the desktop app or standalone CLI and get omnideck running on your computer."
 order = 1
 +++
 
-Omnideck runs inside a container managed by the `omnideck` CLI. You need a container engine (Podman or Docker) and either a cloud LLM API key or a local Ollama install.
+Choose the desktop app for guided setup in a native window. Use the standalone CLI if you prefer to install and manage omnideck from a terminal.
 
-<ol class="gs-steps">
-  <li><a href="#step-1-install-the-cli">Install the CLI</a> — Homebrew (recommended) or binary download</li>
-  <li><a href="#step-2-install-omnideck">Install Omnideck</a> — the setup wizard handles the rest</li>
-  <li><a href="#step-3-open-the-tool">Open the tool</a> — connect your LLM and start working</li>
-</ol>
+<div class="setup-paths" aria-label="Choose a setup path">
+  <a class="setup-path-card" href="#desktop-app">
+    <span class="setup-path-label">Recommended</span>
+    <strong>Desktop app</strong>
+    <span>Guided installation and setup in a native app for Windows, macOS, and Linux.</span>
+    <span class="setup-path-link">Follow the desktop path →</span>
+  </a>
+  <a class="setup-path-card" href="#standalone-cli">
+    <span class="setup-path-label">Advanced</span>
+    <strong>Standalone CLI</strong>
+    <span>Install and manage the same omnideck runtime from a terminal.</span>
+    <span class="setup-path-link">Follow the CLI path →</span>
+  </a>
+</div>
 
 ## Prerequisites
 
-- **Container engine:** Podman 4.0+ (recommended) or Docker 20.10+. Other container engines such as Colima are not supported at this time. We recommend Podman for its open-source nature and smaller resource footprint.
-- **LLM provider:** an API key for OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint — or [Ollama](https://ollama.com/) for local models
-- **RAM:** 4 GB minimum (8 GB recommended for local models)
+- **Supported computer:** The desktop app supports Windows 11, macOS, and supported desktop Linux distributions. Choose a package offered for your operating system and architecture on the install page. The standalone CLI publishes x86-64 and ARM64 builds for Windows, macOS, and Linux.
+- **Memory:** The desktop app has a published minimum of 4 GB of system RAM. The CLI sizes omnideck's container between 1 GB and 6 GB based on the host. Local Ollama models need additional RAM or VRAM, and the amount varies by model.
+- **Model connection:** Agents need one configured model. Use Anthropic, OpenAI, or OpenRouter with an API key; a reachable OpenAI-compatible endpoint; or [Ollama](https://ollama.com/) for local models. You can add this after installation.
+- **Internet connection:** Initial setup and updates download runtime and application files. After setup, internet access depends on the model provider and integrations you choose.
 
-<h2 id="step-1-install-the-cli">Step 1: Install the CLI</h2>
+You do not need to install Podman first; both guided setup paths can prepare it. The desktop app already includes the matching CLI, so desktop users do not install the standalone CLI separately.
 
-The `omnideck` CLI wraps your container engine with a guided installer and simple management commands.
+<h2 id="desktop-app">Desktop app</h2>
 
-### Option A: Homebrew (macOS and Linux)
+The desktop app is the default way to run omnideck on a personal computer. It keeps installation and day-to-day runtime management in one place.
 
-The recommended way to install on macOS or Linux:
+<h3 id="install-omnideck">1. Install omnideck</h3>
 
-```bash
-brew install omnideck-dev/tap/omnideck
-```
+Open the **[omnideck install page](/install.html)**, choose your operating system, and follow its visual walkthrough. The page points to the current desktop release and provides the correct packages and SHA-256 checksums for each supported architecture.
 
-To upgrade later:
+<p><a href="/install.html" role="button" data-variant="primary">Choose your installer →</a></p>
 
-```bash
-brew upgrade omnideck
-```
+<div class="callout" data-tone="warning">
+<strong>Preview packages:</strong> The current macOS and Windows installers do not yet carry paid publisher identities. Download only from the <a href="/install.html">official install page</a> and verify the checksum before approving a Gatekeeper or SmartScreen warning.
+</div>
 
-### Option B: Download a binary
+<h3 id="prepare-your-machine">2. Prepare your machine</h3>
 
-Grab the binary for your OS from the [releases page](https://github.com/omnideck-dev/cli/releases):
+Open omnideck and select **Set up omnideck**. Guided setup:
 
-| Platform | File | 
-|---|---|
-| macOS (Apple Silicon) | `omnideck-darwin-arm64.tar.gz` | 
-| macOS (Intel) | `omnideck-darwin-amd64.tar.gz` |
-| Linux (x86-64) | `omnideck-linux-amd64.tar.gz` | 
-| Linux (ARM64) | `omnideck-linux-arm64.tar.gz` | 
-| Windows (x86-64) | `omnideck-windows-amd64.zip` | 
+1. Checks your operating system and architecture
+2. Installs, prepares, or repairs the supported Podman runtime
+3. Creates the local Podman machine where the platform requires one
+4. Pulls the application image pinned to your app release
+5. Starts omnideck and confirms that it is healthy
 
-Extract the archive and move the binary to a directory on your `PATH`. On Linux or macOS:
+Setup can take several minutes. Agent Dash remains playable while the runtime is prepared. If Windows shows **Restart needed**, select **Restart now**; omnideck reopens and continues setup automatically after you sign back in.
 
-```bash
-tar -xzf omnideck-linux-amd64.tar.gz
-chmod +x omnideck
-sudo mv omnideck /usr/local/bin/
-```
+<h3 id="connect-a-model">3. Connect a model</h3>
 
-### Verify the install
+When the app reports that omnideck is ready, select **Open omnideck**. The workbench setup guides you through:
 
-```bash
-omnideck --version
-```
-
-<h2 id="step-2-install-omnideck">Step 2: Install Omnideck</h2>
-
-```bash
-omnideck install
-```
-
-The install wizard:
-
-1. Detects your container engine (Docker or Podman)
-2. Checks whether Ollama is reachable on the host
-3. Suggests container memory limits sized for your system
-4. Pulls the container image and starts the container
-
-When the wizard finishes, open **[http://localhost:2337](http://localhost:2337)** in your browser.
-
-<h2 id="step-3-open-the-tool">Step 3: Open the tool</h2>
-
-A setup wizard runs in the UI the first time you open it. It guides you through:
-
-1. **Adding an LLM provider** — cloud (OpenAI, Anthropic, OpenRouter, or any OpenAI-compatible endpoint) or local Ollama
+1. **Adding an LLM provider** — OpenAI, Anthropic, OpenRouter, another OpenAI-compatible endpoint, or local Ollama
 2. **Picking your main model** — used for chat, context compaction, and conversation titles
-3. **Picking an optional vision model** — for tasks that involve image input
+3. **Picking an optional vision model** — for work involving image input
 
-Cloud providers list available models automatically. Ollama lists whatever you've already pulled.
+Cloud providers list their available models automatically. Ollama lists the models already available on your machine.
 
-That's it — you're running.
+<h3 id="open-your-workbench">4. Open your workbench</h3>
 
-## Managing Omnideck
+Open a new conversation and give an agent a useful job: research a question, create something you can use, or set up work you want to run again. Your conversations, agent profiles, routines, and generated files remain available when omnideck restarts or updates.
 
-Everything is driven through the CLI:
+Selecting **Open omnideck** replaces the setup screen with the workbench in the same desktop window. After setup, opening the desktop app takes you straight to the workbench. If the local environment needs setup or repair, omnideck shows that flow before opening it.
 
-```bash
-omnideck status      # container state, data dirs, Ollama reachability, and web UI port
-omnideck stop        # gracefully stop the container
-omnideck start       # start it back up
-omnideck restart     # stop then start
-omnideck update      # pull the latest image and recreate the container
-omnideck logs -f     # tail container logs
-omnideck doctor      # run health checks and print a pass/warn/fail report
-omnideck uninstall   # remove the container (optionally back up and delete data)
-```
+<h2 id="standalone-cli">Standalone CLI</h2>
 
-Your data lives in `~/Omnideck` and survives restarts and upgrades. Conversations, memory, agent profiles, goals, and generated files are all preserved when you `update`.
+The standalone `omnideck` CLI installs and manages the same local runtime from a terminal. Desktop users do not need to install it separately because the desktop app already includes the matching CLI.
+
+1. Follow the **[CLI installation instructions](/docs/cli-reference.html#install-the-cli)**. The Homebrew tap provides a non-preview build for macOS and Linux, while the release archive provides the current command set and Windows builds.
+2. Run `omnideck` as your normal user. The first run opens guided setup and prepares Podman when needed.
+3. Run `omnideck doctor` to confirm the runtime, storage, and browser interface are healthy.
+4. Open the local workbench address reported by the CLI, normally `http://localhost:2337`.
+
+See the **[CLI Reference](/docs/cli-reference.html)** for lifecycle commands, multiple instances, and non-interactive automation.
 
 ## Next steps
 
-- [CLI Reference](/docs/cli-reference.html) — full command and flag reference
-- [Local Models](/docs/local-models.html) — run Omnideck fully offline with Ollama
+- [Installation guide](/install.html#install) — desktop walkthroughs for macOS, Windows, and Linux
+- [Local Models](/docs/local-models.html) — run model inference locally with Ollama
 - [Integrations](/docs/integrations.html) — connect Gmail, Calendar, and Drive
 - [Agents](/docs/agents.html) — create and customize agent profiles
-- [Autonomous Tasks](/docs/tasks.html) — schedule background goals
+- [Routines](/docs/routines.html) — run useful work again on a schedule
 
 <div class="callout" data-tone="info">
-<strong>Privacy:</strong> Omnideck never makes outbound connections to Omnideck servers. Everything runs on your machine. Your data stays in <code>~/Omnideck</code>.
+<strong>Privacy:</strong> omnideck does not require an omnideck account or hosted control plane. The application and its data run on your machine.
 </div>

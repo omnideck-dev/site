@@ -1,66 +1,71 @@
 +++
 title    = "Local Models with Ollama"
-date     = 2025-06-01
+date     = 2026-08-16
 draft    = false
 template = "templates/types/docs.html"
 
 [extra]
-description = "Run Omnideck fully offline using local models via Ollama."
+description = "Connect omnideck to models served locally by Ollama."
 order = 6
 +++
 
-If you'd rather run models locally than send data to a cloud provider, Omnideck supports [Ollama](https://ollama.com/) for fully local inference. Install Ollama on your host, pull the models you want, and Omnideck lists them automatically in the setup wizard.
+omnideck can use [Ollama](https://ollama.com/) to run model inference on your computer instead of sending prompts to a hosted model provider. Ollama runs outside the omnideck container and exposes the models you have installed through its local API.
+
+Local inference does not make every omnideck feature offline. Browser research, cloud integrations, and Ollama cloud models still use the network.
 
 ## Install Ollama
 
-Download and install Ollama from [ollama.com](https://ollama.com/). After installing, pull the models you want to use:
+[Download and install Ollama](https://ollama.com/download). Then pull a model. For example, `qwen3.5` supports tool use and image input:
 
 ```bash
-ollama pull kimi-k2.5      # main model (chat, compaction, titles)
-ollama pull qwen3.5        # vision model (optional — for image input)
+ollama pull qwen3.5
 ```
 
-Verify Ollama is running and your models are available:
+List the models installed on this Ollama server:
 
 ```bash
-ollama list
+ollama ls
 ```
 
-## Recommended models
+## Choose a model
 
-| Role | Suggested model | Notes |
-|---|---|---|
-| Main | `kimi-k2.5` | Used for chat, context compaction, and conversation title generation |
-| Vision | `qwen3.5` | Must support image input — or use your main model if it does |
+The [Ollama model library](https://ollama.com/library) shows each model's capabilities, variants, and download size. For omnideck:
 
-The main model handles everything by default. A separate vision model is only needed if you want a model specifically optimized for image input.
+- choose a model with **Tools** support for agents that need to use omnideck tools
+- choose a size that fits your available memory or VRAM
+- choose a model with **Vision** support if it should interpret images and screenshots
 
-## Connect Omnideck to Ollama
+The same model can be used for ordinary agent work, vision, compaction, and conversation titles when it supports the required capabilities. You can also select different models for those roles.
 
-During `omnideck install`, the wizard checks whether Ollama is reachable on the host and warns if it isn't. If Ollama is running, select it as your provider in the setup wizard — Omnideck will list the models you've pulled.
+## Connect omnideck to Ollama
 
-If Omnideck is already running, go to **Settings → Providers** in the web UI and add Ollama as a provider. The list of available models updates automatically from your local Ollama install.
+During first-time workbench setup, choose **Ollama (local)**. omnideck normally fills the container-safe Ollama URL detected during installation. Click **Connect**, then choose a main model from the models returned by that Ollama server. The optional vision step only lists models Ollama reports as supporting image input.
 
-## macOS and Docker Desktop
+If setup is already complete, open **Settings → Providers**, click **Add**, choose **Ollama**, and confirm the detected base URL with **Test & add**. Choose the provider and model for an individual agent under **Agents**. The system-wide vision and compaction models are under **Settings → System**.
 
-On macOS with Docker Desktop, Ollama must be bound to `0.0.0.0` (not just `127.0.0.1`, which is the default) so the container can reach it on the host. Set this before starting Ollama:
+## Connection check
+
+omnideck reaches Ollama from inside its Podman container, so the URL used inside omnideck is not normally `http://localhost:11434`. The desktop app and CLI pass the correct host address into the container. CLI users can run `omnideck doctor` to test that connection.
+
+On Windows, Ollama may be reachable on Windows but not from the Podman machine. If the container check fails, guided setup provides these steps:
+
+1. Quit Ollama from the notification area.
+2. Open **Edit environment variables for your account**.
+3. Add a user variable named `OLLAMA_HOST` with the value `0.0.0.0:11434`.
+4. Open Ollama again.
+
+This setting can expose Ollama to other computers if Windows Firewall permits it. Do not allow Ollama through the firewall on public networks.
+
+## Ollama cloud models
+
+Ollama can expose cloud models through the same local API. Sign in and run or pull a model whose tag ends in `:cloud`; for example:
 
 ```bash
-export OLLAMA_HOST=0.0.0.0
-ollama serve
+ollama signin
+ollama run kimi-k2.5:cloud
 ```
 
-Or set it permanently in your shell profile. `omnideck doctor` will report whether Ollama is reachable from inside the container.
-
-## Ollama cloud variants
-
-Ollama can also broker cloud-hosted model variants alongside your local models, so they appear the same way in Omnideck. After `ollama login`, pull a cloud variant:
-
-```bash
-ollama pull kimi-k2.5:cloud
-```
-
-Cloud variants skip your local GPU but still need to be pulled so Ollama exposes them. This is useful if you want a unified provider interface that can mix local and cloud models.
+These models do not run locally and require an Ollama account and network connection. After the cloud model appears in `ollama ls`, omnideck can list it with the other models exposed by that Ollama server.
 
 ## Troubleshooting
 
@@ -68,9 +73,10 @@ Cloud variants skip your local GPU but still need to be pulled so Ollama exposes
 
 Only matters if you're using local models. Make sure:
 1. Ollama is running (`ollama serve`)
-2. On macOS / Docker Desktop, `OLLAMA_HOST=0.0.0.0` is set (see above)
-3. On Linux with Podman, the firewall isn't blocking the host network bridge
+2. `omnideck doctor` can reach Ollama from inside the container
+3. On Windows, follow the `OLLAMA_HOST` guidance above if the container check fails
+4. A firewall is not blocking the Podman host connection
 
-**Models don't appear in the setup wizard**
+**Models do not appear in omnideck**
 
-The wizard lists models already pulled in Ollama. Pull your desired models first (`ollama pull <model>`), then reopen Settings in the Omnideck UI.
+Run `ollama ls` to confirm they are installed on the same Ollama server. Pull the model if needed, then test the Ollama connection under **Settings → Providers**. omnideck caches Ollama's model details briefly, so reopen the model picker after the connection succeeds.

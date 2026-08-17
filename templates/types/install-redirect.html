@@ -1,0 +1,15 @@
+{% extends "templates/layouts/base.html" %}
+{% block title %}Install omnideck{% endblock %}
+{% block head %}
+  <link rel="canonical" href="{{ Site.Config.Site.BaseURL }}/install.html">
+  <meta http-equiv="refresh" content="0; url=/install.html">
+  <script>location.replace(`/install.html${location.hash}`)</script>
+{% endblock %}
+{% block body %}
+<section class="home-section">
+  <div class="container">
+    <h1>Install omnideck</h1>
+    <p>This page has moved to <a href="/install.html">the omnideck installation guide</a>.</p>
+  </div>
+</section>
+{% endblock %}

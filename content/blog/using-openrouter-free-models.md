@@ -1,17 +1,17 @@
 +++
-title    = "Running Omnideck on Free Models: What Actually Works"
+title    = "Running omnideck on Free Models: What Actually Works"
 date     = 2026-07-15
 draft    = false
 tags     = ["Cost Optimization", "OpenRouter"]
 template = "templates/types/blog.html"
 
 [extra]
-description    = "OpenRouter's free tier isn't unlimited, and the model that routes you around that fact comes with a real tradeoff. Here's what free actually costs, and how Omnideck runs a set of dedicated free agents for the busywork that never needed a paid model."
+description    = "OpenRouter's free tier isn't unlimited, and the model that routes you around that fact comes with a real tradeoff. Here's what free actually costs, and how omnideck runs a set of dedicated free agents for the busywork that never needed a paid model."
 author         = "Ron Northcutt"
 featured_image = "/images/openrouter-free-models.png"
 +++
 
-I've been testing whether Omnideck can lean on OpenRouter's free models instead of paying for every request, and that turned into a [reference gist](https://bit.ly/openrouter-free) covering every free model on the platform right now. That came from a demo video showing the setup in action (see below). Before getting into how it works inside Omnideck, it's worth being clear about what "free" actually means on OpenRouter, because it's not what most people assume.
+I've been testing whether omnideck can lean on OpenRouter's free models instead of paying for every request, and that turned into a [reference gist](https://bit.ly/openrouter-free) covering every free model on the platform right now. That came from a demo video showing the setup in action (see below). Before getting into how it works inside omnideck, it's worth being clear about what "free" actually means on OpenRouter, because it's not what most people assume.
 
 *Watch the demo*
 
@@ -24,7 +24,7 @@ I've been testing whether Omnideck can lean on OpenRouter's free models instead 
 - `openrouter/free` routes you to whatever free model is best or available, no config needed. Convenient, but you give up model choice.
 - Six models are getting deprecated between July 19 and 21, 2026, including two of the strongest ones (Qwen3 Coder, Tencent Hy3). Don't build on those this week.
 - Rate limits are per-account, not per-model or per-key. You can't route around them.
-- The move for Omnideck: either one generic free agent on the router, or a few free agents pinned to specific models for jobs like vision or title generation, plus an escalation path to a real model when a task actually needs it.
+- The move for omnideck: either one generic free agent on the router, or a few free agents pinned to specific models for jobs like vision or title generation, plus an escalation path to a real model when a task actually needs it.
 
 ## The two tiers of "free"
 
@@ -48,7 +48,7 @@ There's also a shortcut worth knowing about: `openrouter/free`. It's not a model
 
 Fifty requests a day sounds like a lot until you count what a single agentic task actually costs. A multi-step agent that plans, calls a tool, checks the result, and retries once can burn through 10 to 15 requests before it's done with one task. At that rate, the no-credit tier gives you maybe three or four real tasks a day before you're locked out until midnight UTC.
 
-The 1,000/day tier is a different story. That's enough headroom for genuine daily use: testing prompts, running a small agent loop, handling routine tasks without babysitting a counter. It's still not something you'd build a product around, since a single user hammering an endpoint could eat the daily limit in an afternoon. But for a background agent inside something like Omnideck, one that only wakes up for small, low-stakes jobs, 1,000 requests a day is workable.
+The 1,000/day tier is a different story. That's enough headroom for genuine daily use: testing prompts, running a small agent loop, handling routine tasks without babysitting a counter. It's still not something you'd build a product around, since a single user hammering an endpoint could eat the daily limit in an afternoon. But for a background agent inside something like omnideck, one that only wakes up for small, low-stakes jobs, 1,000 requests a day is workable.
 
 The practical move is obvious once you see the numbers: put $10 in, even if you have no plan to spend it, and your free tier becomes 20x more usable.
 
@@ -66,9 +66,9 @@ A few things I'd flag before anyone wires these into a real workflow:
 
 **Free doesn't mean stable.** These are demo-tier slots subsidized by OpenRouter and the model providers. Context windows, output caps, and availability can shift without much warning, the deprecation wave happening this month is proof of that.
 
-## What actually works in Omnideck
+## What actually works in omnideck
 
-Omnideck already runs a mix of local models and API-backed ones depending on the task. There's a clear slot for one or more low-priority agents, explicitly scoped to run on OpenRouter's free tier and handle the small, frequent, low-stakes jobs that don't deserve a paid API call. The question is whether that's one agent on the free router, or a few agents each pinned to a model suited to their job.
+omnideck already runs a mix of local models and API-backed ones depending on the task. There's a clear slot for one or more low-priority agents, explicitly scoped to run on OpenRouter's free tier and handle the small, frequent, low-stakes jobs that don't deserve a paid API call. The question is whether that's one agent on the free router, or a few agents each pinned to a model suited to their job.
 
 Think of it as the equivalent of a junior team member you hand busywork to: summarizing a log file, drafting a quick commit message, checking whether a blog post has any obvious typos, tagging content, doing a first-pass classification before a stronger model reviews it. None of that needs Claude or GPT-4 class reasoning. It needs "good enough, fast, and doesn't cost anything."
 
@@ -80,4 +80,4 @@ A few design notes on how it's set up:
 - **Pick a model that won't disappear next week.** Given the deprecation list, Qwen3 Next 80B or one of the Nemotron Nano models makes more sense as a pinned default than anything flagged for July.
 - **Treat it as disposable.** No moderation, no guaranteed uptime, no long-term model stability. The free agents should never touch anything where output quality or availability actually matters. They're there to save API spend on the stuff nobody would miss if it failed.
 
-At the end of the day, it's not about running Omnideck for free, but routing the 80% of requests that were never worth paying for onto a tier that costs nothing. 
+At the end of the day, it's not about running omnideck for free, but routing the 80% of requests that were never worth paying for onto a tier that costs nothing.

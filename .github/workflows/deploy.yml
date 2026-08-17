@@ -19,6 +19,8 @@ jobs:
         run: chmod +x ./arbor
 
       - name: Sync site data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash scripts/sync-data.sh
 
       - name: Build site

@@ -5,12 +5,12 @@
   <div class="blog-index-layout">
     <div class="blog-index-main">
       <h1>Blog</h1>
-      <p class="muted">Updates, announcements, and deep dives from the Omnideck team.</p>
+      <p class="muted">Updates, announcements, and deep dives from the omnideck team.</p>
       <hr>
       {% if Items %}
       <div class="grid col-1 gap-3 mt-4">
         {% for item in Items|sortbydate %}{% if item.Permalink != "/blog/" and not item.Meta.Fields.tag_index %}
-        <article class="card">
+        <article class="card action-card">
           <h2 class="blog-card-title"><a href="{{ item.Permalink }}" class="blog-card-link">{{ item.Title }}</a></h2>
           <p class="muted blog-card-date"><time>{{ item.Date|godate:"January 2, 2006" }}</time></p>
           {% if item.Tags %}<div class="tag-chips">{% for tag in Data.tags.tags %}{% if tag.name in item.Tags %}<a href="/blog/tags/{{ tag.slug }}.html" class="tag-chip">{{ tag.name }}</a>{% endif %}{% endfor %}</div>{% endif %}

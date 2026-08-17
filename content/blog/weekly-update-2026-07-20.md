@@ -1,5 +1,5 @@
 +++
-title    = "Omnideck weekly update: July 13-19, 2026"
+title    = "omnideck weekly update: July 13-19, 2026"
 date     = 2026-07-20
 draft    = false
 tags     = ["Changelog"]
@@ -11,7 +11,7 @@ author         = "Ron Northcutt"
 featured_image = "/images/weekly-update.png"
 +++
 
-Twenty PRs this week, all in omnideck and site. Fewer than last week's 25, but the biggest one had been sitting on the list for a while: Custom Apps got its first real runtime! 
+Twenty PRs this week, all in omnideck and site. Fewer than last week's 25, but the biggest one had been sitting on the list for a while: Custom Apps got its first real runtime!
 
 Browser tools took the rest of the attention, mostly in the form of fixing edge cases that only show up once real pages start throwing a weird DOM at the agent. The site kept its own pace too, with a guides section, a mobile fix, and two more blog posts live.
 
@@ -19,23 +19,23 @@ Browser tools took the rest of the attention, mostly in the form of fixing edge 
 
 ## Custom Apps gets a runtime
 
-![Custom apps in Omnideck](/images/update/26-07-20-custom-apps.jpg)
+![Custom apps in omnideck](/images/update/26-07-20-custom-apps.jpg)
 
-The Custom Apps feature we mentioned last week now has an actual runtime and workspace behind it (#122). This is the piece that turns "custom apps" from an idea on the roadmap into something an agent can run. 
+The Custom Apps feature we mentioned last week now has an actual runtime and workspace behind it (#122). This is the piece that turns "custom apps" from an idea on the roadmap into something an agent can run.
 
-The core idea is that you can instruct Omnideck on how to build, manage, and update your custom software, and run it from your instance! This makes the AI Workbench even more useful.
+The core idea is that you can instruct omnideck on how to build, manage, and update your custom software, and run it from your instance! This makes the AI Workbench even more useful.
 
 ### Example 1 : IDE App
 
 ![IDE App](/images/update/26-07-20-ide-app.jpg)
 
-You can already write code and edit files in Omnideck, but its not the best experience. As a test, Larry spent an hour having Omnideck build an IDE app from scratch. This is surprising usefula, and gives us a great path forward to making Omnideck even more useful. Of course, you could also just ask Omnideck to install something like [Code OSS](https://github.com/code-oss-dev/code) or another tool. 
+You can already write code and edit files in omnideck, but its not the best experience. As a test, Larry spent an hour having omnideck build an IDE app from scratch. This is surprising usefula, and gives us a great path forward to making omnideck even more useful. Of course, you could also just ask omnideck to install something like [Code OSS](https://github.com/code-oss-dev/code) or another tool.
 
-### Example 2 : Omnideck Projects
+### Example 2 : omnideck Projects
 
 ![Project App](/images/update/26-07-20-project-app.jpg)
 
-This is another experiment. We've talked for a while about creating a workspace/project feature in Omnideck, but we are always trying to balance the utility we provide with flexibility. Opinions are helpful, but they can also constrain.
+This is another experiment. We've talked for a while about creating a workspace/project feature in omnideck, but we are always trying to balance the utility we provide with flexibility. Opinions are helpful, but they can also constrain.
 
 So, Larry created a pretty nifty Projects tool that lets you organize your conversations, artifacts, files, etc. into a project that you can manage. It also has a feature for managing and cleaning up your files. This is more of an experimental POC, but it does have value!
 
@@ -43,7 +43,7 @@ So, Larry created a pretty nifty Projects tool that lets you organize your conve
 
 ![Enable custom apps](/images/update/26-07-20-app-enable.jpg)
 
-This is currently in alpha, so it is not enabled by default. You can turn on the custom apps feature if you want to try it out, but there may be breaking changes in the future. That shouldn't be a problem because Omnideck can just adjust your custom apps to adapt, but this is more for advanced users.
+This is currently in alpha, so it is not enabled by default. You can turn on the custom apps feature if you want to try it out, but there may be breaking changes in the future. That shouldn't be a problem because omnideck can just adjust your custom apps to adapt, but this is more for advanced users.
 
 Just go to `Settings -> System -> Enable Custom Apps` to turn it on. You can also see Larry's [sample repo of apps](https://github.com/lefoulkrod/omnideck-custom-apps) above for an example AND a skill you can import to help create your own apps.
 
@@ -73,9 +73,9 @@ The modal-in-collapsed-wrapper bug from a couple weeks back got pinned down for 
 
 ## Site picked up a guides section
 
-The Omnideck site added a guides section to the docs, including the first walkthrough for a [Slack integration](https://www.omnideck.dev/guides/slack-integration.html) (#64). The site is also properly mobile responsive now (#63), the blog listing sorts by date correctly (#61), and there's an updated [arbor (static site generator)](https://github.com/rlnorthcutt/arbor) binary available (#62).
+The omnideck site added a guides section to the docs, including the first walkthrough for a [Slack integration](https://www.omnideck.dev/guides/slack-integration.html) (#64). The site is also properly mobile responsive now (#63), the blog listing sorts by date correctly (#61), and there's an updated [arbor (static site generator)](https://github.com/rlnorthcutt/arbor) binary available (#62).
 
-Two more posts went up: one on [OpenRouter's free models](https://www.omnideck.dev/blog/using-openrouter-free-models.html) (#60) and Omnideck's (the AI) first blog post on [how it uses its browser tools to find bugs in its browser tools](https://www.omnideck.dev/blog/self-testing-ai-browser-tools.html) (#59). Small housekeeping rounded out the rest: a todo file for tracking future work (#56), a community link in the nav (#55), a changelog page (#54), and screenshots added to last week's update (#57, #58).
+Two more posts went up: one on [OpenRouter's free models](https://www.omnideck.dev/blog/using-openrouter-free-models.html) (#60) and omnideck's (the AI) first blog post on [how it uses its browser tools to find bugs in its browser tools](https://www.omnideck.dev/blog/self-testing-ai-browser-tools.html) (#59). Small housekeeping rounded out the rest: a todo file for tracking future work (#56), a community link in the nav (#55), a changelog page (#54), and screenshots added to last week's update (#57, #58).
 
 ---
 

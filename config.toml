@@ -1,5 +1,5 @@
 [site]
-title       = "Omnideck"
+title       = "omnideck"
 base_url    = "https://www.omnideck.dev"
 language    = "en"
 page_size   = 10

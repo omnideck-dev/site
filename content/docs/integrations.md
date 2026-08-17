@@ -1,6 +1,6 @@
 +++
 title    = "Integrations"
-date     = 2025-06-01
+date     = 2026-08-16
 draft    = false
 template = "templates/types/docs.html"
 
@@ -9,112 +9,110 @@ description = "Connect Gmail, Google Workspace, iCloud, and HTTP APIs so agents 
 order = 7
 +++
 
-Integrations give the agent access to external services — email, calendar, drive, contacts, and HTTP APIs. Each integration becomes a set of agent tools the agent can call by name.
+Integrations give agents tools for services you connect: email, calendars, Google Drive, contacts, and token-authenticated HTTP APIs. The raw credentials stay outside the agent process.
 
 ## Supported integrations
 
 | Provider | Capabilities | Auth method |
 |---|---|---|
-| **Google Workspace** | Mail, Calendar, Drive, and Contacts — full read and write access | OAuth (your own Google Cloud credentials) |
-| **Gmail** | Read email, search messages, send email, move messages | App-specific password |
-| **iCloud** | Read email (IMAP), send email (SMTP), read calendar (CalDAV) | App-specific password |
-| **HTTP API** | Call any REST endpoint with a bearer token | Bearer token |
-
-More integrations — Notion, Slack, and others — are planned.
+| **Google Workspace** | Gmail, Calendar, Drive, and Contacts, selected individually | OAuth using your own Google Cloud desktop client |
+| **Gmail** | Email | App-specific password |
+| **iCloud** | Email and calendar | App-specific password |
+| **HTTP API** | Requests to one base-URL host | Static token in a configurable request header |
 
 ## Adding an integration
 
-Go to **Settings → Integrations** in the web UI and click **Add Integration**. The wizard walks you through setup for each provider.
+Go to **Settings → Integrations** and click **Add integration**. The wizard shows the credentials and permission choices required by each provider.
 
 ### Gmail and iCloud
 
 Both use app-specific passwords — credentials your provider issues for third-party apps, separate from your main account password. You need two-factor authentication enabled on your account.
 
 1. **Pick your provider** — Gmail or iCloud
-2. **Generate an app password** — the wizard links directly to your provider's app-passwords page:
+2. **Generate an app password** — the wizard links directly to your provider's account page:
    - Gmail: [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
-   - iCloud: [appleid.apple.com](https://appleid.apple.com) → Sign-In and Security → App-Specific Passwords
-3. **Enter your email and app password** and click Verify & save
-4. Omnideck verifies the credentials by connecting to the provider. If they're accepted, the integration shows as **connected**.
+   - iCloud: [account.apple.com](https://account.apple.com/account/manage) → Sign-In and Security → App-Specific Passwords
+3. **Enter your email and app password**, then choose **Read only** or **Read + Write** for each available capability.
+4. Click **Verify & save**. If the provider accepts the credentials, the integration appears as **connected**.
 
 ### Google Workspace
 
-Google Workspace uses OAuth with your own Google Cloud credentials — no shared app, no third-party servers. The wizard walks you through a one-time ~5 minute setup:
+Google Workspace uses OAuth with a desktop client you create in your own Google Cloud project. The wizard walks you through the setup:
 
 1. **Create a Google Cloud project** — the wizard links to the Google Cloud Console
 2. **Enable the APIs** — Gmail, Calendar, Drive, and People APIs
 3. **Set up the Google Auth Platform** — configure the consent screen
-4. **Publish the app** — set the app status to "In production" (it's only for you)
-5. **Create the OAuth client** — get a Client ID and Client Secret
-6. **Paste your Client ID and Client Secret** into the wizard and click Authorize
+4. **Publish the app** — this prevents a testing-mode refresh token from expiring after seven days
+5. **Create a Desktop app OAuth client** — copy its Client ID and Client Secret
+6. **Paste the credentials** into omnideck and authorize in the Google window that opens
 
-You also choose which capabilities to share (Gmail, Calendar, Drive, Contacts) and at what access level (read-only or read-write) before authorizing.
+Before authorization, choose which capabilities to connect and their access levels. Gmail, Calendar, and Drive support read-only or read-write access; Contacts is read-only. The wizard currently starts Gmail, Calendar, and Drive at **Read + Write**, so review the selections before continuing.
 
 ### HTTP API
 
-Point your agent at any REST endpoint that authenticates with a static token:
+Point an agent at a REST API that authenticates with a static token:
 
 1. **Enter a base URL** — all agent requests are locked to this host
-2. **Enter a bearer token** — passed as an `Authorization: Bearer` header
-3. **Give it a label** and click Verify & save
+2. **Enter the header name and value template** — the defaults produce `Authorization: Bearer {token}`
+3. **Enter the token**, choose read-only or read-write access, and optionally add a label
+4. Click **Save**
 
-## Write access
+Read-only HTTP access allows `GET`, `HEAD`, and `OPTIONS`. Read-write access also allows `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-By default, integrations are read-only — the agent can read messages, events, and files but can't send email, modify calendar entries, or write to Drive. This is a deliberate safe default.
+## Permissions
 
-To allow writes, open the integration in **Settings → Integrations** and enable **Allow writes**. Omnideck will restart the broker process briefly (~1–3 seconds) and the integration shows as connected again.
+Permissions are set per capability. Gmail, iCloud, and HTTP connections start at **Read only**; Google Workspace uses the defaults shown above. Open a connected integration to change each capability among **Off**, **Read**, and **Read + Write**, when the provider and granted OAuth scopes allow it.
 
-With writes enabled, the agent gains tools for sending email, moving messages, creating or modifying calendar events, uploading and editing Drive files, and making mutating HTTP requests.
+Reducing or changing permissions updates the tools available to agents. If a Google capability was authorized with read-only scopes, broader access requires deleting the integration and adding it again with read-write selected.
 
 ## Integration status
 
 | Status | Meaning |
 |---|---|
-| Connecting | Broker is starting; verifying credentials with the provider |
 | Connected | Broker is running and upstream auth succeeded |
 | Auth failed | Provider rejected the credential — generate a fresh app password and re-add |
-| Not running | Broker crashed three times; check `omnideck logs` for details |
+| Not running | omnideck could not reach or start the integration; delete and re-add it |
 
 ## Editing an integration
 
 Open the integration in **Settings → Integrations**. You can:
 
-- **Change the label** — cosmetic only, no reconnect needed
-- **Toggle Allow writes** — the broker respawns briefly to pick up the new setting
+- **Change its label**
+- **Change permissions** for each available capability
 
-You cannot change the email address or integration ID after creation — delete and re-add instead.
+Credentials and account identity cannot be edited in place. Delete and re-add the integration to replace them.
 
 ## Deleting an integration
 
-Click **Delete** on the integration. This stops the broker, removes the encrypted credentials, and removes the integration's tools from the agent immediately.
+Click **Delete**, then confirm. This stops its broker, removes its credentials from the vault, and removes its tools from future agent turns.
 
 ## Security model
 
-Credentials are stored in an encrypted vault inside the container and are never accessible to the agent:
+omnideck separates credentials from agent execution:
 
-- Credentials are encrypted with AES-256-GCM and stored at `/var/lib/computron/vault/` inside the container. This directory is owned by a separate OS user that the agent cannot read.
+- Credentials are encrypted with AES-256-GCM in a vault owned by a separate container user.
 - The agent never receives raw credentials — it calls broker tools over a Unix socket, and the broker talks to the upstream provider.
-- The broker wipes credentials from its process environment immediately after connecting to the provider, so they don't appear in process listings.
-- Write tools are hidden from the agent's tool registry when writes are disabled, so the agent can't attempt writes even indirectly.
+- Tools are exposed according to the permission selected for each capability.
+- HTTP credentials are only sent to the host in the configured base URL.
 
 <div class="callout" data-tone="warn">
-<strong>Backup security:</strong> The <code>~/Omnideck/.state</code> directory contains the vault master key alongside the encrypted credentials. Treat backups of this directory the same way you'd treat a password manager export — keep them encrypted and access-controlled.
+<strong>Treat the omnideck state volume as sensitive.</strong> It contains encrypted credential data and the local key used to decrypt it. Protect exported copies like a password-manager backup.
 </div>
 
 ## Troubleshooting
 
-**Integration shows "auth failed" shortly after adding**
+**The integration shows “auth failed”**
 
 The credentials were wrong, expired, or revoked. Generate a fresh app password (or OAuth credentials) from your provider and re-add the integration. You cannot edit credentials in place — delete and re-add.
 
-**Integration shows "not running"**
+**The integration shows “not running”**
 
-The broker crashed repeatedly before completing its initial handshake. Check `omnideck logs` for lines tagged with the integration name — common causes are a network firewall blocking outbound connections, or the provider being temporarily unavailable.
+omnideck could not reach or start it. Check the network and provider status, then delete and re-add the connection. CLI users can inspect runtime output with `omnideck logs --follow=false`.
 
-**"Integrations unavailable" in the Settings tab**
+**Settings says “Integrations unavailable”**
 
-The app can't reach the credential vault supervisor. Check `omnideck logs` for `[supervisor]` errors. If the container was stopped uncleanly, `omnideck restart` usually resolves it.
+The app cannot reach its credential service. Restart omnideck. If you manage the runtime with the CLI, run `omnideck restart`, then inspect `omnideck logs --follow=false` if the error returns.
 
-**The agent says it can't list emails but the integration shows "connected"**
+**An integration is connected but an agent cannot use it**
 
-Email servers sometimes drop idle connections after 10–30 minutes. Omnideck reconnects automatically. Check `omnideck logs` for a reconnect message — if the reconnect succeeded, the next agent call will work. If the reconnect failed, treat it as a real network issue.
+Check that the capability is not set to **Off** and that the agent has the **assistant** skill, which grants the connected-service tool categories.
