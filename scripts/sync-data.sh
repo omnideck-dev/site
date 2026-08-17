@@ -4,7 +4,8 @@
 
 set -euo pipefail
 
-cd "$(git rev-parse --show-toplevel)"
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
 
 python3 sync-tags.py
 bash scripts/update-latest-post.sh
