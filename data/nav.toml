@@ -1,4 +1,8 @@
 [[items]]
+label = "Install"
+url   = "/install.html"
+
+[[items]]
 label = "Docs"
 url   = "/docs/getting-started.html"
 
@@ -12,7 +16,7 @@ url   = "/about.html"
 
 [[items]]
 label = "Community"
-url   = "https://join.slack.com/t/omnideckcommunity/shared_invite/zt-43pog9zx2-i0CojjlIjyqvVSdGg4bLHg"
+url   = "/community.html"
 
 [[items]]
 label = "GitHub"

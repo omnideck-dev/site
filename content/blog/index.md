@@ -5,5 +5,5 @@ draft    = false
 template = "templates/types/blog-list.html"
 
 [extra]
-description = "Updates, announcements, and deep dives from the Omnideck team."
+description = "Updates, announcements, and deep dives from the omnideck team."
 +++

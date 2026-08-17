@@ -1,6 +1,6 @@
-# Omnideck Site — Content Guide
+# omnideck Site — Content Guide
 
-This is the public site for Omnideck. Content is written in Markdown with TOML front matter. No build tools or Node.js required.
+This is the public site for omnideck. Content is written in Markdown with TOML front matter. No build tools or Node.js required.
 
 ## First-time setup
 

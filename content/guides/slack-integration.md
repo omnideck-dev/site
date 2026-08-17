@@ -5,13 +5,13 @@ draft    = false
 template = "templates/types/docs.html"
 
 [extra]
-description = "Connect Omnideck to Slack for DMs, threads, and channel mentions — locked to your user only, with reactions, live status, and mid-response cancellation."
+description = "Connect omnideck to Slack for DMs, threads, and channel mentions — locked to your user only, with reactions, live status, and mid-response cancellation."
 order = 1
 +++
 
-# Connect Slack to Omnideck
+# Connect Slack to omnideck
 
-This guide gets Omnideck talking to you through Slack: DMs, threads, and any
+This guide gets omnideck talking to you through Slack: DMs, threads, and any
 public or private channel you invite the bot into. It only responds to you,
 not to anyone else in the workspace, and you can stop it mid-response with
 "stop," "cancel," or just deleting your message.
@@ -20,7 +20,7 @@ You'll do three things, in this order:
 
 1. Set up the Slack app
 2. Collect the handful of values the bridge needs
-3. Paste one prompt into Omnideck, which fetches the bridge script and starts it for you
+3. Paste one prompt into omnideck, which fetches the bridge script and starts it for you
 
 No terminal commands. No local setup on your end.
 
@@ -66,7 +66,7 @@ You need two tokens, from two different pages.
 | Bot Token | **OAuth & Permissions** → Bot User OAuth Token | `xoxb-` |
 | App Token | **Basic Information** → App-Level Tokens → **Generate Token and Scopes** → add the `connections:write` scope → **Generate** | `xapp-` |
 
-Copy both somewhere safe for a moment — you'll hand them to Omnideck in Step 6.
+Copy both somewhere safe for a moment — you'll hand them to omnideck in Step 6.
 
 ---
 
@@ -103,9 +103,9 @@ you can just message the bot directly once it's running.
 
 ---
 
-## Step 3: Set up the bridge in Omnideck
+## Step 3: Set up the bridge in omnideck
 
-Now hand everything off to Omnideck. Paste the prompt below into Omnideck,
+Now hand everything off to omnideck. Paste the prompt below into omnideck,
 filling in your own values first:
 
 ```
@@ -119,7 +119,7 @@ The script itself is already linked below:
 
 Set up my Slack bridge. Do this:
 
-1. Download the Python script from this URL and save it as slack_bridge.py:
+1. Save the Python script from this URL as slack_bridge.py:
    https://gist.github.com/rlnorthcutt/33751b3b79af10b872d65b44038e0a61/raw/f3932f378eb0ecdacbc1dcea2bd6e66f79ae3f45/slack_bridge.py
 
 2. Install its dependencies (slack-bolt, slack-sdk, aiohttp) if they aren't
@@ -131,7 +131,7 @@ Set up my Slack bridge. Do this:
    ALLOWED_USER_IDS=<YOUR_SLACK_USER_ID>
 
    Leave OMNIDECK_URL and OMNIDECK_PROFILE_ID unset unless I tell you
-   otherwise — they default to this Omnideck instance and the "omnideck"
+   otherwise — they default to this omnideck instance and the "omnideck"
    profile.
 
 4. Run the script so it keeps running persistently in the background (not
@@ -145,7 +145,7 @@ If anything above is missing or unclear, ask me before proceeding — don't
 guess at token values or skip a step.
 ```
 
-Omnideck will ask you for anything you left blank. Once it confirms the
+omnideck will ask you for anything you left blank. Once it confirms the
 bridge is running, you're done — no separate terminal session required.
 
 > **Keep those tokens private.** Treat `xoxb-` and `xapp-` values like
@@ -177,7 +177,7 @@ If none of that happens, jump to Troubleshooting below.
 | `SLACK_BOT_TOKEN` | Yes | Bot token from Step 3 (`xoxb-...`) |
 | `SLACK_APP_TOKEN` | Yes | App-level token from Step 3 (`xapp-...`) |
 | `ALLOWED_USER_IDS` | Strongly recommended | Comma-separated Slack user IDs allowed to use the bot. Leave unset and *anyone* in the workspace who can DM or mention the bot gets a response. |
-| `OMNIDECK_URL` | No | Defaults to `http://localhost:8080`. Only set this if Omnideck runs somewhere else. |
+| `OMNIDECK_URL` | No | Defaults to `http://localhost:8080`. Only set this if omnideck runs somewhere else. |
 | `OMNIDECK_PROFILE_ID` | No | Defaults to `omnideck`. Set this if you want the bridge talking to a different agent profile. |
 
 ---
@@ -193,8 +193,8 @@ If none of that happens, jump to Troubleshooting below.
 | Bot replies to people who aren't you | `ALLOWED_USER_IDS` isn't set, or has the wrong ID. Double-check Step 4. |
 | Reactions (🤔/✅/🛑) don't appear but replies still work | Confirm `reactions:write` is in the app's scopes, then reinstall the app (Step 2) — Slack requires reinstalling after scopes change on an already-installed app. |
 | Bot stops responding after several hours with no crash message | Check the manifest has `token_rotation_enabled: false`. Rotating tokens expire every few hours and need a refresh flow this bridge doesn't implement — with rotation off, the bot token doesn't expire on its own. |
-| Bot goes offline after a machine restart | The bridge has no built-in supervisor — ask Omnideck (Step 6, item 4) to confirm it set it up to auto-restart, or check what process manager it used. |
-| "Stop"/deleting a message shows 🛑 but Omnideck seems to keep working | The bridge tells Omnideck to stop server-side via `/api/chat/stop`, in addition to closing its own connection. If Omnideck doesn't have that endpoint (or it errors), you'll see a logged warning but the cancel still closes the Slack-side connection either way — worth confirming that endpoint exists on your Omnideck version. |
+| Bot goes offline after a machine restart | The bridge has no built-in supervisor — ask omnideck (Step 6, item 4) to confirm it set it up to auto-restart, or check what process manager it used. |
+| "Stop"/deleting a message shows 🛑 but omnideck seems to keep working | The bridge tells omnideck to stop server-side via `/api/chat/stop`, in addition to closing its own connection. If omnideck doesn't have that endpoint (or it errors), you'll see a logged warning but the cancel still closes the Slack-side connection either way — worth confirming that endpoint exists on your omnideck version. |
 | Bot missed messages sent while it was restarting | Expected — this bridge is Socket Mode only, with no polling fallback, so anything sent during a genuine outage isn't retried. Short reconnects (a few seconds) are handled automatically and don't lose messages. |
 
 ---
@@ -205,7 +205,7 @@ If none of that happens, jump to Troubleshooting below.
 - Reply to DMs and thread replies
 - Respond to `@mentions` in any channel it's been invited to (public or private)
 - Read and forward file attachments you send it
-- Post back files Omnideck generates
+- Post back files omnideck generates
 - Show a live "thinking" status and a done/cancelled reaction on your message
 - Be stopped mid-response with "stop," "cancel," or by deleting your message
 

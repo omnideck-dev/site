@@ -1,6 +1,6 @@
 # STYLE.md — Ivy + Lattice Reference
 
-This file is the canonical style reference for the Omnideck site. Before writing any custom CSS, check here. Most layout and styling needs are already covered by Ivy and Lattice.
+This file is the canonical style reference for the omnideck site. Before writing any custom CSS, check here. Most layout and styling needs are already covered by Ivy and Lattice.
 
 **CSS load order:**
 
@@ -832,7 +832,7 @@ Pattern: `{breakpoint}-{class}`
 /* site.css */
 
 :root {
-  /* Primary color — Omnideck indigo/violet palette */
+  /* Primary color — omnideck indigo/violet palette */
   --color-primary-light: #6366f1;
   --color-primary-dark:  #818cf8;
   --color-primary-text-light: #ffffff;
@@ -878,7 +878,7 @@ Pattern: `{breakpoint}-{class}`
 <body class="lattice">
   <header class="full-width">
     <div class="container py-5">
-      <h1>Omnideck</h1>
+      <h1>omnideck</h1>
       <p>Open-source AI agent infrastructure.</p>
       <a role="button" data-variant="primary" href="/docs">Get Started</a>
       <a role="button" data-variant="outline" href="https://github.com/..." >View on GitHub</a>
@@ -901,7 +901,7 @@ Pattern: `{breakpoint}-{class}`
 
 ```html
 <section class="py-5">
-  <h2>Why Omnideck</h2>
+  <h2>Why omnideck</h2>
   <div class="grid md-col-3 gap-3 mt-3">
     {% for f in Data.features.items %}
     <div class="card">
@@ -953,7 +953,7 @@ Pattern: `{breakpoint}-{class}`
 ```html
 <header class="full-width sticky" style="top: 0; z-index: 100;">
   <div class="container d-flex items-center justify-between py-2">
-    <a href="/" class="site-logo">Omnideck</a>
+    <a href="/" class="site-logo">omnideck</a>
     <nav class="d-none md-d-flex items-center gap-3">
       {% for item in Data.nav.items %}
       <a href="{{ item.url }}">{{ item.label }}</a>
@@ -984,7 +984,7 @@ Pattern: `{breakpoint}-{class}`
 
 ```html
 <div class="callout" data-tone="info">
-  <strong>Note:</strong> This feature requires Omnideck 0.4 or later.
+  <strong>Note:</strong> This feature requires omnideck 0.4 or later.
 </div>
 ```
 

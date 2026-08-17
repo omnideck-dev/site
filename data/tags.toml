@@ -4,6 +4,11 @@ slug  = "ai"
 count = 1
 
 [[tags]]
+name  = "AI Agents"
+slug  = "ai-agents"
+count = 1
+
+[[tags]]
 name  = "Automation"
 slug  = "automation"
 count = 1
@@ -11,6 +16,16 @@ count = 1
 [[tags]]
 name  = "Changelog"
 slug  = "changelog"
+count = 4
+
+[[tags]]
+name  = "Cost Optimization"
+slug  = "cost-optimization"
+count = 1
+
+[[tags]]
+name  = "Engineering"
+slug  = "engineering"
 count = 1
 
 [[tags]]
@@ -21,6 +36,11 @@ count = 1
 [[tags]]
 name  = "Open Source"
 slug  = "open-source"
+count = 1
+
+[[tags]]
+name  = "OpenRouter"
+slug  = "openrouter"
 count = 1
 
 [[tags]]

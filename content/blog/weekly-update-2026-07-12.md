@@ -1,5 +1,5 @@
 +++
-title    = "Omnideck weekly update: July 6-12, 2026"
+title    = "omnideck weekly update: July 6-12, 2026"
 date     = 2026-07-13
 draft    = false
 tags     = ["Changelog"]
@@ -73,7 +73,7 @@ The browsing agent picked up three real upgrades. `read_page` now returns the wh
 
 ## Site work picked up too
 
-The Omnideck site now supports blog hero images (#47) and tags (#48). Larry's first blog post went up (#49), along with fixes to make `og:image` work for social previews (#50, #52, #53) and an update to the origin story post (#51). If you've shared an Omnideck link on X or LinkedIn recently, this is why the preview image finally looks right.
+The omnideck site now supports blog hero images (#47) and tags (#48). Larry's first blog post went up (#49), along with fixes to make `og:image` work for social previews (#50, #52, #53) and an update to the origin story post (#51). If you've shared an omnideck link on X or LinkedIn recently, this is why the preview image finally looks right.
 
 ---
 

@@ -1,12 +1,12 @@
-# CLAUDE.md — Omnideck Static Site
+# CLAUDE.md — omnideck Static Site
 
-This file defines the conventions, tooling, and constraints for building the Omnideck project site. It is hosted on GitHub Pages and built with Arbor, a convention-driven static site generator.
+This file defines the conventions, tooling, and constraints for building the omnideck project site. It is hosted on GitHub Pages and built with Arbor, a convention-driven static site generator.
 
 ---
 
 ## Project Overview
 
-**Omnideck** is an open-source infrastructure substrate for AI agents. The site is its public-facing home: documentation, landing page, and community entry point.
+**omnideck** is an open-source infrastructure substrate for AI agents. The site is its public-facing home: documentation, landing page, and community entry point.
 
 - **Output target:** GitHub Pages (`public/` → `gh-pages` branch)
 - **Generator:** Arbor (binary available at `./arbor` in repo root)
@@ -99,6 +99,9 @@ Common patterns:
 
 ## HTML Conventions
 
+- The product name is always `omnideck`, including at the start of a sentence. Never capitalize it; “Desktop” is not part of the product name.
+- Present the downloadable desktop app as the default way to use omnideck. Describe the standalone CLI concretely as the option for people who prefer to install and manage omnideck from a terminal.
+- For Linux downloads, promote DEB and RPM as the default desktop packages. AppImage is a secondary Ubuntu compatibility option and must not be the primary Linux call to action.
 - Use semantic elements: `<main>`, `<section>`, `<article>`, `<nav>`, `<header>`, `<footer>`, `<aside>`.
 - One `<h1>` per page. Heading hierarchy must be correct and sequential.
 - No `<div>` where a semantic element exists.
@@ -206,7 +209,7 @@ date     = 2025-06-01
 draft    = false
 
 [extra]
-description = "Install and run Omnideck in under five minutes."
+description = "Install and run omnideck in under five minutes."
 order       = 1   # used for docs sidebar ordering
 +++
 ```
@@ -219,7 +222,7 @@ Draft files are excluded from production builds. Set `draft_mode = true` in `con
 
 ```toml
 [site]
-title    = "Omnideck"
+title    = "omnideck"
 base_url = "https://omnideck.dev"
 language = "en"
 page_size = 10
@@ -271,7 +274,7 @@ Template usage:
 - No JavaScript unless strictly necessary. The dark-mode toggle web component is the only permitted JS by default.
 - No web fonts loaded from external CDNs. Use `system-ui` or self-host.
 - Images must be appropriately sized. Use `<picture>` with `srcset` for responsive images where needed.
-- No tracking scripts, analytics embeds, or third-party resources in the default build.
+- Plausible is the approved analytics provider and its existing hosted script stays in the default build. Do not add other tracking scripts, analytics embeds, or third-party runtime resources without explicit approval.
 
 ---
 

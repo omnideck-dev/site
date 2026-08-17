@@ -1,5 +1,5 @@
 +++
-title    = "Omnideck weekly update: August 2-9, 2026"
+title    = "omnideck weekly update: August 2-9, 2026"
 date     = 2026-08-10
 draft    = false
 tags     = ["Changelog"]
@@ -33,7 +33,7 @@ A few things broke along the way, which is normal for a migration this size. A b
 
 ## CLI and runtime setup converge on one path
 
-Setup used to have more than one way to get a runtime working. Now it doesn't. Setup is unified on the shared Podman runtime, and the plumbing behind Podman-only setup got simplified. Native runtime setup reporting is clearer, and there's now disposable VM end-to-end coverage for the CLI. Omnideck now stays up to date and visible from the command line tool itself, and CLI 0.1.0 shipped.
+Setup used to have more than one way to get a runtime working. Now it doesn't. Setup is unified on the shared Podman runtime, and the plumbing behind Podman-only setup got simplified. Native runtime setup reporting is clearer, and there's now disposable VM end-to-end coverage for the CLI. omnideck now stays up to date and visible from the command line tool itself, and CLI 0.1.0 shipped.
 
 One more fix worth calling out: container removal that gets interrupted, and the name conflicts that used to follow, now recover cleanly.
 
@@ -43,7 +43,7 @@ One more fix worth calling out: container removal that gets interrupted, and the
 
 Testing and release process stopped being an afterthought. Automated desktop VM end-to-end coverage landed, alongside a proper desktop testing and release structure. Setup UX principles moved next to the tests they govern.
 
-On the CLI side, release contract gates went in, and the testing policy is now authoritative rather than advisory. The first-run test lines up with automatic setup, and cross-platform stable upgrade tests are documented. Evidence-backed direct stable promotion is now allowed, and the local release VM lab is documented for anyone who needs to reproduce a release environment.
+On the CLI side, release contract gates went in, and the testing policy is now authoritative rather than advisory. The first-run test lines up with automatic setup, and cross-platform stable upgrade tests are documented. Evidence-backed direct stable promotion is now allowed, with reproducible release environments across supported platforms.
 
 ---
 
