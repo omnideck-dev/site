@@ -22,9 +22,9 @@
       }
     })();
   </script>
-  <meta name="description" content="Connect omnideck to Slack for DMs, threads, and channel mentions — locked to your user only, with reactions, live status, and mid-response cancellation.">
+  <meta name="description" content="Connect omnideck to Slack for DMs, threads, and channel mentions — locked to the users you allow, with reactions, live status, and mid-response cancellation.">
   <meta property="og:title" content="Slack Integration">
-  <meta property="og:description" content="Connect omnideck to Slack for DMs, threads, and channel mentions — locked to your user only, with reactions, live status, and mid-response cancellation.">
+  <meta property="og:description" content="Connect omnideck to Slack for DMs, threads, and channel mentions — locked to the users you allow, with reactions, live status, and mid-response cancellation.">
   
   <title>Slack Integration | Docs | omnideck</title>
   <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
@@ -155,21 +155,24 @@
     <article class="span-12 md-span-9">
       <h1>Slack Integration</h1>
       
-      <p class="muted">Connect omnideck to Slack for DMs, threads, and channel mentions — locked to your user only, with reactions, live status, and mid-response cancellation.</p>
+      <p class="muted">Connect omnideck to Slack for DMs, threads, and channel mentions — locked to the users you allow, with reactions, live status, and mid-response cancellation.</p>
       <hr>
       
       <h1>Connect Slack to omnideck</h1>
 <p>This guide gets omnideck talking to you through Slack: DMs, threads, and any
-public or private channel you invite the bot into. It only responds to you,
-not to anyone else in the workspace, and you can stop it mid-response with
-&quot;stop,&quot; &quot;cancel,&quot; or just deleting your message.</p>
+public or private channel you invite the bot into. It only responds to the
+people you allow — by default, just you — and you can stop it mid-response
+with &quot;stop,&quot; &quot;cancel,&quot; or just deleting your message.</p>
 <p>You'll do three things, in this order:</p>
 <ol>
 <li>Set up the Slack app</li>
 <li>Collect the handful of values the bridge needs</li>
 <li>Paste one prompt into omnideck, which fetches the bridge script and starts it for you</li>
 </ol>
-<p>No terminal commands. No local setup on your end.</p>
+<p>No terminal commands for you — omnideck handles the setup, including keeping
+the bridge running across crashes and restarts. Depending on your
+environment it may set up a process supervisor (systemd, cron, or a wrapper
+script); it will tell you what it used and how to check the logs.</p>
 <hr>
 <h2>Step 1: Set up the Slack app</h2>
 <h3>Create the Slack app</h3>
@@ -220,11 +223,12 @@ permissions means less exposure if a token ever leaks.</p>
 </tr>
 </tbody>
 </table>
-<p>Copy both somewhere safe for a moment — you'll hand them to omnideck in Step 6.</p>
+<p>Copy both somewhere safe for a moment — you'll hand them to omnideck in Step 3.</p>
 <hr>
 <h3>Get your Slack user ID</h3>
-<p>The bridge is locked down to respond to exactly one person: you. It needs
-your Slack user ID to do that.</p>
+<p>By default the bridge is locked down to respond to exactly one person: you.
+It needs your Slack user ID to do that. (You can allow more people later —
+see the environment variable reference below.)</p>
 <ol>
 <li>Click your profile picture in Slack (top right).</li>
 <li>Click <strong>Profile</strong>.</li>
@@ -248,9 +252,9 @@ you can just message the bot directly once it's running.</p>
 <h2>Step 3: Set up the bridge in omnideck</h2>
 <p>Now hand everything off to omnideck. Paste the prompt below into omnideck,
 filling in your own values first:</p>
-<pre><code>- `&lt;SLACK_BOT_TOKEN&gt;` — your `xoxb-...` token from Step 3
-- `&lt;SLACK_APP_TOKEN&gt;` — your `xapp-...` token from Step 3
-- `&lt;YOUR_SLACK_USER_ID&gt;` — your `U...` ID from Step 4
+<pre><code>- `&lt;SLACK_BOT_TOKEN&gt;` — your `xoxb-...` token from Step 2
+- `&lt;SLACK_APP_TOKEN&gt;` — your `xapp-...` token from Step 2
+- `&lt;YOUR_SLACK_USER_ID&gt;` — your `U...` ID from Step 2
 
 The script itself is already linked below:
 `https://gist.githubusercontent.com/rlnorthcutt/33751b3b79af10b872d65b44038e0a61/raw/slack_bridge.py`
@@ -290,8 +294,36 @@ bridge is running, you're done — no separate terminal session required.</p>
 passwords — anyone with the bot token can act as your bot in Slack.</p>
 </blockquote>
 <hr>
+<h3>Optional: Give the bot its own personality</h3>
+<p>By default the bridge talks to your main omnideck profile — the same
+orchestrator you use for real work. That works, but the replies tend to be
+long and formal, and every message runs with an unbounded token budget.</p>
+<p>For a better Slack experience, create a dedicated profile and point the
+bridge at it. Paste this into omnideck and edit the personality to taste:</p>
+<pre><code>Create an agent profile called &quot;slack_bot&quot; for use through the Slack
+bridge. Personality: friendly and concise, short paragraphs suited to
+Slack, calls me by first name, light humor, no corporate speak, and likes
+dropping one pop culture reference per reply (80s/90s/00s).
+
+Skills: assistant, routine_planner, personal-context, and write-code
+(needed so it can update plans and artifacts when I ask). Do NOT allow
+spawning sub-agents or loading additional skills.
+
+Keep it cheap to run: num_predict 1024, max_iterations 8,
+context_window 131072, think false.
+
+Then set OMNIDECK_PROFILE_ID=&quot;slack_bot&quot; in the Slack bridge env file
+(~/slack-bridge/env) and restart the bridge so it picks up the new
+profile.
+</code></pre>
+<p>You can shape the persona however you like — the profile's system prompt is
+just instructions. What matters structurally: limited skills, no spawning,
+and a capped output and iteration budget, so a Slack message can never turn
+into a long agent session.</p>
+<hr>
 <h3>Verify it's working</h3>
-<p>Send the bot a DM, or <code>@Ozri</code> mention it in a channel you invited it to.
+<p>Send the bot a DM, or <code>@mention</code> it (using the name you gave it in Step 1)
+in a channel you invited it to.
 You should see, in order:</p>
 <ol>
 <li>A 🤔 reaction appear on your message (it saw you)</li>
@@ -316,17 +348,17 @@ thing.</p>
 <tr>
 <td><code>SLACK_BOT_TOKEN</code></td>
 <td>Yes</td>
-<td>Bot token from Step 3 (<code>xoxb-...</code>)</td>
+<td>Bot token from Step 2 (<code>xoxb-...</code>)</td>
 </tr>
 <tr>
 <td><code>SLACK_APP_TOKEN</code></td>
 <td>Yes</td>
-<td>App-level token from Step 3 (<code>xapp-...</code>)</td>
+<td>App-level token from Step 2 (<code>xapp-...</code>)</td>
 </tr>
 <tr>
 <td><code>ALLOWED_USER_IDS</code></td>
 <td>Strongly recommended</td>
-<td>Comma-separated Slack user IDs allowed to use the bot. Leave unset and <em>anyone</em> in the workspace who can DM or mention the bot gets a response.</td>
+<td>Comma-separated Slack user IDs allowed to use the bot — you can allow more than one person (e.g. a maintainer team). Leave unset and <em>anyone</em> in the workspace who can DM or mention the bot gets a response.</td>
 </tr>
 <tr>
 <td><code>OMNIDECK_URL</code></td>
@@ -336,7 +368,7 @@ thing.</p>
 <tr>
 <td><code>OMNIDECK_PROFILE_ID</code></td>
 <td>No</td>
-<td>Defaults to <code>omnideck</code>. Set this if you want the bridge talking to a different agent profile.</td>
+<td>Defaults to <code>omnideck</code>. Recommended: create a dedicated Slack profile (see &quot;Optional: Give the bot its own personality&quot;) so the bot gets a Slack-sized persona and token budget instead of your main orchestrator.</td>
 </tr>
 </tbody>
 </table>
@@ -356,7 +388,7 @@ thing.</p>
 </tr>
 <tr>
 <td>Bot works in DMs but not in a channel</td>
-<td>You need to <code>/invite</code> the bot to that channel (Step 5) — this applies to public channels too, not just private ones.</td>
+<td>You need to <code>/invite</code> the bot to that channel (Step 2) — this applies to public channels too, not just private ones.</td>
 </tr>
 <tr>
 <td>Private channel messages ignored</td>
@@ -368,7 +400,7 @@ thing.</p>
 </tr>
 <tr>
 <td>Bot replies to people who aren't you</td>
-<td><code>ALLOWED_USER_IDS</code> isn't set, or has the wrong ID. Double-check Step 4.</td>
+<td><code>ALLOWED_USER_IDS</code> isn't set, or has the wrong ID. Double-check Step 2.</td>
 </tr>
 <tr>
 <td>Reactions (🤔/✅/🛑) don't appear but replies still work</td>
@@ -380,7 +412,7 @@ thing.</p>
 </tr>
 <tr>
 <td>Bot goes offline after a machine restart</td>
-<td>The bridge has no built-in supervisor — ask omnideck (Step 6, item 4) to confirm it set it up to auto-restart, or check what process manager it used.</td>
+<td>Check whether the bridge process is running (<code>ps aux | grep bridge</code>). If omnideck set up a supervisor (systemd unit, cron entry, or a wrapper script), the bridge should restart on its own — look for a <code>run-bridge.sh</code>-style wrapper in the bridge's folder. If nothing restarts it, ask omnideck to set up persistence.</td>
 </tr>
 <tr>
 <td>&quot;Stop&quot;/deleting a message shows 🛑 but omnideck seems to keep working</td>
@@ -405,7 +437,7 @@ thing.</p>
 </ul>
 <p><strong>Can't (by design, to keep this simple and locked-down):</strong></p>
 <ul>
-<li>Respond to anyone but you (<code>ALLOWED_USER_IDS</code>)</li>
+<li>Respond to anyone you haven't allowlisted (<code>ALLOWED_USER_IDS</code>)</li>
 <li>React to other people's reactions, run polls, or post to Slack Lists/Canvas — none of that is wired up in this version</li>
 <li>Recover messages sent during an actual outage (no polling fallback)</li>
 </ul>
