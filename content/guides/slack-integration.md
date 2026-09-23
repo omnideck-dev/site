@@ -5,16 +5,16 @@ draft    = false
 template = "templates/types/docs.html"
 
 [extra]
-description = "Connect omnideck to Slack for DMs, threads, and channel mentions — locked to your user only, with reactions, live status, and mid-response cancellation."
+description = "Connect omnideck to Slack for DMs, threads, and channel mentions — locked to the users you allow, with reactions, live status, and mid-response cancellation."
 order = 1
 +++
 
 # Connect Slack to omnideck
 
 This guide gets omnideck talking to you through Slack: DMs, threads, and any
-public or private channel you invite the bot into. It only responds to you,
-not to anyone else in the workspace, and you can stop it mid-response with
-"stop," "cancel," or just deleting your message.
+public or private channel you invite the bot into. It only responds to the
+people you allow — by default, just you — and you can stop it mid-response
+with "stop," "cancel," or just deleting your message.
 
 You'll do three things, in this order:
 
@@ -22,7 +22,10 @@ You'll do three things, in this order:
 2. Collect the handful of values the bridge needs
 3. Paste one prompt into omnideck, which fetches the bridge script and starts it for you
 
-No terminal commands. No local setup on your end.
+No terminal commands for you — omnideck handles the setup, including keeping
+the bridge running across crashes and restarts. Depending on your
+environment it may set up a process supervisor (systemd, cron, or a wrapper
+script); it will tell you what it used and how to check the logs.
 
 ---
 
@@ -66,14 +69,15 @@ You need two tokens, from two different pages.
 | Bot Token | **OAuth & Permissions** → Bot User OAuth Token | `xoxb-` |
 | App Token | **Basic Information** → App-Level Tokens → **Generate Token and Scopes** → add the `connections:write` scope → **Generate** | `xapp-` |
 
-Copy both somewhere safe for a moment — you'll hand them to omnideck in Step 6.
+Copy both somewhere safe for a moment — you'll hand them to omnideck in Step 3.
 
 ---
 
 ### Get your Slack user ID
 
-The bridge is locked down to respond to exactly one person: you. It needs
-your Slack user ID to do that.
+By default the bridge is locked down to respond to exactly one person: you.
+It needs your Slack user ID to do that. (You can allow more people later —
+see the environment variable reference below.)
 
 1. Click your profile picture in Slack (top right).
 2. Click **Profile**.
@@ -109,9 +113,9 @@ Now hand everything off to omnideck. Paste the prompt below into omnideck,
 filling in your own values first:
 
 ```
-- `<SLACK_BOT_TOKEN>` — your `xoxb-...` token from Step 3
-- `<SLACK_APP_TOKEN>` — your `xapp-...` token from Step 3
-- `<YOUR_SLACK_USER_ID>` — your `U...` ID from Step 4
+- `<SLACK_BOT_TOKEN>` — your `xoxb-...` token from Step 2
+- `<SLACK_APP_TOKEN>` — your `xapp-...` token from Step 2
+- `<YOUR_SLACK_USER_ID>` — your `U...` ID from Step 2
 
 The script itself is already linked below:
 `https://gist.githubusercontent.com/rlnorthcutt/33751b3b79af10b872d65b44038e0a61/raw/slack_bridge.py`
@@ -153,9 +157,44 @@ bridge is running, you're done — no separate terminal session required.
 
 ---
 
+### Optional: Give the bot its own personality
+
+By default the bridge talks to your main omnideck profile — the same
+orchestrator you use for real work. That works, but the replies tend to be
+long and formal, and every message runs with an unbounded token budget.
+
+For a better Slack experience, create a dedicated profile and point the
+bridge at it. Paste this into omnideck and edit the personality to taste:
+
+```
+Create an agent profile called "slack_bot" for use through the Slack
+bridge. Personality: friendly and concise, short paragraphs suited to
+Slack, calls me by first name, light humor, no corporate speak, and likes
+dropping one pop culture reference per reply (80s/90s/00s).
+
+Skills: assistant, routine_planner, personal-context, and write-code
+(needed so it can update plans and artifacts when I ask). Do NOT allow
+spawning sub-agents or loading additional skills.
+
+Keep it cheap to run: num_predict 1024, max_iterations 8,
+context_window 131072, think false.
+
+Then set OMNIDECK_PROFILE_ID="slack_bot" in the Slack bridge env file
+(~/slack-bridge/env) and restart the bridge so it picks up the new
+profile.
+```
+
+You can shape the persona however you like — the profile's system prompt is
+just instructions. What matters structurally: limited skills, no spawning,
+and a capped output and iteration budget, so a Slack message can never turn
+into a long agent session.
+
+---
+
 ### Verify it's working
 
-Send the bot a DM, or `@Ozri` mention it in a channel you invited it to.
+Send the bot a DM, or `@mention` it (using the name you gave it in Step 1)
+in a channel you invited it to.
 You should see, in order:
 
 1. A 🤔 reaction appear on your message (it saw you)
@@ -174,11 +213,11 @@ If none of that happens, jump to Troubleshooting below.
 
 | Variable | Required? | Purpose |
 |---|---|---|
-| `SLACK_BOT_TOKEN` | Yes | Bot token from Step 3 (`xoxb-...`) |
-| `SLACK_APP_TOKEN` | Yes | App-level token from Step 3 (`xapp-...`) |
-| `ALLOWED_USER_IDS` | Strongly recommended | Comma-separated Slack user IDs allowed to use the bot. Leave unset and *anyone* in the workspace who can DM or mention the bot gets a response. |
+| `SLACK_BOT_TOKEN` | Yes | Bot token from Step 2 (`xoxb-...`) |
+| `SLACK_APP_TOKEN` | Yes | App-level token from Step 2 (`xapp-...`) |
+| `ALLOWED_USER_IDS` | Strongly recommended | Comma-separated Slack user IDs allowed to use the bot — you can allow more than one person (e.g. a maintainer team). Leave unset and *anyone* in the workspace who can DM or mention the bot gets a response. |
 | `OMNIDECK_URL` | No | Defaults to `http://localhost:8080`. Only set this if omnideck runs somewhere else. |
-| `OMNIDECK_PROFILE_ID` | No | Defaults to `omnideck`. Set this if you want the bridge talking to a different agent profile. |
+| `OMNIDECK_PROFILE_ID` | No | Defaults to `omnideck`. Recommended: create a dedicated Slack profile (see "Optional: Give the bot its own personality") so the bot gets a Slack-sized persona and token budget instead of your main orchestrator. |
 
 ---
 
@@ -187,13 +226,13 @@ If none of that happens, jump to Troubleshooting below.
 | Symptom | Fix |
 |---|---|
 | Bot never replies to anything | Check the manifest's `event_subscriptions.bot_events` includes `message.channels`, `message.groups`, and `message.im`. Socket Mode being "on" isn't enough by itself — the event subscriptions have to be declared too. |
-| Bot works in DMs but not in a channel | You need to `/invite` the bot to that channel (Step 5) — this applies to public channels too, not just private ones. |
+| Bot works in DMs but not in a channel | You need to `/invite` the bot to that channel (Step 2) — this applies to public channels too, not just private ones. |
 | Private channel messages ignored | Confirm `groups:history` and `groups:read` are in the app's scopes, and that the bot has been invited to that channel. |
 | File attachments don't come through | Confirm `files:read` and `files:write` are in the app's scopes. |
-| Bot replies to people who aren't you | `ALLOWED_USER_IDS` isn't set, or has the wrong ID. Double-check Step 4. |
+| Bot replies to people who aren't you | `ALLOWED_USER_IDS` isn't set, or has the wrong ID. Double-check Step 2. |
 | Reactions (🤔/✅/🛑) don't appear but replies still work | Confirm `reactions:write` is in the app's scopes, then reinstall the app (Step 2) — Slack requires reinstalling after scopes change on an already-installed app. |
 | Bot stops responding after several hours with no crash message | Check the manifest has `token_rotation_enabled: false`. Rotating tokens expire every few hours and need a refresh flow this bridge doesn't implement — with rotation off, the bot token doesn't expire on its own. |
-| Bot goes offline after a machine restart | The bridge has no built-in supervisor — ask omnideck (Step 6, item 4) to confirm it set it up to auto-restart, or check what process manager it used. |
+| Bot goes offline after a machine restart | Check whether the bridge process is running (`ps aux \| grep bridge`). If omnideck set up a supervisor (systemd unit, cron entry, or a wrapper script), the bridge should restart on its own — look for a `run-bridge.sh`-style wrapper in the bridge's folder. If nothing restarts it, ask omnideck to set up persistence. |
 | "Stop"/deleting a message shows 🛑 but omnideck seems to keep working | The bridge tells omnideck to stop server-side via `/api/chat/stop`, in addition to closing its own connection. If omnideck doesn't have that endpoint (or it errors), you'll see a logged warning but the cancel still closes the Slack-side connection either way — worth confirming that endpoint exists on your omnideck version. |
 | Bot missed messages sent while it was restarting | Expected — this bridge is Socket Mode only, with no polling fallback, so anything sent during a genuine outage isn't retried. Short reconnects (a few seconds) are handled automatically and don't lose messages. |
 
@@ -210,6 +249,6 @@ If none of that happens, jump to Troubleshooting below.
 - Be stopped mid-response with "stop," "cancel," or by deleting your message
 
 **Can't (by design, to keep this simple and locked-down):**
-- Respond to anyone but you (`ALLOWED_USER_IDS`)
+- Respond to anyone you haven't allowlisted (`ALLOWED_USER_IDS`)
 - React to other people's reactions, run polls, or post to Slack Lists/Canvas — none of that is wired up in this version
 - Recover messages sent during an actual outage (no polling fallback)
