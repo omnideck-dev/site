@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="A one-page answer for the questions your IT team or CTO will ask before you use an AI assistant for work: license, isolation, credentials, telemetry, and data location.">
+  <meta property="og:title" content="Using Omnideck at Work">
+  <meta property="og:description" content="A one-page answer for the questions your IT team or CTO will ask before you use an AI assistant for work: license, isolation, credentials, telemetry, and data location.">
+  
+  <title>Using Omnideck at Work | Docs | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
+  
+</head>
+<body class="lattice ">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="/community.html" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    </div>
+  </div>
+
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="/community.html" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    </div>
+  </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
+</header>
+
+  <main id="main-content" class="full-width">
+    
+<div class="container py-5">
+  <div class="grid gap-5">
+    <div class="span-12 md-span-3">
+      <aside class="docs-sidebar">
+  <span class="docs-nav-label">Documentation</span>
+  <nav>
+    
+    <a href="/docs/getting-started.html">Getting Started</a>
+    
+    <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
+    
+    <a href="/docs/agents.html">Agents</a>
+    
+    <a href="/docs/routines.html">Routines</a>
+    
+    <a href="/docs/integrations.html">Integrations</a>
+    
+    <a href="/docs/local-models.html">Local Models</a>
+    
+    <a href="/docs/cli-reference.html">CLI Reference</a>
+    
+  </nav>
+  <span class="docs-nav-label">Guides</span>
+  <nav>
+    
+    <a href="/guides/slack-integration.html">Slack Integration</a>
+    
+    <a href="/guides/using-omnideck-at-work.html">Using Omnideck at Work</a>
+    
+  </nav>
+</aside>
+
+<details class="docs-mobile-nav">
+  <summary>Documentation</summary>
+  <div class="docs-mobile-nav-body">
+    <span class="docs-nav-label">Documentation</span>
+    <nav>
+      
+      <a href="/docs/getting-started.html">Getting Started</a>
+      
+      <a href="/docs/getting-started.html#install-omnideck">Install omnideck</a>
+      
+      <a href="/docs/agents.html">Agents</a>
+      
+      <a href="/docs/routines.html">Routines</a>
+      
+      <a href="/docs/integrations.html">Integrations</a>
+      
+      <a href="/docs/local-models.html">Local Models</a>
+      
+      <a href="/docs/cli-reference.html">CLI Reference</a>
+      
+    </nav>
+    <span class="docs-nav-label">Guides</span>
+    <nav>
+      
+      <a href="/guides/slack-integration.html">Slack Integration</a>
+      
+      <a href="/guides/using-omnideck-at-work.html">Using Omnideck at Work</a>
+      
+    </nav>
+  </div>
+</details>
+
+    </div>
+    <article class="span-12 md-span-9">
+      <h1>Using Omnideck at Work</h1>
+      
+      <p class="muted">A one-page answer for the questions your IT team or CTO will ask before you use an AI assistant for work: license, isolation, credentials, telemetry, and data location.</p>
+      <hr>
+      
+      <h1>Using Omnideck at Work</h1>
+<p><strong>A one-page answer for the questions your IT team or CTO will ask before you use an AI assistant for work.</strong></p>
+<h2>The short version</h2>
+<p>Omnideck is a self-hosted AI assistant that runs entirely on hardware your company controls: a laptop, a workstation, or an internal server. There is no telemetry. Nothing about your usage, your prompts, or your data is sent to us, because there is no &quot;us&quot; in the runtime path at all. It's open-source software you run yourself, the same way you'd run a local database or a dev container.</p>
+<p>If your organization already trusts you to run Docker containers and use an LLM API key, you already have everything Omnideck needs.</p>
+<h2>What it actually is</h2>
+<p>Omnideck is a <strong>wrapper around whatever LLM your organization has already approved</strong>, not a new AI vendor to vet. It doesn't ship its own model or its own inference service. You point it at:</p>
+<ul>
+<li>An LLM your company already has a contract with (Anthropic, OpenAI, Azure OpenAI, or any OpenAI-compatible endpoint), or</li>
+<li>A model running entirely on your own hardware via Ollama, with no external API calls at all.</li>
+</ul>
+<p>If your company's answer to &quot;can I use Claude/ChatGPT for work&quot; is already yes, Omnideck doesn't introduce a new data-handling question; it's the same approved model, with a better interface and local tools around it. If your company requires local-only inference, Omnideck supports that too, and at that point no prompt or response ever leaves the machine it's running on.</p>
+<h2>The five things a security review usually asks about</h2>
+<p><strong>1. Open source (Apache 2.0).</strong>
+The full source is available for review under the Apache License 2.0, a standard, OSI-approved permissive license, not a source-available license with usage restrictions. Nothing is a black box; your security team can read exactly what the agent can and cannot do before anyone runs it, rather than taking a vendor's word for it.</p>
+<p><strong>2. Containerized.</strong>
+Omnideck runs as a single container image. It doesn't install anything into the host OS, doesn't require elevated host privileges to operate, and can be stopped, removed, or rebuilt cleanly. State (conversations, memory, settings) lives in a named container volume, not a shared host directory; the agent's filesystem is walled off from the rest of your machine by the container boundary itself. <code>omnideck uninstall</code> can back up and delete that volume for you.</p>
+<p><strong>3. Secrets never reach the model.</strong>
+This is the part worth walking your CTO through directly. API keys and OAuth tokens (for the LLM provider itself, and for any connected integration like email or calendar) live in an encrypted vault and are decrypted only inside a separate, isolated process the agent runtime can't read. When the agent needs to call an API, the request goes through that broker, and the real credential is attached on the way out. The application code the LLM's tool calls run through never holds a decrypted key in memory. Concretely: <strong>the agent runtime never holds a decrypted credential, so a prompt-injection attempt or an agent compromise has no secret to read.</strong> The threat model documents the residual risks honestly. Your API key is not an environment variable sitting next to application code; it never exists where the agent's code runs.</p>
+<p><strong>4. No telemetry.</strong>
+There is no analytics SDK, no usage tracking, and no phone-home behavior anywhere in the codebase; that's a verifiable claim, not a policy promise, since the source is open. Nothing about how you use it is collected, by us or anyone else.</p>
+<p><strong>5. Runs locally, with any model you like.</strong>
+The whole system is a container plus a Go CLI to manage it. It runs on your machine or your infra, under your network policy, behind your firewall. Swapping models, cloud to local or one vendor to another, is a config change, not a re-architecture. That means adopting Omnideck is not an additional-vendor decision; it's a decision to run an open-source client against a model your organization has already approved.</p>
+<h2>What this means in practice</h2>
+<ul>
+<li><strong>For IT:</strong> it's a container you can inspect, scan, and remove like any other internal tool. It doesn't require a new SaaS vendor review, a new DPA, or a new data-residency conversation if you're already using local or already-approved models.</li>
+<li><strong>For a CTO or security lead:</strong> the credential-isolation design (point 3) is the thing worth a closer look.</li>
+<li><strong>For you:</strong> you can point people at this page instead of re-explaining the architecture in a Slack thread. If the answer to &quot;can I run this&quot; is still no, the follow-up is a narrow one: usually &quot;can we run it against our already-approved model&quot; rather than &quot;can we approve an entirely new AI product.&quot;</li>
+</ul>
+<h2>FAQ</h2>
+<p><strong>What license is this actually under? Any restrictions?</strong>
+Apache License 2.0, the same permissive, OSI-approved license used by Kubernetes, Kafka, and most enterprise-grade OSS. No field-of-use restrictions, no &quot;can't compete with us&quot; clause. Your legal team can approve it the same way they'd approve any other Apache-licensed dependency.</p>
+<p><strong>Who supports this if something breaks? Is there a vendor SLA?</strong>
+No. Omnideck is maintained by its two creators (Larry Foulkrod and Ron Northcutt), not a company with a support contract. There's no SLA, no ticket queue, no guaranteed response time. Support is open-source-project support (issues, patches, <code>omnideck update</code> for fixes). If your organization requires a vendor support agreement for any tool touching work data, say so up front; that's a real gap, not something this page can paper over.</p>
+<p><strong>Does the web UI require a login?</strong>
+No. There's no built-in authentication in front of the app itself. The access boundary is whatever network exposure you give it: by default it's bound to localhost on your own machine, which is the intended deployment. If you ever put it on a shared network or server, you're responsible for putting your own access control in front of it (a reverse proxy with auth, a VPN, a firewall rule), the same way you would for any other unauthenticated local dev tool.</p>
+<p><strong>Does anything ever leave my machine?</strong>
+Only traffic to the LLM provider (and any integrations, like Gmail or Calendar) that <em>you</em> configure: nothing to Omnideck's creators, ever, and no telemetry. If you configure a fully local model via Ollama, there is no external network call at all. If you configure a cloud model, the only egress is to that provider's API, using the credentials it already has, the same traffic that would exist if you called that API directly yourself.</p>
+<p><strong>Can the agent browse the web? Is that an exfiltration risk?</strong>
+Yes, one of its tools drives a real, persistent-session browser (Playwright/Chrome) to whatever page it needs. That's a capability, not a hidden one; it behaves like giving an employee's script the ability to open a browser tab. Egress from it follows the same network policy as any other browser on that machine; if your org restricts outbound traffic at the firewall or proxy level, that restriction applies here too. There's nothing browser-tool-specific to carve out.</p>
+<p><strong>How are stored credentials (API keys, OAuth tokens) protected at rest?</strong>
+Encrypted with AES-256-GCM in a vault directory, decrypted only inside the separate, isolated broker process described above. The master key itself is protected by OS file permissions rather than a hardware security module: solid for a self-hosted single-machine tool, but worth knowing precisely rather than assuming enterprise-KMS-grade protection.</p>
+<p><strong>Does Omnideck have SOC 2 / ISO 27001 / HIPAA certification?</strong>
+No, and structurally it can't. Those certifications apply to a vendor processing your data on their infrastructure, and there is no vendor in this data path. Self-hosting means your organization's existing infrastructure controls are what apply, the same as for any other self-hosted open-source tool you already run (a database, a CI runner, an internal dashboard).</p>
+<p><strong>Where does my data actually live, and how do I get rid of it?</strong>
+Everything (conversations, memory, settings) lives in a named container volume, not a plain folder on your host filesystem. That's a deliberate isolation boundary, not just a storage detail: the container (and the agent running inside it) is walled off from your local machine, so it can't read, write, or bypass files elsewhere on your system beyond what you've explicitly exposed to it. There's no remote copy to separately request deletion of; <code>omnideck uninstall</code> can back up and then delete that volume in one step.</p>
+
+    </article>
+  </div>
+</div>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+    <p class="footer-text">
+      Open source · Apache 2
+    </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=f6211ced"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>
