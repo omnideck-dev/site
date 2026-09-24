@@ -29,3 +29,7 @@ url   = "/docs/cli-reference.html"
 [[guides]]
 title = "Slack Integration"
 url   = "/guides/slack-integration.html"
+
+[[guides]]
+title = "Using Omnideck at Work"
+url   = "/guides/using-omnideck-at-work.html"
