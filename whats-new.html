@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/omnideck-app-icon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('dm:theme');
+        const theme = saved === 'light' || saved === 'dark'
+          ? saved
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta name="description" content="The latest published OmniDeck app, desktop installer, and CLI releases.">
+  <meta property="og:title" content="What’s new">
+  <meta property="og:description" content="The latest published OmniDeck app, desktop installer, and CLI releases.">
+  
+  <title>What’s new | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=7743af8c">
+  
+</head>
+<body class="lattice ">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/whats-new.html" class="nav-link">What’s new</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="/community.html" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
+      </button>
+
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    </div>
+  </div>
+
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/whats-new.html" class="nav-mobile-link">What’s new</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="/community.html" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    </div>
+  </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
+</header>
+
+  <main id="main-content" class="full-width">
+    
+<section class="container py-5" aria-labelledby="releases-title">
+  <h1 id="releases-title">What’s new</h1>
+  <p>Published updates to the app, desktop installers, and CLI, with release notes for each ship.</p>
+  <p class="muted">Desktop installers bundle their own CLI and runtime versions. A separate CLI or runtime release does not replace your desktop installer.</p>
+  <p><a href="/install.html">Download the latest desktop installer →</a></p>
+  <div class="grid col-1 gap-3 mt-4">
+    
+    <article class="card" data-release-tag="v0.11.0-beta.6">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.6">CLI 0.11.0-beta.6</a></h2>
+      <p class="muted"><time datetime="2026-09-29T01:55:17Z">September 29, 2026</time></p>
+      <p>This beta prepares local installations for MCP sign-in in compatible omnideck application builds and fixes Windows container-to-host routing.</p>
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.6" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="app-v0.5.2">
+      <span class="section-label">App / runtime · Stable</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.5.2">App / runtime 0.5.2</a></h2>
+      <p class="muted"><time datetime="2026-09-27T23:24:01Z">September 27, 2026</time></p>
+      <p>Integrations: Integration access is now stored and enforced as an explicit per-tool allowlist. Existing connections migrate automatically, and brokered model providers remain available without appearing as tool integrations. Integration…</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.5.2" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="app-v0.5.1">
+      <span class="section-label">App / runtime · Stable</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.5.1">App / runtime 0.5.1</a></h2>
+      <p class="muted"><time datetime="2026-09-26T14:36:39Z">September 26, 2026</time></p>
+      <p>Updates: What’s new now opens a dedicated app release page with the changes included in that version. Older app versions keep their existing release-note links.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.5.1" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.11">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.11">Desktop installer 0.1.0-beta.11</a></h2>
+      <p class="muted"><time datetime="2026-08-19T14:50:15Z">August 19, 2026</time></p>
+      <p>This beta updates the bundled omnideck app from version 0.1.4 to version 0.2.2. It is an in-place upgrade; you do not need to uninstall beta.10 first.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.11" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.10">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.10">Desktop installer 0.1.0-beta.10</a></h2>
+      <p class="muted"><time datetime="2026-08-19T14:12:58Z">August 19, 2026</time></p>
+      <p>This beta fixes link handling in the desktop application. It is an in-place upgrade; you do not need to uninstall beta.9 first.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.10" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.9">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.9">Desktop installer 0.1.0-beta.9</a></h2>
+      <p class="muted"><time datetime="2026-08-17T03:41:57Z">August 17, 2026</time></p>
+      <p>This beta separates the graphical desktop host from the standalone CLI command and improves browser cleanup for scheduled routines. It is an in-place upgrade; you do not need to uninstall beta.8 first.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.9" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.8">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.8">Desktop installer 0.1.0-beta.8</a></h2>
+      <p class="muted"><time datetime="2026-08-14T22:48:46Z">August 14, 2026</time></p>
+      <p>Beta.8 brings the complete omnideck agent workspace to Windows, macOS, and Linux in a guided desktop application. It adds reliable native zoom and rolls up the latest improvements to setup, downloads, updates, and day-to-day desktop use.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.8" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.7">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.7">Desktop installer 0.1.0-beta.7</a></h2>
+      <p class="muted"><time datetime="2026-08-14T01:38:51Z">August 14, 2026</time></p>
+      <p>This beta supersedes v0.1.0-beta.6 with a conventional, guided macOS disk image installer. The application behavior and bundled runtime remain unchanged from beta.6.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.7" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.11.0-beta.5">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.5">CLI 0.11.0-beta.5</a></h2>
+      <p class="muted"><time datetime="2026-08-14T00:35:14Z">August 14, 2026</time></p>
+      
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.5" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.11.0-beta.4">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.4">CLI 0.11.0-beta.4</a></h2>
+      <p class="muted"><time datetime="2026-08-13T23:53:42Z">August 13, 2026</time></p>
+      
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.4" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.6">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.6">Desktop installer 0.1.0-beta.6</a></h2>
+      <p class="muted"><time datetime="2026-08-13T21:09:47Z">August 13, 2026</time></p>
+      <p>This beta supersedes v0.1.0-beta.5 with an AppImage setup fix discovered by the published-artifact VM qualification sweep. It includes the desktop zoom, native downloads and completion toasts, menu suppression, native updater, and…</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.6" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.5">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.5">Desktop installer 0.1.0-beta.5</a></h2>
+      <p class="muted"><time datetime="2026-08-13T19:13:06Z">August 13, 2026</time></p>
+      <p>This beta fills several native desktop gaps while preserving the existing browser application and setup experience. It bundles OmniDeck CLI v0.11.0-beta.2 from commit a32d3ad95f44 and the OmniDeck 0.1.4 runtime image at its checked-in…</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.5" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.11.0-beta.3">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.3">CLI 0.11.0-beta.3</a></h2>
+      <p class="muted"><time datetime="2026-08-13T01:00:27Z">August 13, 2026</time></p>
+      <p>Aligns the TUI with the Omnideck desktop app&#39;s dark palette. - Prevents nested ANSI resets from exposing light terminal backgrounds on Debian, macOS, and other light-default terminals. - Adds a compact, scrollable dashboard for smaller…</p>
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.3" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.4">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.4">Desktop installer 0.1.0-beta.4</a></h2>
+      <p class="muted"><time datetime="2026-08-12T23:59:23Z">August 12, 2026</time></p>
+      <p>This beta fixes agent and skill profile downloads in the native desktop app and bundles OmniDeck CLI v0.11.0-beta.2 from commit a32d3ad95f44.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.4" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.3">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.3">Desktop installer 0.1.0-beta.3</a></h2>
+      <p class="muted"><time datetime="2026-08-12T15:05:59Z">August 12, 2026</time></p>
+      <p>This beta repairs two setup conflicts reported against v0.1.0-beta.2 and bundles OmniDeck CLI v0.11.0-beta.2 from commit a32d3ad95f44.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.3" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.11.0-beta.2">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.2">CLI 0.11.0-beta.2</a></h2>
+      <p class="muted"><time datetime="2026-08-12T14:23:30Z">August 12, 2026</time></p>
+      
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.2" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.2">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.2">Desktop installer 0.1.0-beta.2</a></h2>
+      <p class="muted"><time datetime="2026-08-12T03:43:29Z">August 12, 2026</time></p>
+      <p>This beta corrects the macOS first-run resource check in v0.1.0-beta.1. It retains the same bundled CLI, hosted runtime image, setup wording, and platform behavior.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.2" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-beta.1">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.1">Desktop installer 0.1.0-beta.1</a></h2>
+      <p class="muted"><time datetime="2026-08-12T02:00:58Z">August 12, 2026</time></p>
+      <p>This beta promotes the extensively tested alpha.11 behavior without changing the setup wording, runtime image, or hosted application. It bundles OmniDeck CLI v0.11.0-beta.1, rebuilt from the same tested CLI source commit as…</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.1" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.11.0-beta.1">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.1">CLI 0.11.0-beta.1</a></h2>
+      <p class="muted"><time datetime="2026-08-12T01:08:32Z">August 12, 2026</time></p>
+      
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.1" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-alpha.11">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.11">Desktop installer 0.1.0-alpha.11</a></h2>
+      <p class="muted"><time datetime="2026-08-10T00:47:57Z">August 10, 2026</time></p>
+      <p>This alpha bundles OmniDeck CLI v0.11.0-alpha.2 and adds disposable local-VM end-to-end coverage for the shipped Tauri desktop packages. The visible setup wording, structure, and behavior remain locked to the exact-copy desktop mockup.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.11" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.11.0-alpha.2">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-alpha.2">CLI 0.11.0-alpha.2</a></h2>
+      <p class="muted"><time datetime="2026-08-09T23:51:36Z">August 9, 2026</time></p>
+      
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-alpha.2" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-alpha.10">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.10">Desktop installer 0.1.0-alpha.10</a></h2>
+      <p class="muted"><time datetime="2026-08-09T23:17:20Z">August 9, 2026</time></p>
+      <p>This alpha is a desktop-host maintenance release. It reorganizes the Tauri host and release-sidecar tooling without intended changes to setup copy, window behavior, runtime lifecycle, or the application UI.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.10" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-alpha.9">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.9">Desktop installer 0.1.0-alpha.9</a></h2>
+      <p class="muted"><time datetime="2026-08-09T18:35:49Z">August 9, 2026</time></p>
+      <p>This alpha makes first-run setup quieter and clearer across Windows, macOS, and Linux while keeping required operating-system approval prompts visible.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.9" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.11.0-alpha.1">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-alpha.1">CLI 0.11.0-alpha.1</a></h2>
+      <p class="muted"><time datetime="2026-08-09T16:52:55Z">August 9, 2026</time></p>
+      
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-alpha.1" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.10.0">
+      <span class="section-label">CLI · Stable</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.10.0">CLI 0.10.0</a></h2>
+      <p class="muted"><time datetime="2026-08-08T16:50:15Z">August 8, 2026</time></p>
+      <p>Omnideck CLI is now the shared Podman environment backend for both the interactive CLI and Omnideck Desktop. - Bare omnideck launches now detect first-time setup or repair automatically, with restart/resume guidance on Windows and macOS…</p>
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.10.0" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-alpha.8">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.8">Desktop installer 0.1.0-alpha.8</a></h2>
+      <p class="muted"><time datetime="2026-08-08T14:00:28Z">August 8, 2026</time></p>
+      <p>This alpha replaces the Electron desktop shell with a smaller Tauri v2 host while preserving the existing setup experience and the container-served omnideck application.</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.8" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.10.0-alpha.2">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.10.0-alpha.2">CLI 0.10.0-alpha.2</a></h2>
+      <p class="muted"><time datetime="2026-08-08T01:05:48Z">August 8, 2026</time></p>
+      
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.10.0-alpha.2" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-alpha.7">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.7">Desktop installer 0.1.0-alpha.7</a></h2>
+      <p class="muted"><time datetime="2026-08-07T15:38:07Z">August 7, 2026</time></p>
+      <p>This alpha gives the application and command line tool one shared way to set up and manage omnideck. The application bundles Omnideck CLI v0.10.0-alpha.1 and uses its versioned JSON interface for runtime setup, repair, container…</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.7" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.10.0-alpha.1">
+      <span class="section-label">CLI · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/cli/releases/tag/v0.10.0-alpha.1">CLI 0.10.0-alpha.1</a></h2>
+      <p class="muted"><time datetime="2026-08-07T14:08:12Z">August 7, 2026</time></p>
+      
+      <a href="https://github.com/omnideck-dev/cli/releases/tag/v0.10.0-alpha.1" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+    <article class="card" data-release-tag="v0.1.0-alpha.6">
+      <span class="section-label">Desktop installer · Preview</span>
+      <h2 class="blog-card-title"><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.6">Desktop installer 0.1.0-alpha.6</a></h2>
+      <p class="muted"><time datetime="2026-08-05T01:19:14Z">August 5, 2026</time></p>
+      <p>This alpha adds built-in update management and separates the desktop and container release lifecycles. A desktop release now records the container version it was tested with, while newer compatible container versions can be published…</p>
+      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.6" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    
+  </div>
+  <p class="mt-4">More releases: <a href="https://github.com/omnideck-dev/omnideck/releases">App and desktop</a> · <a href="https://github.com/omnideck-dev/cli/releases">CLI</a></p>
+</section>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+    <p class="footer-text">
+      Open source · Apache 2
+    </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/whats-new.html">What’s new</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=f6211ced"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>

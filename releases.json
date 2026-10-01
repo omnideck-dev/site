@@ -1,0 +1,398 @@
+{
+  "releases": [
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-beta.6",
+      "title": "CLI 0.11.0-beta.6",
+      "channel": "Preview",
+      "published_iso": "2026-09-29T01:55:17Z",
+      "published": "September 29, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.6",
+      "summary": "This beta prepares local installations for MCP sign-in in compatible omnideck application builds and fixes Windows container-to-host routing."
+    },
+    {
+      "kind": "App / runtime",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "app-v0.5.2",
+      "title": "App / runtime 0.5.2",
+      "channel": "Stable",
+      "published_iso": "2026-09-27T23:24:01Z",
+      "published": "September 27, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.5.2",
+      "summary": "Integrations: Integration access is now stored and enforced as an explicit per-tool allowlist. Existing connections migrate automatically, and brokered model providers remain available without appearing as tool integrations. Integration…"
+    },
+    {
+      "kind": "App / runtime",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "app-v0.5.1",
+      "title": "App / runtime 0.5.1",
+      "channel": "Stable",
+      "published_iso": "2026-09-26T14:36:39Z",
+      "published": "September 26, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.5.1",
+      "summary": "Updates: What’s new now opens a dedicated app release page with the changes included in that version. Older app versions keep their existing release-note links."
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.11",
+      "title": "Desktop installer 0.1.0-beta.11",
+      "channel": "Preview",
+      "published_iso": "2026-08-19T14:50:15Z",
+      "published": "August 19, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.11",
+      "summary": "This beta updates the bundled omnideck app from version 0.1.4 to version 0.2.2. It is an in-place upgrade; you do not need to uninstall beta.10 first."
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.10",
+      "title": "Desktop installer 0.1.0-beta.10",
+      "channel": "Preview",
+      "published_iso": "2026-08-19T14:12:58Z",
+      "published": "August 19, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.10",
+      "summary": "This beta fixes link handling in the desktop application. It is an in-place upgrade; you do not need to uninstall beta.9 first."
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.9",
+      "title": "Desktop installer 0.1.0-beta.9",
+      "channel": "Preview",
+      "published_iso": "2026-08-17T03:41:57Z",
+      "published": "August 17, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.9",
+      "summary": "This beta separates the graphical desktop host from the standalone CLI command and improves browser cleanup for scheduled routines. It is an in-place upgrade; you do not need to uninstall beta.8 first."
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.8",
+      "title": "Desktop installer 0.1.0-beta.8",
+      "channel": "Preview",
+      "published_iso": "2026-08-14T22:48:46Z",
+      "published": "August 14, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.8",
+      "summary": "Beta.8 brings the complete omnideck agent workspace to Windows, macOS, and Linux in a guided desktop application. It adds reliable native zoom and rolls up the latest improvements to setup, downloads, updates, and day-to-day desktop use."
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.7",
+      "title": "Desktop installer 0.1.0-beta.7",
+      "channel": "Preview",
+      "published_iso": "2026-08-14T01:38:51Z",
+      "published": "August 14, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.7",
+      "summary": "This beta supersedes v0.1.0-beta.6 with a conventional, guided macOS disk image installer. The application behavior and bundled runtime remain unchanged from beta.6."
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-beta.5",
+      "title": "CLI 0.11.0-beta.5",
+      "channel": "Preview",
+      "published_iso": "2026-08-14T00:35:14Z",
+      "published": "August 14, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.5",
+      "summary": ""
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-beta.4",
+      "title": "CLI 0.11.0-beta.4",
+      "channel": "Preview",
+      "published_iso": "2026-08-13T23:53:42Z",
+      "published": "August 13, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.4",
+      "summary": ""
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.6",
+      "title": "Desktop installer 0.1.0-beta.6",
+      "channel": "Preview",
+      "published_iso": "2026-08-13T21:09:47Z",
+      "published": "August 13, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.6",
+      "summary": "This beta supersedes v0.1.0-beta.5 with an AppImage setup fix discovered by the published-artifact VM qualification sweep. It includes the desktop zoom, native downloads and completion toasts, menu suppression, native updater, and…"
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.5",
+      "title": "Desktop installer 0.1.0-beta.5",
+      "channel": "Preview",
+      "published_iso": "2026-08-13T19:13:06Z",
+      "published": "August 13, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.5",
+      "summary": "This beta fills several native desktop gaps while preserving the existing browser application and setup experience. It bundles OmniDeck CLI v0.11.0-beta.2 from commit a32d3ad95f44 and the OmniDeck 0.1.4 runtime image at its checked-in…"
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-beta.3",
+      "title": "CLI 0.11.0-beta.3",
+      "channel": "Preview",
+      "published_iso": "2026-08-13T01:00:27Z",
+      "published": "August 13, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.3",
+      "summary": "Aligns the TUI with the Omnideck desktop app's dark palette. - Prevents nested ANSI resets from exposing light terminal backgrounds on Debian, macOS, and other light-default terminals. - Adds a compact, scrollable dashboard for smaller…"
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.4",
+      "title": "Desktop installer 0.1.0-beta.4",
+      "channel": "Preview",
+      "published_iso": "2026-08-12T23:59:23Z",
+      "published": "August 12, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.4",
+      "summary": "This beta fixes agent and skill profile downloads in the native desktop app and bundles OmniDeck CLI v0.11.0-beta.2 from commit a32d3ad95f44."
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.3",
+      "title": "Desktop installer 0.1.0-beta.3",
+      "channel": "Preview",
+      "published_iso": "2026-08-12T15:05:59Z",
+      "published": "August 12, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.3",
+      "summary": "This beta repairs two setup conflicts reported against v0.1.0-beta.2 and bundles OmniDeck CLI v0.11.0-beta.2 from commit a32d3ad95f44."
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-beta.2",
+      "title": "CLI 0.11.0-beta.2",
+      "channel": "Preview",
+      "published_iso": "2026-08-12T14:23:30Z",
+      "published": "August 12, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.2",
+      "summary": ""
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.2",
+      "title": "Desktop installer 0.1.0-beta.2",
+      "channel": "Preview",
+      "published_iso": "2026-08-12T03:43:29Z",
+      "published": "August 12, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.2",
+      "summary": "This beta corrects the macOS first-run resource check in v0.1.0-beta.1. It retains the same bundled CLI, hosted runtime image, setup wording, and platform behavior."
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.1",
+      "title": "Desktop installer 0.1.0-beta.1",
+      "channel": "Preview",
+      "published_iso": "2026-08-12T02:00:58Z",
+      "published": "August 12, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.1",
+      "summary": "This beta promotes the extensively tested alpha.11 behavior without changing the setup wording, runtime image, or hosted application. It bundles OmniDeck CLI v0.11.0-beta.1, rebuilt from the same tested CLI source commit as…"
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-beta.1",
+      "title": "CLI 0.11.0-beta.1",
+      "channel": "Preview",
+      "published_iso": "2026-08-12T01:08:32Z",
+      "published": "August 12, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.1",
+      "summary": ""
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-alpha.11",
+      "title": "Desktop installer 0.1.0-alpha.11",
+      "channel": "Preview",
+      "published_iso": "2026-08-10T00:47:57Z",
+      "published": "August 10, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.11",
+      "summary": "This alpha bundles OmniDeck CLI v0.11.0-alpha.2 and adds disposable local-VM end-to-end coverage for the shipped Tauri desktop packages. The visible setup wording, structure, and behavior remain locked to the exact-copy desktop mockup."
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-alpha.2",
+      "title": "CLI 0.11.0-alpha.2",
+      "channel": "Preview",
+      "published_iso": "2026-08-09T23:51:36Z",
+      "published": "August 9, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-alpha.2",
+      "summary": ""
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-alpha.10",
+      "title": "Desktop installer 0.1.0-alpha.10",
+      "channel": "Preview",
+      "published_iso": "2026-08-09T23:17:20Z",
+      "published": "August 9, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.10",
+      "summary": "This alpha is a desktop-host maintenance release. It reorganizes the Tauri host and release-sidecar tooling without intended changes to setup copy, window behavior, runtime lifecycle, or the application UI."
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-alpha.9",
+      "title": "Desktop installer 0.1.0-alpha.9",
+      "channel": "Preview",
+      "published_iso": "2026-08-09T18:35:49Z",
+      "published": "August 9, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.9",
+      "summary": "This alpha makes first-run setup quieter and clearer across Windows, macOS, and Linux while keeping required operating-system approval prompts visible."
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-alpha.1",
+      "title": "CLI 0.11.0-alpha.1",
+      "channel": "Preview",
+      "published_iso": "2026-08-09T16:52:55Z",
+      "published": "August 9, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-alpha.1",
+      "summary": ""
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.10.0",
+      "title": "CLI 0.10.0",
+      "channel": "Stable",
+      "published_iso": "2026-08-08T16:50:15Z",
+      "published": "August 8, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.10.0",
+      "summary": "Omnideck CLI is now the shared Podman environment backend for both the interactive CLI and Omnideck Desktop. - Bare omnideck launches now detect first-time setup or repair automatically, with restart/resume guidance on Windows and macOS…"
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-alpha.8",
+      "title": "Desktop installer 0.1.0-alpha.8",
+      "channel": "Preview",
+      "published_iso": "2026-08-08T14:00:28Z",
+      "published": "August 8, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.8",
+      "summary": "This alpha replaces the Electron desktop shell with a smaller Tauri v2 host while preserving the existing setup experience and the container-served omnideck application."
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.10.0-alpha.2",
+      "title": "CLI 0.10.0-alpha.2",
+      "channel": "Preview",
+      "published_iso": "2026-08-08T01:05:48Z",
+      "published": "August 8, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.10.0-alpha.2",
+      "summary": ""
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-alpha.7",
+      "title": "Desktop installer 0.1.0-alpha.7",
+      "channel": "Preview",
+      "published_iso": "2026-08-07T15:38:07Z",
+      "published": "August 7, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.7",
+      "summary": "This alpha gives the application and command line tool one shared way to set up and manage omnideck. The application bundles Omnideck CLI v0.10.0-alpha.1 and uses its versioned JSON interface for runtime setup, repair, container…"
+    },
+    {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.10.0-alpha.1",
+      "title": "CLI 0.10.0-alpha.1",
+      "channel": "Preview",
+      "published_iso": "2026-08-07T14:08:12Z",
+      "published": "August 7, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.10.0-alpha.1",
+      "summary": ""
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-alpha.6",
+      "title": "Desktop installer 0.1.0-alpha.6",
+      "channel": "Preview",
+      "published_iso": "2026-08-05T01:19:14Z",
+      "published": "August 5, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.6",
+      "summary": "This alpha adds built-in update management and separates the desktop and container release lifecycles. A desktop release now records the container version it was tested with, while newer compatible container versions can be published…"
+    }
+  ],
+  "desktop_tag": "v0.1.0-beta.11",
+  "desktop_url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.11",
+  "downloads": {
+    "macos_arm64": {
+      "filename": "omnideck_0.1.0-beta.11_aarch64.dmg",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_aarch64.dmg",
+      "size": "9.1 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_aarch64.dmg.sha256"
+    },
+    "macos_x64": {
+      "filename": "omnideck_0.1.0-beta.11_x64.dmg",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_x64.dmg",
+      "size": "9.8 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_x64.dmg.sha256"
+    },
+    "windows_x64": {
+      "filename": "omnideck_0.1.0-beta.11_x64-setup.exe",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_x64-setup.exe",
+      "size": "8.0 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_x64-setup.exe.sha256"
+    },
+    "windows_arm64": {
+      "filename": "omnideck_0.1.0-beta.11_arm64-setup.exe",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_arm64-setup.exe",
+      "size": "7.2 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_arm64-setup.exe.sha256"
+    },
+    "linux_x64_appimage": {
+      "filename": "omnideck_0.1.0-beta.11_amd64.AppImage",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_amd64.AppImage",
+      "size": "80.6 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_amd64.AppImage.sha256"
+    },
+    "linux_arm64_appimage": {
+      "filename": "omnideck_0.1.0-beta.11_aarch64.AppImage",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_aarch64.AppImage",
+      "size": "78.3 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_aarch64.AppImage.sha256"
+    },
+    "linux_x64_deb": {
+      "filename": "omnideck_0.1.0-beta.11_amd64.deb",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_amd64.deb",
+      "size": "9.9 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_amd64.deb.sha256"
+    },
+    "linux_arm64_deb": {
+      "filename": "omnideck_0.1.0-beta.11_arm64.deb",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_arm64.deb",
+      "size": "9.2 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck_0.1.0-beta.11_arm64.deb.sha256"
+    },
+    "linux_x64_rpm": {
+      "filename": "omnideck-0.1.0-beta.11-1.x86_64.rpm",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck-0.1.0-beta.11-1.x86_64.rpm",
+      "size": "9.9 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck-0.1.0-beta.11-1.x86_64.rpm.sha256"
+    },
+    "linux_arm64_rpm": {
+      "filename": "omnideck-0.1.0-beta.11-1.aarch64.rpm",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck-0.1.0-beta.11-1.aarch64.rpm",
+      "size": "9.2 MB",
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.11/omnideck-0.1.0-beta.11-1.aarch64.rpm.sha256"
+    }
+  }
+}
