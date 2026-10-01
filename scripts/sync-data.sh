@@ -9,4 +9,4 @@ cd "$repo_root"
 
 python3 sync-tags.py
 bash scripts/update-latest-post.sh
-python3 scripts/sync-desktop-release.py
+python3 scripts/sync-releases.py

@@ -3,17 +3,41 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+  schedule:
+    # Reconcile ships from both source repositories without cross-repo secrets.
+    - cron: '17,47 * * * *'
+    # Also verify the live site and download links even when no release changed.
+    - cron: '23 13 * * *'
+  repository_dispatch:
+    types: [release-published]
   workflow_dispatch:
 
+concurrency:
+  group: site-${{ github.event_name == 'pull_request' && github.ref || 'production' }}
+  cancel-in-progress: false
+
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Test release synchronization and verification
+        run: python3 -m unittest discover -s tests -v
 
       - name: Make arbor executable
         run: chmod +x ./arbor
@@ -24,10 +48,47 @@ jobs:
         run: bash scripts/sync-data.sh
 
       - name: Build site
-        run: ./arbor build
+        run: |
+          ./arbor check
+          ./arbor build
+          python3 scripts/verify-site.py public
+
+      - name: Compare published release snapshot
+        if: github.event_name != 'pull_request'
+        id: freshness
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.request
+          expected = json.loads(pathlib.Path('static/releases.json').read_text())
+          changed = True
+          try:
+              request = urllib.request.Request('https://www.omnideck.dev/releases.json', headers={'Cache-Control': 'no-cache'})
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  changed = json.load(response) != expected
+          except (OSError, ValueError):
+              pass  # A missing/unreadable manifest needs deployment and verification.
+          deploy = changed or os.environ['EVENT_NAME'] != 'schedule'
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'deploy={str(deploy).lower()}\n')
+          PY
 
       - name: Deploy to gh-pages branch
+        if: steps.freshness.outputs.deploy == 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+
+      - name: Verify live releases and download links
+        if: >-
+          github.event_name != 'pull_request' &&
+          (steps.freshness.outputs.deploy == 'true' || github.event.schedule == '23 13 * * *')
+        run: python3 scripts/verify-site.py https://www.omnideck.dev --attempts 20 --check-downloads
+
+      - name: Record synchronization failure
+        if: failure()
+        run: |
+          echo '## Website freshness check failed' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Review the failed sync, build, or live verification step. Existing published pages remain available; this run did not confirm freshness.' >> "$GITHUB_STEP_SUMMARY"
