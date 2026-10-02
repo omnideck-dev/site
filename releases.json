@@ -3,6 +3,17 @@
     {
       "kind": "Desktop installer",
       "repository": "omnideck-dev/omnideck",
+      "tag": "v0.1.0-beta.13",
+      "title": "Desktop installer 0.1.0-beta.13",
+      "channel": "Preview",
+      "published_iso": "2026-10-02T14:33:27Z",
+      "published": "October 2, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.13",
+      "summary": "This beta prevents desktop upgrades and repairs from reverting a newer application container to an older bundled version. New installations use app version 0.5.2. The bundled CLI remains v0.11.0-beta.6."
+    },
+    {
+      "kind": "Desktop installer",
+      "repository": "omnideck-dev/omnideck",
       "tag": "v0.1.0-beta.12",
       "title": "Desktop installer 0.1.0-beta.12",
       "channel": "Preview",
@@ -318,81 +329,70 @@
       "published": "August 7, 2026",
       "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.7",
       "summary": "This alpha gives the application and command line tool one shared way to set up and manage omnideck. The application bundles Omnideck CLI v0.10.0-alpha.1 and uses its versioned JSON interface for runtime setup, repair, container…"
-    },
-    {
-      "kind": "CLI",
-      "repository": "omnideck-dev/cli",
-      "tag": "v0.10.0-alpha.1",
-      "title": "CLI 0.10.0-alpha.1",
-      "channel": "Preview",
-      "published_iso": "2026-08-07T14:08:12Z",
-      "published": "August 7, 2026",
-      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.10.0-alpha.1",
-      "summary": ""
     }
   ],
-  "desktop_tag": "v0.1.0-beta.12",
-  "desktop_url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.12",
+  "desktop_tag": "v0.1.0-beta.13",
+  "desktop_url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.13",
   "downloads": {
     "macos_arm64": {
-      "filename": "omnideck_0.1.0-beta.12_aarch64.dmg",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_aarch64.dmg",
+      "filename": "omnideck_0.1.0-beta.13_aarch64.dmg",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_aarch64.dmg",
       "size": "9.0 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_aarch64.dmg.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_aarch64.dmg.sha256"
     },
     "macos_x64": {
-      "filename": "omnideck_0.1.0-beta.12_x64.dmg",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_x64.dmg",
+      "filename": "omnideck_0.1.0-beta.13_x64.dmg",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64.dmg",
       "size": "9.8 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_x64.dmg.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64.dmg.sha256"
     },
     "windows_x64": {
-      "filename": "omnideck_0.1.0-beta.12_x64-setup.exe",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_x64-setup.exe",
+      "filename": "omnideck_0.1.0-beta.13_x64-setup.exe",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64-setup.exe",
       "size": "8.0 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_x64-setup.exe.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64-setup.exe.sha256"
     },
     "windows_arm64": {
-      "filename": "omnideck_0.1.0-beta.12_arm64-setup.exe",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_arm64-setup.exe",
+      "filename": "omnideck_0.1.0-beta.13_arm64-setup.exe",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_arm64-setup.exe",
       "size": "7.2 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_arm64-setup.exe.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_arm64-setup.exe.sha256"
     },
     "linux_x64_appimage": {
-      "filename": "omnideck_0.1.0-beta.12_amd64.AppImage",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_amd64.AppImage",
+      "filename": "omnideck_0.1.0-beta.13_amd64.AppImage",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_amd64.AppImage",
       "size": "84.5 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_amd64.AppImage.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_amd64.AppImage.sha256"
     },
     "linux_arm64_appimage": {
-      "filename": "omnideck_0.1.0-beta.12_aarch64.AppImage",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_aarch64.AppImage",
+      "filename": "omnideck_0.1.0-beta.13_aarch64.AppImage",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_aarch64.AppImage",
       "size": "81.9 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_aarch64.AppImage.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_aarch64.AppImage.sha256"
     },
     "linux_x64_deb": {
-      "filename": "omnideck_0.1.0-beta.12_amd64.deb",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_amd64.deb",
+      "filename": "omnideck_0.1.0-beta.13_amd64.deb",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_amd64.deb",
       "size": "9.8 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_amd64.deb.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_amd64.deb.sha256"
     },
     "linux_arm64_deb": {
-      "filename": "omnideck_0.1.0-beta.12_arm64.deb",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_arm64.deb",
+      "filename": "omnideck_0.1.0-beta.13_arm64.deb",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_arm64.deb",
       "size": "9.2 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck_0.1.0-beta.12_arm64.deb.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_arm64.deb.sha256"
     },
     "linux_x64_rpm": {
-      "filename": "omnideck-0.1.0-beta.12-1.x86_64.rpm",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck-0.1.0-beta.12-1.x86_64.rpm",
+      "filename": "omnideck-0.1.0-beta.13-1.x86_64.rpm",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck-0.1.0-beta.13-1.x86_64.rpm",
       "size": "9.9 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck-0.1.0-beta.12-1.x86_64.rpm.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck-0.1.0-beta.13-1.x86_64.rpm.sha256"
     },
     "linux_arm64_rpm": {
-      "filename": "omnideck-0.1.0-beta.12-1.aarch64.rpm",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck-0.1.0-beta.12-1.aarch64.rpm",
+      "filename": "omnideck-0.1.0-beta.13-1.aarch64.rpm",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck-0.1.0-beta.13-1.aarch64.rpm",
       "size": "9.2 MB",
-      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.12/omnideck-0.1.0-beta.12-1.aarch64.rpm.sha256"
+      "checksum_url": "https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck-0.1.0-beta.13-1.aarch64.rpm.sha256"
     }
   }
 }
