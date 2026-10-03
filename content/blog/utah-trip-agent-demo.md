@@ -8,7 +8,7 @@ template = "templates/types/blog.html"
 [extra]
 description    = "omnideck is a free desktop app that puts AI agents to work on your computer. We asked it to help plan a Utah parks trip. Its agents read the official fee pages, built two apps you can try, and painted a sticker in GIMP as an experiment."
 author         = "Larry Foulkrod"
-featured_image = "/images/utah-trip/featured.png"
+featured_image = "/images/utah-trip/featured-20261003.png"
 +++
 
 omnideck is a free, open source desktop app that puts AI agents to work on your own computer. The agents can browse the web, build small apps, and check their own work. To show what that looks like, we asked omnideck to help plan a weekend in Utah's national parks. Four friends, three requests, and each one ends with something you can keep. This post shows the results, links two of them so you can try them, and explains how the demo was made.
