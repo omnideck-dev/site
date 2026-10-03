@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Utah parks: is the annual pass worth it?</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff8ee;color:#2b1d3a;font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:28px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;color:#c8553d;text-transform:uppercase}
+h1{font-size:40px;line-height:1.05;letter-spacing:-.02em;margin:10px 0 6px}
+.sub{color:#6b5a72;margin:0 0 22px}
+.parks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.park{border:2px solid #e8d6c2;background:#fff;border-radius:16px;padding:16px;cursor:pointer;transition:.15s}
+.pick{all:unset;display:block;width:100%;cursor:pointer}
+.pick:focus-visible{outline:3px solid #4b3a8c;outline-offset:4px;border-radius:8px}
+.park.on{border-color:#c8553d;box-shadow:0 6px 18px rgba(200,85,61,.18)}
+.park:not(.on){opacity:.55}
+.park .name{font-weight:800;font-size:18px}
+.park .fee{font-size:34px;font-weight:850;letter-spacing:-.02em;color:#c8553d;margin:6px 0 2px}
+.park .per{font-size:13px;color:#6b5a72}
+.park .check{float:right;width:22px;height:22px;border-radius:50%;border:2px solid #c8553d;display:grid;place-items:center;font-size:13px;color:#fff}
+.park.on .check{background:#c8553d}
+.park a{display:inline-block;margin-top:10px;font-size:13px;color:#4b3a8c;font-weight:600}
+.row{display:flex;align-items:center;gap:14px;margin:20px 0 6px;font-weight:700}
+.step{display:flex;align-items:center;border:2px solid #e8d6c2;border-radius:12px;overflow:hidden;background:#fff}
+.step button{border:0;background:#fff;font:800 20px system-ui;width:42px;height:40px;cursor:pointer;color:#2b1d3a}
+.step button:hover{background:#f6e7d6}
+.step output{min-width:36px;text-align:center;font-weight:800;font-size:18px}
+.result{margin-top:18px;border-radius:20px;background:#2b1d3a;color:#fff8ee;padding:22px 24px}
+.verdict{font-size:34px;font-weight:850;letter-spacing:-.02em}
+.verdict small{display:block;font-size:15px;font-weight:600;color:#e9c9a8;letter-spacing:0;margin-top:2px}
+.bars{margin-top:16px;display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:190px 1fr 70px;align-items:center;gap:12px;font-size:14px}
+.track{height:16px;background:rgba(255,255,255,.12);border-radius:8px;overflow:hidden}
+.fill{height:100%;border-radius:8px;transition:width .35s}
+.gate .fill{background:#f0a35e}.pass .fill{background:#8fc29a}
+.amt{font-weight:800;text-align:right;font-size:16px}
+.note{font-size:12.5px;color:#7b6a80;margin-top:16px}
+.note a{color:#4b3a8c}
+@media (max-width:560px){body{padding:18px}.parks{grid-template-columns:1fr}.bar{grid-template-columns:120px 1fr 56px}h1{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="eyebrow">Utah parks · fees from official NPS pages · checked Oct 2, 2026</div>
+<h1>Is the annual pass worth it?</h1>
+<p class="sub">Tap the parks you plan to visit. Add cars if your group is driving more than one.</p>
+
+<div class="parks" id="parks"></div>
+
+<div class="row">Cars in your group
+  <div class="step"><button aria-label="Fewer cars" onclick="cars(-1)">−</button><output id="cars">1</output><button aria-label="More cars" onclick="cars(1)">+</button></div>
+</div>
+
+<div class="result">
+  <div class="verdict" id="verdict"></div>
+  <div class="bars">
+    <div class="bar gate"><span id="gateLabel">Pay at each gate</span><div class="track"><div class="fill" id="gateFill"></div></div><span class="amt" id="gate"></span></div>
+    <div class="bar pass"><span id="passLabel">America the Beautiful pass</span><div class="track"><div class="fill" id="passFill"></div></div><span class="amt" id="pass"></span></div>
+  </div>
+</div>
+
+<p class="note">Private-vehicle entrance fees for US residents. One annual pass ($80) covers the pass holder and passengers in one private vehicle. Visiting from outside the US? The annual pass is $250, and Zion and Bryce Canyon add a $100 per-person nonresident fee. Check the source pages before you go.</p>
+
+<script>
+const PARKS = [
+  {id: "zion", name: "Zion", fee: 35, url: "https://www.nps.gov/zion/planyourvisit/fees.htm"},
+  {id: "bryce", name: "Bryce Canyon", fee: 35, url: "https://www.nps.gov/brca/planyourvisit/fees.htm"},
+  {id: "arches", name: "Arches", fee: 30, url: "https://www.nps.gov/arch/planyourvisit/fees.htm"},
+];
+const PASS = 80;
+const state = {on: new Set(PARKS.map(p => p.id)), cars: 1};
+const money = n => "$" + n.toLocaleString();
+
+function renderParks() {
+  document.getElementById("parks").innerHTML = PARKS.map(p => `
+    <div class="park ${state.on.has(p.id) ? "on" : ""}" onclick="toggle('${p.id}')">
+      <button class="pick" aria-pressed="${state.on.has(p.id)}" aria-label="${p.name}"
+              onclick="event.stopPropagation(); toggle('${p.id}')">
+        <span class="check">✓</span>
+        <div class="name">${p.name}</div>
+        <div class="fee">${money(p.fee)}</div>
+        <div class="per">per private vehicle</div>
+      </button>
+      <a href="${p.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Source: nps.gov ↗</a>
+    </div>`).join("");
+}
+
+function render() {
+  renderParks();
+  const perCar = PARKS.filter(p => state.on.has(p.id)).reduce((s, p) => s + p.fee, 0);
+  const gate = perCar * state.cars, pass = PASS * state.cars;
+  const max = Math.max(gate, pass, 1);
+  document.getElementById("cars").textContent = state.cars;
+  document.getElementById("gate").textContent = money(gate);
+  document.getElementById("pass").textContent = money(pass);
+  document.getElementById("gateFill").style.width = (gate / max * 100) + "%";
+  document.getElementById("passFill").style.width = (pass / max * 100) + "%";
+  const n = state.on.size, carWord = state.cars === 1 ? "one pass" : state.cars + " passes";
+  let v;
+  if (n === 0) v = `Pick a park<small>Tap a park above to start.</small>`;
+  else if (pass < gate) v = `Buy the pass. Save ${money(gate - pass)}.<small>${n === 3 ? "All three parks" : n + " park" + (n > 1 ? "s" : "")} cost more at the gate than ${carWord}.</small>`;
+  else if (pass === gate) v = `It's a tie.<small>The pass costs the same. It still helps if you visit another park within a year.</small>`;
+  else v = `Pay at the gate. Save ${money(pass - gate)}.<small>For ${n === 1 ? "one park" : "these " + n + " parks"}, gate fees cost less than ${carWord}.</small>`;
+  document.getElementById("verdict").innerHTML = v;
+}
+function toggle(id) { state.on.has(id) ? state.on.delete(id) : state.on.add(id); render(); }
+function cars(d) { state.cars = Math.min(6, Math.max(1, state.cars + d)); render(); }
+render();
+</script>
+</body>
+</html>
