@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Utah trip splitter</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff8ee;color:#2b1d3a;font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:26px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;color:#c8553d;text-transform:uppercase}
+h1{font-size:38px;line-height:1.05;letter-spacing:-.02em;margin:8px 0 4px}
+.sub{color:#6b5a72;margin:0 0 18px}
+.card{background:#fff;border:2px solid #eedcc8;border-radius:18px;padding:18px;margin-bottom:14px}
+.card h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#8a7790;margin:0 0 12px}
+.form{display:grid;grid-template-columns:1.5fr .8fr 1fr auto;gap:10px;align-items:end}
+label{font-size:12px;font-weight:700;color:#6b5a72;display:grid;gap:4px}
+input,select{font:inherit;padding:10px 12px;border:2px solid #e8d6c2;border-radius:10px;background:#fffdf9;color:#2b1d3a;width:100%}
+input:focus,select:focus{outline:none;border-color:#c8553d}
+button{font:800 15px system-ui;border:0;border-radius:10px;padding:12px 18px;cursor:pointer}
+.add{background:#c8553d;color:#fff}
+.add:hover{background:#b14630}
+.split{grid-column:1/-1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;color:#6b5a72;font-weight:700}
+.chip{display:inline-flex;align-items:center;gap:6px;border:2px solid #e8d6c2;border-radius:999px;padding:5px 12px 5px 8px;cursor:pointer;font-weight:700;color:#2b1d3a;user-select:none}
+.chip input{width:auto;margin:0;accent-color:#c8553d}
+.chip:has(input:checked){border-color:#c8553d;background:#fff1e6}
+.list{display:grid;gap:6px}
+.exp{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:8px 4px;border-bottom:1px solid #f1e4d6}
+.exp:last-child{border-bottom:0}
+.exp .what{font-weight:700}
+.exp .who{font-size:13px;color:#8a7790}
+.exp .amt{font-weight:800;font-variant-numeric:tabular-nums}
+.del{background:none;color:#b9a6b8;padding:4px 8px;font-size:18px}
+.del:hover{color:#c8553d}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bal{display:grid;grid-template-columns:64px 1fr 84px;gap:10px;align-items:center;margin:8px 0;font-size:15px}
+.axis{position:relative;height:18px;background:#f6ece1;border-radius:9px}
+.axis:before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:#d8c4b0}
+.axis div{position:absolute;top:0;height:100%;border-radius:9px;transition:all .35s}
+.pos{background:#6f9b74}.neg{background:#e07a5f}
+.bal .n{font-weight:800;text-align:right;font-variant-numeric:tabular-nums}
+.settle{background:#2b1d3a;color:#fff8ee;border:0}
+.settle h2{color:#e9c9a8}
+.pay{display:flex;align-items:center;gap:10px;font-size:18px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.pay:last-of-type{border-bottom:0}
+.pay b{color:#fff}
+.pay .arrow{color:#f0a35e;font-weight:900}
+.pay .m{margin-left:auto;font-weight:850;font-size:20px;color:#f0a35e;font-variant-numeric:tabular-nums}
+.done{color:#8fc29a;font-weight:700}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px;flex-wrap:wrap}
+.copy{background:#f0a35e;color:#2b1d3a}
+.total{font-size:14px;color:#e9c9a8}
+@media (max-width:620px){body{padding:18px}.form{grid-template-columns:1fr 1fr}.add{grid-column:1/-1}.grid{grid-template-columns:1fr}h1{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="eyebrow">Utah road trip · shared costs</div>
+<h1>Who owes whom?</h1>
+<p class="sub">Add what each person paid. The settle-up uses the fewest payments possible.</p>
+
+<div class="card">
+  <h2>Add an expense</h2>
+  <div class="form" id="form">
+    <label>What<input id="what" name="what" placeholder="e.g. Dinner in Springdale" required></label>
+    <label>Amount ($)<input id="amount" name="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required></label>
+    <label>Paid by<select id="payer" name="payer"></select></label>
+    <button class="add" id="add" type="button">Add</button>
+    <div class="split" id="split">Split between:</div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Expenses</h2>
+    <div class="list" id="list"></div>
+  </div>
+  <div class="card">
+    <h2>Balances</h2>
+    <div id="bals"></div>
+  </div>
+</div>
+
+<div class="card settle">
+  <h2>Settle up</h2>
+  <div id="pays"></div>
+  <div class="foot"><span class="total" id="total"></span><button class="copy" id="copy" type="button">Copy for the group chat</button></div>
+</div>
+
+<script>
+const PEOPLE = ["Maya", "Leo", "Priya", "Sam"];
+let expenses = [
+  {what: "Campsite, 2 nights", amount: 120, payer: "Maya", split: [...PEOPLE]},
+  {what: "Groceries", amount: 86, payer: "Priya", split: [...PEOPLE]},
+  {what: "Gas", amount: 64, payer: "Leo", split: [...PEOPLE]},
+];
+const cents = n => Math.round(n * 100);
+const money = c => "$" + (Math.abs(c) / 100).toFixed(2);
+
+function balances() {
+  const b = Object.fromEntries(PEOPLE.map(p => [p, 0]));
+  for (const e of expenses) {
+    const total = cents(e.amount), n = e.split.length;
+    b[e.payer] += total;
+    // Spread leftover cents so every split adds up exactly.
+    e.split.forEach((p, i) => { b[p] -= Math.floor(total / n) + (i < total % n ? 1 : 0); });
+  }
+  return b;
+}
+
+// Fewest payments: split people into as many zero-sum groups as possible
+// (each group of k people settles in k-1 payments), then pair within groups.
+function settle(b) {
+  const people = PEOPLE.filter(p => b[p] !== 0), n = people.length;
+  if (!n) return [];
+  const full = (1 << n) - 1, sum = new Array(1 << n).fill(0);
+  for (let m = 1; m <= full; m++) { const i = 31 - Math.clz32(m & -m); sum[m] = sum[m & (m - 1)] + b[people[i]]; }
+  const best = new Array(1 << n).fill(-1), pick = new Array(1 << n).fill(0);
+  best[0] = 0;
+  for (let m = 1; m <= full; m++) {
+    if (sum[m] !== 0) continue;
+    for (let s = m; s; s = (s - 1) & m) {
+      if (sum[s] === 0 && best[m ^ s] >= 0 && best[m ^ s] + 1 > best[m]) { best[m] = best[m ^ s] + 1; pick[m] = s; }
+    }
+  }
+  const pays = [];
+  for (let m = full; m; m ^= pick[m]) {
+    const group = people.filter((_, i) => pick[m] >> i & 1).map(p => ({p, v: b[p]}));
+    while (group.some(g => g.v !== 0)) {
+      group.sort((x, y) => x.v - y.v);
+      const debtor = group[0], creditor = group[group.length - 1], amt = Math.min(-debtor.v, creditor.v);
+      pays.push({from: debtor.p, to: creditor.p, amt});
+      debtor.v += amt; creditor.v -= amt;
+    }
+  }
+  return pays;
+}
+
+function render() {
+  document.getElementById("list").innerHTML = expenses.map((e, i) => `
+    <div class="exp"><div><div class="what">${esc(e.what)}</div>
+    <div class="who">${e.payer} paid · split ${e.split.length === PEOPLE.length ? "4 ways" : e.split.join(", ")}</div></div>
+    <span class="amt">${money(cents(e.amount))}</span>
+    <button class="del" aria-label="Remove ${esc(e.what)}" onclick="removeExpense(${i})">×</button></div>`).join("")
+    || `<div class="who">No expenses yet.</div>`;
+  const b = balances(), max = Math.max(1, ...PEOPLE.map(p => Math.abs(b[p])));
+  document.getElementById("bals").innerHTML = PEOPLE.map(p => {
+    const w = Math.abs(b[p]) / max * 50, pos = b[p] >= 0;
+    return `<div class="bal"><b>${p}</b><div class="axis"><div class="${pos ? "pos" : "neg"}" style="${pos ? "left:50%" : "right:50%"};width:${w}%"></div></div>
+      <span class="n" style="color:${pos ? "#4f7a55" : "#c8553d"}">${b[p] === 0 ? "even" : (pos ? "+" : "−") + money(b[p])}</span></div>`;
+  }).join("");
+  const pays = settle(b);
+  document.getElementById("pays").innerHTML = pays.length
+    ? pays.map(x => `<div class="pay"><b>${x.from}</b><span class="arrow">→</span><b>${x.to}</b><span class="m">${money(x.amt)}</span></div>`).join("")
+    : `<div class="done">Everyone is even.</div>`;
+  const total = expenses.reduce((s, e) => s + cents(e.amount), 0);
+  document.getElementById("total").textContent = `Trip total ${money(total)} · ${pays.length} payment${pays.length === 1 ? "" : "s"} to settle`;
+}
+
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c])); }
+function removeExpense(i) { expenses.splice(i, 1); render(); }
+
+document.getElementById("payer").innerHTML = PEOPLE.map(p => `<option>${p}</option>`).join("");
+document.getElementById("split").innerHTML += PEOPLE.map(p =>
+  `<label class="chip"><input type="checkbox" name="split" value="${p}" checked>${p}</label>`).join("");
+// Plain click/Enter handlers (no <form> submit) so it also works in sandboxed previews.
+function addExpense() {
+  const whatEl = document.getElementById("what"), amountEl = document.getElementById("amount");
+  const what = whatEl.value.trim(), amount = parseFloat(amountEl.value);
+  const split = [...document.querySelectorAll("input[name=split]:checked")].map(x => x.value);
+  if (!what || !(amount > 0) || !split.length) return;
+  expenses.push({what, amount, payer: document.getElementById("payer").value, split});
+  whatEl.value = ""; amountEl.value = "";
+  document.querySelectorAll("input[name=split]").forEach(x => x.checked = true);
+  render();
+}
+document.getElementById("add").addEventListener("click", addExpense);
+document.querySelectorAll("#what, #amount").forEach(el =>
+  el.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); addExpense(); } }));
+document.getElementById("copy").addEventListener("click", async () => {
+  const text = "Utah trip settle-up:\n" + settle(balances()).map(x => `${x.from} pays ${x.to} ${money(x.amt)}`).join("\n");
+  const btn = document.getElementById("copy");
+  try { await navigator.clipboard.writeText(text); btn.textContent = "Copied ✓"; }
+  catch { btn.textContent = "Copy blocked here. Download the file to use it."; }
+  setTimeout(() => btn.textContent = "Copy for the group chat", 2200);
+});
+render();
+</script>
+</body>
+</html>
