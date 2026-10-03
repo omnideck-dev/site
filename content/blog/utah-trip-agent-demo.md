@@ -1,17 +1,17 @@
 +++
-title    = "One Trip, Three Requests: What Was Real in Our omnideck Demo"
+title    = "AI Agents on Your Computer Planned Our Utah Trip"
 date     = 2026-10-03
 draft    = false
 tags     = ["ai-agents", "open-source", "demo"]
 template = "templates/types/blog.html"
 
 [extra]
-description    = "We asked omnideck to plan a Utah parks trip: research the fees, build an expense app, and paint a sticker. Here is what the agents made, what you can try yourself, and exactly how the demo was recorded."
+description    = "omnideck is a free desktop app that puts AI agents to work on your computer. We asked it to help plan a Utah parks trip. Its agents read the official fee pages, built two apps you can try, and painted a sticker in GIMP as an experiment."
 author         = "Larry Foulkrod"
 featured_image = "/images/utah-trip/featured.png"
 +++
 
-We made a three-minute demo of omnideck planning a weekend in Utah's national parks. Four friends, three requests, and each one ends with something you can keep. This post shows the results, links them so you can try them, and explains how the demo was made. We think that last part matters as much as the results.
+omnideck is a free, open source desktop app that puts AI agents to work on your own computer. The agents can browse the web, build small apps, and check their own work. To show what that looks like, we asked omnideck to help plan a weekend in Utah's national parks. Four friends, three requests, and each one ends with something you can keep. This post shows the results, links two of them so you can try them, and explains how the demo was made.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kzp_lSqwxaA" title="omnideck demo: research, build an app, and paint in GIMP" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
