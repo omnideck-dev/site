@@ -169,6 +169,8 @@ body {
 
 main.full-width {
   width: 100%;
+  /* Let the page grid shrink below the intrinsic width of article content. */
+  min-width: 0;
   max-width: none;
   margin: 0;
   padding: 0;
@@ -1504,6 +1506,7 @@ article td { border-color: var(--border); }
 .blog-article {
   max-width: 820px;
   padding-block: var(--sp-12);
+  overflow-wrap: anywhere;
 }
 
 .blog-header { max-width: var(--site-prose); padding: 0; }
