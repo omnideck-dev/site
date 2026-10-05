@@ -9,19 +9,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <script>
-    (() => {
-      try {
-        const saved = localStorage.getItem('dm:theme');
-        const theme = saved === 'light' || saved === 'dark'
-          ? saved
-          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.dataset.theme = theme;
-      } catch {
-        document.documentElement.dataset.theme = 'light';
-      }
-    })();
-  </script>
+  <script src="/js/prepaint.min.js"></script>
   <meta name="description" content="Blog posts tagged with Engineering">
   <meta property="og:title" content="Engineering">
   <meta property="og:description" content="Blog posts tagged with Engineering">
@@ -31,7 +19,7 @@
   <meta name="twitter:image" content="https://www.omnideck.dev/images/og-image.png">
   
   <title>Engineering | Blog | omnideck</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=fb2a191e">
+  <link rel="stylesheet" href="/css/bundle.css?v=002961df">
   
 </head>
 <body class="lattice ">
@@ -62,10 +50,7 @@
     </nav>
 
     <div class="header-actions">
-      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
-        <svg class="theme-icon theme-icon-sun" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-brightness-high"/></svg>
-        <svg class="theme-icon theme-icon-moon" viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-moon"/></svg>
-      </button>
+      <dark-mode-toggle theme="auto"></dark-mode-toggle>
 
     <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <span class="nav-toggle-bar"></span>
@@ -253,7 +238,7 @@
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=7d5fcacb"></script>
+  <script src="/js/bundle.js?v=48c0e119"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>
