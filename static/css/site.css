@@ -1693,7 +1693,7 @@ article td { border-color: var(--border); }
   display: block;
   color: var(--text-tertiary);
   font-family: var(--font-brand);
-  font-size: 9px;
+  font-size: 0.75rem;
   letter-spacing: 0.065em;
   text-transform: uppercase;
 }
@@ -1724,11 +1724,11 @@ article td { border-color: var(--border); }
   font-weight: 500;
 }
 
-.download-option span {
+.download-option > div > span {
   overflow: hidden;
   color: var(--text-tertiary);
   font-family: var(--font-brand);
-  font-size: 9px;
+  font-size: 0.8125rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1762,7 +1762,7 @@ article td { border-color: var(--border); }
   margin-top: var(--sp-2);
   color: var(--text-secondary);
   font-family: var(--font-brand);
-  font-size: 10px;
+  font-size: 0.8125rem;
 }
 
 .install-guide {
@@ -1823,21 +1823,18 @@ article td { border-color: var(--border); }
   background: var(--surface);
 }
 
-.install-package-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-4);
-  margin-top: var(--sp-4);
-  font-family: var(--font-brand);
-  font-size: 10px;
+.install-phone-note {
+  display: none;
+  margin-top: var(--sp-3);
+  font-weight: 600;
 }
 
-.install-package-meta a {
-  color: var(--text-secondary);
-  text-decoration: none;
+@media (pointer: coarse) and (max-width: 1024px) {
+  .install-phone-note { display: block; }
 }
 
-.install-package-meta a:hover { color: var(--accent); }
+.install-checksum { margin-top: var(--sp-3); }
+.install-checksum code { overflow-wrap: anywhere; }
 
 .install-package-note {
   margin: var(--sp-5) 0 0;
@@ -1894,10 +1891,12 @@ article td { border-color: var(--border); }
   font-size: 18px;
 }
 
-.install-step-copy p {
+.install-step-copy :is(p, ul) {
   margin: 0;
   font-size: 14px;
 }
+
+.install-step-copy :is(p, ul) + :is(p, ul) { margin-top: var(--sp-2); }
 
 .install-step-copy code { overflow-wrap: anywhere; }
 
@@ -1961,7 +1960,7 @@ article td { border-color: var(--border); }
 .install-command-label {
   color: var(--text-secondary);
   font-family: var(--font-brand);
-  font-size: 10px;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
