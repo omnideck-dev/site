@@ -27,7 +27,7 @@
   <meta property="og:description" content="Install omnideck on macOS, Windows, or Linux with the right package and a step-by-step guide for your operating system.">
   
   <title>Install omnideck — macOS, Windows &amp; Linux</title>
-  <link rel="stylesheet" href="/css/bundle.css?v=b6ed222b">
+  <link rel="stylesheet" href="/css/bundle.css?v=a4e873e5">
   
 </head>
 <body class="lattice page-install">
@@ -103,15 +103,31 @@
         <img src="/images/omnideck-app-icon.svg" alt="" width="36" height="36">
         <span class="section-label">omnideck</span>
       </div>
-      <h1>Install omnideck.<br><em>Run your agents locally.</em></h1>
-      <p class="downloads-lede">Choose your system to get the right package and follow its setup from download to a ready local workbench.</p>
+      <h1>Install omnideck.<br><em>Free for Mac, Windows, and Linux.</em></h1>
+      <p class="downloads-lede">Choose your computer, download the app, and follow the steps below. The first setup takes several minutes. Before your first chat, you connect an AI model.</p>
+      <p class="install-phone-note">omnideck runs on a computer, not a phone. Open this page on your Mac or PC to install it.</p>
     </div>
     <aside class="release-panel" aria-label="Current desktop release" data-release-tag="v0.1.0-beta.13">
       <span class="release-channel">Preview release</span>
       <strong>v0.1.0-beta.13</strong>
       <time datetime="2026-10-02T14:33:27Z">Published October 2, 2026</time>
-      <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.13" target="_blank" rel="noopener">Release notes ↗<span class="sr-only"> (opens in a new tab)</span></a>
+      <a href="/whats-new.html">What’s new</a>
     </aside>
+  </div>
+</section>
+
+<section class="downloads-section" aria-labelledby="before-title">
+  <div class="container">
+    <section class="card install-before" aria-labelledby="before-title">
+      <h2 id="before-title">Before you start</h2>
+      <ul>
+        <li><strong>A computer</strong> with macOS, Windows 11, or desktop Linux and at least 4 GB of memory.</li>
+        <li><strong>Permission to install software.</strong> Setup installs the parts omnideck runs on, and your computer asks you to approve it.</li>
+        <li><strong>An internet connection.</strong> Setup downloads under 1 GB of application files.</li>
+        <li><strong>An AI model to connect.</strong> Use an API key from Anthropic, OpenAI, or OpenRouter, which bills API use to your account with them. Or use a model you already downloaded with <a href="/docs/local-models.html">Ollama</a> on this computer.</li>
+      </ul>
+      <p>omnideck is free and needs no omnideck account. <a href="/docs/getting-started.html#connect-a-model">More about connecting a model</a></p>
+    </section>
   </div>
 </section>
 
@@ -136,24 +152,32 @@
             <div>
               <span class="install-platform-label">macOS · Apple silicon or Intel</span>
               <h3 id="download-macos-title">Download for Mac</h3>
-              <p>Choose the DMG that matches your Mac.</p>
+              <p>Choose the DMG that matches your Mac. To check, open the Apple menu → <strong>About This Mac</strong>. A <strong>Chip</strong> line means Apple silicon. A <strong>Processor</strong> line that names Intel means Intel.</p>
             </div>
           </header>
           <div class="download-options install-package-options">
             <div class="download-option">
               <div><strong>Apple silicon</strong><span>M1 or newer · 9.0 MB</span></div>
-              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_aarch64.dmg" role="button" data-variant="primary">Download DMG</a>
+              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_aarch64.dmg" role="button" data-variant="primary">Download DMG<span class="sr-only"> for Apple silicon</span></a>
             </div>
             <div class="download-option">
               <div><strong>Intel</strong><span>x86-64 · 9.8 MB</span></div>
-              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64.dmg" role="button" data-variant="outline">Download DMG</a>
+              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64.dmg" role="button" data-variant="outline">Download DMG<span class="sr-only"> for Intel</span></a>
             </div>
           </div>
-          <div class="install-package-meta">
-            <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_aarch64.dmg.sha256">Apple silicon checksum</a>
-            <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64.dmg.sha256">Intel checksum</a>
-          </div>
-          <p class="install-package-note"><strong>Preview package:</strong> macOS may ask you to approve omnideck in Privacy &amp; Security. Only continue when the DMG came from the link above and its SHA-256 checksum matches the release.</p>
+          <p class="install-package-note"><strong>Preview package:</strong> macOS may ask you to approve omnideck in Privacy &amp; Security. Only continue when the DMG came from the link above and its SHA-256 fingerprint matches the one below.</p>
+          <details class="install-checksum">
+            <summary>Check your download</summary>
+            <p>Open <strong>Terminal</strong> and run the command for your file. The result must match the fingerprint exactly.</p>
+            <dl>
+              <dt>Apple silicon</dt>
+              <dd><code>shasum -a 256 ~/Downloads/omnideck_0.1.0-beta.13_aarch64.dmg</code></dd>
+              <dd><code>b5bcb41dd3b1b374637ec0472a26f07c45fd6b9612e004c76a882e1ad51f72ba</code></dd>
+              <dt>Intel</dt>
+              <dd><code>shasum -a 256 ~/Downloads/omnideck_0.1.0-beta.13_x64.dmg</code></dd>
+              <dd><code>cccdb0fb3348fba23d4302ede0d041ede4af6391b258ba86fb003e68d940d766</code></dd>
+            </dl>
+          </details>
         </section>
         <header class="install-steps-heading">
           <div>
@@ -201,7 +225,7 @@
           <li class="install-walkthrough-step">
             <div class="install-step-copy">
               <h4>Set up omnideck</h4>
-              <p>Select <strong>Set up omnideck</strong>. The app prepares the local runtime for your workbench.</p>
+              <p>Select <strong>Set up omnideck</strong>. Setup gets your Mac ready and downloads omnideck’s files. It takes several minutes, and you can play Agent Dash while you wait.</p>
             </div>
             <div class="install-step-media">
               <picture>
@@ -222,15 +246,34 @@
               </picture>
             </div>
           </li>
-          <li class="install-walkthrough-step install-workbench-ready">
+          <li class="install-walkthrough-step">
   <div class="install-step-copy">
-    <h4>Open your workbench</h4>
-    <p>When setup finishes, omnideck opens your local workbench. Start a new conversation or choose a suggested task.</p>
+    <h4>Connect an AI model</h4>
+    <p>Before your first chat, omnideck asks which AI model to use. Select <strong>Get Started</strong>, then choose one:</p>
+    <ul>
+      <li><strong>Cloud API</strong>: paste an API key from Anthropic, OpenAI, or OpenRouter.</li>
+      <li><strong>Ollama (local)</strong>: use a model that is already downloaded in Ollama on this computer.</li>
+      <li><strong>OpenAI-compatible endpoint</strong>: use a server such as LM Studio.</li>
+    </ul>
+    <p>Select <strong>Connect</strong>, then pick a main model. The vision model is optional. Select <strong>Skip — I’ll configure this later</strong> if you don’t have one.</p>
   </div>
   <div class="install-step-media">
     <picture>
-      <source type="image/webp" srcset="/images/install/workbench-ready-720.webp 720w, /images/install/workbench-ready.webp 1440w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
-      <img src="/images/install/workbench-ready.webp" alt="omnideck open to a new local workbench with suggested tasks" width="1440" height="900" loading="lazy" decoding="async">
+      <source type="image/webp" srcset="/images/install/connect-model-720.webp 720w, /images/install/connect-model.webp 2400w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+      <img src="/images/install/connect-model.png" alt="omnideck setup asking you to choose Ollama, an OpenAI-compatible endpoint, or a Cloud API" width="2400" height="1260" loading="lazy" decoding="async">
+    </picture>
+  </div>
+</li>
+<li class="install-walkthrough-step install-workbench-ready">
+  <div class="install-step-copy">
+    <h4>Start with the welcome tour</h4>
+    <p>Select <strong>Start Chatting</strong>. Your first chat is a short tour of omnideck. It ends with requests you can try, such as connecting your calendar.</p>
+    <p>For your own first job, select <strong>New chat</strong> and describe what you need in plain words. For example: “Plan five weeknight dinners for a family of four. One of us doesn’t eat nuts. Then make one shopping list.”</p>
+  </div>
+  <div class="install-step-media">
+    <picture>
+      <source type="image/webp" srcset="/images/install/welcome-tour-720.webp 720w, /images/install/welcome-tour.webp 1340w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+      <img src="/images/install/welcome-tour.png" alt="omnideck’s first chat, a welcome tour that ends with requests to try" width="1340" height="1140" loading="lazy" decoding="async">
     </picture>
   </div>
 </li>
@@ -245,24 +288,32 @@
             <div>
               <span class="install-platform-label">Windows 11 · x86-64 or ARM64</span>
               <h3 id="download-windows-title">Download for Windows</h3>
-              <p>Choose the EXE that matches your PC.</p>
+              <p>Choose the EXE that matches your PC. To check, open <strong>Settings → System → About</strong> and look at <strong>System type</strong>. An x64-based processor means x86-64. An ARM-based processor means ARM64.</p>
             </div>
           </header>
           <div class="download-options install-package-options">
             <div class="download-option">
               <div><strong>x86-64</strong><span>Intel or AMD · 8.0 MB</span></div>
-              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64-setup.exe" role="button" data-variant="primary">Download EXE</a>
+              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64-setup.exe" role="button" data-variant="primary">Download EXE<span class="sr-only"> for x86-64</span></a>
             </div>
             <div class="download-option">
               <div><strong>ARM64</strong><span>Snapdragon · 7.2 MB</span></div>
-              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_arm64-setup.exe" role="button" data-variant="outline">Download EXE</a>
+              <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_arm64-setup.exe" role="button" data-variant="outline">Download EXE<span class="sr-only"> for ARM64</span></a>
             </div>
           </div>
-          <div class="install-package-meta">
-            <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_x64-setup.exe.sha256">x86-64 checksum</a>
-            <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_arm64-setup.exe.sha256">ARM64 checksum</a>
-          </div>
-          <p class="install-package-note"><strong>Preview package:</strong> Windows may show a SmartScreen warning. Only continue when the EXE came from the link above and its SHA-256 checksum matches the release.</p>
+          <p class="install-package-note"><strong>Preview package:</strong> Windows may show a SmartScreen warning. Only continue when the EXE came from the link above and its SHA-256 fingerprint matches the one below.</p>
+          <details class="install-checksum">
+            <summary>Check your download</summary>
+            <p>Open <strong>PowerShell</strong> and run the command for your file. The result must match the fingerprint. Upper or lower case letters don’t matter.</p>
+            <dl>
+              <dt>x86-64</dt>
+              <dd><code>Get-FileHash "$HOME\Downloads\omnideck_0.1.0-beta.13_x64-setup.exe"</code></dd>
+              <dd><code>4c1a00baa87506451af9aefedef4665ea312d1db6afffa472239ef2702a6298b</code></dd>
+              <dt>ARM64</dt>
+              <dd><code>Get-FileHash "$HOME\Downloads\omnideck_0.1.0-beta.13_arm64-setup.exe"</code></dd>
+              <dd><code>220517040a24632cc51497cea2d2672b5152ed7c496aea04c616b360e4f50b1a</code></dd>
+            </dl>
+          </details>
         </section>
         <header class="install-steps-heading">
           <span class="install-platform-label">Installation</span>
@@ -337,15 +388,34 @@
               </picture>
             </div>
           </li>
-          <li class="install-walkthrough-step install-workbench-ready">
+          <li class="install-walkthrough-step">
   <div class="install-step-copy">
-    <h4>Open your workbench</h4>
-    <p>When setup finishes, omnideck opens your local workbench. Start a new conversation or choose a suggested task.</p>
+    <h4>Connect an AI model</h4>
+    <p>Before your first chat, omnideck asks which AI model to use. Select <strong>Get Started</strong>, then choose one:</p>
+    <ul>
+      <li><strong>Cloud API</strong>: paste an API key from Anthropic, OpenAI, or OpenRouter.</li>
+      <li><strong>Ollama (local)</strong>: use a model that is already downloaded in Ollama on this computer.</li>
+      <li><strong>OpenAI-compatible endpoint</strong>: use a server such as LM Studio.</li>
+    </ul>
+    <p>Select <strong>Connect</strong>, then pick a main model. The vision model is optional. Select <strong>Skip — I’ll configure this later</strong> if you don’t have one.</p>
   </div>
   <div class="install-step-media">
     <picture>
-      <source type="image/webp" srcset="/images/install/workbench-ready-720.webp 720w, /images/install/workbench-ready.webp 1440w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
-      <img src="/images/install/workbench-ready.webp" alt="omnideck open to a new local workbench with suggested tasks" width="1440" height="900" loading="lazy" decoding="async">
+      <source type="image/webp" srcset="/images/install/connect-model-720.webp 720w, /images/install/connect-model.webp 2400w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+      <img src="/images/install/connect-model.png" alt="omnideck setup asking you to choose Ollama, an OpenAI-compatible endpoint, or a Cloud API" width="2400" height="1260" loading="lazy" decoding="async">
+    </picture>
+  </div>
+</li>
+<li class="install-walkthrough-step install-workbench-ready">
+  <div class="install-step-copy">
+    <h4>Start with the welcome tour</h4>
+    <p>Select <strong>Start Chatting</strong>. Your first chat is a short tour of omnideck. It ends with requests you can try, such as connecting your calendar.</p>
+    <p>For your own first job, select <strong>New chat</strong> and describe what you need in plain words. For example: “Plan five weeknight dinners for a family of four. One of us doesn’t eat nuts. Then make one shopping list.”</p>
+  </div>
+  <div class="install-step-media">
+    <picture>
+      <source type="image/webp" srcset="/images/install/welcome-tour-720.webp 720w, /images/install/welcome-tour.webp 1340w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+      <img src="/images/install/welcome-tour.png" alt="omnideck’s first chat, a welcome tour that ends with requests to try" width="1340" height="1140" loading="lazy" decoding="async">
     </picture>
   </div>
 </li>
@@ -360,30 +430,40 @@
             <div>
               <span class="install-platform-label">Desktop Linux · x86-64 or ARM64</span>
               <h3 id="download-linux-title">Download for Linux</h3>
-              <p>Use a native DEB or RPM package. AppImage remains a secondary compatibility option for Ubuntu.</p>
+              <p>Use the DEB on Debian, Ubuntu, and similar systems. Use the RPM on Fedora, RHEL, and similar systems. AppImage is a secondary option for Ubuntu. To check your architecture, run <code>uname -m</code>. <code>x86_64</code> means x86-64, and <code>aarch64</code> means ARM64.</p>
             </div>
           </header>
           <div class="linux-install-options">
             <div class="linux-package-group">
               <strong>x86-64</strong>
               <div class="package-links">
-                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_amd64.deb" role="button" data-variant="primary">Download DEB</a>
-                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck-0.1.0-beta.13-1.x86_64.rpm" role="button" data-variant="outline">Download RPM</a>
+                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_amd64.deb" role="button" data-variant="primary">Download DEB<span class="sr-only"> for x86-64</span></a>
+                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck-0.1.0-beta.13-1.x86_64.rpm" role="button" data-variant="outline">Download RPM<span class="sr-only"> for x86-64</span></a>
               </div>
-              <a class="package-secondary-download" href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_amd64.AppImage">Download AppImage</a>
+              <a class="package-secondary-download" href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_amd64.AppImage">Download AppImage<span class="sr-only"> for x86-64</span></a>
             </div>
             <div class="linux-package-group">
               <strong>ARM64</strong>
               <div class="package-links">
-                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_arm64.deb" role="button" data-variant="primary">Download DEB</a>
-                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck-0.1.0-beta.13-1.aarch64.rpm" role="button" data-variant="outline">Download RPM</a>
+                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_arm64.deb" role="button" data-variant="primary">Download DEB<span class="sr-only"> for ARM64</span></a>
+                <a href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck-0.1.0-beta.13-1.aarch64.rpm" role="button" data-variant="outline">Download RPM<span class="sr-only"> for ARM64</span></a>
               </div>
-              <a class="package-secondary-download" href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_aarch64.AppImage">Download AppImage</a>
+              <a class="package-secondary-download" href="https://github.com/omnideck-dev/omnideck/releases/download/v0.1.0-beta.13/omnideck_0.1.0-beta.13_aarch64.AppImage">Download AppImage<span class="sr-only"> for ARM64</span></a>
             </div>
           </div>
-          <div class="install-package-meta">
-            <a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.13" target="_blank" rel="noopener">Checksums and all Linux packages ↗<span class="sr-only"> (opens in a new tab)</span></a>
-          </div>
+          <details class="install-checksum">
+            <summary>Check your download</summary>
+            <p>Run <code>sha256sum</code> on the file you downloaded, for example <code>sha256sum ~/Downloads/omnideck_0.1.0-beta.13_amd64.deb</code>. The result must match its fingerprint below.</p>
+            <dl>
+              <dt>omnideck_0.1.0-beta.13_amd64.deb</dt><dd><code>e94d1c9ab392e09be07b07a30602587cf85dda281ed4edb7e8a17a474120d89c</code></dd>
+              <dt>omnideck-0.1.0-beta.13-1.x86_64.rpm</dt><dd><code>52f84427d983d3ae131be5ae0a0d3168577bf6c0406ce9fa804a769ede2326d9</code></dd>
+              <dt>omnideck_0.1.0-beta.13_amd64.AppImage</dt><dd><code>843ed3f0177b4bb16891de1480f5486c1894a7a43c580bb45879c80d5d146d9e</code></dd>
+              <dt>omnideck_0.1.0-beta.13_arm64.deb</dt><dd><code>6c9613e784af7e3b97ebc51bc7bcef9933cf1781b90b4bf8821adcc35813f25f</code></dd>
+              <dt>omnideck-0.1.0-beta.13-1.aarch64.rpm</dt><dd><code>11468cc4fe1312d98af0b63cbedcba8ca131c51cff3264d39622f4e5e27fd204</code></dd>
+              <dt>omnideck_0.1.0-beta.13_aarch64.AppImage</dt><dd><code>64397e1f127440e0af94cf266648873e79d15b92a26ead548acefb176c4dac36</code></dd>
+            </dl>
+            <p><a href="https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.13" target="_blank" rel="noopener">All packages on GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a></p>
+          </details>
         </section>
         <header class="install-steps-heading">
           <span class="install-platform-label">Installation</span>
@@ -393,7 +473,7 @@
           <li class="install-walkthrough-step install-step-text">
             <div class="install-step-copy">
               <h4>Install omnideck</h4>
-              <p>Use the commands for the package and architecture you downloaded.</p>
+              <p>In a terminal, run the command for the package and architecture you downloaded, from the folder that holds the file. Linux asks for your password.</p>
               <div class="linux-install-commands">
                 <section class="linux-install-command-group" aria-labelledby="linux-command-x64">
                   <h5 id="linux-command-x64">x86-64</h5>
@@ -408,7 +488,7 @@
                     </div>
                   </div>
                   <div class="install-command">
-                    <span class="install-command-label">RPM · Fedora or RHEL</span>
+                    <span class="install-command-label">RPM · Fedora, RHEL, Rocky, or AlmaLinux</span>
                     <div class="install-terminal">
                       <code class="t-cmd">sudo dnf install ./omnideck-0.1.0-beta.13-1.x86_64.rpm</code>
                       <button class="copy-btn" type="button" aria-label="Copy x86-64 RPM install command" data-copy-label="Copy x86-64 RPM install command">
@@ -431,7 +511,7 @@
                     </div>
                   </div>
                   <div class="install-command">
-                    <span class="install-command-label">RPM · Fedora or RHEL</span>
+                    <span class="install-command-label">RPM · Fedora, RHEL, Rocky, or AlmaLinux</span>
                     <div class="install-terminal">
                       <code class="t-cmd">sudo dnf install ./omnideck-0.1.0-beta.13-1.aarch64.rpm</code>
                       <button class="copy-btn" type="button" aria-label="Copy ARM64 RPM install command" data-copy-label="Copy ARM64 RPM install command">
@@ -458,8 +538,8 @@
           </li>
           <li class="install-walkthrough-step">
             <div class="install-step-copy">
-              <h4>Prepare the local runtime</h4>
-              <p>Approve an administrator prompt if your system asks. omnideck prepares the local runtime for your workbench.</p>
+              <h4>Approve the setup</h4>
+              <p>Setup installs the container runtime omnideck runs in, so Linux may ask for an administrator password. Then it downloads omnideck’s files. This takes several minutes.</p>
             </div>
             <div class="install-step-media">
               <picture>
@@ -480,15 +560,34 @@
               </picture>
             </div>
           </li>
-          <li class="install-walkthrough-step install-workbench-ready">
+          <li class="install-walkthrough-step">
   <div class="install-step-copy">
-    <h4>Open your workbench</h4>
-    <p>When setup finishes, omnideck opens your local workbench. Start a new conversation or choose a suggested task.</p>
+    <h4>Connect an AI model</h4>
+    <p>Before your first chat, omnideck asks which AI model to use. Select <strong>Get Started</strong>, then choose one:</p>
+    <ul>
+      <li><strong>Cloud API</strong>: paste an API key from Anthropic, OpenAI, or OpenRouter.</li>
+      <li><strong>Ollama (local)</strong>: use a model that is already downloaded in Ollama on this computer.</li>
+      <li><strong>OpenAI-compatible endpoint</strong>: use a server such as LM Studio.</li>
+    </ul>
+    <p>Select <strong>Connect</strong>, then pick a main model. The vision model is optional. Select <strong>Skip — I’ll configure this later</strong> if you don’t have one.</p>
   </div>
   <div class="install-step-media">
     <picture>
-      <source type="image/webp" srcset="/images/install/workbench-ready-720.webp 720w, /images/install/workbench-ready.webp 1440w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
-      <img src="/images/install/workbench-ready.webp" alt="omnideck open to a new local workbench with suggested tasks" width="1440" height="900" loading="lazy" decoding="async">
+      <source type="image/webp" srcset="/images/install/connect-model-720.webp 720w, /images/install/connect-model.webp 2400w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+      <img src="/images/install/connect-model.png" alt="omnideck setup asking you to choose Ollama, an OpenAI-compatible endpoint, or a Cloud API" width="2400" height="1260" loading="lazy" decoding="async">
+    </picture>
+  </div>
+</li>
+<li class="install-walkthrough-step install-workbench-ready">
+  <div class="install-step-copy">
+    <h4>Start with the welcome tour</h4>
+    <p>Select <strong>Start Chatting</strong>. Your first chat is a short tour of omnideck. It ends with requests you can try, such as connecting your calendar.</p>
+    <p>For your own first job, select <strong>New chat</strong> and describe what you need in plain words. For example: “Plan five weeknight dinners for a family of four. One of us doesn’t eat nuts. Then make one shopping list.”</p>
+  </div>
+  <div class="install-step-media">
+    <picture>
+      <source type="image/webp" srcset="/images/install/welcome-tour-720.webp 720w, /images/install/welcome-tour.webp 1340w" sizes="(min-width: 769px) 700px, calc(100vw - 64px)">
+      <img src="/images/install/welcome-tour.png" alt="omnideck’s first chat, a welcome tour that ends with requests to try" width="1340" height="1140" loading="lazy" decoding="async">
     </picture>
   </div>
 </li>
@@ -496,6 +595,13 @@
         </ol>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="downloads-section" aria-labelledby="setup-help-title">
+  <div class="container">
+    <h2 id="setup-help-title">If setup stops</h2>
+    <p>omnideck shows <strong>Setup needs attention</strong> with the cause and a next step. Follow that step, then select <strong>Try again</strong>. If it stops again, open <strong>Technical details</strong> and share them in the <a href="/community.html">community Slack</a> or a <a href="https://github.com/omnideck-dev/omnideck/issues">GitHub issue</a>.</p>
   </div>
 </section>
 
@@ -533,7 +639,7 @@
   </div>
 </footer>
 
-  <script src="/js/bundle.js?v=f6211ced"></script>
+  <script src="/js/bundle.js?v=7d5fcacb"></script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
   <script>
