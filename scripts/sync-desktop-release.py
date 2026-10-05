@@ -43,13 +43,17 @@ def asset_table(release: dict[str, object]) -> dict[str, dict[str, object]]:
             for name, asset in assets.items():
                 if name.endswith(suffix) and not name.endswith(".sha256"):
                     checksum = assets.get(f"{name}.sha256")
+                    digest = str(asset.get("digest") or "")
                     return {
                         "filename": name,
                         "url": asset["browser_download_url"],
                         "size": human_size(int(asset["size"])),
                         "checksum_url": checksum["browser_download_url"] if checksum else "",
+                        # GitHub's asset digest; shown on the install page so people can compare
+                        # without downloading the .sha256 file. Same value as the published .sha256.
+                        "sha256": digest.removeprefix("sha256:") if digest.startswith("sha256:") else "",
                     }
-        return {"filename": "", "url": "", "size": "", "checksum_url": ""}
+        return {"filename": "", "url": "", "size": "", "checksum_url": "", "sha256": ""}
 
     return {
         "macos_arm64": select("_aarch64.dmg"),
@@ -92,6 +96,7 @@ def render(release: dict[str, object], downloads: dict[str, dict[str, object]]) 
                 f"url = {toml_string(asset['url'])}",
                 f"size = {toml_string(asset['size'])}",
                 f"checksum_url = {toml_string(asset['checksum_url'])}",
+                f"sha256 = {toml_string(asset['sha256'])}",
                 "",
             ]
         )
@@ -102,7 +107,7 @@ def sync(releases):
     release = newest_published_release(releases)
     downloads = asset_table(release)
     missing = [label for label, asset in downloads.items()
-               if not asset["url"] or not asset["checksum_url"]]
+               if not asset["url"] or not asset["checksum_url"] or not asset["sha256"]]
     if missing:
         raise RuntimeError(f"desktop release {release['tag_name']} is missing packages or checksums: {', '.join(missing)}")
     write_atomic(OUTPUT, render(release, downloads))

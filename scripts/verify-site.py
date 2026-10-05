@@ -46,7 +46,8 @@ def check_pages(root, expected):
     for release in expected["releases"]:
         if release["tag"] not in feed.tags or release["url"] not in feed.links:
             raise RuntimeError(f"What's new is missing release {release['tag']}")
-    install = Page(read(root, "install.html"))
+    install_html = read(root, "install.html")
+    install = Page(install_html)
     if expected["desktop_tag"] not in install.tags:
         raise RuntimeError(f"Install page is missing desktop release {expected['desktop_tag']}")
     for asset in expected["downloads"].values():
@@ -54,6 +55,8 @@ def check_pages(root, expected):
             raise RuntimeError(f"Install page is missing download {asset['filename']}")
         if not asset["checksum_url"]:
             raise RuntimeError(f"Download has no checksum: {asset['filename']}")
+        if not asset.get("sha256") or asset["sha256"] not in install_html:
+            raise RuntimeError(f"Install page is missing the SHA-256 fingerprint for {asset['filename']}")
 
 
 def check_downloads(expected):

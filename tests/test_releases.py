@@ -39,7 +39,7 @@ def installers():
     for suffix in suffixes:
         name = 'omnideck_0.1.0-beta.11' + suffix
         for filename in [name, name + '.sha256']:
-            result.append({'name': filename, 'size': 1000,
+            result.append({'name': filename, 'size': 1000, 'digest': 'sha256:' + 'ab' * 32,
                            'browser_download_url': f'https://github.com/download/{filename}'})
     return result
 
@@ -62,6 +62,13 @@ class ReleaseTests(unittest.TestCase):
     def test_missing_checksum_fails(self):
         self.desktop['assets'] = [asset for asset in installers() if not asset['name'].endswith('_x64.dmg.sha256')]
         with self.assertRaisesRegex(RuntimeError, 'macos_x64'):
+            desktop.sync([self.desktop])
+
+    def test_missing_digest_fails(self):
+        for asset in self.desktop['assets']:
+            if asset['name'].endswith('_amd64.deb'):
+                del asset['digest']
+        with self.assertRaisesRegex(RuntimeError, 'linux_x64_deb'):
             desktop.sync([self.desktop])
 
     def test_api_failure_does_not_report_success_with_checked_in_data(self):
@@ -123,11 +130,13 @@ class VerificationTests(unittest.TestCase):
         self.expected = {'releases': [{'tag': 'app-v0.5.2', 'url': 'https://github.com/notes'}],
                          'desktop_tag': 'v0.1.0-beta.11', 'desktop_url': 'https://github.com/desktop',
                          'downloads': {'mac': {'filename': 'mac.dmg', 'url': 'https://github.com/mac.dmg',
-                                               'checksum_url': 'https://github.com/mac.dmg.sha256'}}}
+                                               'checksum_url': 'https://github.com/mac.dmg.sha256',
+                                               'sha256': 'cd' * 32}}}
         (self.root / 'releases.json').write_text(json.dumps(self.expected))
         for name in ['index.html', 'whats-new.html']:
             (self.root / name).write_text('<aside data-release-tag="app-v0.5.2"><a href="https://github.com/notes">Notes</a></aside>')
-        (self.root / 'install.html').write_text('<aside data-release-tag="v0.1.0-beta.11"><a href="https://github.com/mac.dmg">Download</a></aside>')
+        (self.root / 'install.html').write_text('<aside data-release-tag="v0.1.0-beta.11"><a href="https://github.com/mac.dmg">Download</a></aside>'
+                                                f'<code>{"cd" * 32}</code>')
 
     def test_valid_build(self):
         verify.check_pages(str(self.root), self.expected)
@@ -155,6 +164,11 @@ class VerificationTests(unittest.TestCase):
     def test_missing_download(self):
         (self.root / 'install.html').write_text('<aside data-release-tag="v0.1.0-beta.11">')
         with self.assertRaisesRegex(RuntimeError, 'missing download'):
+            verify.check_pages(str(self.root), self.expected)
+
+    def test_missing_fingerprint_on_install_page(self):
+        (self.root / 'install.html').write_text('<aside data-release-tag="v0.1.0-beta.11"><a href="https://github.com/mac.dmg">Download</a></aside>')
+        with self.assertRaisesRegex(RuntimeError, 'SHA-256 fingerprint'):
             verify.check_pages(str(self.root), self.expected)
 
     def test_network_verification_uses_head_for_packages_and_checksums(self):
