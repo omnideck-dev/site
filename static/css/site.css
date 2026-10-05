@@ -378,7 +378,18 @@ img { max-width: 100%; }
   gap: var(--sp-2);
 }
 
-.theme-toggle,
+/* Dark Mode Toggle web component — sized to sit natively in the header.
+   Colors reuse the site's palette tokens (light border/elevated, dark
+   border-strong/text-secondary) so it adapts to the active theme. */
+dark-mode-toggle {
+  --track-width: 44px;
+  --track-height: 24px;
+  --track-bg-light: #e2e8f0;   /* light --border */
+  --track-bg-dark: #363d52;    /* dark --border-strong */
+  --thumb-bg: #ffffff;         /* light --elevated */
+  --thumb-bg-dark: #8892a8;    /* dark --text-secondary */
+}
+
 .nav-toggle,
 .copy-btn,
 .tab,
@@ -388,36 +399,6 @@ img { max-width: 100%; }
   border: 0;
   box-shadow: none;
 }
-
-.theme-toggle {
-  display: inline-grid;
-  width: 36px;
-  height: 36px;
-  place-items: center;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0;
-  background: var(--elevated);
-  color: var(--text-secondary);
-  cursor: pointer;
-}
-
-.theme-toggle:hover {
-  border-color: var(--border-strong);
-  background: var(--accent-muted);
-  color: var(--accent);
-}
-
-.theme-icon {
-  display: block;
-  grid-area: 1 / 1;
-  width: 21px;
-  height: 21px;
-  fill: currentColor;
-}
-
-[data-theme="light"] .theme-icon-moon,
-[data-theme="dark"] .theme-icon-sun { display: none; }
 
 .nav-toggle {
   display: none;

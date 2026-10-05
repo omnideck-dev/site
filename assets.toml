@@ -11,6 +11,6 @@ sources = [
 name    = "js/bundle.js"
 type    = "js"
 sources = [
-  "static/js/dark-mode-toggle.js",
+  "static/js/dark-mode-toggle.min.js",
   "static/js/site.js",
 ]
