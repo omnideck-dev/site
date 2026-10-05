@@ -1,0 +1,20 @@
+{% extends "templates/layouts/base.html" %}
+{% block title %}What’s new | {{ Site.Config.Site.Title }}{% endblock %}
+{% block body %}
+<section class="container py-5" aria-labelledby="releases-title">
+  <h1 id="releases-title">What’s new</h1>
+  <p>New features, improvements, and fixes in OmniDeck.</p>
+  <div class="grid col-1 gap-3 mt-4">
+    {% for release in Data.releases.items %}
+    <article class="card" data-release-tag="{{ release.tag }}">
+      <span class="section-label">{{ release.kind }} · {{ release.channel }}</span>
+      <h2 class="blog-card-title"><a href="{{ release.url }}">{{ release.title }}</a></h2>
+      <p class="muted"><time datetime="{{ release.published_iso }}">{{ release.published }}</time></p>
+      {% if release.summary %}<p>{{ release.summary }}</p>{% endif %}
+      <a href="{{ release.url }}" role="button" data-variant="ghost" data-size="sm">Read release notes →</a>
+    </article>
+    {% endfor %}
+  </div>
+  <p class="mt-4">More releases: <a href="https://github.com/omnideck-dev/omnideck/releases">App and desktop</a> · <a href="https://github.com/omnideck-dev/cli/releases">CLI</a></p>
+</section>
+{% endblock %}

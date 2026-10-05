@@ -3,16 +3,17 @@
 {% block title %}{{ Site.Config.Site.Title }} — Your Local AI Agent Workbench{% endblock %}
 {% block body %}
 
-<!-- ── LATEST POST RIBBON ──────────────────────────────────── -->
-{% if Data.homepage.latest_post %}
-<aside class="latest-post-ribbon" aria-label="Latest update">
+<!-- ── LATEST RELEASE RIBBON ───────────────────────────────── -->
+{% if Data.releases.latest %}
+<aside class="latest-post-ribbon" aria-label="Latest release" data-release-tag="{{ Data.releases.latest.tag }}">
   <div class="container">
     <div class="ribbon-inner">
-      <span class="ribbon-label">Latest update</span>
-      <a href="{{ Data.homepage.latest_post.url }}" class="ribbon-title">{{ Data.homepage.latest_post.title }}</a>
-      {% if Data.homepage.latest_post.date %}<time class="ribbon-date">{{ Data.homepage.latest_post.date }}</time>{% endif %}
-      <a href="{{ Data.homepage.latest_post.url }}" class="ribbon-cta">Read →</a>
+      <span class="ribbon-label">Latest release</span>
+      <a href="{{ Data.releases.latest.url }}" class="ribbon-title">{{ Data.releases.latest.title }} · {{ Data.releases.latest.channel }}</a>
+      <time class="ribbon-date" datetime="{{ Data.releases.latest.published_iso }}">{{ Data.releases.latest.published }}</time>
+      <a href="/whats-new.html" class="ribbon-cta">What’s new →</a>
     </div>
+    {% if Data.releases.latest.summary %}<p class="muted mt-2 mb-0">{{ Data.releases.latest.summary }}</p>{% endif %}
   </div>
 </aside>
 {% endif %}
@@ -301,6 +302,17 @@
     </div>
   </div>
 </section>
+
+{% if Data.homepage.latest_post %}
+<section class="home-section home-chapter" aria-labelledby="latest-blog-title">
+  <div class="container">
+    <span class="section-label">From the blog</span>
+    <h2 id="latest-blog-title"><a href="{{ Data.homepage.latest_post.url }}">{{ Data.homepage.latest_post.title }}</a></h2>
+    <p class="muted">{{ Data.homepage.latest_post.date }}</p>
+    <a href="{{ Data.homepage.latest_post.url }}">Read post →</a>
+  </div>
+</section>
+{% endif %}
 
 <section class="band band-surface cta-section home-chapter">
   <div class="container">

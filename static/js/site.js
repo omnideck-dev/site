@@ -1,6 +1,9 @@
 (() => {
-  const platform = String(navigator.userAgentData?.platform || navigator.platform || navigator.userAgent).toLowerCase();
-  const detectedOS = platform.includes('win')
+  const ua = navigator.userAgent;
+  // Phones can't run omnideck; Android also reports "Linux", so don't preselect a desktop tab.
+  const isPhone = navigator.userAgentData?.mobile || /Android|iPhone|iPod/i.test(ua);
+  const platform = String(navigator.userAgentData?.platform || navigator.platform || ua).toLowerCase();
+  const detectedOS = isPhone ? null : platform.includes('win')
     ? 'windows'
     : platform.includes('linux')
       ? 'linux'

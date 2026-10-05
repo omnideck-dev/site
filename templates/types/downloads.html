@@ -10,15 +10,31 @@
         <img src="/images/omnideck-app-icon.svg" alt="" width="36" height="36">
         <span class="section-label">omnideck</span>
       </div>
-      <h1>Install omnideck.<br><em>Run your agents locally.</em></h1>
-      <p class="downloads-lede">Choose your system to get the right package and follow its setup from download to a ready local workbench.</p>
+      <h1>Install omnideck.<br><em>Free for Mac, Windows, and Linux.</em></h1>
+      <p class="downloads-lede">Choose your computer, download the app, and follow the steps below. The first setup takes several minutes. Before your first chat, you connect an AI model.</p>
+      <p class="install-phone-note">omnideck runs on a computer, not a phone. Open this page on your Mac or PC to install it.</p>
     </div>
-    <aside class="release-panel" aria-label="Current desktop release">
+    <aside class="release-panel" aria-label="Current desktop release" data-release-tag="{{ Data.desktop_release.release.tag }}">
       <span class="release-channel">{{ Data.desktop_release.release.channel }} release</span>
       <strong>v{{ Data.desktop_release.release.version }}</strong>
       <time datetime="{{ Data.desktop_release.release.published_iso }}">Published {{ Data.desktop_release.release.published }}</time>
-      <a href="{{ Data.desktop_release.release.url }}" target="_blank" rel="noopener">Release notes ↗<span class="sr-only"> (opens in a new tab)</span></a>
+      <a href="/whats-new.html">What’s new</a>
     </aside>
+  </div>
+</section>
+
+<section class="downloads-section" aria-labelledby="before-title">
+  <div class="container">
+    <section class="card install-before" aria-labelledby="before-title">
+      <h2 id="before-title">Before you start</h2>
+      <ul>
+        <li><strong>A computer</strong> with macOS, Windows 11, or desktop Linux and at least 4 GB of memory.</li>
+        <li><strong>Permission to install software.</strong> Setup installs the parts omnideck runs on, and your computer asks you to approve it.</li>
+        <li><strong>An internet connection.</strong> Setup downloads under 1 GB of application files.</li>
+        <li><strong>An AI model to connect.</strong> Use an API key from Anthropic, OpenAI, or OpenRouter, which bills API use to your account with them. Or use a model you already downloaded with <a href="/docs/local-models.html">Ollama</a> on this computer.</li>
+      </ul>
+      <p>omnideck is free and needs no omnideck account. <a href="/docs/getting-started.html#connect-a-model">More about connecting a model</a></p>
+    </section>
   </div>
 </section>
 
@@ -43,24 +59,32 @@
             <div>
               <span class="install-platform-label">macOS · Apple silicon or Intel</span>
               <h3 id="download-macos-title">Download for Mac</h3>
-              <p>Choose the DMG that matches your Mac.</p>
+              <p>Choose the DMG that matches your Mac. To check, open the Apple menu → <strong>About This Mac</strong>. A <strong>Chip</strong> line means Apple silicon. A <strong>Processor</strong> line that names Intel means Intel.</p>
             </div>
           </header>
           <div class="download-options install-package-options">
             <div class="download-option">
               <div><strong>Apple silicon</strong><span>M1 or newer · {{ Data.desktop_release.macos_arm64.size }}</span></div>
-              <a href="{{ Data.desktop_release.macos_arm64.url }}" role="button" data-variant="primary">Download DMG</a>
+              <a href="{{ Data.desktop_release.macos_arm64.url }}" role="button" data-variant="primary">Download DMG<span class="sr-only"> for Apple silicon</span></a>
             </div>
             <div class="download-option">
               <div><strong>Intel</strong><span>x86-64 · {{ Data.desktop_release.macos_x64.size }}</span></div>
-              <a href="{{ Data.desktop_release.macos_x64.url }}" role="button" data-variant="outline">Download DMG</a>
+              <a href="{{ Data.desktop_release.macos_x64.url }}" role="button" data-variant="outline">Download DMG<span class="sr-only"> for Intel</span></a>
             </div>
           </div>
-          <div class="install-package-meta">
-            <a href="{{ Data.desktop_release.macos_arm64.checksum_url }}">Apple silicon checksum</a>
-            <a href="{{ Data.desktop_release.macos_x64.checksum_url }}">Intel checksum</a>
-          </div>
-          <p class="install-package-note"><strong>Preview package:</strong> macOS may ask you to approve omnideck in Privacy &amp; Security. Only continue when the DMG came from the link above and its SHA-256 checksum matches the release.</p>
+          <p class="install-package-note"><strong>Preview package:</strong> macOS may ask you to approve omnideck in Privacy &amp; Security. Only continue when the DMG came from the link above and its SHA-256 fingerprint matches the one below.</p>
+          <details class="install-checksum">
+            <summary>Check your download</summary>
+            <p>Open <strong>Terminal</strong> and run the command for your file. The result must match the fingerprint exactly.</p>
+            <dl>
+              <dt>Apple silicon</dt>
+              <dd><code>shasum -a 256 ~/Downloads/{{ Data.desktop_release.macos_arm64.filename }}</code></dd>
+              <dd><code>{{ Data.desktop_release.macos_arm64.sha256 }}</code></dd>
+              <dt>Intel</dt>
+              <dd><code>shasum -a 256 ~/Downloads/{{ Data.desktop_release.macos_x64.filename }}</code></dd>
+              <dd><code>{{ Data.desktop_release.macos_x64.sha256 }}</code></dd>
+            </dl>
+          </details>
         </section>
         <header class="install-steps-heading">
           <div>
@@ -108,7 +132,7 @@
           <li class="install-walkthrough-step">
             <div class="install-step-copy">
               <h4>Set up omnideck</h4>
-              <p>Select <strong>Set up omnideck</strong>. The app prepares the local runtime for your workbench.</p>
+              <p>Select <strong>Set up omnideck</strong>. Setup gets your Mac ready and downloads omnideck’s files. It takes several minutes, and you can play Agent Dash while you wait.</p>
             </div>
             <div class="install-step-media">
               <picture>
@@ -140,24 +164,32 @@
             <div>
               <span class="install-platform-label">Windows 11 · x86-64 or ARM64</span>
               <h3 id="download-windows-title">Download for Windows</h3>
-              <p>Choose the EXE that matches your PC.</p>
+              <p>Choose the EXE that matches your PC. To check, open <strong>Settings → System → About</strong> and look at <strong>System type</strong>. An x64-based processor means x86-64. An ARM-based processor means ARM64.</p>
             </div>
           </header>
           <div class="download-options install-package-options">
             <div class="download-option">
               <div><strong>x86-64</strong><span>Intel or AMD · {{ Data.desktop_release.windows_x64.size }}</span></div>
-              <a href="{{ Data.desktop_release.windows_x64.url }}" role="button" data-variant="primary">Download EXE</a>
+              <a href="{{ Data.desktop_release.windows_x64.url }}" role="button" data-variant="primary">Download EXE<span class="sr-only"> for x86-64</span></a>
             </div>
             <div class="download-option">
               <div><strong>ARM64</strong><span>Snapdragon · {{ Data.desktop_release.windows_arm64.size }}</span></div>
-              <a href="{{ Data.desktop_release.windows_arm64.url }}" role="button" data-variant="outline">Download EXE</a>
+              <a href="{{ Data.desktop_release.windows_arm64.url }}" role="button" data-variant="outline">Download EXE<span class="sr-only"> for ARM64</span></a>
             </div>
           </div>
-          <div class="install-package-meta">
-            <a href="{{ Data.desktop_release.windows_x64.checksum_url }}">x86-64 checksum</a>
-            <a href="{{ Data.desktop_release.windows_arm64.checksum_url }}">ARM64 checksum</a>
-          </div>
-          <p class="install-package-note"><strong>Preview package:</strong> Windows may show a SmartScreen warning. Only continue when the EXE came from the link above and its SHA-256 checksum matches the release.</p>
+          <p class="install-package-note"><strong>Preview package:</strong> Windows may show a SmartScreen warning. Only continue when the EXE came from the link above and its SHA-256 fingerprint matches the one below.</p>
+          <details class="install-checksum">
+            <summary>Check your download</summary>
+            <p>Open <strong>PowerShell</strong> and run the command for your file. The result must match the fingerprint. Upper or lower case letters don’t matter.</p>
+            <dl>
+              <dt>x86-64</dt>
+              <dd><code>Get-FileHash "$HOME\Downloads\{{ Data.desktop_release.windows_x64.filename }}"</code></dd>
+              <dd><code>{{ Data.desktop_release.windows_x64.sha256 }}</code></dd>
+              <dt>ARM64</dt>
+              <dd><code>Get-FileHash "$HOME\Downloads\{{ Data.desktop_release.windows_arm64.filename }}"</code></dd>
+              <dd><code>{{ Data.desktop_release.windows_arm64.sha256 }}</code></dd>
+            </dl>
+          </details>
         </section>
         <header class="install-steps-heading">
           <span class="install-platform-label">Installation</span>
@@ -243,30 +275,40 @@
             <div>
               <span class="install-platform-label">Desktop Linux · x86-64 or ARM64</span>
               <h3 id="download-linux-title">Download for Linux</h3>
-              <p>Use a native DEB or RPM package. AppImage remains a secondary compatibility option for Ubuntu.</p>
+              <p>Use the DEB on Debian, Ubuntu, and similar systems. Use the RPM on Fedora, RHEL, and similar systems. AppImage is a secondary option for Ubuntu. To check your architecture, run <code>uname -m</code>. <code>x86_64</code> means x86-64, and <code>aarch64</code> means ARM64.</p>
             </div>
           </header>
           <div class="linux-install-options">
             <div class="linux-package-group">
               <strong>x86-64</strong>
               <div class="package-links">
-                <a href="{{ Data.desktop_release.linux_x64_deb.url }}" role="button" data-variant="primary">Download DEB</a>
-                <a href="{{ Data.desktop_release.linux_x64_rpm.url }}" role="button" data-variant="outline">Download RPM</a>
+                <a href="{{ Data.desktop_release.linux_x64_deb.url }}" role="button" data-variant="primary">Download DEB<span class="sr-only"> for x86-64</span></a>
+                <a href="{{ Data.desktop_release.linux_x64_rpm.url }}" role="button" data-variant="outline">Download RPM<span class="sr-only"> for x86-64</span></a>
               </div>
-              <a class="package-secondary-download" href="{{ Data.desktop_release.linux_x64_appimage.url }}">Download AppImage</a>
+              <a class="package-secondary-download" href="{{ Data.desktop_release.linux_x64_appimage.url }}">Download AppImage<span class="sr-only"> for x86-64</span></a>
             </div>
             <div class="linux-package-group">
               <strong>ARM64</strong>
               <div class="package-links">
-                <a href="{{ Data.desktop_release.linux_arm64_deb.url }}" role="button" data-variant="primary">Download DEB</a>
-                <a href="{{ Data.desktop_release.linux_arm64_rpm.url }}" role="button" data-variant="outline">Download RPM</a>
+                <a href="{{ Data.desktop_release.linux_arm64_deb.url }}" role="button" data-variant="primary">Download DEB<span class="sr-only"> for ARM64</span></a>
+                <a href="{{ Data.desktop_release.linux_arm64_rpm.url }}" role="button" data-variant="outline">Download RPM<span class="sr-only"> for ARM64</span></a>
               </div>
-              <a class="package-secondary-download" href="{{ Data.desktop_release.linux_arm64_appimage.url }}">Download AppImage</a>
+              <a class="package-secondary-download" href="{{ Data.desktop_release.linux_arm64_appimage.url }}">Download AppImage<span class="sr-only"> for ARM64</span></a>
             </div>
           </div>
-          <div class="install-package-meta">
-            <a href="{{ Data.desktop_release.release.url }}" target="_blank" rel="noopener">Checksums and all Linux packages ↗<span class="sr-only"> (opens in a new tab)</span></a>
-          </div>
+          <details class="install-checksum">
+            <summary>Check your download</summary>
+            <p>Run <code>sha256sum</code> on the file you downloaded, for example <code>sha256sum ~/Downloads/{{ Data.desktop_release.linux_x64_deb.filename }}</code>. The result must match its fingerprint below.</p>
+            <dl>
+              <dt>{{ Data.desktop_release.linux_x64_deb.filename }}</dt><dd><code>{{ Data.desktop_release.linux_x64_deb.sha256 }}</code></dd>
+              <dt>{{ Data.desktop_release.linux_x64_rpm.filename }}</dt><dd><code>{{ Data.desktop_release.linux_x64_rpm.sha256 }}</code></dd>
+              <dt>{{ Data.desktop_release.linux_x64_appimage.filename }}</dt><dd><code>{{ Data.desktop_release.linux_x64_appimage.sha256 }}</code></dd>
+              <dt>{{ Data.desktop_release.linux_arm64_deb.filename }}</dt><dd><code>{{ Data.desktop_release.linux_arm64_deb.sha256 }}</code></dd>
+              <dt>{{ Data.desktop_release.linux_arm64_rpm.filename }}</dt><dd><code>{{ Data.desktop_release.linux_arm64_rpm.sha256 }}</code></dd>
+              <dt>{{ Data.desktop_release.linux_arm64_appimage.filename }}</dt><dd><code>{{ Data.desktop_release.linux_arm64_appimage.sha256 }}</code></dd>
+            </dl>
+            <p><a href="{{ Data.desktop_release.release.url }}" target="_blank" rel="noopener">All packages on GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a></p>
+          </details>
         </section>
         <header class="install-steps-heading">
           <span class="install-platform-label">Installation</span>
@@ -276,7 +318,7 @@
           <li class="install-walkthrough-step install-step-text">
             <div class="install-step-copy">
               <h4>Install omnideck</h4>
-              <p>Use the commands for the package and architecture you downloaded.</p>
+              <p>In a terminal, run the command for the package and architecture you downloaded, from the folder that holds the file. Linux asks for your password.</p>
               <div class="linux-install-commands">
                 <section class="linux-install-command-group" aria-labelledby="linux-command-x64">
                   <h5 id="linux-command-x64">x86-64</h5>
@@ -291,7 +333,7 @@
                     </div>
                   </div>
                   <div class="install-command">
-                    <span class="install-command-label">RPM · Fedora or RHEL</span>
+                    <span class="install-command-label">RPM · Fedora, RHEL, Rocky, or AlmaLinux</span>
                     <div class="install-terminal">
                       <code class="t-cmd">sudo dnf install ./{{ Data.desktop_release.linux_x64_rpm.filename }}</code>
                       <button class="copy-btn" type="button" aria-label="Copy x86-64 RPM install command" data-copy-label="Copy x86-64 RPM install command">
@@ -314,7 +356,7 @@
                     </div>
                   </div>
                   <div class="install-command">
-                    <span class="install-command-label">RPM · Fedora or RHEL</span>
+                    <span class="install-command-label">RPM · Fedora, RHEL, Rocky, or AlmaLinux</span>
                     <div class="install-terminal">
                       <code class="t-cmd">sudo dnf install ./{{ Data.desktop_release.linux_arm64_rpm.filename }}</code>
                       <button class="copy-btn" type="button" aria-label="Copy ARM64 RPM install command" data-copy-label="Copy ARM64 RPM install command">
@@ -341,8 +383,8 @@
           </li>
           <li class="install-walkthrough-step">
             <div class="install-step-copy">
-              <h4>Prepare the local runtime</h4>
-              <p>Approve an administrator prompt if your system asks. omnideck prepares the local runtime for your workbench.</p>
+              <h4>Approve the setup</h4>
+              <p>Setup installs the container runtime omnideck runs in, so Linux may ask for an administrator password. Then it downloads omnideck’s files. This takes several minutes.</p>
             </div>
             <div class="install-step-media">
               <picture>
@@ -367,6 +409,13 @@
         </ol>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="downloads-section" aria-labelledby="setup-help-title">
+  <div class="container">
+    <h2 id="setup-help-title">If setup stops</h2>
+    <p>omnideck shows <strong>Setup needs attention</strong> with the cause and a next step. Follow that step, then select <strong>Try again</strong>. If it stops again, open <strong>Technical details</strong> and share them in the <a href="/community.html">community Slack</a> or a <a href="https://github.com/omnideck-dev/omnideck/issues">GitHub issue</a>.</p>
   </div>
 </section>
 

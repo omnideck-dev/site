@@ -4,7 +4,7 @@ url   = "/docs/getting-started.html"
 
 [[items]]
 title = "Install omnideck"
-url   = "/docs/getting-started.html#install-omnideck"
+url   = "/install.html"
 
 [[items]]
 title = "Agents"

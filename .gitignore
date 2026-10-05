@@ -1,3 +1,6 @@
 public/
 .arbor-cache.json
 temp/
+__pycache__/
+data/releases.toml
+static/releases.json
