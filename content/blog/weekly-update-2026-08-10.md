@@ -17,8 +17,6 @@ featured_image = "/images/weekly-update.png"
 
 ## The desktop app leaves Electron for Tauri (beta)
 
-![Desktop beta App](/images/update/26-08-10-desktop-beta.png)
-
 The desktop host is now built on Tauri instead of Electron. It's a rewrite of the foundation the whole desktop app sits on. The weeks since have gone into making that foundation solid: a refactor of the Tauri host ahead of alpha.10, desktop setup improvements for alpha.9, and an alpha.6 release before that.
 
 The desktop app now uses the shared CLI for its own runtime management instead of duplicating that logic. That means you can use the desktop app, the CLI, or both... it doesn't matter. Your decks are visible and reporting accurately regardless of how you choose to manage them!s
