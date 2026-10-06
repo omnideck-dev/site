@@ -22,69 +22,75 @@ Integrations give agents tools for services you connect: email, calendars, Googl
 
 ## Adding an integration
 
-Go to **Settings → Integrations** and click **Add integration**. The wizard shows the credentials and permission choices required by each provider.
+Go to **Settings → Integrations** and click **Add integration**. Setup has four steps: **Integration**, **Connection**, **Tools**, and **Review**. If you cancel before the last step, omnideck removes the credentials that setup saved.
 
 ### Gmail and iCloud
 
-Both use app-specific passwords — credentials your provider issues for third-party apps, separate from your main account password. You need two-factor authentication enabled on your account.
+Both use app-specific passwords. Your provider issues these for third-party apps, separate from your main account password. You need two-factor authentication turned on for your account.
 
-1. **Pick your provider** — Gmail or iCloud
-2. **Generate an app password** — the wizard links directly to your provider's account page:
+1. **Pick your provider**: Gmail or iCloud.
+2. **Create an app password.** The form links to your provider's account page:
    - Gmail: [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
    - iCloud: [account.apple.com](https://account.apple.com/account/manage) → Sign-In and Security → App-Specific Passwords
-3. **Enter your email and app password**, then choose **Read only** or **Read + Write** for each available capability.
-4. Click **Verify & save**. If the provider accepts the credentials, the integration appears as **connected**.
+3. **Enter your email and the app password.** A connection name is optional.
+4. Click **Connect**.
+5. **Choose tools**, then review and click **Add integration**. See [Choosing tools](#choosing-tools).
 
 ### Google Workspace
 
-Google Workspace uses OAuth with a desktop client you create in your own Google Cloud project. The wizard walks you through the setup:
+Google Workspace uses OAuth with a desktop client you create in your own Google Cloud project. The form's **Google Cloud setup** section walks you through it:
 
-1. **Create a Google Cloud project** — the wizard links to the Google Cloud Console
-2. **Enable the APIs** — Gmail, Calendar, Drive, and People APIs
-3. **Set up the Google Auth Platform** — configure the consent screen
-4. **Publish the app** — this prevents a testing-mode refresh token from expiring after seven days
-5. **Create a Desktop app OAuth client** — copy its Client ID and Client Secret
-6. **Paste the credentials** into omnideck and authorize in the Google window that opens
+1. **Create a Google Cloud project.** The form links to the Google Cloud Console.
+2. **Enable the APIs**: Gmail, Calendar, Drive, and People.
+3. **Set up the Google Auth Platform** and configure the consent screen.
+4. **Publish the app.** In Testing, Google authorizations expire after seven days.
+5. **Create a Desktop app OAuth client** and copy its Client ID and Client secret.
+6. **Enter the account email** and, optionally, a connection name. Paste the Client ID and Client secret, then click **Authorize with Google**.
+7. **Sign in to Google** in the window that opens and allow access. Then return to omnideck.
+8. **Choose tools**, then review and click **Add integration**.
 
-Before authorization, choose which capabilities to connect and their access levels. Gmail, Calendar, and Drive support read-only or read-write access; Contacts is read-only. The wizard currently starts Gmail, Calendar, and Drive at **Read + Write**, so review the selections before continuing.
+omnideck asks Google for access to Gmail, Calendar, Drive, and Contacts. The tools you can choose come from the access Google actually grants. If you don't allow a service, its tools don't appear.
 
 ### HTTP API
 
 Point an agent at a REST API that authenticates with a static token:
 
-1. **Enter a base URL** — all agent requests are locked to this host
-2. **Enter the header name and value template** — the defaults produce `Authorization: Bearer {token}`
-3. **Enter the token**, choose read-only or read-write access, and optionally add a label
-4. Click **Save**
+1. **Enter a connection name and a base URL.** Agent requests are locked to this host.
+2. **Enter the header name and template.** The defaults produce `Authorization: Bearer {token}`.
+3. **Enter the token** and click **Connect**.
+4. **Choose tools.** HTTP has one tool, **Call API**. Then review and click **Add integration**.
 
-Read-only HTTP access allows `GET`, `HEAD`, and `OPTIONS`. Read-write access also allows `POST`, `PUT`, `PATCH`, and `DELETE`.
+When **Call API** is on, agents can send read and write requests to the base URL, within what the token allows. To limit what an agent can change, use a token with read-only access at the provider.
 
-## Permissions
+<h2 id="choosing-tools">Choosing tools</h2>
 
-Permissions are set per capability. Gmail, iCloud, and HTTP connections start at **Read only**; Google Workspace uses the defaults shown above. Open a connected integration to change each capability among **Off**, **Read**, and **Read + Write**, when the provider and granted OAuth scopes allow it.
+You decide which individual tools omnideck can use with each connection. Examples are **Search email**, **Send email**, **Create calendar event**, **Delete calendar event**, and **Share Drive file**. Nothing is selected at first. omnideck can use only the tools you turn on.
 
-Reducing or changing permissions updates the tools available to agents. If a Google capability was authorized with read-only scopes, broader access requires deleting the integration and adding it again with read-write selected.
+Tools are grouped by service: Email, Calendar, Drive, Contacts, or API. You can search the list, use **Select all** or **Deselect all**, and see how many are selected.
+
+For example, to let omnideck read your mail and manage your calendar without sending mail or deleting events, turn on the reading and searching email tools and the calendar tools except the delete ones. Leave **Send email** off.
+
+To change tools later, open the integration in **Settings → Integrations** and click **Change tools**. Changes apply from the agent's next run. If you turn a tool off, calls to it are refused right away, even in a run that has already started.
 
 ## Integration status
 
 | Status | Meaning |
 |---|---|
-| Connected | Broker is running and upstream auth succeeded |
-| Auth failed | Provider rejected the credential — generate a fresh app password and re-add |
-| Not running | omnideck could not reach or start the integration; delete and re-add it |
+| Connected | The integration is running and its credential was accepted |
+| Auth failed | The provider rejected the credential. Update it from Connection settings |
+| Not running | omnideck could not reach or start the integration. Update its connection, or remove it and add it again |
 
 ## Editing an integration
 
-Open the integration in **Settings → Integrations**. You can:
+Open the integration in **Settings → Integrations**. The page lists what omnideck can do with it. You can:
 
-- **Change its label**
-- **Change permissions** for each available capability
+- **Change tools**: turn individual tools on or off. This is available while the integration is Connected.
+- **Rename** it, under **Connection settings**.
+- **Update its credential**, under **Connection settings**: **Update app password** for Gmail and iCloud, **Sign in again** for Google Workspace, or **Update token** for HTTP. Your tool choices are kept.
 
-Credentials and account identity cannot be edited in place. Delete and re-add the integration to replace them.
+## Removing an integration
 
-## Deleting an integration
-
-Click **Delete**, then confirm. This stops its broker, removes its credentials from the vault, and removes its tools from future agent turns.
+Open **Connection settings**, click **Remove integration**, then **Confirm removal?**. This stops the integration, removes its credentials from the vault, and removes its tools from future agent runs.
 
 ## Security model
 
@@ -92,7 +98,7 @@ omnideck separates credentials from agent execution:
 
 - Credentials are encrypted with AES-256-GCM in a vault owned by a separate container user.
 - The agent never receives raw credentials — it calls broker tools over a Unix socket, and the broker talks to the upstream provider.
-- Tools are exposed according to the permission selected for each capability.
+- Agents get only the tools you turned on for each integration, and omnideck checks again when each tool is called.
 - HTTP credentials are only sent to the host in the configured base URL.
 
 <div class="callout" data-tone="warn">
@@ -103,11 +109,11 @@ omnideck separates credentials from agent execution:
 
 **The integration shows “auth failed”**
 
-The credentials were wrong, expired, or revoked. Generate a fresh app password (or OAuth credentials) from your provider and re-add the integration. You cannot edit credentials in place — delete and re-add.
+The credential was wrong, expired, or revoked. Open the integration, then **Connection settings**, and use **Update app password**, **Sign in again**, or **Update token**. For Google, also check that the Google Cloud app is published. Authorizations from an app in Testing expire after seven days.
 
 **The integration shows “not running”**
 
-omnideck could not reach or start it. Check the network and provider status, then delete and re-add the connection. CLI users can inspect runtime output with `omnideck logs --follow=false`.
+omnideck could not reach or start it. Check the network and the provider's status, then update the connection from **Connection settings**. If it still doesn't start, remove the integration and add it again. CLI users can inspect runtime output with `omnideck logs --follow=false`.
 
 **Settings says “Integrations unavailable”**
 
@@ -115,4 +121,4 @@ The app cannot reach its credential service. Restart omnideck. If you manage the
 
 **An integration is connected but an agent cannot use it**
 
-Check that the capability is not set to **Off** and that the agent has the **assistant** skill, which grants the connected-service tool categories.
+Open the integration and check that the tool the agent needs is turned on under **What omnideck can do**. Also check that the agent has the **assistant** skill, which grants the connected-service tool categories. A run that was already going when you turned a tool on keeps its starting tools; start a new request.
