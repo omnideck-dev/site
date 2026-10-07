@@ -15,33 +15,99 @@ The `omnideck` CLI sets up and manages the same local omnideck runtime as the de
 
 Running `omnideck` without a subcommand opens the appropriate interactive screen for first setup, runtime preparation, repair, or managing an existing installation.
 
-This reference was verified against the published `v0.10.0` stable and `v0.11.0-beta.5` preview binaries. Run `omnideck --version` to check the build installed on your computer.
+The commands below apply to the published `v0.10.0` stable and `v0.11.0-beta.6` preview releases. Run `omnideck --version` to check the build installed on your computer.
 
 <h2 id="install-the-cli">Install the CLI</h2>
 
-### Homebrew on macOS or Linux
+### Choose a release
 
-The Homebrew tap is the non-preview CLI channel:
+On macOS or Linux, choose the **[v0.10.0 stable release](https://github.com/omnideck-dev/cli/releases/tag/v0.10.0)** or **[v0.11.0-beta.6 preview](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.6)**. On Windows, use **v0.11.0-beta.6**: v0.10.0 can stall at **Start omnideck** while checking the runtime network. The current desktop app includes v0.11.0-beta.6. Download both your archive and `SHA256SUMS` from the same release.
+
+| Computer | Archive |
+|---|---|
+| macOS, Apple silicon | `omnideck-darwin-arm64.tar.gz` |
+| macOS, Intel | `omnideck-darwin-amd64.tar.gz` |
+| Linux, x86-64 | `omnideck-linux-amd64.tar.gz` |
+| Linux, ARM64 | `omnideck-linux-arm64.tar.gz` |
+| Windows, x86-64 | `omnideck-windows-amd64.zip` |
+| Windows, ARM64 | `omnideck-windows-arm64.zip` |
+
+On macOS, check **Apple menu → About This Mac**: **Chip** means Apple silicon, and an Intel **Processor** means x86-64. On Linux, `uname -m` reports `x86_64` or `aarch64`. On Windows, check **Settings → System → About → System type**.
+
+### macOS or Linux archive
+
+Open a terminal in the download folder. First calculate the archive's SHA-256 fingerprint and compare it with the line for that file in `SHA256SUMS`. For example:
 
 ```bash
-brew install omnideck-dev/tap/omnideck
+# macOS, Apple silicon
+shasum -a 256 omnideck-darwin-arm64.tar.gz
+
+# Linux, x86-64
+sha256sum omnideck-linux-amd64.tar.gz
 ```
 
-Upgrade it later with:
+After the fingerprint matches, extract your archive. Use the filename for your computer from the table above:
 
 ```bash
-brew upgrade omnideck
+# macOS, Apple silicon
+tar -xzf omnideck-darwin-arm64.tar.gz
+
+# Linux, x86-64
+tar -xzf omnideck-linux-amd64.tar.gz
 ```
 
-### Release archive
-
-For the current stable command set, Windows builds, preview builds, or a manual installation, download the archive for your operating system and architecture from the <a href="https://github.com/omnideck-dev/cli/releases" target="_blank" rel="noopener">omnideck CLI releases ↗<span class="sr-only"> (opens in a new tab)</span></a>. Releases include Linux and macOS tar archives, Windows ZIP archives, and a `SHA256SUMS` file.
-
-Extract `omnideck` (`omnideck.exe` on Windows), put it somewhere on your `PATH`, and verify the installation:
+Run only the extraction command for your computer. Then install the extracted binary and check its version:
 
 ```bash
+sudo mkdir -p /usr/local/bin
+sudo install -m 755 omnideck /usr/local/bin/omnideck
 omnideck --version
 ```
+
+`/usr/local/bin` must be on your `PATH`. If `omnideck --version` still reports an older build, run `command -v omnideck` to see which copy your shell finds, and place `/usr/local/bin` ahead of an older Homebrew installation in `PATH`. The `sudo` commands copy the CLI into a system directory; run omnideck itself as your normal user.
+
+### Windows archive
+
+Download your Windows archive and `SHA256SUMS` from **[v0.11.0-beta.6](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.6)**. This is a preview release; the stable v0.10.0 has a separate Windows startup issue described above. If startup fails with a `memory.max` error on WSL 3.0.1 and Podman 6.0.2, use the [tested WSL recovery steps](/install.html#windows-wsl-recovery).
+
+Open PowerShell in the download folder. For x86-64, verify the archive:
+
+```powershell
+Get-FileHash .\omnideck-windows-amd64.zip -Algorithm SHA256
+```
+
+Compare the hash with the line for that file in `SHA256SUMS`; letter case does not matter. On ARM64, use `omnideck-windows-arm64.zip` instead. After the hash matches, extract it into your user account:
+
+```powershell
+Expand-Archive .\omnideck-windows-amd64.zip -DestinationPath "$env:LOCALAPPDATA\Programs\omnideck-cli" -Force
+& "$env:LOCALAPPDATA\Programs\omnideck-cli\omnideck.exe" --version
+```
+
+Use the ARM64 archive filename in `Expand-Archive` on an ARM-based PC. To make `omnideck` available by name, search Windows for **Edit environment variables for your account**, edit your user **Path**, and add `%LOCALAPPDATA%\Programs\omnideck-cli`. Open a new PowerShell window and run `omnideck --version`.
+
+### Homebrew on macOS or Linux
+
+The Homebrew tap currently installs **v0.9.0**, an older CLI. It does not include the `--json`, `runtime`, or `environment` commands documented below, and its setup can offer Docker. Use a release archive above for the current Podman setup and command reference.
+
+If you specifically want the Homebrew version:
+
+```bash
+brew tap omnideck-dev/tap
+brew install omnideck-dev/tap/omnideck
+omnideck --version
+```
+
+If Homebrew reports that the tap is untrusted, review the [official omnideck formula](https://github.com/omnideck-dev/homebrew-tap/blob/main/Formula/omnideck.rb), trust that formula, and retry:
+
+```bash
+brew trust --formula omnideck-dev/tap/omnideck
+brew install omnideck-dev/tap/omnideck
+omnideck --version
+```
+
+The trust step is conditional: older Homebrew versions may not ask for it.
+
+`brew upgrade omnideck` upgrades only as far as the version published in the tap; it does not install a preview release.
 
 Run `omnideck` as your normal user. Do not put `sudo` before it or choose **Run as administrator**; guided setup asks the operating system for approval only when a system change requires it.
 

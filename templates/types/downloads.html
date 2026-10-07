@@ -30,7 +30,7 @@
       <ul>
         <li><strong>A computer</strong> with macOS, Windows 11, or desktop Linux and at least 4 GB of memory.</li>
         <li><strong>Permission to install software.</strong> Setup installs the parts omnideck runs on, and your computer asks you to approve it.</li>
-        <li><strong>An internet connection.</strong> Setup downloads under 1 GB of application files.</li>
+        <li><strong>An internet connection.</strong> The application image is about 680 MB on x86-64 or 850 MB on ARM64. A fresh setup also downloads operating-system components and Podman files, so the total can exceed 1 GB.</li>
         <li><strong>An AI model to connect.</strong> Use an API key from Anthropic, OpenAI, or OpenRouter, which bills API use to your account with them. Or use a model you already downloaded with <a href="/docs/local-models.html">Ollama</a> on this computer.</li>
       </ul>
       <p>omnideck is free and needs no omnideck account. <a href="/docs/getting-started.html#connect-a-model">More about connecting a model</a></p>
@@ -178,6 +178,7 @@
             </div>
           </div>
           <p class="install-package-note"><strong>Preview package:</strong> Windows may show a SmartScreen warning. Only continue when the EXE came from the link above and its SHA-256 fingerprint matches the one below.</p>
+          <p class="install-package-note"><strong>Windows setup notice:</strong> A current WSL and Podman combination can stop setup with a <code>memory.max</code> error. See the <a href="#windows-wsl-recovery">tested recovery steps</a> if this happens.</p>
           <details class="install-checksum">
             <summary>Check your download</summary>
             <p>Open <strong>PowerShell</strong> and run the command for your file. The result must match the fingerprint. Upper or lower case letters don’t matter.</p>
@@ -199,7 +200,7 @@
           <li class="install-walkthrough-step">
             <div class="install-step-copy">
               <h4>Approve the installer</h4>
-              <p>If SmartScreen opens, select <strong>More info</strong>, confirm the publisher details, then select <strong>Run anyway</strong>.</p>
+              <p>If SmartScreen opens, select <strong>More info</strong>. This preview is unsigned, so Windows may show <strong>Unknown publisher</strong>. Check that the app filename matches your download above and verify its SHA-256 fingerprint before selecting <strong>Run anyway</strong>.</p>
             </div>
             <div class="install-step-media install-step-media-pair">
               <picture>
@@ -215,7 +216,7 @@
           <li class="install-walkthrough-step">
             <div class="install-step-copy">
               <h4>Install omnideck</h4>
-              <p>Select <strong>Next</strong>, finish the installer, then open omnideck and select <strong>Set up omnideck</strong>.</p>
+              <p>Select <strong>Next</strong> on the welcome screen, keep the default installation folder (<code>%LOCALAPPDATA%\omnideck</code>), and continue. When installation completes, select <strong>Next</strong>. Leave <strong>Run omnideck</strong> checked and select <strong>Finish</strong>, then select <strong>Set up omnideck</strong> in the app.</p>
             </div>
             <div class="install-step-media">
               <picture>
@@ -275,9 +276,22 @@
             <div>
               <span class="install-platform-label">Desktop Linux · x86-64 or ARM64</span>
               <h3 id="download-linux-title">Download for Linux</h3>
-              <p>Use the DEB on Debian, Ubuntu, and similar systems. Use the RPM on Fedora, RHEL, and similar systems. AppImage is a secondary option for Ubuntu. To check your architecture, run <code>uname -m</code>. <code>x86_64</code> means x86-64, and <code>aarch64</code> means ARM64.</p>
+              <p>Use the DEB on Debian or Ubuntu, the RPM on Fedora, or the AppImage on Ubuntu 24.04 or newer. Check the Linux requirements below before using another distribution. To check your architecture, run <code>uname -m</code>. <code>x86_64</code> means x86-64, and <code>aarch64</code> means ARM64.</p>
             </div>
           </header>
+          <details class="install-checksum">
+            <summary>Linux requirements</summary>
+            <p>The current preview has been checked on x86-64 Ubuntu 24.04 with AppImage, Debian 13 with DEB, and Fedora 44 with RPM.</p>
+            <table>
+              <thead><tr><th>Package</th><th>x86-64 minimum glibc</th><th>ARM64 minimum glibc</th></tr></thead>
+              <tbody>
+                <tr><td>DEB or RPM</td><td>2.34</td><td>2.39</td></tr>
+                <tr><td>AppImage</td><td>2.38</td><td>2.39</td></tr>
+              </tbody>
+            </table>
+            <p>DEB and RPM packages also need GTK 3 and WebKitGTK 4.1, which your package manager installs when your distribution provides them. Other RPM-based systems must provide these dependencies too. Check glibc with <code>ldd --version</code>.</p>
+            <p>Ubuntu 22.04 and Debian 12 have an older glibc and cannot run the current AppImage or ARM64 packages.</p>
+          </details>
           <div class="linux-install-options">
             <div class="linux-package-group">
               <strong>x86-64</strong>
@@ -333,7 +347,7 @@
                     </div>
                   </div>
                   <div class="install-command">
-                    <span class="install-command-label">RPM · Fedora, RHEL, Rocky, or AlmaLinux</span>
+                    <span class="install-command-label">RPM · Fedora</span>
                     <div class="install-terminal">
                       <code class="t-cmd">sudo dnf install ./{{ Data.desktop_release.linux_x64_rpm.filename }}</code>
                       <button class="copy-btn" type="button" aria-label="Copy x86-64 RPM install command" data-copy-label="Copy x86-64 RPM install command">
@@ -356,7 +370,7 @@
                     </div>
                   </div>
                   <div class="install-command">
-                    <span class="install-command-label">RPM · Fedora, RHEL, Rocky, or AlmaLinux</span>
+                    <span class="install-command-label">RPM · Fedora</span>
                     <div class="install-terminal">
                       <code class="t-cmd">sudo dnf install ./{{ Data.desktop_release.linux_arm64_rpm.filename }}</code>
                       <button class="copy-btn" type="button" aria-label="Copy ARM64 RPM install command" data-copy-label="Copy ARM64 RPM install command">
@@ -367,12 +381,24 @@
                   </div>
                 </section>
               </div>
+              <details class="install-checksum">
+                <summary>Using the AppImage on Ubuntu</summary>
+                <p>Keep the downloaded AppImage in a permanent folder. In a terminal in that folder, make it executable and launch it using the command for your architecture.</p>
+                <p><strong>x86-64</strong></p>
+                <pre><code>chmod +x ./{{ Data.desktop_release.linux_x64_appimage.filename }}
+./{{ Data.desktop_release.linux_x64_appimage.filename }}</code></pre>
+                <p><strong>ARM64</strong></p>
+                <pre><code>chmod +x ./{{ Data.desktop_release.linux_arm64_appimage.filename }}
+./{{ Data.desktop_release.linux_arm64_appimage.filename }}</code></pre>
+                <p>If it reports that <code>libfuse.so.2</code> is missing, install the FUSE 2 library with <code>sudo apt install libfuse2t64</code> on Ubuntu 24.04, then launch it again. See the <a href="https://docs.appimage.org/user-guide/troubleshooting/fuse.html">AppImage FUSE guide</a> for other versions.</p>
+                <p>Open the AppImage file again whenever you want to start omnideck; it does not install a DEB or RPM package.</p>
+              </details>
             </div>
           </li>
           <li class="install-walkthrough-step">
             <div class="install-step-copy">
               <h4>Set up omnideck</h4>
-              <p>Open omnideck and select <strong>Set up omnideck</strong>.</p>
+              <p>Open omnideck from your application menu, or launch the AppImage, and select <strong>Set up omnideck</strong>.</p>
             </div>
             <div class="install-step-media">
               <picture>
@@ -415,7 +441,21 @@
 <section class="downloads-section" aria-labelledby="setup-help-title">
   <div class="container">
     <h2 id="setup-help-title">If setup stops</h2>
-    <p>omnideck shows <strong>Setup needs attention</strong> with the cause and a next step. Follow that step, then select <strong>Try again</strong>. If it stops again, open <strong>Technical details</strong> and share them in the <a href="/community.html">community Slack</a> or a <a href="https://github.com/omnideck-dev/omnideck/issues">GitHub issue</a>.</p>
+    <p>omnideck explains what stopped setup and shows a next step, such as approving a permission prompt or restarting Windows. Follow that step, then select <strong>Try again</strong> when it is offered. If it stops again, open <strong>Technical details</strong> and share them in the <a href="/community.html">community Slack</a> or a <a href="https://github.com/omnideck-dev/omnideck/issues">GitHub issue</a>.</p>
+    <h3 id="windows-wsl-recovery">Windows: setup stops with a memory.max error</h3>
+    <p>On Windows 11 25H2 with WSL 3.0.1 and Podman 6.0.2, desktop 0.1.0-beta.13 can show <strong>Setup didn’t finish</strong> with <code>crun: open memory.max for writing: No such file or directory</code> in Technical details. The same runtime issue affects CLI v0.11.0-beta.6.</p>
+    <p>The following workaround was checked through desktop setup and opening the workspace, and through CLI startup and restart with its memory limit intact. It changes WSL’s resource-control isolation for <strong>all WSL 2 distributions in your Windows account</strong>.</p>
+    <ol>
+      <li>Close omnideck and save any work in your WSL distributions.</li>
+      <li>Open <code>%UserProfile%\.wslconfig</code> in a text editor, or create it if it does not exist. Keep all existing settings. In its <code>[wsl2]</code> section, add or update <code>isolateDistroCgroup=false</code>. Add the section only if it is missing:
+        <pre><code>[wsl2]
+isolateDistroCgroup=false</code></pre>
+        Save the file as <code>.wslconfig</code>, without a <code>.txt</code> extension.
+      </li>
+      <li>In PowerShell, run <code>wsl --shutdown</code>. This stops every running WSL distribution in your account.</li>
+      <li>Reopen omnideck, or run <code>omnideck</code> for the CLI. Desktop setup resumes; select <strong>Open omnideck</strong> when it reports that it is ready.</li>
+    </ol>
+    <p>See <a href="https://learn.microsoft.com/windows/wsl/wsl-config">Microsoft’s WSL configuration reference</a> for the setting’s scope, and <a href="https://github.com/omnideck-dev/omnideck/issues/424">the tracked Windows runtime issue</a> for updates.</p>
   </div>
 </section>
 
