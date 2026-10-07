@@ -158,9 +158,9 @@
       <p>omnideck is a free desktop app for macOS, Windows 11, and Linux. This page shows what you need, how setup works, and how to start your first job. If you prefer a terminal, see <a href="#standalone-cli">Prefer a terminal?</a> at the end.</p>
 <h2>What you need</h2>
 <ul>
-<li><strong>A computer:</strong> a Mac with Apple silicon or Intel, a Windows 11 PC, or a desktop Linux computer. x86-64 and ARM64 are both supported. You need at least 4 GB of memory. 8 GB is recommended if you want to run models on your own computer.</li>
+<li><strong>A computer:</strong> a Mac with Apple silicon or Intel, a Windows 11 PC, or a desktop Linux computer. x86-64 and ARM64 are both supported. You need at least 4 GB of memory. 8 GB is recommended if you want to run models on your own computer. On Linux, check the <a href="/install.html#install-linux-panel">package and library requirements</a>; they differ by package and architecture.</li>
 <li><strong>Permission to install software:</strong> setup installs the parts omnideck runs on, and your computer asks you to approve that. On a Mac, that's an administrator password or Touch ID. On Windows, it's a User Account Control prompt. On Linux, it's an administrator prompt.</li>
-<li><strong>An internet connection:</strong> the first setup downloads omnideck’s application files, which are under 1 GB.</li>
+<li><strong>An internet connection:</strong> the application image is about 680 MB on x86-64 or 850 MB on ARM64. A fresh setup also downloads operating-system components and Podman files, so the total can exceed 1 GB.</li>
 <li><strong>An AI model to connect:</strong> omnideck asks for one before your first chat. Choose one of these:
 <ul>
 <li><strong>A cloud account:</strong> an API key from Anthropic, OpenAI, or OpenRouter. The provider bills API use to your account with them, separately from omnideck, which is free. API access is also billed separately from any chat subscription you have with that provider. Create a key at <a href="https://platform.claude.com/settings/keys">Anthropic</a>, <a href="https://platform.openai.com/api-keys">OpenAI</a>, or <a href="https://openrouter.ai/settings/keys">OpenRouter</a>.</li>
@@ -178,7 +178,7 @@
 <strong>Preview packages:</strong> The current macOS and Windows installers are not yet signed with a paid publisher identity, so macOS or Windows may warn you before opening them. Download only from the <a href="/install.html">official install page</a>. Each download there shows its SHA-256 fingerprint and how to check it.
 </div>
 <h3 id="prepare-your-machine">2. Let setup prepare your computer</h3>
-<p>Open omnideck and select <strong>Set up omnideck</strong>. Setup shows one step at a time:</p>
+<p>Open omnideck and select <strong>Set up omnideck</strong>. The <strong>Preparing your environment</strong> screen shows the current activity and progress. Setup includes these stages:</p>
 <ol>
 <li><strong>Getting your computer ready</strong>: installs or repairs the container runtime omnideck runs in. This is where your computer asks for approval.</li>
 <li><strong>Preparing a secure space to run in</strong>: on macOS and Windows only.</li>
@@ -186,7 +186,8 @@
 <li><strong>Almost ready</strong>: final checks</li>
 </ol>
 <p>Setup can take several minutes. You can play Agent Dash while you wait. If Windows shows <strong>Restart needed</strong>, select <strong>Restart now</strong>. omnideck reopens and continues after you sign back in.</p>
-<p>If setup shows <strong>Setup needs attention</strong>, it names the cause and the next step. Follow that step, then select <strong>Try again</strong>. If it stops again, open <strong>Technical details</strong> and share them in the <a href="/community.html">community Slack</a> or a <a href="https://github.com/omnideck-dev/omnideck/issues">GitHub issue</a>.</p>
+<p>If setup stops, omnideck explains the cause and shows a next step, such as approving a permission prompt or restarting Windows. Follow that step, then select <strong>Try again</strong> when it is offered. If it stops again, open <strong>Technical details</strong> and share them in the <a href="/community.html">community Slack</a> or a <a href="https://github.com/omnideck-dev/omnideck/issues">GitHub issue</a>.</p>
+<p>On Windows, if Technical details mention <code>memory.max</code>, follow the <a href="/install.html#windows-wsl-recovery">tested WSL recovery steps</a>. Current WSL 3.0.1 and Podman 6.0.2 can require this explicit configuration change before setup can finish.</p>
 <h3 id="connect-a-model">3. Connect a model</h3>
 <p>When setup reports that omnideck is ready, select <strong>Open omnideck</strong>, then <strong>Get Started</strong>.</p>
 <ol>
@@ -216,7 +217,7 @@
 <h2 id="standalone-cli">Prefer a terminal?</h2>
 <p>The standalone <code>omnideck</code> CLI installs and manages the same omnideck from a terminal. Desktop users don’t need it, because the desktop app already includes it.</p>
 <ol>
-<li>Follow the <strong><a href="/docs/cli-reference.html#install-the-cli">CLI installation instructions</a></strong>. The Homebrew tap provides a non-preview build for macOS and Linux, while the release archive provides the current command set and Windows builds.</li>
+<li>Follow the <strong><a href="/docs/cli-reference.html#install-the-cli">CLI installation instructions</a></strong>. Use a release archive: Windows users should choose v0.11.0-beta.6; macOS and Linux users can choose stable or preview. The Homebrew tap currently installs the older v0.9.0 release, which has a different setup flow and command set.</li>
 <li>Run <code>omnideck</code> as your normal user. The first run opens guided setup and prepares Podman when needed.</li>
 <li>Run <code>omnideck doctor</code> to confirm the runtime, storage, and browser interface are healthy.</li>
 <li>Open the local workbench address reported by the CLI, normally <code>http://localhost:2337</code>.</li>
