@@ -1518,228 +1518,359 @@ article td { border-color: var(--border); }
   object-fit: cover;
 }
 
-/* ── Desktop downloads and install guide ─────────────────── */
+/* ── Install page ──────────────────────────────────────────── */
 
-.release-inline {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-2);
-  margin-bottom: var(--sp-2);
-  color: var(--text-tertiary);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+.page-install main {
+  --install-section-y: clamp(48px, 6vw, 80px);
+  --install-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono", Menlo, Consolas, monospace;
+  --install-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm3.53 5.47a.75.75 0 0 0-1.06 0L7 8.94 5.53 7.47a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l4-4a.75.75 0 0 0 0-1.06Z'/%3E%3C/svg%3E");
+  --install-download: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2v8M4.5 6.5 8 10l3.5-3.5M2.5 11v1.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V11'/%3E%3C/svg%3E");
 }
 
-.release-inline a {
-  color: var(--accent);
-  text-decoration: none;
+/* Ivy pads every header, footer, and section; this page sets its own spacing.
+   :where keeps the reset at zero specificity so component rules below win. */
+:where(.page-install main) :where(header, footer, section) {
+  margin: 0;
+  padding: 0;
 }
 
-.download-action {
-  display: flex;
-  min-height: 44px;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--sp-3);
+.page-install main :not(pre) > code {
+  border-radius: 5px;
+  padding: 0.08em 0.35em;
+  font-family: var(--install-mono);
+  font-size: 0.875em;
+  overflow-wrap: anywhere;
+}
+
+.page-install main pre {
+  margin: var(--sp-2) 0 var(--sp-3);
   border: 1px solid var(--terminal-border);
   border-radius: var(--radius-md);
-  padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-3);
-  background: var(--terminal-surface);
-}
-
-.download-action a[role="button"] {
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
-}
-
-.download-copy {
-  display: grid;
-  min-width: 0;
-}
-
-.download-copy strong {
-  overflow: hidden;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--terminal-bg);
   color: var(--terminal-text);
-  font-family: var(--font-code);
-  font-size: 11px;
-  font-weight: 500;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
-.download-copy span,
-.install-link-separator {
-  color: var(--terminal-comment);
-  font-family: var(--font-brand);
-  font-size: 10px;
+.page-install main pre code {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: var(--install-mono);
+  font-size: inherit;
 }
 
-.install-link-separator { margin-inline: var(--sp-2); }
+/* Hero */
 
-.screenshot-desktop {
-  aspect-ratio: 2784 / 1838;
-  background: #090a0d;
-  object-fit: cover;
-}
-
-.downloads-hero {
-  border-bottom: 1px solid var(--border);
+.install-hero {
+  padding: clamp(40px, 6vw, 72px) 0 var(--install-section-y);
   background: var(--canvas);
-  padding: clamp(64px, 9vw, 112px) 0;
 }
 
-.downloads-hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
-  align-items: end;
-  gap: var(--sp-12);
+.install-hero h1 {
+  margin: 0 0 var(--sp-4);
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
 }
 
-.downloads-hero h1 {
-  max-width: 780px;
-  margin: 0 0 var(--sp-5);
-  font-size: var(--site-display-xl);
-  line-height: 1.02;
-  letter-spacing: -0.045em;
-}
-
-.downloads-hero h1 em {
+.install-hero h1 em {
   color: var(--accent);
   font-style: normal;
 }
 
-.downloads-lede {
-  max-width: 720px;
+.install-lede {
+  max-width: 640px;
   margin: 0;
-  font-size: clamp(17px, 2vw, 20px);
+  font-size: clamp(16px, 1.6vw, 18px);
   line-height: 1.6;
 }
 
-.release-panel {
-  display: grid;
-  gap: var(--sp-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--sp-5);
-  background: var(--elevated);
-}
-
-.release-panel strong {
-  font-family: var(--font-code);
-  font-size: 22px;
+.install-phone-note {
+  display: none;
+  max-width: 640px;
+  margin: var(--sp-3) 0 0;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
-.release-channel {
-  display: inline-flex;
+@media (pointer: coarse) and (max-width: 1024px) {
+  .install-phone-note { display: block; }
+}
+
+.release-panel {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--sp-2);
+  gap: var(--sp-2) var(--sp-3);
+  margin-top: var(--sp-5);
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.release-channel {
+  border-radius: var(--radius-full);
+  padding: 2px 10px;
+  background: var(--warning-muted);
   color: var(--warning);
-  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
 
+.release-panel strong {
+  font-family: var(--install-mono);
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .release-panel time,
 .release-panel a {
-  color: var(--text-secondary);
-  font-family: var(--font-brand);
-  font-size: 10px;
+  border-left: 1px solid var(--border-strong);
+  padding-left: var(--sp-3);
+}
+
+.release-panel a {
+  font-weight: 600;
   text-decoration: none;
 }
 
-.release-panel a { color: var(--accent); }
+.release-panel a:hover { text-decoration: underline; }
 
-.downloads-section {
-  padding: var(--site-section-y) 0;
+.install-before {
+  margin-top: clamp(32px, 4vw, 44px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-6);
+  background: var(--elevated);
+  box-shadow: var(--shadow-sm);
 }
 
-.downloads-section-heading {
-  max-width: 760px;
-  margin: 0 auto var(--sp-8);
-  text-align: center;
+.install-before h2 {
+  margin: 0 0 var(--sp-4);
+  font-size: 18px;
+  letter-spacing: -0.01em;
 }
 
-.downloads-section-heading h2 {
-  margin: 0 0 var(--sp-3);
-  font-size: var(--site-display-lg);
+.install-before ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-4) var(--sp-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.downloads-section-heading p { margin: 0; }
+.install-before li {
+  position: relative;
+  margin: 0;
+  padding-left: 28px;
+  font-size: 14px;
+  line-height: 1.6;
+}
 
-.download-os-icon {
-  display: inline-block;
-  width: 28px;
-  height: 28px;
-  flex: 0 0 auto;
+.install-before li::before {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 17px;
+  height: 17px;
   background: var(--accent);
-  mask-position: center;
-  mask-repeat: no-repeat;
-  mask-size: contain;
+  content: "";
+  mask: var(--install-check) center / contain no-repeat;
+}
+
+.install-before > p {
+  margin: var(--sp-5) 0 0;
+  border-top: 1px solid var(--border);
+  padding-top: var(--sp-4);
+  font-size: 14px;
+}
+
+/* Operating system tabs */
+
+.install-guide {
+  scroll-margin-top: calc(var(--site-header-height) + var(--sp-4));
+  border-block: 1px solid var(--border);
+  padding: var(--install-section-y) 0;
+  background: var(--surface);
+}
+
+.install-guide-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4) var(--sp-6);
+  margin-bottom: var(--sp-6);
+}
+
+.install-guide-header h2 {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 34px);
+}
+
+.install-tabs .tab-bar {
+  display: inline-grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: var(--sp-1);
+  overflow: visible;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-1);
+  background: var(--canvas);
+}
+
+.install-tabs .tab {
+  min-height: 40px;
+  border-radius: var(--radius-md);
+  padding: var(--sp-2) var(--sp-5);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  transition: background 150ms var(--ease), color 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+
+.install-tabs .tab:hover {
+  background: var(--accent-muted);
+  color: var(--text-primary);
+}
+
+.install-tabs .tab.active {
+  background: var(--elevated);
+  box-shadow: var(--shadow-sm), inset 0 0 0 1px var(--border);
+  color: var(--text-primary);
+}
+
+.install-tabs .tab.active::after { content: none; }
+.install-tabs .tab-icon { width: 15px; height: 15px; }
+.install-tabs .tab.active .tab-icon { background: var(--accent); }
+
+/* The site's soft glow is too faint on these controls, so use a solid ring. */
+.page-install main :is(a, button, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Panel deep links stop low enough to keep the heading and selected tab in view. */
+.install-tabs .tab-content.install-panel {
+  min-height: 0;
+  scroll-margin-top: calc(var(--site-header-height) + 92px);
+  padding: 0;
+  background: transparent;
+}
+
+/* Download card */
+
+.install-package {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--elevated);
+  box-shadow: var(--shadow-sm);
+}
+
+.install-package-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--sp-6) var(--sp-10);
+  padding: var(--sp-6) var(--sp-8);
 }
 
 .install-platform-label {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
   color: var(--text-tertiary);
-  font-family: var(--font-brand);
-  font-size: 0.75rem;
-  letter-spacing: 0.065em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.install-platform-label .tab-icon {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+}
+
+.install-package-header h3 {
+  margin: var(--sp-2) 0;
+  font-size: 24px;
+}
+
+.install-package-header p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .download-options {
   display: grid;
-  gap: var(--sp-2);
+  gap: var(--sp-3);
 }
 
 .download-option {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: var(--sp-2);
+  gap: var(--sp-2) var(--sp-4);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--sp-2);
-  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-3) var(--sp-3) var(--sp-3) var(--sp-4);
+  background: var(--canvas);
 }
 
-.download-option > div { display: grid; min-width: 0; }
+.download-option > div {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
 
-.download-option strong,
-.linux-package-group > strong {
+.download-option strong {
   color: var(--text-primary);
-  font-family: var(--font-brand);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .download-option > div > span {
-  overflow: hidden;
   color: var(--text-tertiary);
-  font-family: var(--font-brand);
-  font-size: 0.8125rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 13px;
 }
 
-.download-option a[role="button"],
-.package-links a[role="button"] {
+.download-option a[role="button"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--sp-2);
+  min-height: 40px;
+  padding: var(--sp-2) var(--sp-4);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
-.download-option a[role="button"] { min-height: 32px; padding: 5px 9px; font-size: 10px; }
+.download-option a[role="button"]::before {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  background: currentColor;
+  content: "";
+  mask: var(--install-download) center / contain no-repeat;
+}
 
-.linux-package-group {
-  display: grid;
-  gap: var(--sp-2);
-  margin-bottom: var(--sp-3);
+.linux-package-group { grid-template-columns: auto minmax(0, 1fr); }
+
+.linux-package-group > strong {
+  grid-row: span 2;
+  min-width: 4.5em;
 }
 
 .package-links {
@@ -1748,104 +1879,154 @@ article td { border-color: var(--border); }
   gap: var(--sp-2);
 }
 
-.package-links a[role="button"] { min-width: 0; padding-inline: var(--sp-2); }
-
 .package-secondary-download {
-  display: inline-block;
-  margin-top: var(--sp-2);
-  color: var(--text-secondary);
-  font-family: var(--font-brand);
-  font-size: 0.8125rem;
-}
-
-.install-guide {
-  scroll-margin-top: calc(var(--site-header-height) + var(--sp-4));
-  background: var(--surface);
-}
-
-.install-tabs.tabs-container {
-  max-width: none;
-  background: var(--elevated);
-}
-
-.install-tabs .tab-content { min-height: 0; }
-
-.install-panel {
-  scroll-margin-top: calc(var(--site-header-height) + var(--sp-4));
-  padding: var(--sp-8);
-  background: var(--elevated);
-}
-
-.install-package {
-  margin-bottom: var(--sp-8);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: var(--sp-8);
-}
-
-.install-package-header {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-6);
-}
-
-.install-package-header h3,
-.install-steps-heading h3 {
-  margin: var(--sp-1) 0 0;
-  font-size: 24px;
-}
-
-.install-package-header p {
-  margin: var(--sp-2) 0 0;
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-
-.install-package-options,
-.linux-install-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--sp-3);
-}
-
-.linux-install-options .linux-package-group {
-  margin: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--sp-3);
-  background: var(--surface);
-}
-
-.install-phone-note {
-  display: none;
-  margin-top: var(--sp-3);
-  font-weight: 600;
-}
-
-@media (pointer: coarse) and (max-width: 1024px) {
-  .install-phone-note { display: block; }
-}
-
-.install-checksum { margin-top: var(--sp-3); }
-.install-checksum code { overflow-wrap: anywhere; }
-
-.install-package-note {
-  margin: var(--sp-5) 0 0;
-  border-left: 2px solid var(--warning);
-  padding-left: var(--sp-3);
+  justify-self: end;
   color: var(--text-secondary);
   font-size: 13px;
 }
 
+.install-package-footer {
+  display: grid;
+  gap: var(--sp-3);
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  padding: var(--sp-4) var(--sp-8) var(--sp-1);
+  background: var(--canvas);
+}
+
+.install-package-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.install-package-note svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  margin-top: 3px;
+  fill: var(--warning);
+}
+
 .install-package-note strong { color: var(--text-primary); }
 
-.install-steps-heading {
-  margin-bottom: var(--sp-5);
+/* Disclosures */
+
+.install-checksum,
+.install-checksum[open] {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.install-package-footer > .install-checksum:first-child { border-top: 0; }
+
+.install-checksum > summary,
+.install-checksum[open] > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: 0;
+  border-radius: var(--radius-sm);
+  padding: var(--sp-3) 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.install-checksum > summary:hover { color: var(--accent); }
+
+.install-checksum > summary::before {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  margin-inline: 2px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  content: "";
+  transform: rotate(-45deg);
+  transition: transform 150ms var(--ease);
+}
+
+.install-checksum[open] > summary::before { transform: rotate(45deg); }
+
+.install-checksum > :not(summary) { margin-left: 23px; }
+.install-checksum > :last-child { margin-bottom: var(--sp-4); }
+
+.install-checksum p {
+  margin-top: 0;
+  margin-bottom: var(--sp-3);
+  font-size: 14px;
+}
+
+.install-checksum dl {
+  display: grid;
+  gap: var(--sp-1);
+  margin-top: 0;
+  margin-bottom: var(--sp-3);
+}
+
+.install-checksum dt {
+  margin-top: var(--sp-2);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.install-checksum dd { margin: 0; }
+
+.page-install main .install-checksum dd code {
+  display: block;
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  background: var(--elevated);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.install-checksum table {
+  margin-top: 0;
+  margin-bottom: var(--sp-3);
+  font-size: 13px;
+}
+
+.install-checksum th,
+.install-checksum td {
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-2) var(--sp-3);
+  vertical-align: top;
+}
+
+.install-checksum th {
+  background: var(--surface);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.install-checksum td {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Numbered walkthrough */
+
+.install-steps { margin-top: clamp(40px, 5vw, 56px); }
+
+.install-steps > h3 {
+  margin: 0 0 var(--sp-6);
+  font-size: 24px;
 }
 
 .install-walkthrough {
   display: grid;
-  gap: var(--sp-4);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1855,146 +2036,414 @@ article td { border-color: var(--border); }
 .install-walkthrough-step {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
-  min-width: 0;
-  overflow: hidden;
+  grid-template-columns: 32px minmax(0, 1fr) minmax(0, 1.15fr);
+  column-gap: var(--sp-6);
   margin: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--canvas);
+  padding-bottom: var(--sp-10);
   counter-increment: install-step;
 }
 
+.install-walkthrough-step:last-child { padding-bottom: 0; }
+
 .install-walkthrough-step::before {
-  position: absolute;
   z-index: 1;
-  top: var(--sp-5);
-  left: var(--sp-5);
+  grid-column: 1;
+  grid-row: 1;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  background: var(--elevated);
   color: var(--accent);
-  content: "0" counter(install-step) " —";
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  content: counter(install-step);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  line-height: 30px;
+  text-align: center;
 }
 
-.install-step-copy { padding: 52px var(--sp-6) var(--sp-6); }
+/* Rail that joins each step marker to the next one. */
+.install-walkthrough-step::after {
+  position: absolute;
+  top: 40px;
+  bottom: var(--sp-2);
+  left: 16px;
+  width: 1px;
+  background: var(--border-strong);
+  content: "";
+}
+
+.install-walkthrough-step:last-child::after { content: none; }
+
+.install-step-copy {
+  grid-column: 2;
+  min-width: 0;
+  padding-top: var(--sp-1);
+}
 
 .install-step-copy h4 {
   margin: 0 0 var(--sp-2);
   font-size: 18px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
 }
 
-.install-step-copy :is(p, ul) {
+.install-step-copy > :is(p, ul) {
   margin: 0;
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.65;
 }
 
-.install-step-copy :is(p, ul) + :is(p, ul) { margin-top: var(--sp-2); }
-
-.install-step-copy code { overflow-wrap: anywhere; }
+.install-step-copy > :is(p, ul) + :is(p, ul) { margin-top: var(--sp-3); }
+.install-step-copy > ul { padding-left: 1.2em; }
+.install-step-copy > ul li + li { margin-top: var(--sp-1); }
 
 .install-step-media {
   display: grid;
-  align-content: center;
+  grid-column: 3;
+  align-self: start;
   min-width: 0;
-  border-left: 1px solid var(--border);
-  background: #090a0d;
+  gap: var(--sp-3);
 }
 
 .install-step-media picture {
   display: block;
   min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--elevated);
+  box-shadow: var(--shadow-sm);
 }
 
+/* One frame shape for every screenshot keeps the steps even; contain shows the whole capture. */
 .install-step-media img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 10;
-  background: #090a0d;
   object-fit: contain;
 }
 
-.install-step-media-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.install-step-pair .install-step-copy,
+.install-step-text .install-step-copy { grid-column: 2 / -1; }
 
-.install-step-media-pair picture + picture { border-left: 1px solid var(--border); }
+.install-step-pair .install-step-copy { max-width: 680px; }
 
-.install-step-text { grid-template-columns: 1fr; }
-
-.install-step-text .install-step-copy {
-  width: 100%;
-  max-width: 860px;
+.install-step-media-pair {
+  grid-column: 2 / -1;
+  grid-row: 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: var(--sp-4);
 }
 
 .linux-install-commands {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--sp-4);
-  margin-top: var(--sp-5);
+  margin: var(--sp-5) 0 var(--sp-4);
 }
 
 .linux-install-command-group {
   display: grid;
+  align-content: start;
   min-width: 0;
   gap: var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-4);
+  background: var(--elevated);
 }
 
 .linux-install-command-group h5 {
   margin: 0;
   color: var(--text-primary);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .install-command {
   display: grid;
   min-width: 0;
-  gap: var(--sp-1);
+  gap: 6px;
 }
 
 .install-command-label {
-  color: var(--text-secondary);
-  font-family: var(--font-brand);
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 .install-command .install-terminal {
+  position: relative;
   display: flex;
   align-items: center;
-  overflow: hidden;
-  border-color: var(--border);
-  background: var(--elevated);
+  min-height: 44px;
+  border: 1px solid var(--terminal-border);
+  border-radius: var(--radius-md);
+  overflow: visible;
+  padding: 10px 48px 10px var(--sp-3);
+  background: var(--terminal-bg);
+  color: var(--terminal-text);
+  /* The shared terminal style is single-line and scrolls; here long filenames wrap
+     and the right padding keeps them clear of the copy button. */
   white-space: normal;
 }
 
-.install-command .t-cmd {
+.page-install main .install-command .t-cmd {
+  flex: 1 1 auto;
   min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
   border: 0;
   padding: 0;
   background: transparent;
-  color: var(--text-primary);
-  line-height: 1.45;
-  overflow-wrap: anywhere;
+  color: var(--terminal-text);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
-.downloads-advanced > .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--sp-8);
+.install-command .copy-btn {
+  top: 50%;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+  translate: 0 -50%;
 }
 
-.downloads-advanced {
-  border-top: 1px solid var(--border);
+.install-step-copy .install-checksum {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0 var(--sp-4);
+  background: var(--elevated);
+}
+
+/* Troubleshooting */
+
+.install-help {
+  padding: var(--install-section-y) 0 var(--sp-12);
   background: var(--canvas);
 }
 
-.downloads-advanced h2 { margin: 0 0 var(--sp-3); font-size: 30px; }
-.downloads-advanced p { max-width: 720px; margin: 0; }
-.downloads-advanced a[role="button"] { display: inline-flex; flex: 0 0 auto; align-items: center; }
+.install-help-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: start;
+  gap: var(--sp-8) var(--sp-10);
+}
+
+.install-help-intro {
+  position: sticky;
+  top: calc(var(--site-header-height) + var(--sp-6));
+}
+
+.install-help-intro h2 {
+  margin: 0 0 var(--sp-3);
+  font-size: clamp(26px, 3vw, 34px);
+}
+
+.install-help-intro p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.install-fixes {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.install-fix {
+  scroll-margin-top: calc(var(--site-header-height) + var(--sp-4));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-6);
+  background: var(--elevated);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Mark the recovery a visitor arrived at from a direct link. */
+.install-fix:target {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
+}
+
+.install-fix h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 var(--sp-3);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.install-fix h3 .tab-icon {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  background: var(--accent);
+}
+
+.install-fix p {
+  margin: 0 0 var(--sp-3);
+  font-size: 15px;
+}
+
+.install-fix > p:last-child { margin-bottom: 0; }
+
+.install-fix .install-package-note {
+  border-radius: var(--radius-md);
+  padding: 10px var(--sp-3);
+  background: var(--warning-muted);
+  color: var(--text-primary);
+}
+
+.install-fix-steps {
+  display: grid;
+  gap: var(--sp-3);
+  margin: var(--sp-4) 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: fix-step;
+}
+
+.install-fix-steps > li {
+  position: relative;
+  padding-left: 36px;
+  font-size: 15px;
+  line-height: 1.65;
+  counter-increment: fix-step;
+}
+
+.install-fix-steps > li::before {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-muted);
+  color: var(--accent);
+  content: counter(fix-step);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 24px;
+  text-align: center;
+}
+
+.install-fix .install-fix-links {
+  margin: 0;
+  border-top: 1px solid var(--border);
+  padding-top: var(--sp-3);
+  font-size: 14px;
+}
+
+/* Command-line alternative */
+
+.install-cli {
+  padding: 0 0 var(--install-section-y);
+  background: var(--canvas);
+}
+
+.install-cli-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6) var(--sp-8);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-6) var(--sp-8);
+  background: var(--surface);
+}
+
+.install-cli-card .section-label { margin-bottom: var(--sp-2); }
+
+.install-cli-card h2 {
+  margin: 0 0 var(--sp-2);
+  font-size: clamp(20px, 2.4vw, 24px);
+}
+
+.install-cli-card p {
+  max-width: 620px;
+  margin: 0;
+  font-size: 15px;
+}
+
+.install-cli-card a[role="button"] {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+}
 
 body.page-install .site-footer { margin-top: 0; }
+
+@media (max-width: 960px) {
+  .install-package-body { grid-template-columns: 1fr; }
+  .install-help-layout { grid-template-columns: 1fr; }
+  .install-help-intro { position: static; max-width: 640px; }
+
+  .install-walkthrough-step { grid-template-columns: 32px minmax(0, 1fr); }
+  .install-step-copy,
+  .install-step-pair .install-step-copy,
+  .install-step-text .install-step-copy { grid-column: 2; }
+
+  .install-step-media {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: 560px;
+    margin-top: var(--sp-4);
+  }
+
+  .install-step-media-pair { max-width: none; }
+}
+
+@media (max-width: 640px) {
+  .install-before ul { grid-template-columns: 1fr; }
+  .install-before { padding: var(--sp-5); }
+
+  .install-guide-header { align-items: stretch; flex-direction: column; }
+  .install-tabs .tab-content.install-panel { scroll-margin-top: calc(var(--site-header-height) + 136px); }
+  .install-tabs .tab-bar { display: grid; }
+  .install-tabs .tab { padding-inline: var(--sp-2); }
+
+  .install-package-body { padding: var(--sp-5); }
+  .install-package-footer { padding: var(--sp-3) var(--sp-5) var(--sp-1); }
+
+  .download-option,
+  .linux-package-group { grid-template-columns: 1fr; }
+  .linux-package-group > strong { grid-row: auto; }
+  .download-option a[role="button"] { width: 100%; }
+  .package-secondary-download { justify-self: start; }
+
+  .install-walkthrough-step {
+    grid-template-columns: 28px minmax(0, 1fr);
+    column-gap: var(--sp-4);
+    padding-bottom: var(--sp-8);
+  }
+
+  .install-walkthrough-step::before {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+    line-height: 26px;
+  }
+
+  .install-walkthrough-step::after { top: 36px; left: 14px; }
+
+  .install-step-media-pair,
+  .linux-install-commands { grid-template-columns: 1fr; }
+
+  .install-checksum > :not(summary) { margin-left: 0; }
+
+  .install-fix { padding: var(--sp-5); }
+  .install-fix-steps > li { padding-left: 32px; }
+
+  .install-cli-card {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: var(--sp-5);
+  }
+}
 
 /* ── Responsive ────────────────────────────────────────────── */
 
@@ -2078,8 +2527,6 @@ body.page-install .site-footer { margin-top: 0; }
   .blog-index-layout { grid-template-columns: 1fr; }
   .blog-index-sidebar { position: static; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .blog-index-sidebar .docs-nav-label { grid-column: 1 / -1; }
-  .downloads-hero-inner { grid-template-columns: 1fr; align-items: start; gap: var(--sp-6); }
-  .release-panel { max-width: 320px; }
 }
 
 @media (max-width: 768px) {
@@ -2138,21 +2585,6 @@ body.page-install .site-footer { margin-top: 0; }
   }
   .blog-index-sidebar .docs-nav-label { display: none; }
   .tag-sidebar-link { flex: 0 0 auto; border: 1px solid var(--border); }
-
-  .install-panel { padding: var(--sp-5); }
-  .downloads-advanced > .container { align-items: flex-start; flex-direction: column; }
-  .install-package-options,
-  .linux-install-options { grid-template-columns: 1fr; }
-  .install-walkthrough-step { grid-template-columns: 1fr; }
-  .install-step-media {
-    border-top: 1px solid var(--border);
-    border-left: 0;
-  }
-  .install-step-media-pair { grid-template-columns: 1fr; }
-  .install-step-media-pair picture + picture {
-    border-top: 1px solid var(--border);
-    border-left: 0;
-  }
 }
 
 @media (max-width: 560px) {
@@ -2171,20 +2603,6 @@ body.page-install .site-footer { margin-top: 0; }
   .hero-product-context { display: none; }
   .trust-badges { display: grid; grid-template-columns: 1fr 1fr; }
   .card { padding: var(--sp-5); }
-  .download-action { align-items: stretch; flex-direction: column; }
-  .download-action a[role="button"] { justify-content: center; }
-  .download-action-buttons { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
-  .download-action-buttons a[role="button"] { width: 100%; }
-  .download-option { grid-template-columns: 1fr; }
-  .download-option a[role="button"] { width: 100%; }
-  .package-links { grid-template-columns: 1fr; }
-  .install-panel { padding: var(--sp-4); }
-  .install-step-copy { padding: 48px var(--sp-4) var(--sp-4); }
-  .linux-install-commands { grid-template-columns: 1fr; }
-  .install-walkthrough-step::before {
-    top: var(--sp-4);
-    left: var(--sp-4);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -47,7 +47,9 @@
           : event.key === 'End'
             ? tabs.length - 1
             : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
-        selectTab(tabs[nextIndex], true);
+        const selected = tabs[nextIndex];
+        selectTab(selected, true);
+        if (syncHash) history.replaceState(null, '', `#${selected.getAttribute('aria-controls')}`);
       });
     });
 
