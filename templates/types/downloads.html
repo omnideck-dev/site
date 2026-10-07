@@ -178,7 +178,7 @@
             </div>
           </div>
           <p class="install-package-note"><strong>Preview package:</strong> Windows may show a SmartScreen warning. Only continue when the EXE came from the link above and its SHA-256 fingerprint matches the one below.</p>
-          <p class="install-package-note"><strong>Windows setup notice:</strong> A current WSL and Podman combination can stop setup with a <code>memory.max</code> error. See the <a href="#windows-wsl-recovery">tested recovery steps</a> if this happens.</p>
+          <p class="install-package-note"><strong>Windows setup notice:</strong> If setup reports an initialization timeout or a <code>memory.max</code> error, follow the <a href="#windows-wsl-timeout">matching recovery steps</a>.</p>
           <details class="install-checksum">
             <summary>Check your download</summary>
             <p>Open <strong>PowerShell</strong> and run the command for your file. The result must match the fingerprint. Upper or lower case letters don’t matter.</p>
@@ -442,6 +442,8 @@
   <div class="container">
     <h2 id="setup-help-title">If setup stops</h2>
     <p>omnideck explains what stopped setup and shows a next step, such as approving a permission prompt or restarting Windows. Follow that step, then select <strong>Try again</strong> when it is offered. If it stops again, open <strong>Technical details</strong> and share them in the <a href="/community.html">community Slack</a> or a <a href="https://github.com/omnideck-dev/omnideck/issues">GitHub issue</a>.</p>
+    <h3 id="windows-wsl-timeout">Windows: WSL initialization times out</h3>
+    <p>If <strong>Technical details</strong> contains <code>Wsl/Service/CreateInstance/ERROR_TIMEOUT</code> while preparing WSL, save your work, restart Windows, and reopen omnideck to resume setup. Use the separate <code>memory.max</code> workaround below only if that error appears.</p>
     <h3 id="windows-wsl-recovery">Windows: setup stops with a memory.max error</h3>
     <p>On Windows 11 25H2 with WSL 3.0.1 and Podman 6.0.2, desktop 0.1.0-beta.13 can show <strong>Setup didn’t finish</strong> with <code>crun: open memory.max for writing: No such file or directory</code> in Technical details. The same runtime issue affects CLI v0.11.0-beta.6.</p>
     <p>The following workaround was checked through desktop setup and opening the workspace, and through CLI startup and restart with its memory limit intact. It changes WSL’s resource-control isolation for <strong>all WSL 2 distributions in your Windows account</strong>.</p>
