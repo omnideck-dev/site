@@ -48,7 +48,7 @@ Setup can take several minutes. You can play Agent Dash while you wait. If Windo
 
 If setup stops, omnideck explains the cause and shows a next step, such as approving a permission prompt or restarting Windows. Follow that step, then select **Try again** when it is offered. If it stops again, open **Technical details** and share them in the [community Slack](/community.html) or a [GitHub issue](https://github.com/omnideck-dev/omnideck/issues).
 
-On Windows, if Technical details mention `memory.max`, follow the [tested WSL recovery steps](/install.html#windows-wsl3). Current WSL 3.0.1 and Podman 6.0.2 can require this explicit configuration change before setup can finish.
+On Windows, if Technical details mention `memory.max`, follow the [tested WSL recovery steps](/install.html#windows-wsl-recovery). Current WSL 3.0.1 and Podman 6.0.2 can require this explicit configuration change before setup can finish.
 
 <h3 id="connect-a-model">3. Connect a model</h3>
 

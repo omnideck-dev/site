@@ -64,11 +64,11 @@ sudo install -m 755 omnideck /usr/local/bin/omnideck
 omnideck --version
 ```
 
-`/usr/local/bin` must be on your `PATH`. The `sudo` commands copy the CLI into a system directory; run omnideck itself as your normal user.
+`/usr/local/bin` must be on your `PATH`. If `omnideck --version` still reports an older build, run `command -v omnideck` to see which copy your shell finds, and place `/usr/local/bin` ahead of an older Homebrew installation in `PATH`. The `sudo` commands copy the CLI into a system directory; run omnideck itself as your normal user.
 
 ### Windows archive
 
-Download your Windows archive and `SHA256SUMS` from **[v0.11.0-beta.6](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.6)**. This is a preview release; the stable v0.10.0 has a separate Windows startup issue described above. If startup fails with a `memory.max` error on WSL 3.0.1 and Podman 6.0.2, use the [tested WSL recovery steps](/install.html#windows-wsl3).
+Download your Windows archive and `SHA256SUMS` from **[v0.11.0-beta.6](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.6)**. This is a preview release; the stable v0.10.0 has a separate Windows startup issue described above. If startup fails with a `memory.max` error on WSL 3.0.1 and Podman 6.0.2, use the [tested WSL recovery steps](/install.html#windows-wsl-recovery).
 
 Open PowerShell in the download folder. For x86-64, verify the archive:
 
