@@ -15,13 +15,13 @@ The `omnideck` CLI sets up and manages the same local omnideck runtime as the de
 
 Running `omnideck` without a subcommand opens the appropriate interactive screen for first setup, runtime preparation, repair, or managing an existing installation.
 
-The commands below apply to the published `v0.10.0` stable and `v0.11.0-beta.6` preview releases. Run `omnideck --version` to check the build installed on your computer.
+The commands below apply to the published `v0.10.0` stable and `v0.11.0-beta.7` preview releases. Run `omnideck --version` to check the build installed on your computer.
 
 <h2 id="install-the-cli">Install the CLI</h2>
 
 ### Choose a release
 
-On macOS or Linux, choose the **[v0.10.0 stable release](https://github.com/omnideck-dev/cli/releases/tag/v0.10.0)** or **[v0.11.0-beta.6 preview](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.6)**. On Windows, use **v0.11.0-beta.6**: v0.10.0 can stall at **Start omnideck** while checking the runtime network. The current desktop app includes v0.11.0-beta.6. Download both your archive and `SHA256SUMS` from the same release.
+On macOS or Linux, choose the **[v0.10.0 stable release](https://github.com/omnideck-dev/cli/releases/tag/v0.10.0)** or **[v0.11.0-beta.7 preview](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.7)**. On Windows, use **v0.11.0-beta.7**: v0.10.0 can stall at **Start omnideck** while checking the runtime network. The current desktop app includes v0.11.0-beta.6. Download both your archive and `SHA256SUMS` from the same release.
 
 | Computer | Archive |
 |---|---|
@@ -68,7 +68,7 @@ omnideck --version
 
 ### Windows archive
 
-Download your Windows archive and `SHA256SUMS` from **[v0.11.0-beta.6](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.6)**. This is a preview release; the stable v0.10.0 has a separate Windows startup issue described above. If startup fails with a `memory.max` error on WSL 3.0.1 and Podman 6.0.2, use the [tested WSL recovery steps](/install.html#windows-wsl-recovery).
+Download your Windows archive and `SHA256SUMS` from **[v0.11.0-beta.7](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.7)**. This is a preview release; the stable v0.10.0 has a separate Windows startup issue described above. If startup fails with a `memory.max` error on WSL 3.0.1 and Podman 6.0.2, use the [tested WSL recovery steps](/install.html#windows-wsl-recovery). Beta.7 shows this recovery link when it detects the failure; it does not change WSL settings.
 
 Open PowerShell in the download folder. For x86-64, verify the archive:
 
