@@ -455,7 +455,7 @@
 
       <section id="windows-wsl-recovery" class="install-fix" aria-labelledby="windows-wsl-recovery-title">
         <h3 id="windows-wsl-recovery-title"><span class="tab-icon icon-windows" aria-hidden="true"></span>Windows: setup stops with a memory.max error</h3>
-        <p>On Windows 11 25H2 with WSL 3.0.1 and Podman 6.0.2, desktop 0.1.0-beta.13 can show <strong>Setup didn’t finish</strong> with <code>crun: open memory.max for writing: No such file or directory</code> in Technical details. The same runtime issue affects CLI v0.11.0-beta.6.</p>
+        <p>On Windows 11 25H2 with WSL 3.0.1 and Podman 6.0.2, desktop 0.1.0-beta.13 can show <strong>Setup didn’t finish</strong> with <code>crun: open memory.max for writing: No such file or directory</code> in Technical details. The same runtime issue affects CLI v0.11.0-beta.6 and v0.11.0-beta.7. Beta.7 adds a direct link to these recovery steps; it does not change WSL settings.</p>
         <p>The following workaround was checked through desktop setup and opening the workspace, and through CLI startup and restart with its memory limit intact.</p>
         <p class="install-package-note"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-exclamation-triangle"/></svg><span>It changes WSL’s resource-control isolation for <strong>all WSL 2 distributions in your Windows account</strong>.</span></p>
         <ol class="install-fix-steps">

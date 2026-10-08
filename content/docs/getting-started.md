@@ -86,7 +86,7 @@ omnideck keeps your conversations, agents, routines, and files when it restarts 
 
 The standalone `omnideck` CLI installs and manages the same omnideck from a terminal. Desktop users don’t need it, because the desktop app already includes it.
 
-1. Follow the **[CLI installation instructions](/docs/cli-reference.html#install-the-cli)**. Use a release archive: Windows users should choose v0.11.0-beta.6; macOS and Linux users can choose stable or preview. The Homebrew tap currently installs the older v0.9.0 release, which has a different setup flow and command set.
+1. Follow the **[CLI installation instructions](/docs/cli-reference.html#install-the-cli)**. Use a release archive: Windows users should choose v0.11.0-beta.7; macOS and Linux users can choose stable or preview. The Homebrew tap currently installs the older v0.9.0 release, which has a different setup flow and command set.
 2. Run `omnideck` as your normal user. The first run opens guided setup and prepares Podman when needed.
 3. Run `omnideck doctor` to confirm the runtime, storage, and browser interface are healthy.
 4. Open the local workbench address reported by the CLI, normally `http://localhost:2337`.
