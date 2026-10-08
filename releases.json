@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-beta.7",
+      "title": "CLI 0.11.0-beta.7",
+      "channel": "Preview",
+      "published_iso": "2026-10-08T22:27:40Z",
+      "published": "October 8, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.7",
+      "summary": "This beta makes Windows setup failures easier to diagnose and provides a direct link to the recovery instructions."
+    },
+    {
       "kind": "Desktop installer",
       "repository": "omnideck-dev/omnideck",
       "tag": "v0.1.0-beta.13",
@@ -318,17 +329,6 @@
       "published": "August 8, 2026",
       "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.10.0-alpha.2",
       "summary": ""
-    },
-    {
-      "kind": "Desktop installer",
-      "repository": "omnideck-dev/omnideck",
-      "tag": "v0.1.0-alpha.7",
-      "title": "Desktop installer 0.1.0-alpha.7",
-      "channel": "Preview",
-      "published_iso": "2026-08-07T15:38:07Z",
-      "published": "August 7, 2026",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.7",
-      "summary": "This alpha gives the application and command line tool one shared way to set up and manage omnideck. The application bundles Omnideck CLI v0.10.0-alpha.1 and uses its versioned JSON interface for runtime setup, repair, container…"
     }
   ],
   "desktop_tag": "v0.1.0-beta.13",
