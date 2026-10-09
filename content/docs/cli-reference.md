@@ -15,13 +15,13 @@ The `omnideck` CLI sets up and manages the same local omnideck runtime as the de
 
 Running `omnideck` without a subcommand opens the appropriate interactive screen for first setup, runtime preparation, repair, or managing an existing installation.
 
-The commands below apply to the published `v0.10.0` stable and `v0.11.0-beta.7` preview releases. Run `omnideck --version` to check the build installed on your computer.
+The commands below apply to the published `v0.10.0` stable and `v0.11.0-beta.8` preview releases. Run `omnideck --version` to check the build installed on your computer.
 
 <h2 id="install-the-cli">Install the CLI</h2>
 
 ### Choose a release
 
-On macOS or Linux, choose the **[v0.10.0 stable release](https://github.com/omnideck-dev/cli/releases/tag/v0.10.0)** or **[v0.11.0-beta.7 preview](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.7)**. On Windows, use **v0.11.0-beta.7**: v0.10.0 can stall at **Start omnideck** while checking the runtime network. The current desktop app includes v0.11.0-beta.6. Download both your archive and `SHA256SUMS` from the same release.
+On macOS or Linux, choose the **[v0.10.0 stable release](https://github.com/omnideck-dev/cli/releases/tag/v0.10.0)** or **[v0.11.0-beta.8 preview](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.8)**. On Windows, use **v0.11.0-beta.8**: v0.10.0 can stall at **Start omnideck** while checking the runtime network. The current desktop app includes v0.11.0-beta.6. Download both your archive and `SHA256SUMS` from the same release.
 
 | Computer | Archive |
 |---|---|
@@ -66,9 +66,11 @@ omnideck --version
 
 `/usr/local/bin` must be on your `PATH`. If `omnideck --version` still reports an older build, run `command -v omnideck` to see which copy your shell finds, and place `/usr/local/bin` ahead of an older Homebrew installation in `PATH`. The `sudo` commands copy the CLI into a system directory; run omnideck itself as your normal user.
 
+On macOS, the v0.11.0-beta.8 executable is signed with omnideck’s Apple Developer ID and notarized by Apple. The first time it runs, macOS may check it with Apple online, so stay connected to the internet for that first run.
+
 ### Windows archive
 
-Download your Windows archive and `SHA256SUMS` from **[v0.11.0-beta.7](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.7)**. This is a preview release; the stable v0.10.0 has a separate Windows startup issue described above. If startup fails with a `memory.max` error on WSL 3.0.1 and Podman 6.0.2, use the [tested WSL recovery steps](/install.html#windows-wsl-recovery). Beta.7 shows this recovery link when it detects the failure; it does not change WSL settings.
+Download your Windows archive and `SHA256SUMS` from **[v0.11.0-beta.8](https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.8)**. This is a preview release; the stable v0.10.0 has a separate Windows startup issue described above. The Windows executable is not signed yet, so Windows may warn about an unknown publisher; continue only when the archive's hash matches `SHA256SUMS`. If startup fails with a `memory.max` error on WSL 3.0.1 and Podman 6.0.2, use the [tested WSL recovery steps](/install.html#windows-wsl-recovery). This issue is not fixed in beta.8. Beta.7 added a link to these steps when the CLI detects the failure; the CLI does not change WSL settings.
 
 Open PowerShell in the download folder. For x86-64, verify the archive:
 
@@ -310,11 +312,12 @@ omnideck update
 
 ## Build from source
 
-Building the CLI requires Go 1.25.13 or newer:
+Building v0.11.0-beta.8 requires Go 1.26.9 or newer, as set in its `go.mod`. Other versions list their own minimum in `go.mod`. To build that release, check out its tag:
 
 ```bash
 git clone https://github.com/omnideck-dev/cli
 cd cli
+git checkout v0.11.0-beta.8
 go build -trimpath -o omnideck .
 ```
 
