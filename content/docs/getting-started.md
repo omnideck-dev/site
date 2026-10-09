@@ -32,7 +32,7 @@ Open the **[install page](/install.html)** and choose your computer. It has the 
 <p><a href="/install.html" role="button" data-variant="primary">Choose your download →</a></p>
 
 <div class="callout" data-tone="warning">
-<strong>Preview packages:</strong> The current macOS and Windows installers are not yet signed with a paid publisher identity, so macOS or Windows may warn you before opening them. Download only from the <a href="/install.html">official install page</a>. Each download there shows its SHA-256 fingerprint and how to check it.
+<strong>Preview packages:</strong> The Mac downloads are signed with omnideck’s Apple Developer ID and notarized by Apple. The Windows installers are not signed yet, so Windows may show a SmartScreen warning before it opens them. Download only from the <a href="/install.html">official install page</a>. Each download there shows its SHA-256 fingerprint and how to check it.
 </div>
 
 <h3 id="prepare-your-machine">2. Let setup prepare your computer</h3>
@@ -86,7 +86,7 @@ omnideck keeps your conversations, agents, routines, and files when it restarts 
 
 The standalone `omnideck` CLI installs and manages the same omnideck from a terminal. Desktop users don’t need it, because the desktop app already includes it.
 
-1. Follow the **[CLI installation instructions](/docs/cli-reference.html#install-the-cli)**. Use a release archive: Windows users should choose v0.11.0-beta.7; macOS and Linux users can choose stable or preview. The Homebrew tap currently installs the older v0.9.0 release, which has a different setup flow and command set.
+1. Follow the **[CLI installation instructions](/docs/cli-reference.html#install-the-cli)**. Use a release archive: Windows users should choose v0.11.0-beta.8; macOS and Linux users can choose stable or preview. The Homebrew tap currently installs the older v0.9.0 release, which has a different setup flow and command set.
 2. Run `omnideck` as your normal user. The first run opens guided setup and prepares Podman when needed.
 3. Run `omnideck doctor` to confirm the runtime, storage, and browser interface are healthy.
 4. Open the local workbench address reported by the CLI, normally `http://localhost:2337`.
