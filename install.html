@@ -146,7 +146,7 @@
             </div>
           </div>
           <footer class="install-package-footer">
-            <p class="install-package-note"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-exclamation-triangle"/></svg><span><strong>Preview package:</strong> macOS may ask you to approve omnideck in Privacy &amp; Security. Only continue when the DMG came from the link above and its SHA-256 fingerprint matches the one below.</span></p>
+            <p class="install-package-note"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-check-lg"/></svg><span><strong>Signed and notarized:</strong> The Mac downloads are signed with omnideck’s Apple Developer ID and checked by Apple before release. Apple’s approval travels with the DMG, so macOS can verify it even without an internet connection. You can also compare its SHA-256 fingerprint with the one below.</span></p>
             <details class="install-checksum">
               <summary>Check your download</summary>
               <p>Open <strong>Terminal</strong> and run the command for your file. The result must match the fingerprint exactly.</p>
@@ -177,28 +177,11 @@
                 </picture>
               </div>
             </li>
-            <li class="install-walkthrough-step">
+            <li class="install-walkthrough-step install-step-text">
               <div class="install-step-copy">
-                <h4>Approve omnideck in Settings</h4>
-                <p>Open omnideck from Applications. If macOS blocks it, select <strong>Done</strong>, then open <strong>System Settings → Privacy &amp; Security</strong> and select <strong>Open Anyway</strong>.</p>
-              </div>
-              <div class="install-step-media">
-                <picture>
-                  <source type="image/webp" srcset="/images/install/macos-privacy-security-720.webp 720w, /images/install/macos-privacy-security.webp 1654w" sizes="(min-width: 961px) 560px, calc(100vw - 80px)">
-                  <img src="/images/install/macos-privacy-security.png" alt="macOS Privacy and Security settings with the Open Anyway button for omnideck" width="1654" height="1474" loading="lazy" decoding="async">
-                </picture>
-              </div>
-            </li>
-            <li class="install-walkthrough-step">
-              <div class="install-step-copy">
-                <h4>Confirm with an administrator</h4>
-                <p>If macOS shows another confirmation, select <strong>Open Anyway</strong>. Approve an administrator Touch ID or password prompt if asked.</p>
-              </div>
-              <div class="install-step-media">
-                <picture>
-                  <source type="image/webp" srcset="/images/install/macos-security-approval-720.webp 720w, /images/install/macos-security-approval.webp 2880w" sizes="(min-width: 961px) 560px, calc(100vw - 80px)">
-                  <img src="/images/install/macos-security-approval.png" alt="macOS administrator approval prompt for opening omnideck" width="2880" height="1800" loading="lazy" decoding="async">
-                </picture>
+                <h4>Open omnideck</h4>
+                <p>Open omnideck from Applications. The first time, macOS checks the app and may ask whether you want to open an app downloaded from the internet. Select <strong>Open</strong>.</p>
+                <p>If macOS instead says it can’t verify omnideck or that it may harm your Mac, don’t open it. Move it to the Trash, download the DMG again from this page, and check its fingerprint.</p>
               </div>
             </li>
             <li class="install-walkthrough-step">
@@ -301,6 +284,13 @@
         <section class="install-steps" aria-labelledby="steps-windows-title">
           <h3 id="steps-windows-title">Install and set up omnideck</h3>
           <ol class="install-walkthrough">
+            
+            <li class="install-walkthrough-step" id="windows-wsl-2711">
+              <div class="install-step-copy">
+                <h4>Optional: install the tested WSL version first</h4>
+                <p>omnideck 0.1.0-beta.13 was tested on Windows 11 (x86-64) with WSL 2.7.11 installed first. 0.1.0-beta.14 changes the Mac downloads and the app icon, not Windows setup, but it hasn’t been tested separately on this route. To use that route on a PC that doesn’t have WSL yet, do this before you open the omnideck installer: download <code>wsl.2.7.11.0.x64.msi</code> from <a href="https://github.com/microsoft/WSL/releases/tag/2.7.11">Microsoft’s WSL 2.7.11 release</a>. In <strong>Windows Features</strong>, turn on <strong>Virtual Machine Platform</strong> and <strong>Windows Subsystem for Linux</strong>. Open the downloaded installer, then restart Windows.</p>
+              </div>
+            </li>
             
             <li class="install-walkthrough-step install-step-pair">
               <div class="install-step-copy">
@@ -623,7 +613,7 @@
 
       <section id="windows-wsl-recovery" class="install-fix" aria-labelledby="windows-wsl-recovery-title">
         <h3 id="windows-wsl-recovery-title"><span class="tab-icon icon-windows" aria-hidden="true"></span>Windows: setup stops with a memory.max error</h3>
-        <p>On Windows 11 25H2 with WSL 3.0.1 and Podman 6.0.2, desktop 0.1.0-beta.13 can show <strong>Setup didn’t finish</strong> with <code>crun: open memory.max for writing: No such file or directory</code> in Technical details. The same runtime issue affects CLI v0.11.0-beta.6 and v0.11.0-beta.7. Beta.7 adds a direct link to these recovery steps; it does not change WSL settings.</p>
+        <p>On Windows 11 25H2 with WSL 3.0.1 and Podman 6.0.2, desktop 0.1.0-beta.13 can show <strong>Setup didn’t finish</strong> with <code>crun: open memory.max for writing: No such file or directory</code> in Technical details. The issue is not fixed in desktop 0.1.0-beta.14. The same runtime issue affects CLI v0.11.0-beta.6 through v0.11.0-beta.8. CLI beta.7 adds a direct link to these recovery steps; it does not change WSL settings.</p>
         <p>The following workaround was checked through desktop setup and opening the workspace, and through CLI startup and restart with its memory limit intact.</p>
         <p class="install-package-note"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="/icons/bootstrap-icons.svg#bi-exclamation-triangle"/></svg><span>It changes WSL’s resource-control isolation for <strong>all WSL 2 distributions in your Windows account</strong>.</span></p>
         <ol class="install-fix-steps">
