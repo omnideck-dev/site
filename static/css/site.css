@@ -526,7 +526,6 @@ a[role="button"]:active { transform: translateY(1px); }
 
 .card,
 .callout {
-  margin: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--elevated);
@@ -534,6 +533,7 @@ a[role="button"]:active { transform: translateY(1px); }
 }
 
 .card {
+  margin: 0;
   height: 100%;
   padding: var(--sp-6);
   box-shadow: var(--shadow-sm);
