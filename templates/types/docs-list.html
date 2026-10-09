@@ -14,7 +14,7 @@
         <strong>New here?</strong> <a href="/install.html">Install omnideck</a>, then follow the <a href="/docs/getting-started.html">Getting Started</a> guide.
       </div>
       {% if Items %}
-      <div class="grid col-1 md-col-2 gap-3 mt-4">
+      <div class="grid col-1 md-col-2 gap-3">
         {% for item in Items %}
         {% if item.Permalink != Page.Permalink and not item.Meta.Fields.hidden %}
         <div class="card action-card">

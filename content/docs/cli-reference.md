@@ -9,7 +9,7 @@ description = "Install omnideck from the terminal and use the commands available
 order = 5
 +++
 
-<div class="callout" data-tone="info"><strong>Most people should start with the <a href="/install.html">omnideck desktop app</a>.</strong> Use the standalone CLI if you prefer to install and manage omnideck from a terminal.</div>
+<div class="callout" data-tone="info"><strong>Looking for the desktop app?</strong> Most people should <a href="/install.html">install the omnideck desktop app</a>. It already includes the CLI. Use this page if you prefer to install and manage omnideck from a terminal.</div>
 
 The `omnideck` CLI sets up and manages the same local omnideck runtime as the desktop app. It uses Podman on Windows, macOS, and Linux; other container runtimes are not supported.
 
