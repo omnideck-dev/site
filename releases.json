@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "kind": "App / runtime",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "app-v0.5.3",
+      "title": "App / runtime 0.5.3",
+      "channel": "Stable",
+      "published_iso": "2026-10-09T15:40:41Z",
+      "published": "October 9, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.5.3",
+      "summary": "Branding: The app icon and browser tab favicon have been updated to the new omnideck mark, with the favicon now rendered as a transparent disc."
+    },
+    {
       "kind": "Desktop installer",
       "repository": "omnideck-dev/omnideck",
       "tag": "v0.1.0-beta.14",
@@ -318,17 +329,6 @@
       "published": "August 9, 2026",
       "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-alpha.1",
       "summary": ""
-    },
-    {
-      "kind": "CLI",
-      "repository": "omnideck-dev/cli",
-      "tag": "v0.10.0",
-      "title": "CLI 0.10.0",
-      "channel": "Stable",
-      "published_iso": "2026-08-08T16:50:15Z",
-      "published": "August 8, 2026",
-      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.10.0",
-      "summary": "Omnideck CLI is now the shared Podman environment backend for both the interactive CLI and Omnideck Desktop. - Bare omnideck launches now detect first-time setup or repair automatically, with restart/resume guidance on Windows and macOS…"
     }
   ],
   "desktop_tag": "v0.1.0-beta.14",
