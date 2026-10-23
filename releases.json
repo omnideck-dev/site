@@ -3,6 +3,17 @@
     {
       "kind": "App / runtime",
       "repository": "omnideck-dev/omnideck",
+      "tag": "app-v0.5.5",
+      "title": "App / runtime 0.5.5",
+      "channel": "Stable",
+      "published_iso": "2026-10-23T03:03:11Z",
+      "published": "October 23, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.5.5",
+      "summary": "Chat: Saved conversations load with compressed responses, reducing the data transferred over slower connections while preserving the complete history."
+    },
+    {
+      "kind": "App / runtime",
+      "repository": "omnideck-dev/omnideck",
       "tag": "app-v0.5.4",
       "title": "App / runtime 0.5.4",
       "channel": "Stable",
@@ -318,17 +329,6 @@
       "published": "August 9, 2026",
       "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.10",
       "summary": "This alpha is a desktop-host maintenance release. It reorganizes the Tauri host and release-sidecar tooling without intended changes to setup copy, window behavior, runtime lifecycle, or the application UI."
-    },
-    {
-      "kind": "Desktop installer",
-      "repository": "omnideck-dev/omnideck",
-      "tag": "v0.1.0-alpha.9",
-      "title": "Desktop installer 0.1.0-alpha.9",
-      "channel": "Preview",
-      "published_iso": "2026-08-09T18:35:49Z",
-      "published": "August 9, 2026",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.9",
-      "summary": "This alpha makes first-run setup quieter and clearer across Windows, macOS, and Linux while keeping required operating-system approval prompts visible."
     }
   ],
   "desktop_tag": "v0.1.0-beta.14",
