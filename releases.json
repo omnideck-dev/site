@@ -3,6 +3,17 @@
     {
       "kind": "App / runtime",
       "repository": "omnideck-dev/omnideck",
+      "tag": "app-v0.5.4",
+      "title": "App / runtime 0.5.4",
+      "channel": "Stable",
+      "published_iso": "2026-10-23T01:25:26Z",
+      "published": "October 23, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.5.4",
+      "summary": "Chat: You can retry stopping a response after a temporary connection or server failure. - Artifacts: Files with special characters such as #, ?, or % in their names now open, download, and save correctly. Uploaded image thumbnails also…"
+    },
+    {
+      "kind": "App / runtime",
+      "repository": "omnideck-dev/omnideck",
       "tag": "app-v0.5.3",
       "title": "App / runtime 0.5.3",
       "channel": "Stable",
@@ -318,17 +329,6 @@
       "published": "August 9, 2026",
       "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.9",
       "summary": "This alpha makes first-run setup quieter and clearer across Windows, macOS, and Linux while keeping required operating-system approval prompts visible."
-    },
-    {
-      "kind": "CLI",
-      "repository": "omnideck-dev/cli",
-      "tag": "v0.11.0-alpha.1",
-      "title": "CLI 0.11.0-alpha.1",
-      "channel": "Preview",
-      "published_iso": "2026-08-09T16:52:55Z",
-      "published": "August 9, 2026",
-      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-alpha.1",
-      "summary": ""
     }
   ],
   "desktop_tag": "v0.1.0-beta.14",
