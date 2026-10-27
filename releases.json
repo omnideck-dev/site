@@ -3,6 +3,17 @@
     {
       "kind": "App / runtime",
       "repository": "omnideck-dev/omnideck",
+      "tag": "app-v0.6.0",
+      "title": "App / runtime 0.6.0",
+      "channel": "Stable",
+      "published_iso": "2026-10-26T22:18:39Z",
+      "published": "October 26, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.6.0",
+      "summary": "Chat: Conversations keep working when you switch chats or start a new one. The sidebar shows running conversations and marks background work as finished until you open it. Stop still applies only to the selected conversation."
+    },
+    {
+      "kind": "App / runtime",
+      "repository": "omnideck-dev/omnideck",
       "tag": "app-v0.5.6",
       "title": "App / runtime 0.5.6",
       "channel": "Stable",
@@ -318,17 +329,6 @@
       "published": "August 10, 2026",
       "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-alpha.11",
       "summary": "This alpha bundles OmniDeck CLI v0.11.0-alpha.2 and adds disposable local-VM end-to-end coverage for the shipped Tauri desktop packages. The visible setup wording, structure, and behavior remain locked to the exact-copy desktop mockup."
-    },
-    {
-      "kind": "CLI",
-      "repository": "omnideck-dev/cli",
-      "tag": "v0.11.0-alpha.2",
-      "title": "CLI 0.11.0-alpha.2",
-      "channel": "Preview",
-      "published_iso": "2026-08-09T23:51:36Z",
-      "published": "August 9, 2026",
-      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-alpha.2",
-      "summary": ""
     }
   ],
   "desktop_tag": "v0.1.0-beta.14",
