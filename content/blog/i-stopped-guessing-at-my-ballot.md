@@ -11,8 +11,6 @@ author         = "Ryan Picchini"
 featured_image = "/images/voting-prep.jpg"
 +++
 
-I used AI to walk into the voting booth feeling informed. The setup took one download. The research took one evening. Before you judge, read below.
-
 ## My struggle is probably yours
 
 I have three kids, an amazing wife and a job that's all encompassing. Every election I get a ballot with questions written like this:
