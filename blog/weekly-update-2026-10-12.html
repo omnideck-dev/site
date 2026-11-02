@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script src="/js/prepaint.min.js"></script>
+  <meta name="description" content="11 changes across three repos. Browser tools handle hostile pages and keyboard paste, the site got a new brand icon set and a real theme switcher, and the install guides caught up with the releases.">
+  <meta property="og:title" content="omnideck weekly update: October 5-11, 2026">
+  <meta property="og:description" content="11 changes across three repos. Browser tools handle hostile pages and keyboard paste, the site got a new brand icon set and a real theme switcher, and the install guides caught up with the releases.">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta property="og:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  <meta name="twitter:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  
+  <title>omnideck weekly update: October 5-11, 2026 | Blog | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=1d04495f">
+  
+</head>
+<body class="lattice ">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/whats-new.html" class="nav-link">What’s new</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="/community.html" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+    </nav>
+
+    <div class="header-actions">
+      <dark-mode-toggle theme="auto"></dark-mode-toggle>
+
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    </div>
+  </div>
+
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/whats-new.html" class="nav-mobile-link">What’s new</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="/community.html" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    </div>
+  </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
+</header>
+
+  <main id="main-content" class="full-width">
+    
+
+<div class="container blog-hero-image">
+  <img src="/images/weekly-update.png" alt="omnideck weekly update: October 5-11, 2026" class="blog-hero-img">
+</div>
+
+<article class="container py-5 blog-article">
+  <header class="blog-header">
+    <h1>omnideck weekly update: October 5-11, 2026</h1>
+    <p class="muted"><time>October 12, 2026</time> · Ron Northcutt</p>
+    <div class="tag-chips"><a href="/blog/tags/changelog.html" class="tag-chip">Changelog</a></div>
+    <p>11 changes across three repos. Browser tools handle hostile pages and keyboard paste, the site got a new brand icon set and a real theme switcher, and the install guides caught up with the releases.</p>
+  </header>
+  <hr>
+  <p>Eleven changes across omnideck, cli, and site. Most of the site work is the kind of thing you only notice when it is wrong: icons, theme switching, install steps that had drifted from what actually ships.</p>
+<hr>
+<h2>Browser tools handle more of the awkward cases</h2>
+<p>Two fixes, both about pages that fight back. Browser tools can now read and interact with pages that disable JavaScript eval, which is a common hardening move on sites that do not want automation. Keyboard paste works with Ctrl/Cmd+V as well, so pasting into a field no longer needs a workaround.</p>
+<p>Snapshots also preserve sticky controls and editable text now, and hidden dialogs or consent bars no longer make a page look unavailable when it is fine underneath. If you have seen a snapshot come back mostly empty on a site with a cookie banner, that was this.</p>
+<p>Worth saying plainly: browser automation is where we get the most bug reports and where the gap between &quot;works in testing&quot; and &quot;works on the real web&quot; is widest. Two fixes a week is the honest rate.</p>
+<hr>
+<h2>The site got a new look and a better theme switcher</h2>
+<p>App and desktop icons are refreshed to the new omnideck mark, and the site now uses the same brand icon set with a CSS restyle to match the product interface.</p>
+<p>Theme switching moved to the dark-mode-toggle web component. It remembers your choice, applies it before the page paints so there is no white flash on load, and follows your system setting by default. The old switcher was homegrown and it showed.</p>
+<hr>
+<h2>Install guides caught up with the releases</h2>
+<p>The desktop installation guide was rewritten for desktop beta.14 and CLI beta.8. Windows install instructions now match the route we actually tested on video rather than the route that used to work. WSL initialization timeout recovery and the macOS approval prompts are both spelled out, since those are the two places people get stuck and conclude the install is broken. Setup and recovery steps match the released versions again, and integration setup reflects the per-tool access model from the week before.</p>
+<hr>
+<h2>CLI and smaller fixes</h2>
+<p>Windows users now get a clear explanation when WSL container limits prevent startup, instead of a failure that looks like a bug in omnideck. The CLI reference had a callout spacing problem, which is the least exciting sentence in this post.</p>
+<hr>
+<p>If you install on Windows or macOS and something in the guide does not match what you see, that is worth reporting. The guides are only as good as the last person who followed them on a clean machine. <a href="https://omnideckcommunity.slack.com/archives/C0BGWDQN2TY/p1783946625666379">Slack</a> is the place.</p>
+
+</article>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+    <p class="footer-text">
+      Open source · Apache 2
+    </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/whats-new.html">What’s new</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=bbc8eb1e"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>

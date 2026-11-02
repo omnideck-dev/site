@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script src="/js/prepaint.min.js"></script>
+  <meta name="description" content="4 changes across two repos. Background work keeps running when you switch chats, and start or restart no longer claims success before the app is actually ready.">
+  <meta property="og:title" content="omnideck weekly update: October 26 - November 1, 2026">
+  <meta property="og:description" content="4 changes across two repos. Background work keeps running when you switch chats, and start or restart no longer claims success before the app is actually ready.">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta property="og:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  <meta name="twitter:image" content="https://www.omnideck.dev/images/weekly-update.png">
+  
+  <title>omnideck weekly update: October 26 - November 1, 2026 | Blog | omnideck</title>
+  <link rel="stylesheet" href="/css/bundle.css?v=1d04495f">
+  
+</head>
+<body class="lattice ">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="site-logo" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      
+        <a href="/install.html" class="nav-link">Install</a>
+      
+        <a href="/docs/getting-started.html" class="nav-link">Docs</a>
+      
+        <a href="/whats-new.html" class="nav-link">What’s new</a>
+      
+        <a href="/blog/" class="nav-link">Blog</a>
+      
+        <a href="/about.html" class="nav-link">About</a>
+      
+        <a href="/community.html" class="nav-link">Community</a>
+      
+        <a href="https://github.com/omnideck-dev/omnideck" class="nav-link">GitHub</a>
+      
+    </nav>
+
+    <div class="header-actions">
+      <dark-mode-toggle theme="auto"></dark-mode-toggle>
+
+    <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    </div>
+  </div>
+
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="container nav-mobile-inner">
+    
+      <a href="/install.html" class="nav-mobile-link">Install</a>
+    
+      <a href="/docs/getting-started.html" class="nav-mobile-link">Docs</a>
+    
+      <a href="/whats-new.html" class="nav-mobile-link">What’s new</a>
+    
+      <a href="/blog/" class="nav-mobile-link">Blog</a>
+    
+      <a href="/about.html" class="nav-mobile-link">About</a>
+    
+      <a href="/community.html" class="nav-mobile-link">Community</a>
+    
+      <a href="https://github.com/omnideck-dev/omnideck" class="nav-mobile-link">GitHub</a>
+    
+    </div>
+  </nav>
+  <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>
+</header>
+
+  <main id="main-content" class="full-width">
+    
+
+<div class="container blog-hero-image">
+  <img src="/images/weekly-update.png" alt="omnideck weekly update: October 26 - November 1, 2026" class="blog-hero-img">
+</div>
+
+<article class="container py-5 blog-article">
+  <header class="blog-header">
+    <h1>omnideck weekly update: October 26 - November 1, 2026</h1>
+    <p class="muted"><time>November 2, 2026</time> · Ron Northcutt</p>
+    <div class="tag-chips"><a href="/blog/tags/changelog.html" class="tag-chip">Changelog</a></div>
+    <p>4 changes across two repos. Background work keeps running when you switch chats, and start or restart no longer claims success before the app is actually ready.</p>
+  </header>
+  <hr>
+  <p>Four changes across omnideck and cli this week. They share a theme: things that said they were done when they were not.</p>
+<hr>
+<h2>Background work keeps running when you switch chats</h2>
+<p>Previously, starting a new conversation or jumping to another one could interrupt work already going. Now conversations keep running in the background. The sidebar shows which ones are active and marks finished background work as done until you open it and look.</p>
+<p>Reloading a workspace with an unsent chat behaves now too. It restores the empty chat directly instead of loading a conversation that was never saved, and it no longer throws an error over the tabs and settings.</p>
+<p>This one changes how you use the product more than the changelog line suggests. Start something long, go do something else, come back to a result instead of a restart.</p>
+<hr>
+<h2>Start and restart tell the truth</h2>
+<p><code>omnideck start</code> and <code>omnideck restart</code> used to report success and leave you waiting for an app that was not up yet. They now wait for the app to respond before saying anything. There is also a new <code>omnideck wait</code> command that checks readiness without changing an installation, which is what you want in a script or a health check.</p>
+<p>The desktop app shares those readiness checks with the bundled CLI, and its recovery screen has a Copy diagnostics button, so a support conversation can start with real information instead of a description of a blank window.</p>
+<hr>
+<p>If you script against the CLI, <code>omnideck wait</code> is worth a look. If you have been bitten by a restart that reported success too early, that one is fixed. <a href="https://omnideckcommunity.slack.com/archives/C0BGWDQN2TY/p1783946625666379">Slack</a> if anything still misbehaves.</p>
+
+</article>
+
+  </main>
+  <footer class="full-width site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-brand" aria-label="omnideck home">
+      <img src="/images/omnideck-app-icon.svg" alt="" width="28" height="28">
+      <span>omnideck</span>
+    </a>
+    <p class="footer-text">
+      Open source · Apache 2
+    </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/install.html">Install</a>
+      <a href="/docs/getting-started.html">Docs</a>
+      <a href="/whats-new.html">What’s new</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about.html">About</a>
+      <a href="/community.html">Community</a>
+      <a href="https://github.com/omnideck-dev/omnideck">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="/js/bundle.js?v=bbc8eb1e"></script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-OEPLQuywKOTpVxjDTbjH9.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</body>
+</html>
