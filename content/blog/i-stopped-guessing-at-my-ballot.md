@@ -2,7 +2,7 @@
 title    = "I stopped guessing at my ballot"
 date     = 2026-11-02
 draft    = false
-tags     = ["Local AI", "Privacy", "AI Agents"]
+tags     = ["Use Cases", "Privacy", "Local AI"]
 template = "templates/types/blog.html"
 
 [extra]

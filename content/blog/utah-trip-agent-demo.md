@@ -2,7 +2,7 @@
 title    = "AI Agents on Your Computer Planned Our Utah Trip"
 date     = 2026-10-03
 draft    = false
-tags     = ["ai-agents", "open-source", "demo"]
+tags     = ["Use Cases", "AI Agents"]
 template = "templates/types/blog.html"
 
 [extra]

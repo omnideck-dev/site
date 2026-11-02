@@ -1,10 +1,10 @@
 +++
-title    = "AI"
-date     = 2026-01-01
+title    = "Models"
+date     = 2026-11-02
 draft    = false
 template = "templates/types/tag.html"
 
 [extra]
 tag_index    = true
-description = "Blog posts tagged with AI"
+description = "Blog posts tagged with Models"
 +++

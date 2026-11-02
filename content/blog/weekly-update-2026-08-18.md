@@ -1,5 +1,5 @@
 +++
-title    = "Omnideck weekly update: August 9-15, 2026"
+title    = "omnideck weekly update: August 9-15, 2026"
 date     = 2026-08-16
 draft    = false
 tags     = ["Changelog"]

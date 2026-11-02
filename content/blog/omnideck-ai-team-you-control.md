@@ -2,7 +2,7 @@
 title    = "omnideck: an AI team you actually control"
 date     = 2026-07-04
 draft    = false
-tags     = ["AI", "Open Source", "Privacy", "Automation", "Multi-Agent Systems"]
+tags     = ["AI Agents", "Open Source", "Privacy"]
 template = "templates/types/blog.html"
 
 [extra]

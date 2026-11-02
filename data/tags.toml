@@ -1,69 +1,39 @@
 [[tags]]
-name  = "AI"
-slug  = "ai"
-count = 1
-
-[[tags]]
 name  = "AI Agents"
 slug  = "ai-agents"
-count = 1
-
-[[tags]]
-name  = "Automation"
-slug  = "automation"
-count = 1
+count = 5
 
 [[tags]]
 name  = "Changelog"
 slug  = "changelog"
-count = 4
-
-[[tags]]
-name  = "Cost Optimization"
-slug  = "cost-optimization"
-count = 1
+count = 10
 
 [[tags]]
 name  = "Engineering"
 slug  = "engineering"
-count = 1
+count = 2
 
 [[tags]]
-name  = "Multi-Agent Systems"
-slug  = "multi-agent-systems"
+name  = "Local AI"
+slug  = "local-ai"
+count = 2
+
+[[tags]]
+name  = "Models"
+slug  = "models"
 count = 1
 
 [[tags]]
 name  = "Open Source"
 slug  = "open-source"
-count = 1
-
-[[tags]]
-name  = "OpenRouter"
-slug  = "openrouter"
-count = 1
+count = 2
 
 [[tags]]
 name  = "Privacy"
 slug  = "privacy"
-count = 1
+count = 2
 
 [[tags]]
-name  = "freedom-first"
-slug  = "freedom-first"
-count = 1
-
-[[tags]]
-name  = "local-ai"
-slug  = "local-ai"
-count = 1
-
-[[tags]]
-name  = "open-source"
-slug  = "open-source"
-count = 1
-
-[[tags]]
-name  = "origin-story"
-slug  = "origin-story"
-count = 1
+name  = "Use Cases"
+slug  = "use-cases"
+count = 2
