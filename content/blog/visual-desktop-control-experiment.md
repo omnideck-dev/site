@@ -2,7 +2,7 @@
 title    = "Visual Desktop Control in omnideck: An Experiment in Progress"
 date     = 2026-10-04
 draft    = false
-tags     = ["engineering", "ai-agents", "open-source"]
+tags     = ["Engineering", "AI Agents"]
 template = "templates/types/blog.html"
 
 [extra]

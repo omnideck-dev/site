@@ -1,7 +1,7 @@
 +++
 title= "How omnideck Got Started"
 date= 2026-07-04
-tags= ["origin-story", "open-source", "local-ai", "freedom-first"]
+tags     = ["Open Source", "Local AI"]
 draft= false
 
 [extra]

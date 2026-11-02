@@ -2,7 +2,7 @@
 title    = "Running omnideck on Free Models: What Actually Works"
 date     = 2026-07-15
 draft    = false
-tags     = ["Cost Optimization", "OpenRouter"]
+tags     = ["Models", "AI Agents"]
 template = "templates/types/blog.html"
 
 [extra]
