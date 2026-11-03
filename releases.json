@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "kind": "App / runtime",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "app-v0.7.0",
+      "title": "App / runtime 0.7.0",
+      "channel": "Stable",
+      "published_iso": "2026-11-02T23:31:22Z",
+      "published": "November 2, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.7.0",
+      "summary": "Integrations: Custom MCP integrations now support local, LAN and tailnet servers, including HTTP on local networks, without requiring test mode. Public servers still require HTTPS. - Integrations: Connect remote MCP servers and select…"
+    },
+    {
       "kind": "Desktop installer",
       "repository": "omnideck-dev/omnideck",
       "tag": "v0.1.0-beta.15",
@@ -318,17 +329,6 @@
       "published": "August 12, 2026",
       "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.2",
       "summary": "This beta corrects the macOS first-run resource check in v0.1.0-beta.1. It retains the same bundled CLI, hosted runtime image, setup wording, and platform behavior."
-    },
-    {
-      "kind": "Desktop installer",
-      "repository": "omnideck-dev/omnideck",
-      "tag": "v0.1.0-beta.1",
-      "title": "Desktop installer 0.1.0-beta.1",
-      "channel": "Preview",
-      "published_iso": "2026-08-12T02:00:58Z",
-      "published": "August 12, 2026",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.1",
-      "summary": "This beta promotes the extensively tested alpha.11 behavior without changing the setup wording, runtime image, or hosted application. It bundles OmniDeck CLI v0.11.0-beta.1, rebuilt from the same tested CLI source commit as…"
     }
   ],
   "desktop_tag": "v0.1.0-beta.15",
