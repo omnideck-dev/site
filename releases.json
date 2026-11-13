@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "kind": "CLI",
+      "repository": "omnideck-dev/cli",
+      "tag": "v0.11.0-beta.10",
+      "title": "CLI 0.11.0-beta.10",
+      "channel": "Preview",
+      "published_iso": "2026-11-13T15:54:58Z",
+      "published": "November 13, 2026",
+      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.10",
+      "summary": "This beta adds omnideck repair, restores MCP and Slack integrations for installations created by earlier versions, and makes adding, reconciling, and removing instances safe when several installations share one computer. JSON output…"
+    },
+    {
       "kind": "App / runtime",
       "repository": "omnideck-dev/omnideck",
       "tag": "app-v0.7.0",
@@ -318,17 +329,6 @@
       "published": "August 12, 2026",
       "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.2",
       "summary": ""
-    },
-    {
-      "kind": "Desktop installer",
-      "repository": "omnideck-dev/omnideck",
-      "tag": "v0.1.0-beta.2",
-      "title": "Desktop installer 0.1.0-beta.2",
-      "channel": "Preview",
-      "published_iso": "2026-08-12T03:43:29Z",
-      "published": "August 12, 2026",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.2",
-      "summary": "This beta corrects the macOS first-run resource check in v0.1.0-beta.1. It retains the same bundled CLI, hosted runtime image, setup wording, and platform behavior."
     }
   ],
   "desktop_tag": "v0.1.0-beta.15",
