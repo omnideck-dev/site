@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "kind": "App / runtime",
+      "repository": "omnideck-dev/omnideck",
+      "tag": "app-v0.8.0",
+      "title": "App / runtime 0.8.0",
+      "channel": "Stable",
+      "published_iso": "2026-11-19T02:11:44Z",
+      "published": "November 19, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.8.0",
+      "summary": "Chat: Give a chat a goal, and the agent keeps working on it in that chat until it is done. Goals is in early access: on the Settings page, type the early access code, then turn on Goals in Settings → System → Experimental. Start a goal…"
+    },
+    {
       "kind": "CLI",
       "repository": "omnideck-dev/cli",
       "tag": "v0.11.0-beta.10",
@@ -318,17 +329,6 @@
       "published": "August 12, 2026",
       "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.3",
       "summary": "This beta repairs two setup conflicts reported against v0.1.0-beta.2 and bundles OmniDeck CLI v0.11.0-beta.2 from commit a32d3ad95f44."
-    },
-    {
-      "kind": "CLI",
-      "repository": "omnideck-dev/cli",
-      "tag": "v0.11.0-beta.2",
-      "title": "CLI 0.11.0-beta.2",
-      "channel": "Preview",
-      "published_iso": "2026-08-12T14:23:30Z",
-      "published": "August 12, 2026",
-      "url": "https://github.com/omnideck-dev/cli/releases/tag/v0.11.0-beta.2",
-      "summary": ""
     }
   ],
   "desktop_tag": "v0.1.0-beta.15",
