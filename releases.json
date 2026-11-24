@@ -3,6 +3,17 @@
     {
       "kind": "App / runtime",
       "repository": "omnideck-dev/omnideck",
+      "tag": "app-v0.8.1",
+      "title": "App / runtime 0.8.1",
+      "channel": "Stable",
+      "published_iso": "2026-11-24T02:39:05Z",
+      "published": "November 24, 2026",
+      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/app-v0.8.1",
+      "summary": "Goals: On the Goals page with no goals yet, the Start a goal button now sits right under the example goals instead of at the bottom of the page. - Goals: The goal history section lines up with the rest of the goal details. Its heading…"
+    },
+    {
+      "kind": "App / runtime",
+      "repository": "omnideck-dev/omnideck",
       "tag": "app-v0.8.0",
       "title": "App / runtime 0.8.0",
       "channel": "Stable",
@@ -318,17 +329,6 @@
       "published": "August 12, 2026",
       "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.4",
       "summary": "This beta fixes agent and skill profile downloads in the native desktop app and bundles OmniDeck CLI v0.11.0-beta.2 from commit a32d3ad95f44."
-    },
-    {
-      "kind": "Desktop installer",
-      "repository": "omnideck-dev/omnideck",
-      "tag": "v0.1.0-beta.3",
-      "title": "Desktop installer 0.1.0-beta.3",
-      "channel": "Preview",
-      "published_iso": "2026-08-12T15:05:59Z",
-      "published": "August 12, 2026",
-      "url": "https://github.com/omnideck-dev/omnideck/releases/tag/v0.1.0-beta.3",
-      "summary": "This beta repairs two setup conflicts reported against v0.1.0-beta.2 and bundles OmniDeck CLI v0.11.0-beta.2 from commit a32d3ad95f44."
     }
   ],
   "desktop_tag": "v0.1.0-beta.15",
